@@ -1,5 +1,7 @@
 package org.kulturhusfx.base;
 
+import java.util.Date;
+
 public class Billett {
 
         private int telefonnrKjoper;

@@ -1,6 +1,5 @@
 package org.kulturhusfx.base;
 
-import java.util.Calendar;
 
 public class Arrangement {
 
@@ -23,7 +22,9 @@ public class Arrangement {
         this.billettpris = billettpris;
     }
 
-    public int solgteBilletter(){}
+    public int solgteBilletter(){
+        return 0;
+    }
 
     public void visAlleArrangementer(){}
 
