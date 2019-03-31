@@ -4,7 +4,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0"
-            prefWidth="657.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+            prefWidth="657.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.kulturhusfx.controllers.KulturhusScene3FXMLController">
     <children>
         <Label layoutX="193.0" layoutY="14.0" text="Småkommunens Kulturhus">
             <font>
