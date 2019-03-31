@@ -16,7 +16,7 @@ public class FXMLController {
 
     //Scene change method attempt
     public void handleAdminLoginButtonAction(ActionEvent event) throws IOException {
-        
+
         /* Får ikke dette til å virke
         Parent scene3Parent = FXMLLoader.load(getClass().getClass().getResource("org/kulturhusfx/kulturhusScene3.fxml"));
         Scene scene3Scene = new Scene(scene3Parent);
@@ -36,10 +36,10 @@ public class FXMLController {
 
         Scene scene = new Scene(root);
         // add CSS etc. should be here
-        Stage editPersonStage = new Stage();
-        editPersonStage.setTitle("Endre person");
-        editPersonStage.setScene(scene);
-        editPersonStage.show();
+        Stage leggTilArrangement = new Stage();
+        leggTilArrangement.setTitle("Programutvikling Semesteroppgave");
+        leggTilArrangement.setScene(scene);
+        leggTilArrangement.show();
 
         System.out.println("You clicked me!");
     }
