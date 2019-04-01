@@ -35,7 +35,7 @@ public class AdminMainPageController {
 
         System.out.println(newHall.getHallName() + newHall.getHallType() + newHall.getNumberOfSeats());
     }
-    
+
     public void backToMainPageBtn(ActionEvent event) throws  IOException{
         Parent MainPageParent = null;
         try {
