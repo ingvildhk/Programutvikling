@@ -25,7 +25,7 @@ public class MainPageController {
         }
 
         Scene adminMainPageScene = new Scene(adminMainPageParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(adminMainPageScene);
         window.show();
 
