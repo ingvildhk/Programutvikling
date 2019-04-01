@@ -1,6 +1,8 @@
 package org.kulturhusfx.base;
 
-public class InvalidPhoneException {
+public class InvalidPhoneException extends Exception {
+    public InvalidPhoneException(String msg) {
 
-    //tlfnr må være 8 siffer
+        super(msg);
+    }
 }

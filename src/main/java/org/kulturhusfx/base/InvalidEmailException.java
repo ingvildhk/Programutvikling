@@ -1,5 +1,8 @@
 package org.kulturhusfx.base;
 
-public class InvalidEmailException {
-    //epost mangler @
+public class InvalidEmailException extends Exception {
+    public InvalidEmailException(String msg) {
+
+        super(msg);
+    }
 }

@@ -3,16 +3,16 @@ package org.kulturhusfx.base;
 
 public class Arrangement {
 
-    KontaktPerson kontaktperson;
+    ContactPerson kontaktperson;
     String navn;
     String opptredendePersoner;
     String program;
-    Lokale sted;
+    Hall sted;
     String tidspunkt;
     double billettpris;
 
-    public Arrangement(KontaktPerson kontaktperson, String navn, String opptredendePersoner,
-                       String program, Lokale sted, String tidspunkt, double billettpris) {
+    public Arrangement(ContactPerson kontaktperson, String navn, String opptredendePersoner,
+                       String program, Hall sted, String tidspunkt, double billettpris) {
         this.kontaktperson = kontaktperson;
         this.navn = navn;
         this.opptredendePersoner = opptredendePersoner;
