@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class KulturhusScene3FXMLController {
+public class AdminMainPageController {
 
     //@FXML
     //private Label label;
