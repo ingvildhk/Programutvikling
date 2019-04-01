@@ -1,5 +1,5 @@
 package org.kulturhusfx.base;
 
-public class InvalidEmalException {
+public class InvalidEmailException {
     //epost mangler @
 }
