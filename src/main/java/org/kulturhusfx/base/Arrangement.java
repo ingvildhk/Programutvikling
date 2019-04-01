@@ -30,6 +30,7 @@ public class Arrangement {
     }
 
     public void leggTilArrangement(Arrangement o) {
+
     }
 
     public void slettArrangement(Arrangement o) {

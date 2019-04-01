@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class FXMLController {
+public class MainPageController {
 
     //@FXML
     //private Label label;
@@ -36,7 +36,6 @@ public class FXMLController {
             return;
         }
 
-        // add CSS etc. should be here
         Scene scene3Scene = new Scene(scene3Parent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(scene3Scene);
