@@ -11,35 +11,22 @@ import java.io.IOException;
 
 public class MainPageController {
 
-    //@FXML
-    //private Label label;
+    // Egen launch metode?
+    public void handleAdminLoginBtnAction(ActionEvent event) throws IOException {
 
-    //Scene change method attempt
-    public void handleAdminLoginButtonAction(ActionEvent event) throws IOException {
-
-        /* Får ikke dette til å virke
-        Parent scene3Parent = FXMLLoader.load(getClass().getClass().getResource("org/kulturhusfx/adminMainPage.fxml"));
-        Scene scene3Scene = new Scene(scene3Parent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scene3Scene);
-        window.show();*/
-
-        Parent scene3Parent = null;
+        Parent adminMainPageParent = null;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
 
-            scene3Parent = fxmlLoader.load(getClass().getResource("adminMainPage.fxml").openStream());
-
-
+            adminMainPageParent = fxmlLoader.load(getClass().getResource("adminMainPage.fxml").openStream());
         } catch (IOException e) {
             e.printStackTrace(); // FXML document should be available
             return;
         }
 
-        Scene scene3Scene = new Scene(scene3Parent);
+        Scene adminMainPageScene = new Scene(adminMainPageParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scene3Scene);
-        window.setTitle("Programutvikling Semesteroppgave");
+        window.setScene(adminMainPageScene);
         window.show();
 
         System.out.println("You clicked me!");
