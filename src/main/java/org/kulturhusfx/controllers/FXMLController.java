@@ -18,7 +18,7 @@ public class FXMLController {
     public void handleAdminLoginButtonAction(ActionEvent event) throws IOException {
 
         /* Får ikke dette til å virke
-        Parent scene3Parent = FXMLLoader.load(getClass().getClass().getResource("org/kulturhusfx/kulturhusScene3.fxml"));
+        Parent scene3Parent = FXMLLoader.load(getClass().getClass().getResource("org/kulturhusfx/adminMainPage.fxml"));
         Scene scene3Scene = new Scene(scene3Parent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(scene3Scene);
@@ -27,7 +27,11 @@ public class FXMLController {
         Parent scene3Parent = null;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
+<<<<<<< HEAD
             scene3Parent = fxmlLoader.load(getClass().getResource("kulturhusScene3.fxml").openStream());
+=======
+            root = fxmlLoader.load(getClass().getResource("adminMainPage.fxml").openStream());
+>>>>>>> master
 
         } catch (IOException e) {
             e.printStackTrace(); // FXML document should be available
