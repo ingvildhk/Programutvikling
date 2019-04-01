@@ -36,6 +36,18 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.fxml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -61,7 +73,6 @@
                     <mainClass>org.kulturhusfx.MainApp</mainClass>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 

@@ -24,22 +24,22 @@ public class FXMLController {
         window.setScene(scene3Scene);
         window.show();*/
 
-        Parent root = null;
+        Parent scene3Parent = null;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            root = fxmlLoader.load(getClass().getResource("kulturhusScene3.fxml").openStream());
+            scene3Parent = fxmlLoader.load(getClass().getResource("kulturhusScene3.fxml").openStream());
 
         } catch (IOException e) {
             e.printStackTrace(); // FXML document should be available
             return;
         }
 
-        Scene scene = new Scene(root);
         // add CSS etc. should be here
-        Stage leggTilArrangement = new Stage();
-        leggTilArrangement.setTitle("Programutvikling Semesteroppgave");
-        leggTilArrangement.setScene(scene);
-        leggTilArrangement.show();
+        Scene scene3Scene = new Scene(scene3Parent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(scene3Scene);
+        window.setTitle("Programutvikling Semesteroppgave");
+        window.show();
 
         System.out.println("You clicked me!");
     }
