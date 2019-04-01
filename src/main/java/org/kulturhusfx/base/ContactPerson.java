@@ -1,6 +1,6 @@
 package org.kulturhusfx.base;
 
-public class KontaktPerson {
+public class ContactPerson {
     private String navn;
     private String telefonnummer;
     private String epost;
@@ -9,7 +9,7 @@ public class KontaktPerson {
     private String andreOpplysninger;
 
     //nettside, firma og andreOpplysninger er ikke i konstruktøren da de er valgfrie opplysninger
-    public KontaktPerson(String navn, String telefonnummer, String epost) {
+    public ContactPerson(String navn, String telefonnummer, String epost) {
         this.navn = navn;
         this.telefonnummer = telefonnummer;
         this.epost = epost;

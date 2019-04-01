@@ -1,11 +1,11 @@
 package org.kulturhusfx.base;
 
-public class Lokale {
+public class Hall {
     private String salNavn;
     private String typeSal;
     private int antallPlasser;
 
-    public Lokale(String salNavn, String typeSal, int antallPlasser) {
+    public Hall(String salNavn, String typeSal, int antallPlasser) {
         this.salNavn = salNavn;
         this.typeSal = typeSal;
         this.antallPlasser = antallPlasser;
