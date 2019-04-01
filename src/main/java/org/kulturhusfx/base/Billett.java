@@ -2,13 +2,13 @@ package org.kulturhusfx.base;
 
 import java.util.Date;
 
-public class Ticket {
+public class Billett {
 
     private int telefonnrKjoper;
     private int plassnr;
     private Date kjopstidspunkt;
 
-    public Ticket(int telefonnrKjoper) {
+    public Billett(int telefonnrKjoper) {
         this.telefonnrKjoper = telefonnrKjoper;
     }
 
