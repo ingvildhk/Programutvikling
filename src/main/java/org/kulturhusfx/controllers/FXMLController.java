@@ -27,11 +27,9 @@ public class FXMLController {
         Parent scene3Parent = null;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-<<<<<<< HEAD
-            scene3Parent = fxmlLoader.load(getClass().getResource("kulturhusScene3.fxml").openStream());
-=======
-            root = fxmlLoader.load(getClass().getResource("adminMainPage.fxml").openStream());
->>>>>>> master
+
+            scene3Parent = fxmlLoader.load(getClass().getResource("adminMainPage.fxml").openStream());
+
 
         } catch (IOException e) {
             e.printStackTrace(); // FXML document should be available
