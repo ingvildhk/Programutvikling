@@ -57,6 +57,6 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <Button id="adminLoginButton" layoutX="463.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleAdminLoginBtnAction" text="Admin Login" />
+        <Button id="adminLoginButton" fx:id="adminLoginBtn" layoutX="463.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleAdminLoginBtnAction" text="Admin Login" />
     </children>
 </AnchorPane>
