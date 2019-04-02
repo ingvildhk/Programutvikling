@@ -1,13 +1,17 @@
 package org.kulturhusfx.base;
 
-import org.kulturhusfx.controllers.uihelpers.InvalidInputHandler;
+import org.kulturhusfx.base.exception.InvalidDateException;
+import org.kulturhusfx.util.InvalidInputHandler;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Event {
 
+    private static int counter = 0;
+
     ContactPerson contactPerson;
+    String id;
     String name;
     String performers;
     String schedule;
@@ -15,6 +19,13 @@ public class Event {
     String date;
     String time;
     double ticketPrice;
+
+    // Settes til max etter lest inn fil
+    public static void setMinId(int id) {
+        if (id > counter) {
+            counter = id;
+        }
+    }
 
     public Event(ContactPerson contactPerson, String name, String performers,
                  String schedule, Hall location, String date, String time, double ticketPrice) {
@@ -26,6 +37,15 @@ public class Event {
         this.date = date;
         this.time = time;
         this.ticketPrice = ticketPrice;
+        this.id = "" + counter++;
+    }
+
+    public String getId(){
+        return id;
+    }
+
+    public Hall getLocation(){
+        return location;
     }
 
     public int soldTickets() {
@@ -36,7 +56,6 @@ public class Event {
     }
 
     public void addEvenet(Event o) {
-
     }
 
     public void removeEvent(Event o) {
@@ -52,16 +71,10 @@ public class Event {
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(date);
         boolean validDate = m.matches();
-        if (validDate == false) {
-            InvalidInputHandler.generateAlert("Datoformat feil. Skriv inn dato i riktig format, feks. 02/05/2019. " +
-                    "Event ble ikke oppdatert");
-            throw new InvalidDateException
-                    ("Datoformat feil. Event ble ikke oppdatert ");
+        if (!validDate) {
+            InvalidInputHandler.generateAlert(new InvalidDateException
+                    ("Datoformat feil. Event ble ikke oppdatert "));
         }
         return true;
     }
-
-
-
-
 }

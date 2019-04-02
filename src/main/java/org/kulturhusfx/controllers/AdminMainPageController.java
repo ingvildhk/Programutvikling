@@ -1,18 +1,16 @@
 package org.kulturhusfx.controllers;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import org.kulturhusfx.base.*;
-import org.kulturhusfx.controllers.uihelpers.InvalidInputHandler;
+import org.kulturhusfx.base.ContactPerson;
+import org.kulturhusfx.base.exception.InvalidInputException;
+import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.util.InvalidInputHandler;
+import org.kulturhusfx.util.SceneUtils;
 
 import java.io.IOException;
 
@@ -28,7 +26,13 @@ public class AdminMainPageController{
     @FXML
     ChoiceBox eventType, eventRoom;
 
-    public void roomRegistrationBtn(ActionEvent event) throws InvalidNumberOfSeatsException, InvalidInputException {
+    private HallModel hallModel;
+
+    public AdminMainPageController() {
+        this.hallModel = new HallModel();
+    }
+
+    public void roomRegistrationBtn(ActionEvent event) {
         String room = roomName.getText();
         String type = roomType.getText();
         String seat = totalNumberofSeats.getText();
@@ -38,12 +42,9 @@ public class AdminMainPageController{
         if (room == null || room.trim().length() == 0 ||
                 type == null || type.trim().length() == 0 ||
                 seat == null || seat.trim().length() == 0){
-            InvalidInputHandler.generateAlert("Alle felt må fylles ut");
-            throw new InvalidInputException("Alle felt må fylles ut");
+            InvalidInputHandler.generateAlert(new InvalidInputException("Alle felt må fylles ut"));
         }
         // Bør ha en else hvor man kun oppretter ny HALL hvis alle felt er fylt ut? Renate
-        Hall newHall = new Hall(room, type, seat);
-        newHall.checkValidNumberOfSeats(seat);
 
         /* Tror vi må ha en en metode som skriver hall-object til fil, og så en metode som leser alle hall fra fil og lister
          Hall-objektene i CHoiceBoxen, koden nedenfor er bare meg som tenkter høy
@@ -53,10 +54,13 @@ public class AdminMainPageController{
         }
         */
 
-        System.out.println(newHall.getHallName() + " " + newHall.getHallType() + " " + newHall.getNumberOfSeats());
+        this.hallModel.createHall(room, type, seat);
+
+        System.out.println(hallModel.halls.toString());
+
     }
 
-    public void eventRegistrationBtn(ActionEvent event) throws InvalidPhoneException, InvalidEmailException, InvalidDateException, InvalidInputException {
+    public void eventRegistrationBtn(ActionEvent event) {
         String name = eventName.getText();
         String type = eventType.getAccessibleText();
         String performer = performers.getText();
@@ -85,8 +89,7 @@ public class AdminMainPageController{
                 contact == null || contact.trim().length() == 0 ||
                 phone == null || phone.trim().length() == 0 ||
                 email == null || email.trim().length() == 0){
-            InvalidInputHandler.generateAlert("Husk å fylle ut alle obligatoriske felter");
-            throw new InvalidInputException("Husk å fylle ut alle obligatoriske felter");
+            InvalidInputHandler.generateAlert(new InvalidInputException("Husk å fylle ut alle obligatoriske felter"));
         } else {
             ContactPerson newContactPerson = new ContactPerson(contact, phone, email);
             // newContactPerson.checkValidPhone(phone);
@@ -96,63 +99,42 @@ public class AdminMainPageController{
             // Event newEvent = new Event(newContactPerson, name, performer, program, room, date, time, ticketPrice2);
 
         }
-
         System.out.println("I work too!");
     }
 
     public void backToMainPageBtn(ActionEvent event) throws  IOException{
-        //this is not working
-        Parent MainPageParent = null;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            MainPageParent = fxmlLoader.load(getClass().getResource("MainPage.fxml").openStream());
+            Parent mainPageParent = fxmlLoader.load(getClass().getResource("MainPage.fxml").openStream());
+            SceneUtils.showScene(mainPageParent, event);
         } catch (IOException e) {
             e.printStackTrace(); // FXML document should be available
             return;
         }
-
-        /*
-
-        Scene MainPageScene = new Scene(MainPageParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(MainPageScene);
-        window.show();*/
     }
 
     public void manageEventsBtn(ActionEvent event) throws IOException {
-        Parent manageEventSceneParent = null;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            manageEventSceneParent = fxmlLoader.load(getClass().getResource("adminManageEvents.fxml").openStream());
+            Parent manageEventSceneParent = fxmlLoader.load(getClass().getResource("adminManageEvents.fxml").openStream());
+            SceneUtils.showScene(manageEventSceneParent, event);
+
         } catch (IOException e){
             e.printStackTrace(); // FXML document should be available
-            return;
         }
-
-        Scene manageEventScene = new Scene(manageEventSceneParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(manageEventScene);
-        window.show();
-
     }
 
     public void seeAllEventsBtn(ActionEvent event) throws IOException{
-        Parent seeAllEventSceneParent = null;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            seeAllEventSceneParent = fxmlLoader.load(getClass().getResource("adminSeeAllEvents.fxml").openStream());
+            Parent seeAllEventSceneParent = fxmlLoader.load(getClass().getResource("adminSeeAllEvents.fxml").openStream());
+            SceneUtils.showScene(seeAllEventSceneParent, event);
         } catch (IOException e){
             e.printStackTrace();
         }
-
-        Scene seeAllEventScene = new Scene(seeAllEventSceneParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(seeAllEventScene);
-        window.show();
     }
 
     public void initialize() {
         // TODO
     }
-
 }

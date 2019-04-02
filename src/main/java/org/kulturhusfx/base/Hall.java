@@ -1,7 +1,7 @@
 package org.kulturhusfx.base;
 
-import javafx.scene.control.ChoiceBox;
-import org.kulturhusfx.controllers.uihelpers.InvalidInputHandler;
+import org.kulturhusfx.base.exception.InvalidNumberOfSeatsException;
+import org.kulturhusfx.util.InvalidInputHandler;
 
 public class Hall {
     private String hallName;
@@ -11,16 +11,15 @@ public class Hall {
     public Hall(String hallName, String hallType, String numberOfSeats) {
         this.hallName = hallName;
         this.hallType = hallType;
+        this.checkValidNumberOfSeats(numberOfSeats);
         this.numberOfSeats = numberOfSeats;
     }
 
     public String getHallName() {
-
         return hallName;
     }
 
     public String getHallType() {
-
         return hallType;
     }
 
@@ -29,37 +28,32 @@ public class Hall {
     }
 
     public void setHallName(String hallName) {
-
         this.hallName = hallName;
     }
 
     public void setHallType(String hallType) {
-
         this.hallType = hallType;
     }
 
     public void setNumberOfSeats(String numberOfSeats) {
-
         this.numberOfSeats = numberOfSeats;
     }
 
-
-
-
-
-
-    public boolean checkValidNumberOfSeats(String numberOfSeats) throws InvalidNumberOfSeatsException {
+    private void checkValidNumberOfSeats(String numberOfSeats) {
         try {
             int seat = Integer.parseInt(numberOfSeats);
             if(seat < 0) {
-                InvalidInputHandler.generateAlert("Antall seter kan ikke være et negativt tall");
-                throw new InvalidNumberOfSeatsException("Antall seter kan ikke være et negativt tall");
+                InvalidInputHandler.generateAlert(
+                        new InvalidNumberOfSeatsException("Antall seter kan ikke være et negativt tall"));
             }
         }
         catch(NumberFormatException e){
-            InvalidInputHandler.generateAlert("Antall seter må være et tall");
-            throw new InvalidNumberOfSeatsException("Antall seter kan ikke være et negativt tall");
+            InvalidInputHandler.generateAlert(
+                    new InvalidNumberOfSeatsException("Antall seter må være et tall"));
         }
-        return true;
+    }
+
+    public String toString(){
+        return (hallName + " " + hallType + " " + numberOfSeats);
     }
 }

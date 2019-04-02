@@ -1,6 +1,7 @@
 package org.kulturhusfx.base;
 
-import org.kulturhusfx.controllers.uihelpers.InvalidInputHandler;
+import org.kulturhusfx.base.exception.InvalidEmailException;
+import org.kulturhusfx.util.InvalidInputHandler;
 
 public class ContactPerson {
     private String name;
@@ -68,8 +69,7 @@ public class ContactPerson {
     public boolean checkValidEmail(String email) throws InvalidEmailException {
         String[] splitEmail = email.split("@");
         if (splitEmail.length != 2) {
-            InvalidInputHandler.generateAlert("Epost må inneholde '@'");
-            throw new InvalidEmailException("Epost må inneholde '@'");
+            InvalidInputHandler.generateAlert(new InvalidEmailException("Epost må inneholde '@'"));
         }
         return true;
     }
