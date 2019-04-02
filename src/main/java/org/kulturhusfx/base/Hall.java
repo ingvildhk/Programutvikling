@@ -1,5 +1,6 @@
 package org.kulturhusfx.base;
 
+import javafx.scene.control.ChoiceBox;
 import org.kulturhusfx.controllers.uihelpers.InvalidInputHandler;
 
 public class Hall {
@@ -41,6 +42,11 @@ public class Hall {
 
         this.numberOfSeats = numberOfSeats;
     }
+
+
+
+
+
 
     public boolean checkValidNumberOfSeats(String numberOfSeats) throws InvalidNumberOfSeatsException {
         try {

@@ -39,17 +39,27 @@ public class AdminMainPageController {
             InvalidInputHandler.generateAlert("Alle felt må fylles ut");
             throw new InvalidInputException("Alle felt må fylles ut");
         }
-
+        // Bør ha en else hvor man kun oppretter ny HALL hvis alle felt er fylt ut? Renate
         Hall newHall = new Hall(room, type, seat);
         newHall.checkValidNumberOfSeats(seat);
+
+        /* Hmmmmm, vi må en en metode som skriver hall til fil, og så en metode som leser alle hall fra fil og lister
+         Hall-objektene i CHoiceBoxen, koden er bare meg som tenkte høy
+        ChoiceBox<Hall> hallChoiceBox = new ChoiceBox<>();
+        for (Hall hall : hallChoiceBox){
+            hallChoiceBox.getItems().add(hall);
+        }
+        */
 
         System.out.println(newHall.getHallName() + " " + newHall.getHallType() + " " + newHall.getNumberOfSeats());
     }
 
-    public void eventRegistrationBtn(ActionEvent event) throws InvalidPhoneException, InvalidEmailException {
+    public void eventRegistrationBtn(ActionEvent event) throws InvalidPhoneException, InvalidEmailException, InvalidDateException, InvalidInputException {
         String name = eventName.getText();
         String type = eventType.getAccessibleText();
         String performer = performers.getText();
+
+        // Room er av typen Hall
         String room = eventRoom.getAccessibleText();
         String time = eventTime.getText();
         String date = eventDate.getText();
@@ -60,7 +70,30 @@ public class AdminMainPageController {
         String website = contactWebsite.getText();
         String firm = contactFirm.getText();
         String other = contactOther.getText();
+        double ticketPrice2 = Double.parseDouble(ticketPrice.getText());
 
+        // Ikke trim().length() på type eller room da de er dropdown og enten NULL eller noe.
+        if (name == null || name.trim().length() == 0 ||
+                type == null ||
+                performer == null || performer.trim().length() == 0 ||
+                room == null ||
+                time == null || time.trim().length() == 0 ||
+                date == null || date.trim().length() == 0 ||
+                program == null || program.trim().length() == 0 ||
+                contact == null || contact.trim().length() == 0 ||
+                phone == null || phone.trim().length() == 0 ||
+                email == null || email.trim().length() == 0){
+            InvalidInputHandler.generateAlert("Husk å fylle ut alle obligatoriske felter");
+            throw new InvalidInputException("Husk å fylle ut alle obligatoriske felter");
+        } else {
+            ContactPerson newContactPerson = new ContactPerson(contact, phone, email);
+            // newContactPerson.checkValidPhone(phone);
+            newContactPerson.checkValidEmail(email);
+
+            // Kontruktøren fungerer ikke da room må være av typen hall
+            // Event newEvent = new Event(newContactPerson, name, performer, program, room, date, time, ticketPrice2);
+
+        }
 
         System.out.println("I work too!");
     }
