@@ -1,5 +1,7 @@
 package org.kulturhusfx.base;
 
+import org.kulturhusfx.controllers.uihelpers.InvalidInputHandler;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,12 +47,17 @@ public class Event {
 
     // Metode for å sjekke om Dato-input er i riktig format
     private boolean checkValidDate(String date) throws InvalidDateException {
+        // Sjekk at regexen er riktig, fjern kommentar når gjort
         String regex = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(date);
         boolean validDate = m.matches();
-        if (validDate == false) throw new InvalidDateException
-                ("Husk å skrive inn dato i riktig format, feks: 12/12/2013. Event ble ikke oppdatert ");
+        if (validDate == false) {
+            InvalidInputHandler.generateAlert("Datoformat feil. Skriv inn dato i riktig format, feks. 02/05/2019. " +
+                    "Event ble ikke oppdatert");
+            throw new InvalidDateException
+                    ("Datoformat feil. Event ble ikke oppdatert ");
+        }
         return true;
     }
 
