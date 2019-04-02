@@ -1,5 +1,6 @@
 package org.kulturhusfx.controllers;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,7 +16,8 @@ import org.kulturhusfx.controllers.uihelpers.InvalidInputHandler;
 
 import java.io.IOException;
 
-public class AdminMainPageController {
+
+public class AdminMainPageController{
 
     @FXML
     TextField roomName, roomType, totalNumberofSeats, performers, eventTime, ticketPrice, eventName;
@@ -110,22 +112,47 @@ public class AdminMainPageController {
         }
 
         /*
+
         Scene MainPageScene = new Scene(MainPageParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(MainPageScene);
         window.show();*/
+    }
+
+    public void manageEventsBtn(ActionEvent event) throws IOException {
+        Parent manageEventSceneParent = null;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            manageEventSceneParent = fxmlLoader.load(getClass().getResource("adminManageEvents.fxml").openStream());
+        } catch (IOException e){
+            e.printStackTrace(); // FXML document should be available
+            return;
+        }
+
+        Scene manageEventScene = new Scene(manageEventSceneParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(manageEventScene);
+        window.show();
 
     }
 
-    public void manageEventsBtn(ActionEvent event){
+    public void seeAllEventsBtn(ActionEvent event) throws IOException{
+        Parent seeAllEventSceneParent = null;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            seeAllEventSceneParent = fxmlLoader.load(getClass().getResource("adminSeeAllEvents.fxml").openStream());
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
-    }
-
-    public void seeAllEventsBtn(ActionEvent event){
-
+        Scene seeAllEventScene = new Scene(seeAllEventSceneParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(seeAllEventScene);
+        window.show();
     }
 
     public void initialize() {
         // TODO
     }
+
 }
