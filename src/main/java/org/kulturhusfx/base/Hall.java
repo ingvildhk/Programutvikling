@@ -1,5 +1,7 @@
 package org.kulturhusfx.base;
 
+import org.kulturhusfx.controllers.uihelpers.InvalidInputHandler;
+
 public class Hall {
     private String hallName;
     private String hallType;
@@ -44,11 +46,13 @@ public class Hall {
         try {
             int seat = Integer.parseInt(numberOfSeats);
             if(seat < 0) {
+                InvalidInputHandler.generateAlert("Antall seter kan ikke være et negativt tall");
                 throw new InvalidNumberOfSeatsException("Antall seter kan ikke være et negativt tall");
             }
         }
         catch(NumberFormatException e){
-            throw new InvalidNumberOfSeatsException("Antall seter må være et tall");
+            InvalidInputHandler.generateAlert("Antall seter må være et tall");
+            throw new InvalidNumberOfSeatsException("Antall seter kan ikke være et negativt tall");
         }
         return true;
     }
