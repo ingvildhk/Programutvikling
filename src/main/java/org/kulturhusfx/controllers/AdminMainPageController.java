@@ -5,16 +5,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.kulturhusfx.base.*;
-import org.kulturhusfx.controllers.uihelpers.InvalidInputHandler;
+import org.kulturhusfx.base.exception.InvalidInputException;
+import org.kulturhusfx.util.InvalidInputHandler;
+import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.util.SceneUtils;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class AdminMainPageController {
 
@@ -26,6 +26,12 @@ public class AdminMainPageController {
     TextArea eventProgram;
     @FXML
     ChoiceBox eventType, eventRoom;
+
+    private HallModel hallModel;
+
+    public AdminMainPageController() {
+        this.hallModel = new HallModel();
+    }
 
     public void roomRegistrationBtn(ActionEvent event) {
         String room = roomName.getText();
@@ -40,13 +46,13 @@ public class AdminMainPageController {
             InvalidInputHandler.generateAlert(new InvalidInputException("Alle felt må fylles ut"));
         }
 
-        Hall newHall = new Hall(room, type, seat);
-        newHall.checkValidNumberOfSeats(seat);
+        this.hallModel.createHall(room, type, seat);
 
-        System.out.println(newHall.getHallName() + " " + newHall.getHallType() + " " + newHall.getNumberOfSeats());
+        System.out.println(hallModel.halls.toString());
+
     }
 
-    public void eventRegistrationBtn(ActionEvent event) throws InvalidPhoneException, InvalidEmailException {
+    public void eventRegistrationBtn(ActionEvent event) {
         String name = eventName.getText();
         String type = eventType.getAccessibleText();
         String performer = performers.getText();
@@ -61,26 +67,18 @@ public class AdminMainPageController {
         String firm = contactFirm.getText();
         String other = contactOther.getText();
 
-
         System.out.println("I work too!");
     }
 
     public void backToMainPageBtn(ActionEvent event) throws  IOException{
-        //this is not working
-        Parent MainPageParent = null;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            MainPageParent = fxmlLoader.load(getClass().getResource("MainPage.fxml").openStream());
+            Parent mainPageParent = fxmlLoader.load(getClass().getResource("MainPage.fxml").openStream());
+            SceneUtils.showScene(mainPageParent, event);
         } catch (IOException e) {
             e.printStackTrace(); // FXML document should be available
             return;
         }
-
-        Scene MainPageScene = new Scene(MainPageParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(MainPageScene);
-        window.show();
-
     }
 
     public void manageEventsBtn(ActionEvent event){

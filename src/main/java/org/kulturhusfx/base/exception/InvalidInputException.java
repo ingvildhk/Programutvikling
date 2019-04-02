@@ -1,4 +1,4 @@
-package org.kulturhusfx.base;
+package org.kulturhusfx.base.exception;
 
 //This is for handling empty Strings - aka no input in required fields
 

@@ -1,4 +1,4 @@
-package org.kulturhusfx.controllers.uihelpers;
+package org.kulturhusfx.util;
 
 import javafx.scene.control.Alert;
 

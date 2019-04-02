@@ -1,6 +1,7 @@
 package org.kulturhusfx.base;
 
-import org.kulturhusfx.controllers.uihelpers.InvalidInputHandler;
+import org.kulturhusfx.base.exception.InvalidPhoneException;
+import org.kulturhusfx.util.InvalidInputHandler;
 
 import java.util.Date;
 
@@ -35,15 +36,14 @@ public class Ticket {
     public boolean checkValidPhone(String phoneNumber) throws InvalidPhoneException {
         try {
             int phone = Integer.parseInt(phoneNumber);
-            if(phone < 0) {
+            if (phone < 0) {
                 InvalidInputHandler.generateAlert(new InvalidPhoneException("Telefonnummer kan ikke være et negativt tall"));
             }
-        }
-        catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             InvalidInputHandler.generateAlert(new InvalidPhoneException("Telefonnummer må være et tall"));
         }
 
-        if (phoneNumber.length()!= 8) {
+        if (phoneNumber.length() != 8) {
             InvalidInputHandler.generateAlert(new InvalidPhoneException("Telefonnummer må være 8 siffer"));
         }
         return true;

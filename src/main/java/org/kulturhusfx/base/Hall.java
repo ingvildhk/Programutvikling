@@ -1,6 +1,7 @@
 package org.kulturhusfx.base;
 
-import org.kulturhusfx.controllers.uihelpers.InvalidInputHandler;
+import org.kulturhusfx.base.exception.InvalidNumberOfSeatsException;
+import org.kulturhusfx.util.InvalidInputHandler;
 
 public class Hall {
     private String hallName;
@@ -19,7 +20,6 @@ public class Hall {
     }
 
     public String getHallType() {
-
         return hallType;
     }
 
@@ -42,7 +42,11 @@ public class Hall {
         this.numberOfSeats = numberOfSeats;
     }
 
-    public void checkValidNumberOfSeats(String numberOfSeats) {
+    public String toString(){
+        return (hallName + " " + hallType + " " + numberOfSeats);
+    }
+
+    private void checkValidNumberOfSeats(String numberOfSeats) {
         try {
             int seat = Integer.parseInt(numberOfSeats);
             if(seat < 0) {
