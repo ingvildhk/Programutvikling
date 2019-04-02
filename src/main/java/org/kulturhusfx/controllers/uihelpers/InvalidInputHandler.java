@@ -9,8 +9,8 @@ public class InvalidInputHandler {
 
     public static void generateAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Feil persondata");
-        alert.setHeaderText("Feil persondata");
+        alert.setTitle("Feil i registreringsdata");
+        alert.setHeaderText("Feil i registreringsdata");
         alert.setContentText(msg);
 
         alert.showAndWait();

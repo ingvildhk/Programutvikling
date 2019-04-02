@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="eventName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.AdminMainPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.AdminMainPageController">
     <children>
         <Label layoutX="193.0" layoutY="14.0" text="Småkommunens Kulturhus">
             <font>
@@ -32,7 +32,7 @@
         <TextField fx:id="roomName" layoutX="528.0" layoutY="106.0" prefHeight="25.0" prefWidth="115.0" />
         <TextField fx:id="roomType" layoutX="528.0" layoutY="156.0" prefHeight="25.0" prefWidth="115.0" />
         <TextField fx:id="totalNumberofSeats" layoutX="528.0" layoutY="219.0" prefHeight="25.0" prefWidth="115.0" />
-        <Button fx:id="roomRegistrationBtn" layoutX="546.0" layoutY="260.0" mnemonicParsing="false" text="Registrer sal" />
+        <Button layoutX="546.0" layoutY="260.0" mnemonicParsing="false" onAction="#roomRegistrationBtn" text="Registrer sal" />
         <Label layoutX="16.0" layoutY="89.0" text="Navn på Arrangementet" />
         <Label layoutX="16.0" layoutY="135.0" text="Type" />
         <Label layoutX="19.0" layoutY="182.0" text="Opptredende Personer" />
@@ -58,12 +58,12 @@
         <TextField fx:id="contactFirm" layoutX="215.0" layoutY="319.0" prefHeight="27.0" prefWidth="196.0" />
         <TextField fx:id="contactOther" layoutX="218.0" layoutY="369.0" prefHeight="27.0" prefWidth="196.0" />
         <Separator layoutX="462.0" layoutY="68.0" orientation="VERTICAL" prefHeight="388.0" prefWidth="0.0" />
-        <Button fx:id="eventRegistrationBtn" layoutX="295.0" layoutY="456.0" mnemonicParsing="false" text="Registrer arrangement" />
+        <Button layoutX="295.0" layoutY="456.0" mnemonicParsing="false" onAction="#eventRegistrationBtn" text="Registrer arrangement" />
       <TextArea fx:id="eventProgram" layoutX="21.0" layoutY="391.0" prefHeight="102.0" prefWidth="182.0" />
       <TextField fx:id="eventName" layoutX="20.0" layoutY="106.0" />
-      <Button fx:id="backToMainPageBtn" layoutX="18.0" layoutY="12.0" mnemonicParsing="false" text="Tilbake" />
-      <Button fx:id="seeAllEventsBtn" layoutX="479.0" layoutY="24.0" mnemonicParsing="false" text="Se alle arrangementer" />
-      <Button fx:id="manageEventsBtn" layoutX="643.0" layoutY="24.0" mnemonicParsing="false" text="Endre arrangementer" />
+      <Button layoutX="18.0" layoutY="12.0" mnemonicParsing="false" onAction="#backToMainPageBtn" text="Tilbake" />
+      <Button layoutX="479.0" layoutY="24.0" mnemonicParsing="false" onAction="#seeAllEventsBtn" text="Se alle arrangementer" />
+      <Button layoutX="643.0" layoutY="24.0" mnemonicParsing="false" onAction="#manageEventsBtn" text="Endre arrangementer" />
       <TextField fx:id="eventDate" layoutX="112.0" layoutY="319.0" prefHeight="27.0" prefWidth="83.0" promptText="dd/mm/yy" />
       <Label layoutX="112.0" layoutY="295.0" text="Dato" />
     </children>
