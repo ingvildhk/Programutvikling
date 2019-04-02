@@ -43,11 +43,11 @@ public class AdminMainPageController {
         Hall newHall = new Hall(room, type, seat);
         newHall.checkValidNumberOfSeats(seat);
 
-        /* Hmmmmm, vi må en en metode som skriver hall til fil, og så en metode som leser alle hall fra fil og lister
-         Hall-objektene i CHoiceBoxen, koden er bare meg som tenkte høy
+        /* Tror vi må ha en en metode som skriver hall-object til fil, og så en metode som leser alle hall fra fil og lister
+         Hall-objektene i CHoiceBoxen, koden nedenfor er bare meg som tenkter høy
         ChoiceBox<Hall> hallChoiceBox = new ChoiceBox<>();
         for (Hall hall : hallChoiceBox){
-            hallChoiceBox.getItems().add(hall);
+            hallChoiceBox.getItems().addAll(Alle Hall fra fil);
         }
         */
 
