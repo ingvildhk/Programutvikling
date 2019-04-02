@@ -14,6 +14,7 @@ import org.kulturhusfx.base.*;
 import org.kulturhusfx.controllers.uihelpers.InvalidInputHandler;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class AdminMainPageController {
 
@@ -26,7 +27,7 @@ public class AdminMainPageController {
     @FXML
     ChoiceBox eventType, eventRoom;
 
-    public void roomRegistrationBtn(ActionEvent event) throws InvalidNumberOfSeatsException, InvalidInputException {
+    public void roomRegistrationBtn(ActionEvent event) {
         String room = roomName.getText();
         String type = roomType.getText();
         String seat = totalNumberofSeats.getText();
@@ -36,8 +37,7 @@ public class AdminMainPageController {
         if (room == null || room.trim().length() == 0 ||
                 type == null || type.trim().length() == 0 ||
                 seat == null || seat.trim().length() == 0){
-            InvalidInputHandler.generateAlert("Alle felt må fylles ut");
-            throw new InvalidInputException("Alle felt må fylles ut");
+            InvalidInputHandler.generateAlert(new InvalidInputException("Alle felt må fylles ut"));
         }
 
         Hall newHall = new Hall(room, type, seat);
@@ -76,11 +76,10 @@ public class AdminMainPageController {
             return;
         }
 
-        /*
         Scene MainPageScene = new Scene(MainPageParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(MainPageScene);
-        window.show();*/
+        window.show();
 
     }
 

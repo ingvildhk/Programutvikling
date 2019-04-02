@@ -68,8 +68,7 @@ public class ContactPerson {
     public boolean checkValidEmail(String email) throws InvalidEmailException {
         String[] splitEmail = email.split("@");
         if (splitEmail.length != 2) {
-            InvalidInputHandler.generateAlert("Epost må inneholde '@'");
-            throw new InvalidEmailException("Epost må inneholde '@'");
+            InvalidInputHandler.generateAlert(new InvalidEmailException("Epost må inneholde '@'"));
         }
         return true;
     }

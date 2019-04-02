@@ -7,13 +7,13 @@ import javafx.scene.control.Alert;
 
 public class InvalidInputHandler {
 
-    public static void generateAlert(String msg) {
+    public static void generateAlert(RuntimeException exception) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Feil i registreringsdata");
         alert.setHeaderText("Feil i registreringsdata");
-        alert.setContentText(msg);
+        alert.setContentText(exception.getMessage());
 
         alert.showAndWait();
+        throw exception;
     }
-
 }

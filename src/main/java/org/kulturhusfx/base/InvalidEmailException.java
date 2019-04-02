@@ -1,6 +1,6 @@
 package org.kulturhusfx.base;
 
-public class InvalidEmailException extends Exception {
+public class InvalidEmailException extends RuntimeException {
     public InvalidEmailException(String msg) {
 
         super(msg);
