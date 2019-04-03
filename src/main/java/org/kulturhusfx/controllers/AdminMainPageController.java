@@ -118,7 +118,6 @@ public class AdminMainPageController{
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent manageEventSceneParent = fxmlLoader.load(getClass().getResource("adminManageEvents.fxml").openStream());
             SceneUtils.showScene(manageEventSceneParent, event);
-
         } catch (IOException e){
             e.printStackTrace(); // FXML document should be available
         }
