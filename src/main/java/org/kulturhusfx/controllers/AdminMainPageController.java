@@ -7,6 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.kulturhusfx.base.ContactPerson;
+import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.exception.InvalidInputException;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.InvalidInputHandler;
@@ -56,7 +57,7 @@ public class AdminMainPageController{
 
         this.hallModel.createHall(room, type, seat);
 
-        System.out.println(hallModel.halls.toString());
+        System.out.println(hallModel.toString());
 
     }
 
@@ -93,7 +94,7 @@ public class AdminMainPageController{
         } else {
             ContactPerson newContactPerson = new ContactPerson(contact, phone, email, website, firm, other);
             // newContactPerson.checkValidPhone(phone);
-            newContactPerson.checkValidEmail(email);
+            Checker.checkValidEmail(email);
 
             // Kontruktøren fungerer ikke da room må være av typen hall
             // Event newEvent = new Event(newContactPerson, name, performer, program, room, date, time, ticketPrice2);

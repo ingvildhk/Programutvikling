@@ -1,5 +1,6 @@
 package org.kulturhusfx.base;
 
+import org.kulturhusfx.model.TicketModel;
 import org.kulturhusfx.util.Checker;
 
 public class Event {
@@ -15,6 +16,7 @@ public class Event {
     private String date;
     private String time;
     private String ticketPrice;
+    private TicketModel ticketList;
 
     //Kjøres etter inlest fil for å kontrollere at id-ene holdes unike
     public static void setMinId(int id) {
@@ -37,6 +39,13 @@ public class Event {
         this.time = time;
         this.ticketPrice = ticketPrice;
         this.id = "" + counter++;
+
+        //Må opprette ny liste med billetter for hvert arrangement så kanskje noe som
+        createNewTicketList();
+    }
+
+    private void createNewTicketList(){
+        this.ticketList = new TicketModel();
     }
 
     public ContactPerson getContactPerson(){
@@ -69,6 +78,10 @@ public class Event {
 
     public String getId(){
         return id;
+    }
+
+    public TicketModel getTicketList(){
+        return ticketList;
     }
 
     private void setContactPerson(ContactPerson contactPerson){

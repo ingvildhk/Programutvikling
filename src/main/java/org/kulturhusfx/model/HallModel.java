@@ -2,25 +2,27 @@ package org.kulturhusfx.model;
 
 
 import org.kulturhusfx.base.Hall;
+import org.kulturhusfx.util.InvalidInputHandler;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class HallModel {
-    public Map<String, Hall> halls;
+    private Map<String, Hall> hallMap;
 
     public HallModel() {
-        this.halls = new HashMap<>();
+        this.hallMap = new HashMap<>();
     }
 
     public void createHall(String hallName, String hallType, String numberOfSeats) {
-        if (halls.containsKey(hallName)) {
-            // Kast en exception her
+        if (hallMap.containsKey(hallName)) {
+            //InvalidInputHandler.generateAlert(new InvalidHallNameException("Salen finnes fra før av");
         }
-        halls.put(hallName, new Hall(hallName, hallType, numberOfSeats));
+        hallMap.put(hallName, new Hall(hallName, hallType, numberOfSeats));
     }
 
     public void deleteHall(String hallName){
 
-        halls.entrySet().removeIf(e -> e.getKey().equals(hallName));
+        hallMap.entrySet().removeIf(e -> e.getKey().equals(hallName));
     }
 }
