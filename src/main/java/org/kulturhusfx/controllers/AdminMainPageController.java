@@ -47,7 +47,7 @@ public class AdminMainPageController {
         Checker.checkIfFieldIsEmpty(room, type, seat);
 
         this.hallModel.createHall(room, type, seat);
-        
+        updateRoomList();
     }
 
     public void eventRegistrationBtn(ActionEvent event) {
@@ -76,6 +76,7 @@ public class AdminMainPageController {
        // String name, String phoneNumber,
           //      String email, String webpage, String firm, String otherInformation
             //System.out.println(hallModel.halls.toString());
+
         }
 
 
@@ -110,15 +111,23 @@ public class AdminMainPageController {
             }
         }
 
-
-        public void initialize () {
-            // TODO
-            eventType.getItems().addAll("Konsert", "Teater");
-
+        public void updateRoomList(){
             for(String i : HallModel.hallMap.keySet()){
                 eventRoom.getItems().add(i);
             }
         }
+
+        public void addEventType(){
+            eventType.getItems().addAll("Konsert", "Teater");
+        }
+
+        public void initialize () {
+            addEventType();
+            updateRoomList();
+
+        }
+
+
     }
 
 

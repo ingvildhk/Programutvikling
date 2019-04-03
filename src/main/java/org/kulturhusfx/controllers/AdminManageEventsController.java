@@ -22,14 +22,5 @@ public class AdminManageEventsController {
             e.printStackTrace(); // FXML document should be available
             return;
         }
-
-
-       /* Scene manageEventScene = new Scene(manageEventSceneParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(manageEventScene);
-        window.show();
-*/
     }
-
-
 }
