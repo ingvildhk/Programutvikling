@@ -34,9 +34,7 @@ public class AdminMainPageController {
 
     public AdminMainPageController() {
         this.hallModel = new HallModel();
-
         this.eventModel = new EventModel();
-
         this.contactPersonModel = new ContactPersonModel();
 
     }
@@ -49,8 +47,7 @@ public class AdminMainPageController {
         Checker.checkIfFieldIsEmpty(room, type, seat);
 
         this.hallModel.createHall(room, type, seat);
-
-        System.out.println(hallModel.hallMap.toString());
+        
     }
 
     public void eventRegistrationBtn(ActionEvent event) {
@@ -116,6 +113,11 @@ public class AdminMainPageController {
 
         public void initialize () {
             // TODO
+            eventType.getItems().addAll("Konsert", "Teater");
+
+            for(String i : HallModel.hallMap.keySet()){
+                eventRoom.getItems().add(i);
+            }
         }
     }
 
