@@ -91,7 +91,7 @@ public class AdminMainPageController{
                 email == null || email.trim().length() == 0){
             InvalidInputHandler.generateAlert(new InvalidInputException("Husk å fylle ut alle obligatoriske felter"));
         } else {
-            ContactPerson newContactPerson = new ContactPerson(contact, phone, email);
+            ContactPerson newContactPerson = new ContactPerson(contact, phone, email, website, firm, other);
             // newContactPerson.checkValidPhone(phone);
             newContactPerson.checkValidEmail(email);
 

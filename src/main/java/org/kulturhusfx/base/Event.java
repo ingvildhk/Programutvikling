@@ -1,10 +1,6 @@
 package org.kulturhusfx.base;
 
-import org.kulturhusfx.util.exception.InvalidDateException;
-import org.kulturhusfx.util.InvalidInputHandler;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.kulturhusfx.util.Checker;
 
 public class Event {
 
@@ -18,9 +14,9 @@ public class Event {
     private Hall location;
     private String date;
     private String time;
-    private double ticketPrice;
+    private String ticketPrice;
 
-    // Settes til max etter lest inn fil
+    //Kjøres etter inlest fil for å kontrollere at id-ene holdes unike
     public static void setMinId(int id) {
         if (id > counter) {
             counter = id;
@@ -28,7 +24,10 @@ public class Event {
     }
 
     public Event(ContactPerson contactPerson, String name, String performers,
-                 String schedule, Hall location, String date, String time, double ticketPrice) {
+                 String schedule, Hall location, String date, String time, String ticketPrice) {
+        Checker.checkValidDate(date);
+        //Checker.checkValidTime(time) - metode må opprettes
+        //Checker.checkValidTicketPrice(ticketPrice) - metode må opprettes
         this.contactPerson = contactPerson;
         this.name = name;
         this.performers = performers;
@@ -40,18 +39,91 @@ public class Event {
         this.id = "" + counter++;
     }
 
-    public String getId(){
-        return id;
+    public ContactPerson getContactPerson(){
+        return contactPerson;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getPerformers(){
+        return performers;
+    }
+
+    public String getSchedule(){
+        return  schedule;
     }
 
     public Hall getLocation(){
         return location;
     }
 
+    public String getDate(){
+        return date;
+    }
+
+    public String getTime(){
+        return time;
+    }
+
+    public String getId(){
+        return id;
+    }
+
+    private void setContactPerson(ContactPerson contactPerson){
+        this.contactPerson = contactPerson;
+    }
+
+    private void setName(String name){
+        this.name = name;
+    }
+
+    private void setPerformers(String performers){
+        this.performers = performers;
+    }
+
+    private void setSchedule(String schedule){
+        this.schedule = schedule;
+    }
+
+    private void setLocation(Hall location){
+        this.location = location;
+    }
+
+    private void setDate(String date){
+        this.date = date;
+    }
+
+    private void setTime(String time){
+        this.time = time;
+    }
+
+    private void setTicketPrice(String ticketPrice){
+        this.ticketPrice = ticketPrice;
+    }
+
+    public void changeEventInformation(ContactPerson contactPerson, String name,
+                                       String performers, String schedule, Hall location,
+                                       String date, String time, String ticketPrice){
+        Checker.checkValidDate(date);
+        //Checker.checkValidTime(date) - metode må opprettes
+        //Checker.checkValidTicketPrice(ticketPrice) - metode må opprettes
+        setContactPerson(contactPerson);
+        setName(name);
+        setPerformers(performers);
+        setSchedule(schedule);
+        setLocation(location);
+        setDate(date);
+        setTime(time);
+        setTicketPrice(ticketPrice);
+    }
+
     public int soldTickets() {
         return 0;
     }
 
+    /* ganske sikker på at disse bør være i EventModel-klassen da den holder styr på liste over alle events
     public void showAllEvents() {
     }
 
@@ -62,19 +134,6 @@ public class Event {
     }
 
     public void editEvent(Event o) {
-    }
+    }*/
 
-    // Metode for å sjekke om Dato-input er i riktig format
-    private boolean checkValidDate(String date) throws InvalidDateException {
-        // Sjekk at regexen er riktig, fjern kommentar når gjort
-        String regex = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(date);
-        boolean validDate = m.matches();
-        if (!validDate) {
-            InvalidInputHandler.generateAlert(new InvalidDateException
-                    ("Datoformat feil. Event ble ikke oppdatert "));
-        }
-        return true;
-    }
 }
