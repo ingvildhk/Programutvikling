@@ -136,17 +136,4 @@ public class Event {
         return 0;
     }
 
-    /* ganske sikker på at disse bør være i EventModel-klassen da den holder styr på liste over alle events
-    public void showAllEvents() {
-    }
-
-    public void addEvenet(Event o) {
-    }
-
-    public void removeEvent(Event o) {
-    }
-
-    public void editEvent(Event o) {
-    }*/
-
 }

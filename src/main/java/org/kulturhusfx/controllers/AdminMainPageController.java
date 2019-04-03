@@ -17,8 +17,7 @@ import org.kulturhusfx.util.SceneUtils;
 
 import java.io.IOException;
 
-
-public class AdminMainPageController{
+public class AdminMainPageController {
 
     @FXML
     TextField roomName, roomType, totalNumberofSeats, performers, eventTime, ticketPrice, eventName;
@@ -36,7 +35,9 @@ public class AdminMainPageController{
     public AdminMainPageController() {
         this.hallModel = new HallModel();
         this.eventModel = new EventModel();
+
         this.contactPersonModel = new ContactPersonModel();
+
     }
 
     public void roomRegistrationBtn(ActionEvent event) {
@@ -44,14 +45,7 @@ public class AdminMainPageController{
         String type = roomType.getText();
         String seat = totalNumberofSeats.getText();
 
-        //sjekker om noen felt er tomme. Bør kanskje skrive en egen metode for dette i en klasse som kan ta
-        //inn ukjent antall parametere
-        if (room == null || room.trim().length() == 0 ||
-                type == null || type.trim().length() == 0 ||
-                seat == null || seat.trim().length() == 0){
-            InvalidInputHandler.generateAlert(new InvalidInputException("Alle felt må fylles ut"));
-        }
-        // Bør ha en else hvor man kun oppretter ny HALL hvis alle felt er fylt ut? Renate
+        Checker.checkIfFieldIsEmpty(room, type, seat);
 
         /* Tror vi må ha en en metode som skriver hall-object til fil, og så en metode som leser alle hall fra fil og lister
          Hall-objektene i CHoiceBoxen, koden nedenfor er bare meg som tenkter høy
@@ -71,8 +65,6 @@ public class AdminMainPageController{
         String name = eventName.getText();
         String type = eventType.getAccessibleText();
         String performer = performers.getText();
-
-        // Room er av typen Hall
         String room = eventRoom.getAccessibleText();
         String time = eventTime.getText();
         String date = eventDate.getText();
@@ -83,64 +75,55 @@ public class AdminMainPageController{
         String website = contactWebsite.getText();
         String firm = contactFirm.getText();
         String other = contactOther.getText();
-        double ticketPrice2 = Double.parseDouble(ticketPrice.getText());
+        String ticket = ticketPrice.getText();
 
-        // Ikke trim().length() på type eller room da de er dropdown og enten NULL eller noe.
-        if (name == null || name.trim().length() == 0 ||
-                type == null ||
-                performer == null || performer.trim().length() == 0 ||
-                room == null ||
-                time == null || time.trim().length() == 0 ||
-                date == null || date.trim().length() == 0 ||
-                program == null || program.trim().length() == 0 ||
-                contact == null || contact.trim().length() == 0 ||
-                phone == null || phone.trim().length() == 0 ||
-                email == null || email.trim().length() == 0){
-            InvalidInputHandler.generateAlert(new InvalidInputException("Husk å fylle ut alle obligatoriske felter"));
-        } else {
-            ContactPerson newContactPerson = new ContactPerson(contact, phone, email, website, firm, other);
-            Checker.checkValidPhone(phone);
-            Checker.checkValidEmail(email);
 
             // Kontruktøren fungerer ikke da room må være av typen hall
             // Event newEvent = new Event(newContactPerson, name, performer, program, room, date, time, ticketPrice2);
 
+            Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
+
+            // this.eventModel.createEvent(name, type, performer, room, time, date, program, contact, phone, email, ticket);
+
+            //System.out.println(hallModel.halls.toString());
         }
-        System.out.println("I work too!");
+
+
+        public void backToMainPageBtn (ActionEvent event) throws IOException {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                Parent mainPageParent = fxmlLoader.load(getClass().getResource("MainPage.fxml").openStream());
+                SceneUtils.showScene(mainPageParent, event);
+            } catch (IOException e) {
+                e.printStackTrace(); // FXML document should be available
+                return;
+            }
+        }
+
+        public void manageEventsBtn (ActionEvent event) throws IOException {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                Parent manageEventSceneParent = fxmlLoader.load(getClass().getResource("adminManageEvents.fxml").openStream());
+                SceneUtils.showScene(manageEventSceneParent, event);
+            } catch (IOException e) {
+                e.printStackTrace(); // FXML document should be available
+            }
+        }
+
+        public void seeAllEventsBtn (ActionEvent event) throws IOException {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                Parent seeAllEventSceneParent = fxmlLoader.load(getClass().getResource("adminSeeAllEvents.fxml").openStream());
+                SceneUtils.showScene(seeAllEventSceneParent, event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        public void initialize () {
+            // TODO
+        }
     }
 
-    public void backToMainPageBtn(ActionEvent event) throws  IOException{
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            Parent mainPageParent = fxmlLoader.load(getClass().getResource("MainPage.fxml").openStream());
-            SceneUtils.showScene(mainPageParent, event);
-        } catch (IOException e) {
-            e.printStackTrace(); // FXML document should be available
-            return;
-        }
-    }
 
-    public void manageEventsBtn(ActionEvent event) throws IOException {
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            Parent manageEventSceneParent = fxmlLoader.load(getClass().getResource("adminManageEvents.fxml").openStream());
-            SceneUtils.showScene(manageEventSceneParent, event);
-        } catch (IOException e){
-            e.printStackTrace(); // FXML document should be available
-        }
-    }
-
-    public void seeAllEventsBtn(ActionEvent event) throws IOException{
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            Parent seeAllEventSceneParent = fxmlLoader.load(getClass().getResource("adminSeeAllEvents.fxml").openStream());
-            SceneUtils.showScene(seeAllEventSceneParent, event);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void initialize() {
-        // TODO
-    }
-}
