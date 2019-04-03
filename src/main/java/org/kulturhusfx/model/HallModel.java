@@ -3,6 +3,7 @@ package org.kulturhusfx.model;
 
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.util.InvalidInputHandler;
+import org.kulturhusfx.util.exception.InvalidHallException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +17,7 @@ public class HallModel {
 
     public void createHall(String hallName, String hallType, String numberOfSeats) {
         if (hallMap.containsKey(hallName)) {
-            //InvalidInputHandler.generateAlert(new InvalidHallNameException("Salen finnes fra før av");
+            InvalidInputHandler.generateAlert(new InvalidHallException("Salen finnes fra før av"));
         }
         hallMap.put(hallName, new Hall(hallName, hallType, numberOfSeats));
     }
