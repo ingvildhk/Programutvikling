@@ -26,7 +26,7 @@ public class Event {
     public Event(ContactPerson contactPerson, String name, String performers,
                  String schedule, Hall location, String date, String time, String ticketPrice) {
         Checker.checkValidDate(date);
-        //Checker.checkValidTime(date) - metode må opprettes
+        //Checker.checkValidTime(time) - metode må opprettes
         //Checker.checkValidTicketPrice(ticketPrice) - metode må opprettes
         this.contactPerson = contactPerson;
         this.name = name;

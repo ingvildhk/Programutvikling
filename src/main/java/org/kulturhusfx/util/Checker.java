@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 //egen klasse med alle check-metodene, kan brukes flere steder om nødvendig
 public class Checker {
 
-    //checkValidTime(date) - metode må opprettes
+    //checkValidTime(time) - metode må opprettes
     //checkValidTicketPrice(ticketPrice) - metode må opprettes
     public static void checkValidNumberOfSeats(String numberOfSeats) {
         try {
