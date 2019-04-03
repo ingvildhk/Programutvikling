@@ -34,6 +34,7 @@ public class AdminMainPageController {
 
     public AdminMainPageController() {
         this.hallModel = new HallModel();
+
         this.eventModel = new EventModel();
 
         this.contactPersonModel = new ContactPersonModel();

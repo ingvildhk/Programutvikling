@@ -11,7 +11,9 @@ public class ContactPersonModel {
     private Map<String, ContactPerson> contactPersonMap;
 
     public ContactPersonModel(){
-        contactPersonMap = new HashMap<>();
+        if(contactPersonMap == null){
+            contactPersonMap = new HashMap<>();
+        }
     }
 
     public void createContactPerson(String name, String phoneNumber,

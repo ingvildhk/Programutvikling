@@ -35,6 +35,7 @@
                         <Label text="Arrangement" GridPane.columnIndex="2" />
                         <Label text="Type Arrangement" GridPane.columnIndex="3" />
                         <Label text="Bestill Billett" GridPane.columnIndex="4" />
+                        <Label fx:id="label2" text="Label" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>

@@ -10,10 +10,16 @@ import java.util.Map;
 
 public class HallModel {
     //public for øyeblikket slik at man skal kunne skrive ut med system.out, kun for kontroll
-    public Map<String, Hall> hallMap;
+    public static Map<String, Hall> hallMap;
 
     public HallModel() {
-        this.hallMap = new HashMap<>();
+        if(hallMap == null){
+            hallMap = new HashMap<>();
+        }
+    }
+
+    public Map getHallMap(){
+        return hallMap;
     }
 
     public void createHall(String hallName, String hallType, String numberOfSeats) {

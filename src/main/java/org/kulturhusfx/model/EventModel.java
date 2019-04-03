@@ -11,7 +11,9 @@ public class EventModel {
     private List<Event> eventList;
 
     public EventModel(){
-        eventList = new ArrayList<>();
+        if(eventList == null){
+            eventList = new ArrayList<>();
+        }
     }
 
     public void createEvent(ContactPerson contactPerson, String name, String performers, String schedule,
