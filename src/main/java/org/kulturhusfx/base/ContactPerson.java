@@ -1,7 +1,6 @@
 package org.kulturhusfx.base;
 
-import org.kulturhusfx.util.exception.InvalidEmailException;
-import org.kulturhusfx.util.InvalidInputHandler;
+import org.kulturhusfx.util.Checker;
 
 public class ContactPerson {
     private String name;
@@ -11,11 +10,18 @@ public class ContactPerson {
     private String firm;
     private String otherInformation;
 
-    //nettside, firma og andreOpplysninger er ikke i konstruktøren da de er valgfrie opplysninger
-    public ContactPerson(String name, String phoneNumber, String email) {
+    //nettside, firma og andreOpplysninger er forsatt med i konstruktøren selv om de er valgfrie, da de kan
+    //være tomme uten at det skaper noen problemer
+    public ContactPerson(String name, String phoneNumber, String email, String webpage,
+                         String firm, String otherInformation) {
+        Checker.checkValidEmail(email);
+        Checker.checkValidPhone(phoneNumber);
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.webpage = webpage;
+        this.firm = firm;
+        this.otherInformation = otherInformation;
     }
 
     public String getName() {
@@ -42,38 +48,40 @@ public class ContactPerson {
         return otherInformation;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    private void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setEmail(String email) {
+    private void setEmail(String email) {
         this.email = email;
     }
 
-    public void setWebpage(String webpage) {
+    private void setWebpage(String webpage) {
         this.webpage = webpage;
     }
 
-    public void setFirm(String firm) {
+    private void setFirm(String firm) {
         this.firm = firm;
     }
 
-    public void setOtherInformation(String otherInformation) {
+    private void setOtherInformation(String otherInformation) {
         this.otherInformation = otherInformation;
     }
 
-    public boolean checkValidEmail(String email) throws InvalidEmailException {
-        String[] splitEmail = email.split("@");
-        if (splitEmail.length != 2) {
-            InvalidInputHandler.generateAlert(new InvalidEmailException("Epost må inneholde '@'"));
-        }
-        return true;
+    public void changeContactPersonInformation(String name, String phoneNumber, String email,
+                                               String webpage, String firm, String otherInformation){
+        Checker.checkValidEmail(email);
+        Checker.checkValidPhone(phoneNumber);
+        setName(name);
+        setPhoneNumber(phoneNumber);
+        setEmail(email);
+        setWebpage(webpage);
+        setFirm(firm);
+        setOtherInformation(otherInformation);
     }
-
-
 
 }

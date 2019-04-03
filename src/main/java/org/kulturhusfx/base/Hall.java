@@ -1,7 +1,6 @@
 package org.kulturhusfx.base;
 
-import org.kulturhusfx.util.exception.InvalidNumberOfSeatsException;
-import org.kulturhusfx.util.InvalidInputHandler;
+import org.kulturhusfx.util.Checker;
 
 public class Hall {
     private String hallName;
@@ -9,9 +8,10 @@ public class Hall {
     private String numberOfSeats;
 
     public Hall(String hallName, String hallType, String numberOfSeats) {
+        //sjekker om seteantall er et tall i konstruktøren, slik at det ikke opprettes objekter med feil
         this.hallName = hallName;
         this.hallType = hallType;
-        this.checkValidNumberOfSeats(numberOfSeats);
+        Checker.checkValidNumberOfSeats(numberOfSeats);
         this.numberOfSeats = numberOfSeats;
     }
 
@@ -27,30 +27,23 @@ public class Hall {
         return numberOfSeats;
     }
 
-    public void setHallName(String hallName) {
+    private void setHallName(String hallName) {
         this.hallName = hallName;
     }
 
-    public void setHallType(String hallType) {
+    private void setHallType(String hallType) {
         this.hallType = hallType;
     }
 
-    public void setNumberOfSeats(String numberOfSeats) {
+    private void setNumberOfSeats(String numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
     }
 
-    private void checkValidNumberOfSeats(String numberOfSeats) {
-        try {
-            int seat = Integer.parseInt(numberOfSeats);
-            if(seat < 0) {
-                InvalidInputHandler.generateAlert(
-                        new InvalidNumberOfSeatsException("Antall seter kan ikke være et negativt tall"));
-            }
-        }
-        catch(NumberFormatException e){
-            InvalidInputHandler.generateAlert(
-                    new InvalidNumberOfSeatsException("Antall seter må være et tall"));
-        }
+    public void changeHallInformation(String hallName, String hallType, String numberOfSeats){
+        Checker.checkValidNumberOfSeats(numberOfSeats);
+        setHallName(hallName);
+        setHallType(hallType);
+        setNumberOfSeats(numberOfSeats);
     }
 
     public String toString(){
