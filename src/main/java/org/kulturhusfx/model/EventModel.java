@@ -1,6 +1,9 @@
 package org.kulturhusfx.model;
 
+import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Event;
+import org.kulturhusfx.base.Hall;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +14,9 @@ public class EventModel {
         eventList = new ArrayList<>();
     }
 
-    public void createEvent(String webpage){
-
+    public void createEvent(ContactPerson contactPerson, String name, String performers, String schedule,
+                            Hall location, String date, String time, String ticketPrice){
+        eventList.add(new Event(contactPerson, name, performers, schedule, location, date, time, ticketPrice));
     }
 
     public void deleteEvent(String id) {

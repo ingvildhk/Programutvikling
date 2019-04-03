@@ -7,6 +7,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.kulturhusfx.base.ContactPerson;
+import org.kulturhusfx.model.ContactPersonModel;
+import org.kulturhusfx.model.EventModel;
+import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.exception.InvalidInputException;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.InvalidInputHandler;
@@ -27,9 +30,13 @@ public class AdminMainPageController{
     ChoiceBox eventType, eventRoom;
 
     private HallModel hallModel;
+    private EventModel eventModel;
+    private ContactPersonModel contactPersonModel;
 
     public AdminMainPageController() {
         this.hallModel = new HallModel();
+        this.eventModel = new EventModel();
+        this.contactPersonModel = new ContactPersonModel();
     }
 
     public void roomRegistrationBtn(ActionEvent event) {
@@ -56,7 +63,7 @@ public class AdminMainPageController{
 
         this.hallModel.createHall(room, type, seat);
 
-        System.out.println(hallModel.halls.toString());
+        System.out.println(hallModel.hallMap.toString());
 
     }
 
@@ -92,8 +99,8 @@ public class AdminMainPageController{
             InvalidInputHandler.generateAlert(new InvalidInputException("Husk å fylle ut alle obligatoriske felter"));
         } else {
             ContactPerson newContactPerson = new ContactPerson(contact, phone, email, website, firm, other);
-            // newContactPerson.checkValidPhone(phone);
-            // newContactPerson.checkValidEmail(email);
+            Checker.checkValidPhone(phone);
+            Checker.checkValidEmail(email);
 
             // Kontruktøren fungerer ikke da room må være av typen hall
             // Event newEvent = new Event(newContactPerson, name, performer, program, room, date, time, ticketPrice2);
