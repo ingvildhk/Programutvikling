@@ -7,6 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.kulturhusfx.base.ContactPerson;
+import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.ContactPersonModel;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.util.Checker;
@@ -52,10 +53,9 @@ public class AdminMainPageController {
 
     public void eventRegistrationBtn(ActionEvent event) {
         String name = eventName.getText();
-        String type = eventType.getAccessibleText();
+        String type = eventType.getValue().toString();
         String performer = performers.getText();
-
-        String room = eventRoom.getAccessibleText();
+        String room = eventRoom.getValue().toString();
         String time = eventTime.getText();
         String date = eventDate.getText();
         String program = eventProgram.getText();
@@ -69,10 +69,11 @@ public class AdminMainPageController {
 
         Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
         // Room er av typen Hall
-        //this.eventModel.createEvent(contact, name, performer, program, room, date, time, ticket);
+        ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
+        Hall hall = (Hall)hallModel.getHallMap().get(room);
+        eventModel.createEvent(contactPerson, name, performer, program, hall, date, time, ticket);
 
-        this.contactPersonModel.createContactPerson(contact, phone, email, website, firm, other);
-
+        System.out.println(eventModel.getEventList().toString());
        // String name, String phoneNumber,
           //      String email, String webpage, String firm, String otherInformation
             //System.out.println(hallModel.halls.toString());

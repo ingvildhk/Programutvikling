@@ -21,6 +21,10 @@ public class EventModel {
         eventList.add(new Event(contactPerson, name, performers, schedule, location, date, time, ticketPrice));
     }
 
+    public List getEventList(){
+        return eventList;
+    }
+
     public void deleteEvent(String id) {
         eventList.removeIf(e -> e.getId().equals(id));
     }

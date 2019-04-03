@@ -84,4 +84,9 @@ public class ContactPerson {
         setOtherInformation(otherInformation);
     }
 
+    public String toString(){
+        String s = name + " " + phoneNumber + " " + email + " " + webpage + " "+ firm + " "+ otherInformation;
+        return s;
+    }
+
 }

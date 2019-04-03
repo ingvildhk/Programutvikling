@@ -132,6 +132,12 @@ public class Event {
         setTicketPrice(ticketPrice);
     }
 
+    public String toString(){
+        String s = contactPerson.toString() + " " + name + " " + performers + " " + schedule + " " +
+                location.toString() + " " + date + " " + time + " " + ticketPrice;
+        return s;
+    }
+
     public int soldTickets() {
         return 0;
     }
