@@ -93,7 +93,7 @@ public class AdminMainPageController{
         } else {
             ContactPerson newContactPerson = new ContactPerson(contact, phone, email, website, firm, other);
             // newContactPerson.checkValidPhone(phone);
-            newContactPerson.checkValidEmail(email);
+            // newContactPerson.checkValidEmail(email);
 
             // Kontruktøren fungerer ikke da room må være av typen hall
             // Event newEvent = new Event(newContactPerson, name, performer, program, room, date, time, ticketPrice2);

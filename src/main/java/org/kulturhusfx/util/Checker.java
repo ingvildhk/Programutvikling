@@ -1,9 +1,6 @@
 package org.kulturhusfx.util;
 
-import org.kulturhusfx.util.exception.InvalidDateException;
-import org.kulturhusfx.util.exception.InvalidEmailException;
-import org.kulturhusfx.util.exception.InvalidNumberOfSeatsException;
-import org.kulturhusfx.util.exception.InvalidPhoneException;
+import org.kulturhusfx.util.exception.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -59,6 +56,33 @@ public class Checker {
         if (!validDate) {
             InvalidInputHandler.generateAlert(new InvalidDateException
                     ("Datoformat feil. Event ble ikke oppdatert "));
+        }
+    }
+
+    public static void checkValidTicketPrice(String price){
+        try{
+            double ticketPrice = Double.parseDouble(price);
+            if (ticketPrice < 0){
+                InvalidInputHandler.generateAlert(new InvalidTicketPriceException("Billettpris må være et positivt tall"));
+            }
+        } catch (NumberFormatException e){
+            InvalidInputHandler.generateAlert(new InvalidTicketPriceException("Billettpris må være et tall"));
+        }
+    }
+
+    public static void checkValidTime(String time){
+        String [] splitStringTime = time.split(":");
+        if(splitStringTime.length != 2){
+            InvalidInputHandler.generateAlert(new InvalidTimeException("Husk å dele time og minutt med : "));
+        }
+        int hour = Integer.parseInt(splitStringTime[0]);
+        if(hour < 0 || hour > 23 ){
+            InvalidInputHandler.generateAlert(new InvalidTimeException("Time må være et tall mellom 0 og 23"));
+        }
+
+        int minute = Integer.parseInt(splitStringTime[1]);
+        if(minute < 0 || minute > 59){
+            InvalidInputHandler.generateAlert(new InvalidTimeException("Minutter må være et tall mellom 0 og 59"));
         }
     }
 }
