@@ -1,6 +1,6 @@
 package org.kulturhusfx.base;
 
-import org.kulturhusfx.base.exception.InvalidDateException;
+import org.kulturhusfx.util.exception.InvalidDateException;
 import org.kulturhusfx.util.InvalidInputHandler;
 
 import java.util.regex.Matcher;
@@ -10,15 +10,15 @@ public class Event {
 
     private static int counter = 0;
 
-    ContactPerson contactPerson;
-    String id;
-    String name;
-    String performers;
-    String schedule;
-    Hall location;
-    String date;
-    String time;
-    double ticketPrice;
+    private ContactPerson contactPerson;
+    private String id;
+    private String name;
+    private String performers;
+    private String schedule;
+    private Hall location;
+    private String date;
+    private String time;
+    private double ticketPrice;
 
     // Settes til max etter lest inn fil
     public static void setMinId(int id) {

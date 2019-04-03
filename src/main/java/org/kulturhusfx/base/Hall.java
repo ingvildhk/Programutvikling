@@ -1,6 +1,6 @@
 package org.kulturhusfx.base;
 
-import org.kulturhusfx.base.exception.InvalidNumberOfSeatsException;
+import org.kulturhusfx.util.exception.InvalidNumberOfSeatsException;
 import org.kulturhusfx.util.InvalidInputHandler;
 
 public class Hall {

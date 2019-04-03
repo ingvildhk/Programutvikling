@@ -1,6 +1,6 @@
 package org.kulturhusfx.base;
 
-import org.kulturhusfx.base.exception.InvalidEmailException;
+import org.kulturhusfx.util.exception.InvalidEmailException;
 import org.kulturhusfx.util.InvalidInputHandler;
 
 public class ContactPerson {

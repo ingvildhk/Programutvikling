@@ -7,7 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.kulturhusfx.base.ContactPerson;
-import org.kulturhusfx.base.exception.InvalidInputException;
+import org.kulturhusfx.util.exception.InvalidInputException;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.SceneUtils;

@@ -1,6 +1,6 @@
 package org.kulturhusfx.base;
 
-import org.kulturhusfx.base.exception.InvalidPhoneException;
+import org.kulturhusfx.util.exception.InvalidPhoneException;
 import org.kulturhusfx.util.InvalidInputHandler;
 
 import java.util.Date;
