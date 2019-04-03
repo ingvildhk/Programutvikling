@@ -63,7 +63,7 @@ public class AdminMainPageController{
 
         this.hallModel.createHall(room, type, seat);
 
-        System.out.println(hallModel.toString());
+        System.out.println(hallModel.hallMap.toString());
 
     }
 

@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HallModel {
-    private Map<String, Hall> hallMap;
+    //public for øyeblikket slik at man skal kunne skrive ut med system.out, kun for kontroll
+    public Map<String, Hall> hallMap;
 
     public HallModel() {
         this.hallMap = new HashMap<>();
@@ -23,7 +24,6 @@ public class HallModel {
     }
 
     public void deleteHall(String hallName){
-
         hallMap.entrySet().removeIf(e -> e.getKey().equals(hallName));
     }
 }
