@@ -47,24 +47,16 @@ public class AdminMainPageController {
 
         Checker.checkIfFieldIsEmpty(room, type, seat);
 
-        /* Tror vi må ha en en metode som skriver hall-object til fil, og så en metode som leser alle hall fra fil og lister
-         Hall-objektene i CHoiceBoxen, koden nedenfor er bare meg som tenkter høy
-        ChoiceBox<Hall> hallChoiceBox = new ChoiceBox<>();
-        for (Hall hall : hallChoiceBox){
-            hallChoiceBox.getItems().addAll(Alle Hall fra fil);
-        }
-        */
-
         this.hallModel.createHall(room, type, seat);
 
         System.out.println(hallModel.hallMap.toString());
-
     }
 
     public void eventRegistrationBtn(ActionEvent event) {
         String name = eventName.getText();
         String type = eventType.getAccessibleText();
         String performer = performers.getText();
+
         String room = eventRoom.getAccessibleText();
         String time = eventTime.getText();
         String date = eventDate.getText();
@@ -77,14 +69,14 @@ public class AdminMainPageController {
         String other = contactOther.getText();
         String ticket = ticketPrice.getText();
 
+        Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
+        // Room er av typen Hall
+        //this.eventModel.createEvent(contact, name, performer, program, room, date, time, ticket);
 
-            // Kontruktøren fungerer ikke da room må være av typen hall
-            // Event newEvent = new Event(newContactPerson, name, performer, program, room, date, time, ticketPrice2);
+        this.contactPersonModel.createContactPerson(contact, phone, email, website, firm, other);
 
-            Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
-
-            // this.eventModel.createEvent(name, type, performer, room, time, date, program, contact, phone, email, ticket);
-
+       // String name, String phoneNumber,
+          //      String email, String webpage, String firm, String otherInformation
             //System.out.println(hallModel.halls.toString());
         }
 
