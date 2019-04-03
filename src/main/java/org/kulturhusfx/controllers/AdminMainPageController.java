@@ -7,6 +7,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.kulturhusfx.base.ContactPerson;
+import org.kulturhusfx.model.ContactPersonModel;
+import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.exception.InvalidInputException;
 import org.kulturhusfx.model.HallModel;
@@ -28,9 +30,13 @@ public class AdminMainPageController{
     ChoiceBox eventType, eventRoom;
 
     private HallModel hallModel;
+    private EventModel eventModel;
+    private ContactPersonModel contactPersonModel;
 
     public AdminMainPageController() {
         this.hallModel = new HallModel();
+        this.eventModel = new EventModel();
+        this.contactPersonModel = new ContactPersonModel();
     }
 
     public void roomRegistrationBtn(ActionEvent event) {
