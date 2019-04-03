@@ -85,4 +85,12 @@ public class Checker {
             InvalidInputHandler.generateAlert(new InvalidTimeException("Minutter må være et tall mellom 0 og 59"));
         }
     }
+
+    public static void checkIfFieldIsEmpty(String... args){
+        for (String str : args){
+            if (str == null || str.trim().length() == 0){
+                InvalidInputHandler.generateAlert(new InvalidInputException("Alle felt må fylles ut"));
+            }
+        }
+    }
 }

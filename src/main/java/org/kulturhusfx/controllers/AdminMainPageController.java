@@ -7,6 +7,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.kulturhusfx.base.ContactPerson;
+import org.kulturhusfx.model.EventModel;
+import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.exception.InvalidInputException;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.InvalidInputHandler;
@@ -14,8 +16,7 @@ import org.kulturhusfx.util.SceneUtils;
 
 import java.io.IOException;
 
-
-public class AdminMainPageController{
+public class AdminMainPageController {
 
     @FXML
     TextField roomName, roomType, totalNumberofSeats, performers, eventTime, ticketPrice, eventName;
@@ -27,9 +28,11 @@ public class AdminMainPageController{
     ChoiceBox eventType, eventRoom;
 
     private HallModel hallModel;
+    private EventModel eventModel;
 
     public AdminMainPageController() {
         this.hallModel = new HallModel();
+        this.eventModel = new EventModel();
     }
 
     public void roomRegistrationBtn(ActionEvent event) {
@@ -37,14 +40,7 @@ public class AdminMainPageController{
         String type = roomType.getText();
         String seat = totalNumberofSeats.getText();
 
-        //sjekker om noen felt er tomme. Bør kanskje skrive en egen metode for dette i en klasse som kan ta
-        //inn ukjent antall parametere
-        if (room == null || room.trim().length() == 0 ||
-                type == null || type.trim().length() == 0 ||
-                seat == null || seat.trim().length() == 0){
-            InvalidInputHandler.generateAlert(new InvalidInputException("Alle felt må fylles ut"));
-        }
-        // Bør ha en else hvor man kun oppretter ny HALL hvis alle felt er fylt ut? Renate
+        Checker.checkIfFieldIsEmpty(room, type, seat);
 
         /* Tror vi må ha en en metode som skriver hall-object til fil, og så en metode som leser alle hall fra fil og lister
          Hall-objektene i CHoiceBoxen, koden nedenfor er bare meg som tenkter høy
@@ -64,8 +60,6 @@ public class AdminMainPageController{
         String name = eventName.getText();
         String type = eventType.getAccessibleText();
         String performer = performers.getText();
-
-        // Room er av typen Hall
         String room = eventRoom.getAccessibleText();
         String time = eventTime.getText();
         String date = eventDate.getText();
@@ -76,33 +70,17 @@ public class AdminMainPageController{
         String website = contactWebsite.getText();
         String firm = contactFirm.getText();
         String other = contactOther.getText();
-        double ticketPrice2 = Double.parseDouble(ticketPrice.getText());
+        String ticket = ticketPrice.getText();
 
-        // Ikke trim().length() på type eller room da de er dropdown og enten NULL eller noe.
-        if (name == null || name.trim().length() == 0 ||
-                type == null ||
-                performer == null || performer.trim().length() == 0 ||
-                room == null ||
-                time == null || time.trim().length() == 0 ||
-                date == null || date.trim().length() == 0 ||
-                program == null || program.trim().length() == 0 ||
-                contact == null || contact.trim().length() == 0 ||
-                phone == null || phone.trim().length() == 0 ||
-                email == null || email.trim().length() == 0){
-            InvalidInputHandler.generateAlert(new InvalidInputException("Husk å fylle ut alle obligatoriske felter"));
-        } else {
-            ContactPerson newContactPerson = new ContactPerson(contact, phone, email, website, firm, other);
-            // newContactPerson.checkValidPhone(phone);
-            // newContactPerson.checkValidEmail(email);
+        Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
 
-            // Kontruktøren fungerer ikke da room må være av typen hall
-            // Event newEvent = new Event(newContactPerson, name, performer, program, room, date, time, ticketPrice2);
+       // this.eventModel.createEvent(name, type, performer, room, time, date, program, contact, phone, email, ticket);
 
-        }
-        System.out.println("I work too!");
+        //System.out.println(hallModel.halls.toString());
     }
 
-    public void backToMainPageBtn(ActionEvent event) throws  IOException{
+
+    public void backToMainPageBtn(ActionEvent event) throws IOException{
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent mainPageParent = fxmlLoader.load(getClass().getResource("MainPage.fxml").openStream());
@@ -133,7 +111,9 @@ public class AdminMainPageController{
         }
     }
 
-    public void initialize() {
-        // TODO
+
+        public void initialize () {
+            // TODO
+        }
     }
-}
+
