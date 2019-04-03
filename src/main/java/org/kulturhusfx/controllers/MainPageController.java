@@ -48,11 +48,14 @@ public class MainPageController {
 
     public void initialize() {
         // TODO
-        if(hallModel!=  null) {
-            String s = hallModel.getHallMap().toString();
-            System.out.println(s);
-            label2.setText(s);
-        }
 
+        //Det må finnes en bedre måte å gjøre dette på
+        String s = hallModel.getHallMap().toString();
+        s = s.replace("{","");
+        s = s.replace("}", "");
+        System.out.println(s);
+        if (s == null || s.trim().length() == 0) {
+            hallModel.createHall("Hovedsalen", "Konsertsal", "150");
+        }
     }
 }
