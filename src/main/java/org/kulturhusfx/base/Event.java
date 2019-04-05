@@ -10,6 +10,7 @@ public class Event {
     private ContactPerson contactPerson;
     private String id;
     private String name;
+    private String type;
     private String performers;
     private String schedule;
     private Hall location;
@@ -26,13 +27,14 @@ public class Event {
     }
 
     public Event(ContactPerson contactPerson, String name, String performers,
-                 String schedule, Hall location, String date, String time, String ticketPrice) {
+                 String schedule, Hall location, String type, String date, String time, String ticketPrice) {
         Checker.checkValidDate(date);
         Checker.checkValidTime(time);
         Checker.checkValidTicketPrice(ticketPrice);
         this.contactPerson = contactPerson;
         this.name = name;
         this.performers = performers;
+        this.type = type;
         this.schedule = schedule;
         this.location = location;
         this.date = date;
@@ -62,6 +64,10 @@ public class Event {
 
     public String getSchedule(){
         return  schedule;
+    }
+
+    public String getType(){
+        return type;
     }
 
     public Hall getLocation(){
@@ -96,6 +102,10 @@ public class Event {
         this.performers = performers;
     }
 
+    private void setType(String type) {
+        this.type = type;
+    }
+
     private void setSchedule(String schedule){
         this.schedule = schedule;
     }
@@ -117,7 +127,7 @@ public class Event {
     }
 
     public void changeEventInformation(ContactPerson contactPerson, String name,
-                                       String performers, String schedule, Hall location,
+                                       String performers, String type, String schedule, Hall location,
                                        String date, String time, String ticketPrice){
         Checker.checkValidDate(date);
         //Checker.checkValidTime(date) - metode må opprettes
@@ -125,6 +135,7 @@ public class Event {
         setContactPerson(contactPerson);
         setName(name);
         setPerformers(performers);
+        setType(type);
         setSchedule(schedule);
         setLocation(location);
         setDate(date);
@@ -133,7 +144,7 @@ public class Event {
     }
 
     public String toString(){
-        String s = contactPerson.toString() + " " + name + " " + performers + " " + schedule + " " +
+        String s = contactPerson.toString() + " " + name + " " + performers + "Type: " + type + " " + schedule + " " +
                 location.toString() + " " + date + " " + time + " " + ticketPrice;
         return s;
     }

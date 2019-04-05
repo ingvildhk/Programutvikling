@@ -16,9 +16,9 @@ public class EventModel {
         }
     }
 
-    public void createEvent(ContactPerson contactPerson, String name, String performers, String schedule,
+    public void createEvent(ContactPerson contactPerson, String name, String performers, String type, String schedule,
                             Hall location, String date, String time, String ticketPrice){
-        eventList.add(new Event(contactPerson, name, performers, schedule, location, date, time, ticketPrice));
+        eventList.add(new Event(contactPerson, name, performers, schedule, location, type, date, time, ticketPrice));
     }
 
     public List getEventList(){
