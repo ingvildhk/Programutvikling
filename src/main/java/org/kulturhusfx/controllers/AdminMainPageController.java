@@ -77,39 +77,18 @@ public class AdminMainPageController {
        // String name, String phoneNumber,
           //      String email, String webpage, String firm, String otherInformation
             //System.out.println(hallModel.halls.toString());
-
         }
 
-
         public void backToMainPageBtn (ActionEvent event) throws IOException {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                Parent mainPageParent = fxmlLoader.load(getClass().getResource("MainPage.fxml").openStream());
-                SceneUtils.showScene(mainPageParent, event);
-            } catch (IOException e) {
-                e.printStackTrace(); // FXML document should be available
-                return;
-            }
+            SceneUtils.launchScene(event, AdminMainPageController.class,  "MainPage.fxml");
         }
 
         public void manageEventsBtn (ActionEvent event) throws IOException {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                Parent manageEventSceneParent = fxmlLoader.load(getClass().getResource("adminManageEvents.fxml").openStream());
-                SceneUtils.showScene(manageEventSceneParent, event);
-            } catch (IOException e) {
-                e.printStackTrace(); // FXML document should be available
-            }
+            SceneUtils.launchScene(event, AdminMainPageController.class,  "adminManageEvents.fxml");
         }
 
         public void seeAllEventsBtn (ActionEvent event) throws IOException {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                Parent seeAllEventSceneParent = fxmlLoader.load(getClass().getResource("adminSeeAllEvents.fxml").openStream());
-                SceneUtils.showScene(seeAllEventSceneParent, event);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            SceneUtils.launchScene(event, AdminMainPageController.class,  "adminSeeAllEvents.fxml");
         }
 
         public void updateRoomList(){
