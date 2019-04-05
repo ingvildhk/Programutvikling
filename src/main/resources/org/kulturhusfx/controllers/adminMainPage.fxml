@@ -9,9 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
-            prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.kulturhusfx.controllers.AdminMainPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.AdminMainPageController">
     <children>
         <Label layoutX="193.0" layoutY="14.0" text="Småkommunens Kulturhus">
             <font>
@@ -40,7 +38,7 @@
         <Label layoutX="19.0" layoutY="182.0" text="Opptredende Personer" />
         <Label layoutX="21.0" layoutY="361.0" text="Program" />
         <Label layoutX="22.0" layoutY="242.0" text="Sal" />
-        <Label layoutX="21.0" layoutY="295.0" text="Klokke" />
+        <Label layoutX="12.0" layoutY="295.0" text="Klokke (hh:mm)" />
         <Label layoutX="344.0" layoutY="404.0" text="Billettpris" />
         <TextField id="performers" fx:id="performers" layoutX="19.0" layoutY="207.0" prefHeight="27.0" prefWidth="174.0" />
         <TextField fx:id="eventTime" layoutX="19.0" layoutY="319.0" prefHeight="27.0" prefWidth="83.0" promptText="hh:mm" />
@@ -67,6 +65,6 @@
       <Button layoutX="479.0" layoutY="24.0" mnemonicParsing="false" onAction="#seeAllEventsBtn" text="Se alle arrangementer" />
       <Button layoutX="643.0" layoutY="24.0" mnemonicParsing="false" onAction="#manageEventsBtn" text="Endre arrangementer" />
       <TextField fx:id="eventDate" layoutX="112.0" layoutY="319.0" prefHeight="27.0" prefWidth="83.0" promptText="dd/mm/yy" />
-      <Label layoutX="112.0" layoutY="295.0" text="Dato" />
+      <Label layoutX="110.0" layoutY="295.0" text="Dato (dd/mm/yy)" />
     </children>
 </AnchorPane>

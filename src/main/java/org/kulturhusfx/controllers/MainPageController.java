@@ -31,10 +31,27 @@ public class MainPageController {
         this.contactPersonModel = new ContactPersonModel();
     }
 
-    // Egen launch metode?
+
+    // Lage en static metode av denne: Just use TheClassName.class instead of getClass().
+    /*public void launchScene(ActionEvent event, String fxmlPath){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent adminMainPageParent = fxmlLoader.load(getClass().getResource(fxmlPath).openStream());
+            SceneUtils.showScene(adminMainPageParent, event);
+        } catch (IOException e) {
+            e.printStackTrace(); // FXML document should be available
+            //return;
+        }
+
+    }
+    */
+
+
     public void handleAdminLoginBtnAction(ActionEvent event) throws IOException {
 
-        try {
+        SceneUtils.launchScene(event, MainPageController.class,  "adminMainPage.fxml");
+
+       /* try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent adminMainPageParent = fxmlLoader.load(getClass().getResource("adminMainPage.fxml").openStream());
             SceneUtils.showScene(adminMainPageParent, event);
@@ -44,6 +61,7 @@ public class MainPageController {
         }
 
         System.out.println("You clicked me!");
+        */
     }
 
     public void initialize() {
