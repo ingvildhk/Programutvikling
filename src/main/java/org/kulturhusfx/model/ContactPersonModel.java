@@ -10,15 +10,15 @@ import java.util.Map;
 public class ContactPersonModel {
     private Map<String, ContactPerson> contactPersonMap;
 
-    public ContactPersonModel(){
-        if(contactPersonMap == null){
+    public ContactPersonModel() {
+        if (contactPersonMap == null) {
             contactPersonMap = new HashMap<>();
         }
     }
 
     public void createContactPerson(String name, String phoneNumber,
-                                    String email, String webpage, String firm, String otherInformation){
-        if (contactPersonMap.containsKey(email)){
+                                    String email, String webpage, String firm, String otherInformation) {
+        if (contactPersonMap.containsKey(email)) {
             InvalidInputHandler.generateAlert(new InvalidContactPersonException("Det er allerede registrert " +
                     "en person på denne eposten"));
         }
@@ -26,7 +26,7 @@ public class ContactPersonModel {
                 webpage, firm, otherInformation));
     }
 
-    public void deleteContactPerson(String email){
+    public void deleteContactPerson(String email) {
         contactPersonMap.entrySet().removeIf(e -> e.getKey().equals(email));
     }
 }

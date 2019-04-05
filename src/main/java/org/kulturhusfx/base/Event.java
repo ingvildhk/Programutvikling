@@ -46,59 +46,59 @@ public class Event {
         createNewTicketList();
     }
 
-    private void createNewTicketList(){
+    private void createNewTicketList() {
         this.ticketList = new TicketModel();
     }
 
-    public ContactPerson getContactPerson(){
+    public ContactPerson getContactPerson() {
         return contactPerson;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public String getPerformers(){
+    public String getPerformers() {
         return performers;
     }
 
-    public String getSchedule(){
-        return  schedule;
+    public String getSchedule() {
+        return schedule;
     }
 
-    public String getType(){
+    public String getType() {
         return type;
     }
 
-    public Hall getLocation(){
+    public Hall getLocation() {
         return location;
     }
 
-    public String getDate(){
+    public String getDate() {
         return date;
     }
 
-    public String getTime(){
+    public String getTime() {
         return time;
     }
 
-    public String getId(){
+    public String getId() {
         return id;
     }
 
-    public TicketModel getTicketList(){
+    public TicketModel getTicketList() {
         return ticketList;
     }
 
-    private void setContactPerson(ContactPerson contactPerson){
+    private void setContactPerson(ContactPerson contactPerson) {
         this.contactPerson = contactPerson;
     }
 
-    private void setName(String name){
+    private void setName(String name) {
         this.name = name;
     }
 
-    private void setPerformers(String performers){
+    private void setPerformers(String performers) {
         this.performers = performers;
     }
 
@@ -106,29 +106,29 @@ public class Event {
         this.type = type;
     }
 
-    private void setSchedule(String schedule){
+    private void setSchedule(String schedule) {
         this.schedule = schedule;
     }
 
-    private void setLocation(Hall location){
+    private void setLocation(Hall location) {
         this.location = location;
     }
 
-    private void setDate(String date){
+    private void setDate(String date) {
         this.date = date;
     }
 
-    private void setTime(String time){
+    private void setTime(String time) {
         this.time = time;
     }
 
-    private void setTicketPrice(String ticketPrice){
+    private void setTicketPrice(String ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
 
     public void changeEventInformation(ContactPerson contactPerson, String name,
                                        String performers, String type, String schedule, Hall location,
-                                       String date, String time, String ticketPrice){
+                                       String date, String time, String ticketPrice) {
         Checker.checkValidDate(date);
         Checker.checkValidTime(time);
         Checker.checkValidTicketPrice(ticketPrice);
@@ -143,7 +143,7 @@ public class Event {
         setTicketPrice(ticketPrice);
     }
 
-    public String toString(){
+    public String toString() {
         String s = contactPerson.toString() + " " + name + " " + performers + "Type: " + type + " " + schedule + " " +
                 location.toString() + " " + date + " " + time + " " + ticketPrice;
         return s;

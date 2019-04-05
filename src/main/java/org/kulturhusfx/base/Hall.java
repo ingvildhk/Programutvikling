@@ -39,14 +39,14 @@ public class Hall {
         this.numberOfSeats = numberOfSeats;
     }
 
-    public void changeHallInformation(String hallName, String hallType, String numberOfSeats){
+    public void changeHallInformation(String hallName, String hallType, String numberOfSeats) {
         Checker.checkValidNumberOfSeats(numberOfSeats);
         setHallName(hallName);
         setHallType(hallType);
         setNumberOfSeats(numberOfSeats);
     }
 
-    public String toString(){
+    public String toString() {
         return (hallName + " " + hallType + " " + numberOfSeats);
     }
 }
