@@ -31,7 +31,7 @@ public class AdminMainPageController {
     private ContactPersonModel contactPersonModel;
 
     public AdminMainPageController() {
-        this.hallModel = new HallModel();
+        this.hallModel = HallModel.getInstance();
         this.eventModel = EventModel.getInstance();
         this.contactPersonModel = new ContactPersonModel();
 
@@ -45,7 +45,7 @@ public class AdminMainPageController {
         Checker.checkIfFieldIsEmpty(room, type, seat);
 
         this.hallModel.createHall(room, type, seat);
-        updateRoomList();
+        //updateRoomList();
     }
 
     public void eventRegistrationBtn(ActionEvent event) {
@@ -67,7 +67,7 @@ public class AdminMainPageController {
         Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
         // Room er av typen Hall
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
-        Hall hall = (Hall) hallModel.getHallMap().get(room);
+        Hall hall = (Hall) hallModel.getHallList();
         eventModel.createEvent(contactPerson, name, performer, type, program, hall, date, time, ticket);
         System.out.println(eventModel.getEventList().get(0));
         System.out.println((eventModel.getEventList().size()));
@@ -86,11 +86,11 @@ public class AdminMainPageController {
         SceneUtils.launchScene(event, AdminMainPageController.class, "adminSeeAllEvents.fxml");
     }
 
-    public void updateRoomList() {
+    /*public void updateRoomList() {
         for (String i : HallModel.hallMap.keySet()) {
             eventRoom.getItems().add(i);
         }
-    }
+    }*/
 
     public void addEventType() {
         eventType.getItems().addAll("Konsert", "Teater");
@@ -98,7 +98,7 @@ public class AdminMainPageController {
 
     public void initialize() {
         addEventType();
-        updateRoomList();
+        //updateRoomList();
 
     }
 

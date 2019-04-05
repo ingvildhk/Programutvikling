@@ -20,7 +20,7 @@ public class MainPageController {
     private ContactPersonModel contactPersonModel;
 
     public MainPageController() {
-        this.hallModel = new HallModel();
+        this.hallModel = HallModel.getInstance();
         this.eventModel = EventModel.getInstance();
         this.contactPersonModel = new ContactPersonModel();
     }
@@ -32,7 +32,7 @@ public class MainPageController {
 
     public void initialize() {
         // TODO
-        if (hallModel.getHallMap().isEmpty()) {
+        if (hallModel.getHallList().isEmpty()) {
             hallModel.createHall("Hovedsalen", "Konsertsal", "150");
         }
     }

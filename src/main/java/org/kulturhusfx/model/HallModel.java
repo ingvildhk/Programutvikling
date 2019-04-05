@@ -5,12 +5,36 @@ import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.exception.InvalidHallException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class HallModel {
-    //public for øyeblikket slik at man skal kunne skrive ut med system.out, kun for kontroll
-    public static Map<String, Hall> hallMap;
+
+    private static final HallModel hallModel = new HallModel();
+
+    private HallModel() {
+    }
+
+    public static HallModel getInstance() {
+        return hallModel;
+    }
+
+    private List<Hall> hallList = new ArrayList<>();
+
+    public List getHallList() {
+        return hallList;
+    }
+
+    public void createHall(String hallName, String hallType, String numberOfSeats) {
+        if (hallList.contains(hallName)) {
+            InvalidInputHandler.generateAlert(new InvalidHallException("Salen finnes fra før av"));
+        }
+        hallList.add((new Hall(hallName, hallType, numberOfSeats)));
+    }
+
+    /* Changing from map to arraylist, and design pattern to singleton
 
     public HallModel() {
         if (hallMap == null || hallMap.isEmpty()) {
@@ -18,9 +42,7 @@ public class HallModel {
         }
     }
 
-    public Map getHallMap() {
-        return hallMap;
-    }
+    public static Map<String, Hall> hallMap;
 
     public void createHall(String hallName, String hallType, String numberOfSeats) {
         if (hallMap.containsKey(hallName)) {
@@ -29,7 +51,11 @@ public class HallModel {
         hallMap.put(hallName, new Hall(hallName, hallType, numberOfSeats));
     }
 
-    public void deleteHall(String hallName) {
-        hallMap.entrySet().removeIf(e -> e.getKey().equals(hallName));
+    public Map getHallMap() {
+        return hallMap;
+    }*/
+
+    public void deleteEvent(String hallName) {
+        hallList.removeIf(e -> e.getHallName().equals(hallName));
     }
 }
