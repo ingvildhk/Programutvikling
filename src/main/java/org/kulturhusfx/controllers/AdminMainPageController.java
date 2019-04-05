@@ -71,8 +71,8 @@ public class AdminMainPageController {
         // Room er av typen Hall
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
         Hall hall = (Hall)hallModel.getHallMap().get(room);
-        eventModel.createEvent(contactPerson, name, performer, program, hall, date, time, ticket);
-
+        eventModel.createEvent(contactPerson, name, performer, type, program, hall, date, time, ticket);
+        System.out.println(type);
         System.out.println(eventModel.getEventList().toString());
        // String name, String phoneNumber,
           //      String email, String webpage, String firm, String otherInformation
