@@ -14,13 +14,6 @@ import java.io.IOException;
 public class AdminManageEventsController {
 
     public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            Parent manageEventSceneParent = fxmlLoader.load(getClass().getResource("adminMainPage.fxml").openStream());
-            SceneUtils.showScene(manageEventSceneParent, event);
-        } catch (IOException e){
-            e.printStackTrace(); // FXML document should be available
-            return;
-        }
+        SceneUtils.launchScene(event, AdminManageEventsController.class,  "adminMainPage.fxml");
     }
 }
