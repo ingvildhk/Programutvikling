@@ -1,8 +1,7 @@
 package org.kulturhusfx.controllers;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -10,10 +9,8 @@ import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.ContactPersonModel;
 import org.kulturhusfx.model.EventModel;
-import org.kulturhusfx.util.Checker;
-import org.kulturhusfx.util.exception.InvalidInputException;
 import org.kulturhusfx.model.HallModel;
-import org.kulturhusfx.util.InvalidInputHandler;
+import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.SceneUtils;
 
 import java.io.IOException;
@@ -35,7 +32,7 @@ public class AdminMainPageController {
 
     public AdminMainPageController() {
         this.hallModel = new HallModel();
-        this.eventModel = new EventModel();
+        this.eventModel = EventModel.getInstance();
         this.contactPersonModel = new ContactPersonModel();
 
     }
@@ -70,44 +67,42 @@ public class AdminMainPageController {
         Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
         // Room er av typen Hall
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
-        Hall hall = (Hall)hallModel.getHallMap().get(room);
+        Hall hall = (Hall) hallModel.getHallMap().get(room);
         eventModel.createEvent(contactPerson, name, performer, type, program, hall, date, time, ticket);
-        System.out.println(type);
-        System.out.println(eventModel.getEventList().toString());
-       // String name, String phoneNumber,
-          //      String email, String webpage, String firm, String otherInformation
-            //System.out.println(hallModel.halls.toString());
+        System.out.println(eventModel.getEventList().get(0));
+        System.out.println((eventModel.getEventList().size()));
+        SceneUtils.launchScene(event, AdminMainPageController.class, "eventRegistrationConfirmationPop.fxml");
+    }
+
+    public void backToMainPageBtn(ActionEvent event) throws IOException {
+        SceneUtils.launchScene(event, AdminMainPageController.class, "MainPage.fxml");
+    }
+
+    public void manageEventsBtn(ActionEvent event) throws IOException {
+        SceneUtils.launchScene(event, AdminMainPageController.class, "adminManageEvents.fxml");
+    }
+
+    public void seeAllEventsBtn(ActionEvent event) throws IOException {
+        SceneUtils.launchScene(event, AdminMainPageController.class, "adminSeeAllEvents.fxml");
+    }
+
+    public void updateRoomList() {
+        for (String i : HallModel.hallMap.keySet()) {
+            eventRoom.getItems().add(i);
         }
+    }
 
-        public void backToMainPageBtn (ActionEvent event) throws IOException {
-            SceneUtils.launchScene(event, AdminMainPageController.class,  "MainPage.fxml");
-        }
+    public void addEventType() {
+        eventType.getItems().addAll("Konsert", "Teater");
+    }
 
-        public void manageEventsBtn (ActionEvent event) throws IOException {
-            SceneUtils.launchScene(event, AdminMainPageController.class,  "adminManageEvents.fxml");
-        }
-
-        public void seeAllEventsBtn (ActionEvent event) throws IOException {
-            SceneUtils.launchScene(event, AdminMainPageController.class,  "adminSeeAllEvents.fxml");
-        }
-
-        public void updateRoomList(){
-            for(String i : HallModel.hallMap.keySet()){
-                eventRoom.getItems().add(i);
-            }
-        }
-
-        public void addEventType(){
-            eventType.getItems().addAll("Konsert", "Teater");
-        }
-
-        public void initialize () {
-            addEventType();
-            updateRoomList();
-
-        }
-
+    public void initialize() {
+        addEventType();
+        updateRoomList();
 
     }
+
+
+}
 
 

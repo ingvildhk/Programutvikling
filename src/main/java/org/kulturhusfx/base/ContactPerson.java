@@ -73,7 +73,7 @@ public class ContactPerson {
     }
 
     public void changeContactPersonInformation(String name, String phoneNumber, String email,
-                                               String webpage, String firm, String otherInformation){
+                                               String webpage, String firm, String otherInformation) {
         Checker.checkValidEmail(email);
         Checker.checkValidPhone(phoneNumber);
         setName(name);
@@ -84,8 +84,8 @@ public class ContactPerson {
         setOtherInformation(otherInformation);
     }
 
-    public String toString(){
-        String s = name + " " + phoneNumber + " " + email + " " + webpage + " "+ firm + " "+ otherInformation;
+    public String toString() {
+        String s = name + " " + phoneNumber + " " + email + " " + webpage + " " + firm + " " + otherInformation;
         return s;
     }
 

@@ -19,7 +19,7 @@ public class Ticket {
         //sjekker om telefonnummer er et gyldig nummer før objektet opprettes
         Checker.checkValidPhone(phoneNumber);
         //sjekker om det er ledige billetter igjen
-        if(Integer.parseInt(event.getLocation().getNumberOfSeats()) >= counter) {
+        if (Integer.parseInt(event.getLocation().getNumberOfSeats()) >= counter) {
             InvalidInputHandler.generateAlert(
                     new InvalidNumberOfSeatsException("Arrangementet er utsolgt"));
         }
@@ -29,7 +29,7 @@ public class Ticket {
         addTicketToList();
     }
 
-    private void addTicketToList(){
+    private void addTicketToList() {
         event.getTicketList().createTicket(phoneNumber, event);
     }
 
@@ -37,7 +37,7 @@ public class Ticket {
         return phoneNumber;
     }
 
-    public Event getEvent(){
+    public Event getEvent() {
         return event;
     }
 
@@ -45,7 +45,7 @@ public class Ticket {
         return date;
     }*/
 
-    public int getSeatNumber(){
+    public int getSeatNumber() {
         return seatNumber;
     }
 

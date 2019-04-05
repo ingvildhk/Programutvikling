@@ -13,12 +13,11 @@ public class Checker {
     public static void checkValidNumberOfSeats(String numberOfSeats) {
         try {
             int seat = Integer.parseInt(numberOfSeats);
-            if(seat < 0) {
+            if (seat < 0) {
                 InvalidInputHandler.generateAlert(
                         new InvalidNumberOfSeatsException("Antall seter kan ikke være et negativt tall"));
             }
-        }
-        catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             InvalidInputHandler.generateAlert(
                     new InvalidNumberOfSeatsException("Antall seter må være et tall"));
         }
@@ -59,36 +58,36 @@ public class Checker {
         }
     }
 
-    public static void checkValidTicketPrice(String price){
-        try{
+    public static void checkValidTicketPrice(String price) {
+        try {
             double ticketPrice = Double.parseDouble(price);
-            if (ticketPrice < 0){
+            if (ticketPrice < 0) {
                 InvalidInputHandler.generateAlert(new InvalidTicketPriceException("Billettpris må være et positivt tall"));
             }
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             InvalidInputHandler.generateAlert(new InvalidTicketPriceException("Billettpris må være et tall"));
         }
     }
 
-    public static void checkValidTime(String time){
-        String [] splitStringTime = time.split(":");
-        if(splitStringTime.length != 2){
+    public static void checkValidTime(String time) {
+        String[] splitStringTime = time.split(":");
+        if (splitStringTime.length != 2) {
             InvalidInputHandler.generateAlert(new InvalidTimeException("Husk å dele time og minutt med : "));
         }
         int hour = Integer.parseInt(splitStringTime[0]);
-        if(hour < 0 || hour > 23 ){
+        if (hour < 0 || hour > 23) {
             InvalidInputHandler.generateAlert(new InvalidTimeException("Time må være et tall mellom 0 og 23"));
         }
 
         int minute = Integer.parseInt(splitStringTime[1]);
-        if(minute < 0 || minute > 59){
+        if (minute < 0 || minute > 59) {
             InvalidInputHandler.generateAlert(new InvalidTimeException("Minutter må være et tall mellom 0 og 59"));
         }
     }
 
-    public static void checkIfFieldIsEmpty(String... args){
-        for (String str : args){
-            if (str == null || str.trim().length() == 0){
+    public static void checkIfFieldIsEmpty(String... args) {
+        for (String str : args) {
+            if (str == null || str.trim().length() == 0) {
                 InvalidInputHandler.generateAlert(new InvalidInputException("Alle felt må fylles ut"));
             }
         }

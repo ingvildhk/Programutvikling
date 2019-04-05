@@ -13,13 +13,13 @@ public class SceneUtils {
 
     public static void showScene(Parent parent, ActionEvent event) {
         Scene MainPageScene = new Scene(parent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(MainPageScene);
         window.show();
     }
 
     // Lage en static metode av denne: Just use TheClassName.class instead of getClass().
-    public static void launchScene(ActionEvent event, Class myClass, String fxmlPath){
+    public static void launchScene(ActionEvent event, Class myClass, String fxmlPath) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent adminMainPageParent = fxmlLoader.load(myClass.getResource(fxmlPath).openStream());
@@ -29,7 +29,6 @@ public class SceneUtils {
             return;
         }
     }
-
 
 
 }

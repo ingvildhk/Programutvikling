@@ -2,13 +2,7 @@ package org.kulturhusfx.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.ContactPersonModel;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
@@ -27,13 +21,13 @@ public class MainPageController {
 
     public MainPageController() {
         this.hallModel = new HallModel();
-        this.eventModel = new EventModel();
+        this.eventModel = EventModel.getInstance();
         this.contactPersonModel = new ContactPersonModel();
     }
 
 
     public void handleAdminLoginBtnAction(ActionEvent event) throws IOException {
-        SceneUtils.launchScene(event, MainPageController.class,  "adminMainPage.fxml");
+        SceneUtils.launchScene(event, MainPageController.class, "adminMainPage.fxml");
     }
 
     public void initialize() {

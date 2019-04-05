@@ -13,12 +13,12 @@ public class HallModel {
     public static Map<String, Hall> hallMap;
 
     public HallModel() {
-        if(hallMap == null){
+        if (hallMap == null || hallMap.isEmpty()) {
             hallMap = new HashMap<>();
         }
     }
 
-    public Map getHallMap(){
+    public Map getHallMap() {
         return hallMap;
     }
 
@@ -29,7 +29,7 @@ public class HallModel {
         hallMap.put(hallName, new Hall(hallName, hallType, numberOfSeats));
     }
 
-    public void deleteHall(String hallName){
+    public void deleteHall(String hallName) {
         hallMap.entrySet().removeIf(e -> e.getKey().equals(hallName));
     }
 }
