@@ -130,8 +130,8 @@ public class Event {
                                        String performers, String type, String schedule, Hall location,
                                        String date, String time, String ticketPrice){
         Checker.checkValidDate(date);
-        //Checker.checkValidTime(date) - metode må opprettes
-        //Checker.checkValidTicketPrice(ticketPrice) - metode må opprettes
+        Checker.checkValidTime(time);
+        Checker.checkValidTicketPrice(ticketPrice);
         setContactPerson(contactPerson);
         setName(name);
         setPerformers(performers);
