@@ -14,8 +14,6 @@ public class ContactPerson {
     //være tomme uten at det skaper noen problemer
     public ContactPerson(String name, String phoneNumber, String email, String webpage,
                          String firm, String otherInformation) {
-        Checker.checkValidEmail(email);
-        Checker.checkValidPhone(phoneNumber);
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;

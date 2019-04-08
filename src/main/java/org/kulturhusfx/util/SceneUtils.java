@@ -6,9 +6,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.kulturhusfx.base.Hall;
+import org.kulturhusfx.model.HallModel;
 
 import java.io.IOException;
 
@@ -33,6 +36,16 @@ public class SceneUtils {
         }
     }
 
+    public static void generateConfirmationAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Bekreftelse");
+        alert.setHeaderText("Bekreftelse på registrert sal");
+        alert.setContentText("Sal er registrert");
+
+        alert.showAndWait();
+    }
+
+    //Updates the value of elements of objects when changing information after adding a new hall or event
     public static String changeInformation(TextField textField, Label label){
         String s;
         if (textField.getText() == null || textField.getText().isEmpty()){
@@ -44,15 +57,23 @@ public class SceneUtils {
         return s;
     }
 
+    //Updates the choicebox with the hallnames
+    public static void updateRoomList(ChoiceBox box, HallModel hallModel){
+        for (Object i : hallModel.getHallList()) {
+            Hall hall = (Hall)i;
+            String hallName = hall.getHallName();
+            //makes sure that only unique hallnames are added to the choicebox
+            if(!box.getItems().contains(hallName)){
+                box.getItems().add(hallName);
+            }
+        }
+    }
 
-    public static void generateConfirmationAlert() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Bekreftelse");
-        alert.setHeaderText("Bekreftelse på registrert sal");
-        alert.setContentText("Sal er registrert");
-
-        alert.showAndWait();
+    //General method for adding types of events to the choicebox
+    public static void addEventType(ChoiceBox box){
+        box.getItems().addAll("Konsert", "Teater");
     }
 
 
 }
+

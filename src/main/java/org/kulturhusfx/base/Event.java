@@ -133,9 +133,6 @@ public class Event {
     public void changeEventInformation(ContactPerson contactPerson, String name,
                                        String performers, String type, String schedule, Hall location,
                                        String date, String time, String ticketPrice) {
-        Checker.checkValidDate(date);
-        Checker.checkValidTime(time);
-        Checker.checkValidTicketPrice(ticketPrice);
         setContactPerson(contactPerson);
         setName(name);
         setPerformers(performers);

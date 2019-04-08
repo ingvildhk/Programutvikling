@@ -30,13 +30,10 @@ public class AdminMainPageController {
 
     private HallModel hallModel;
     private EventModel eventModel;
-    private ContactPersonModel contactPersonModel;
 
     public AdminMainPageController() {
         this.hallModel = HallModel.getInstance();
         this.eventModel = EventModel.getInstance();
-        this.contactPersonModel = new ContactPersonModel();
-
     }
 
     public void roomRegistrationBtn(ActionEvent event) {
@@ -75,9 +72,7 @@ public class AdminMainPageController {
         Hall hall = (Hall)aList.get(hallIndex);
 
         eventModel.createEvent(contactPerson, name, performer, type, program, hall, date, time, ticket);
-        System.out.println(eventModel.getEventList().get(0));
-        System.out.println((eventModel.getEventList().size()));
-        SceneUtils.launchScene(event, AdminMainPageController.class, "eventRegistrationConfirmationPop.fxml");
+        SceneUtils.launchScene(event, EventRegistrationConfirmationPopController.class, "eventRegistrationConfirmationPop.fxml");
     }
 
     public void backToMainPageBtn(ActionEvent event) throws IOException {
@@ -93,28 +88,17 @@ public class AdminMainPageController {
     }
 
     public void updateRoomList() {
-        for (Object i : hallModel.getHallList()) {
-            Hall hall = (Hall)i;
-            String hallName = hall.getHallName();
-            System.out.println(hallName);
-            //makes sure that only unique hallnames are added to the choicebox
-            if(!eventRoom.getItems().contains(hallName)){
-                eventRoom.getItems().add(hallName);
-            }
-        }
+        SceneUtils.updateRoomList(eventRoom, hallModel);
     }
 
     public void addEventType() {
-        eventType.getItems().addAll("Konsert", "Teater");
+        SceneUtils.addEventType(eventType);
     }
 
     public void initialize() {
         addEventType();
         updateRoomList();
-
     }
-
-
 }
 
 

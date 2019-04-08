@@ -2,6 +2,7 @@ package org.kulturhusfx.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -11,6 +12,7 @@ import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.SceneUtils;
 
 import java.util.List;
@@ -42,15 +44,26 @@ public class EventRegistrationConfirmationPopController {
     private Event registeredEvent = (Event)eventList.get(eventList.size() - 1);
 
     public void changeEventBtn(ActionEvent event){
-        String name, type, room, performer, time, date, program, contact, phone, email, website, firm, other, ticket;
-        name = SceneUtils.changeInformation(changeEventNameTxtField, registeredEventNameLabel);
+        System.out.println(registeredEvent.toString());
+        String type, room, program;
+        String name = SceneUtils.changeInformation(changeEventNameTxtField, registeredEventNameLabel);
+        String performer = SceneUtils.changeInformation(changeEventPerformersTxtField, registeredEventPerformersLabel);
+        String time = SceneUtils.changeInformation(changeEventTimeTxtField, registeredEventTimeLabel);
+        String date = SceneUtils.changeInformation(changeEventDateTxtField, registeredEventDateLabel);
+        String contact = SceneUtils.changeInformation(changeEventContactPersonTxtField, registeredEventContactPersonLabel);
+        String phone = SceneUtils.changeInformation(changeEventPhoneTxtField, registeredEventPhoneLabel);
+        String email = SceneUtils.changeInformation(changeEventEmailTxtField, registeredEventEmailLabel);
+        String website = SceneUtils.changeInformation(changeEventWebpageTxtField, registeredEventWebpageLabel);
+        String firm = SceneUtils.changeInformation(changeEventFirmTxtField, registeredEventFirmLabel);
+        String other = SceneUtils.changeInformation(changeEventOtherTxtField, registeredEventOtherLabel);
+        String ticket = SceneUtils.changeInformation(changeEventTicketPriceTxtField, registeredEventTicketPriceLabel);
+
         if(changeEventTypeChoiceBox.getValue() == null){
             type = registeredEventTypeLabel.getText();
         }
         else {
             type = changeEventTypeChoiceBox.getValue().toString();
         }
-        performer = SceneUtils.changeInformation(changeEventPerformersTxtField, registeredEventPerformersLabel);
 
         if(changeEventHallChoiceBox.getValue() == null){
             room = registeredEventHallLabel.getText();
@@ -58,66 +71,18 @@ public class EventRegistrationConfirmationPopController {
         else{
             room = changeEventHallChoiceBox.getValue().toString();
         }
-        if (changeEventTimeTxtField == null){
-            time = registeredEventTimeLabel.getText();
-        }
-        else{
-            time = changeEventTimeTxtField.getText();
-        }
-        if (changeEventDateTxtField == null){
-            date = registeredEventDateLabel.getText();
-        }
-        else {
-            date = changeEventDateTxtField.getText();
-        }
-        if (changeEventProgramTxtArea == null){
+
+        if (changeEventProgramTxtArea.getText() == null || changeEventProgramTxtArea.getText().isEmpty()){
             program = registeredEventScheduleLabel.getText();
         }
         else{
             program = changeEventProgramTxtArea.getText();
         }
-        if(changeEventContactPersonTxtField == null){
-            contact = registeredEventContactPersonLabel.getText();
-        }
-        else{
-            contact = changeEventContactPersonTxtField.getText();
-        }
-        if(changeEventPhoneTxtField == null){
-            phone = registeredEventPhoneLabel.getText();
-        }
-        else{
-            phone = changeEventPhoneTxtField.getText();
-        }
-        if(changeEventEmailTxtField == null){
-            email = registeredEventEmailLabel.getText();
-        }
-        else{
-            email = changeEventEmailTxtField.getText();
-        }
-        if(changeEventWebpageTxtField == null){
-            website = registeredEventWebpageLabel.getText();
-        }
-        else{
-            website = changeEventWebpageTxtField.getText();
-        }
-        if(changeEventFirmTxtField == null){
-            firm = registeredEventFirmLabel.getText();
-        }
-        else{
-            firm = changeEventFirmTxtField.getText();
-        }
-        if(changeEventOtherTxtField == null){
-            other = registeredEventOtherLabel.getText();
-        }
-        else{
-            other = changeEventOtherTxtField.getText();
-        }
-        if(changeEventTicketPriceTxtField == null){
-            ticket = changeEventTicketPriceTxtField.getText();
-        }
-        else{
-            ticket = changeEventTicketPriceTxtField.getText();
-        }
+        Checker.checkValidDate(date);
+        Checker.checkValidTime(time);
+        Checker.checkValidTicketPrice(ticket);
+        Checker.checkValidEmail(email);
+        Checker.checkValidPhone(phone);
 
         List aList = hallModel.getHallList();
         int hallIndex = hallModel.getHallIndex(room);
@@ -125,9 +90,15 @@ public class EventRegistrationConfirmationPopController {
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
         registeredEvent.changeEventInformation(contactPerson, name, performer, type, program, hall, date, time, ticket);
 
+        System.out.println(registeredEvent.toString());
+        System.out.println(eventList.size());
         setLabels();
 
 
+    }
+
+    public void backToAdminBtn(ActionEvent event){
+        SceneUtils.launchScene(event, AdminMainPageController.class, "adminMainPage.fxml");
     }
 
     public void setLabels(){
@@ -151,19 +122,11 @@ public class EventRegistrationConfirmationPopController {
     }
 
     public void updateRoomList() {
-        for (Object i : hallModel.getHallList()) {
-            Hall hall = (Hall)i;
-            String hallName = hall.getHallName();
-            System.out.println(hallName);
-            //makes sure that only unique hallnames are added to the choicebox
-            if(!changeEventHallChoiceBox.getItems().contains(hallName)){
-                changeEventHallChoiceBox.getItems().add(hallName);
-            }
-        }
+        SceneUtils.updateRoomList(changeEventHallChoiceBox, hallModel);
     }
 
     public void addEventType() {
-        changeEventTypeChoiceBox.getItems().addAll("Konsert", "Teater");
+        SceneUtils.addEventType(changeEventTypeChoiceBox);
     }
 
     public void initialize() {

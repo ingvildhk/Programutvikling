@@ -62,5 +62,6 @@
       <Label fx:id="registeredEventWebpageLabel" layoutX="489.0" layoutY="152.0" text="Label" />
       <Label fx:id="registeredEventFirmLabel" layoutX="489.0" layoutY="177.0" text="Label" />
       <Label fx:id="registeredEventOtherLabel" layoutX="489.0" layoutY="206.0" maxWidth="50.0" text="Label" textOverrun="CLIP" wrapText="true" />
+      <Button layoutX="45.0" layoutY="28.0" mnemonicParsing="false" onAction="#backToAdminBtn" text="Lagre og gå tilbake" />
     </children>
 </AnchorPane>
