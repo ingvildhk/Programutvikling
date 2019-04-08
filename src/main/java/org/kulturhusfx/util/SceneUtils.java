@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +30,17 @@ public class SceneUtils {
             e.printStackTrace();
             return;
         }
+    }
+
+    public static String changeInformation(TextField textField, Label label){
+        String s;
+        if (textField.getText() == null || textField.getText().isEmpty()){
+            s = label.getText();
+        }
+        else{
+            s = textField.getText();
+        }
+        return s;
     }
 
 
