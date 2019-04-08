@@ -82,6 +82,10 @@ public class Event {
         return time;
     }
 
+    public String getTicketPrice() {
+        return ticketPrice;
+    }
+
     public String getId() {
         return id;
     }
