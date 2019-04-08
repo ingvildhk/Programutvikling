@@ -96,6 +96,7 @@ public class AdminMainPageController {
             Hall hall = (Hall)i;
             String hallName = hall.getHallName();
             System.out.println(hallName);
+            //makes sure that only unique hallnames are added to the choicebox
             if(!eventRoom.getItems().contains(hallName)){
                 eventRoom.getItems().add(hallName);
             }
