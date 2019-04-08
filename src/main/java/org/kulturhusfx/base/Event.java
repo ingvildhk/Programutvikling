@@ -144,7 +144,7 @@ public class Event {
     }
 
     public String toString() {
-        String s = contactPerson.toString() + " " + name + " " + performers + "Type: " + type + " " + schedule + " " +
+        String s = contactPerson.toString() + " " + name + " " + performers + type + " " + schedule + " " +
                 location.toString() + " " + date + " " + time + " " + ticketPrice;
         return s;
     }

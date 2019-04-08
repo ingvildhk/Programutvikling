@@ -34,6 +34,15 @@ public class HallModel {
         hallList.add((new Hall(hallName, hallType, numberOfSeats)));
     }
 
+    public int getHallIndex(String roomName){
+        for (Hall hall : hallList){
+            if(hall.getHallName().equals(roomName)){
+                return hallList.indexOf(hall);
+            }
+        }
+        return 0;
+    }
+
     /* Changing from map to arraylist, and design pattern to singleton
 
     public HallModel() {
@@ -56,6 +65,7 @@ public class HallModel {
     }*/
 
     public void deleteEvent(String hallName) {
+
         hallList.removeIf(e -> e.getHallName().equals(hallName));
     }
 }

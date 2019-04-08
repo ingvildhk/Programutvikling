@@ -6,6 +6,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.kulturhusfx.base.ContactPerson;
+import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.ContactPersonModel;
 import org.kulturhusfx.model.EventModel;
@@ -14,6 +15,7 @@ import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.SceneUtils;
 
 import java.io.IOException;
+import java.util.List;
 
 public class AdminMainPageController {
 
@@ -45,7 +47,7 @@ public class AdminMainPageController {
         Checker.checkIfFieldIsEmpty(room, type, seat);
 
         this.hallModel.createHall(room, type, seat);
-        //updateRoomList();
+        updateRoomList();
     }
 
     public void eventRegistrationBtn(ActionEvent event) {
@@ -67,7 +69,10 @@ public class AdminMainPageController {
         Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
         // Room er av typen Hall
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
-        Hall hall = (Hall) hallModel.getHallList();
+        List aList = hallModel.getHallList();
+        int hallIndex = hallModel.getHallIndex(room);
+        Hall hall = (Hall)aList.get(hallIndex);
+
         eventModel.createEvent(contactPerson, name, performer, type, program, hall, date, time, ticket);
         System.out.println(eventModel.getEventList().get(0));
         System.out.println((eventModel.getEventList().size()));
@@ -86,11 +91,16 @@ public class AdminMainPageController {
         SceneUtils.launchScene(event, AdminMainPageController.class, "adminSeeAllEvents.fxml");
     }
 
-    /*public void updateRoomList() {
-        for (String i : HallModel.hallMap.keySet()) {
-            eventRoom.getItems().add(i);
+    public void updateRoomList() {
+        for (Object i : hallModel.getHallList()) {
+            Hall hall = (Hall)i;
+            String hallName = hall.getHallName();
+            System.out.println(hallName);
+            if(!eventRoom.getItems().contains(hallName)){
+                eventRoom.getItems().add(hallName);
+            }
         }
-    }*/
+    }
 
     public void addEventType() {
         eventType.getItems().addAll("Konsert", "Teater");
@@ -98,7 +108,7 @@ public class AdminMainPageController {
 
     public void initialize() {
         addEventType();
-        //updateRoomList();
+        updateRoomList();
 
     }
 

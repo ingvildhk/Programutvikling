@@ -9,8 +9,6 @@ import java.util.List;
 
 public class EventModel {
 
-    //Changed to singleton design pattern
-
     private static final EventModel instance = new EventModel();
 
     private EventModel(){
@@ -21,12 +19,6 @@ public class EventModel {
     }
 
     private List<Event> eventList = new ArrayList<>();
-
-    /*public EventModel() {
-        if (eventList == null || eventList.isEmpty()) {
-            eventList = new ArrayList<>();
-        }
-    }*/
 
     public void createEvent(ContactPerson contactPerson, String name, String performers, String type, String schedule,
                             Hall location, String date, String time, String ticketPrice) {
@@ -45,3 +37,12 @@ public class EventModel {
         eventList.removeIf(e -> e.getLocation().getHallName().equals(hallName));
     }
 }
+
+
+
+
+    /*public EventModel() {
+        if (eventList == null || eventList.isEmpty()) {
+            eventList = new ArrayList<>();
+        }
+    }*/
