@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.util.SceneUtils;
 
 import java.util.List;
 
@@ -31,15 +32,14 @@ public class RoomRegistrationConfirmationPopController {
     }
 
     public void editRoomBtn(ActionEvent event) {
-        String roomName = changeRoomNameTxtField.getText();
-        String roomType = changeRoomTypeTxtField.getText();
-        String numberOfSeats = changeRoomNumberSeatsTxtField.getText();
-        if(!changeRoomNameTxtField.getText().isEmpty() || !changeRoomTypeTxtField.getText().isEmpty() ||
-                !changeRoomNumberSeatsTxtField.getText().isEmpty()){
-            registeredHall.changeHallInformation(roomName, roomType, numberOfSeats);
-            setValuetoLabels();
-        }
-        //generateConfirmationAlert();
+        String name = SceneUtils.changeInformation(changeRoomNameTxtField, registeredRoomNameLabel);
+        String type = SceneUtils.changeInformation(changeRoomTypeTxtField, registeredRoomTypeLabel);
+        String seats = SceneUtils.changeInformation(changeRoomNumberSeatsTxtField, registeredRoomNumberSeatsLabel);
+
+        registeredHall.changeHallInformation(name, type, seats);
+        setValuetoLabels();
+
+        generateConfirmationAlert();
     }
 
     public void initialize() {
