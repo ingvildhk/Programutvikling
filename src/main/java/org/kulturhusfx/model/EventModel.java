@@ -18,7 +18,7 @@ public class EventModel {
         return instance;
     }
 
-    private List<Event> eventList = new ArrayList<>();
+    private List<Event> eventList = new ArrayList<Event>();
 
     public void createEvent(ContactPerson contactPerson, String name, String performers, String type, String schedule,
                             Hall location, String date, String time, String ticketPrice) {
