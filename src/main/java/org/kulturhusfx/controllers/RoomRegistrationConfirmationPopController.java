@@ -8,7 +8,10 @@ import javafx.scene.control.TextField;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
 
+import java.util.List;
+
 public class RoomRegistrationConfirmationPopController {
+
 
     @FXML
     Label registeredRoomNameLabel, registeredRoomTypeLabel, registeredRoomNumberSeatsLabel;
@@ -18,19 +21,25 @@ public class RoomRegistrationConfirmationPopController {
     private HallModel hallmodel;
 
     public RoomRegistrationConfirmationPopController(){
-
+        this.hallmodel = HallModel.getInstance();
     }
 
-    public void changeRoomBtn() {
-
-    }
-
+    // Metoden setter lablene i roomRegistrationConfirmationPop.fxml til verdiene til Hall'en som akkurat er registrert
     public void setValuetoLabels(){
-        //registeredRoomNameLabel.setText(hallmodel.getHallMap().getValue());
+        List hallList = hallmodel.getHallList();
+        Hall registeredHall = (Hall)hallList.get(hallList.size()-1);
+        registeredRoomNameLabel.setText(registeredHall.getHallName());
+        registeredRoomTypeLabel.setText(registeredHall.getHallType());
+        registeredRoomNumberSeatsLabel.setText(registeredHall.getNumberOfSeats());
+    }
+
+    public void editRoomBtn() {
+
+
     }
 
     public void initialize() {
-        // TODO
+        setValuetoLabels();
 
     }
 

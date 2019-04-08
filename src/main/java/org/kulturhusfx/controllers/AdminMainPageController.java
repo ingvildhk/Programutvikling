@@ -48,6 +48,7 @@ public class AdminMainPageController {
 
         this.hallModel.createHall(room, type, seat);
         updateRoomList();
+        SceneUtils.launchScene(event, AdminMainPageController.class, "roomRegistrationConfirmationPop.fxml");
     }
 
     public void eventRegistrationBtn(ActionEvent event) {

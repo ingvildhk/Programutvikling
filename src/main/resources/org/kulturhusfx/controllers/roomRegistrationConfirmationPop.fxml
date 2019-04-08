@@ -20,7 +20,7 @@
         <Label layoutX="161.0" layoutY="102.0" text="Type:" />
         <Label layoutX="139.0" layoutY="129.0" text="Antall plasser:" />
         <Label layoutX="262.0" layoutY="247.0" text="Lagre som fil?" />
-        <Button layoutX="355.0" layoutY="163.0" mnemonicParsing="false" onAction="#changeRoomBtn" text="Endre?" />
+        <Button layoutX="355.0" layoutY="163.0" mnemonicParsing="false" onAction="#editRoomBtn" text="Endre?" />
         <Button layoutX="244.0" layoutY="284.0" mnemonicParsing="false" text=".csv" />
         <Button layoutX="316.0" layoutY="284.0" mnemonicParsing="false" text=".jobj" />
       <Label fx:id="registeredRoomNameLabel" layoutX="244.0" layoutY="75.0" text="Label" />
