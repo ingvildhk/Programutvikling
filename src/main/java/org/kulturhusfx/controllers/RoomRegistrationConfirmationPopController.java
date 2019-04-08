@@ -9,6 +9,7 @@ import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.SceneUtils;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.kulturhusfx.util.SceneUtils.generateConfirmationAlert;
@@ -40,6 +41,10 @@ public class RoomRegistrationConfirmationPopController {
         setValuetoLabels();
 
         generateConfirmationAlert();
+    }
+
+    public void backToAdminMainPage(ActionEvent event) throws IOException {
+        SceneUtils.launchScene(event, RoomRegistrationConfirmationPopController.class, "adminMainPage.fxml");
     }
 
     public void initialize() {
