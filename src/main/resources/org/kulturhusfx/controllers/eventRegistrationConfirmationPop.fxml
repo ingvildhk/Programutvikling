@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.EventRegistrationConfirmationPop">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.EventRegistrationConfirmationPopController">
     <children>
         <Label layoutX="299.0" layoutY="14.0" text="Småkommunens Kulturhus">
             <font>
@@ -27,12 +27,12 @@
         <Label layoutX="76.0" layoutY="152.0" text="Sal:" />
         <Label layoutX="58.0" layoutY="206.0" text="Tidspunkt:" />
         <Label layoutX="60.0" layoutY="232.0" text="Billettpris:" />
-        <Label layoutX="344.0" layoutY="76.0" text="Kontaktperson:" />
-        <Label layoutX="341.0" layoutY="102.0" text="Telefonnummer:" />
-        <Label layoutX="365.0" layoutY="128.0" text="Epost:" />
-        <Label layoutX="360.0" layoutY="152.0" text="Nettside" />
-        <Label layoutX="367.0" layoutY="177.0" text="Firma:" />
-        <Label layoutX="332.0" layoutY="206.0" text="Annen Informasjon:" />
+        <Label layoutX="355.0" layoutY="76.0" text="Kontaktperson:" />
+        <Label layoutX="353.0" layoutY="102.0" text="Telefonnummer:" />
+        <Label layoutX="384.0" layoutY="128.0" text="Epost:" />
+        <Label layoutX="383.0" layoutY="152.0" text="Nettside" />
+        <Label layoutX="390.0" layoutY="177.0" text="Firma:" />
+        <Label layoutX="354.0" layoutY="206.0" text="Annen Informasjon:" />
       <Label layoutX="71.0" layoutY="175.0" text="Dato:" />
       <Label fx:id="registeredEventNameLabel" layoutX="153.0" layoutY="76.0" text="Label" />
       <Label fx:id="registeredEventTypeLabel" layoutX="153.0" layoutY="102.0" text="Label" />
@@ -42,25 +42,25 @@
       <Label fx:id="registeredEventHallLabel" layoutX="153.0" layoutY="152.0" text="Label" />
       <Label fx:id="registeredEventTimeLabel" layoutX="153.0" layoutY="206.0" text="Label" />
       <Label fx:id="registeredEventScheduleLabel" layoutX="153.0" layoutY="277.0" text="Label" />
-      <TextField fx:id="changeEventNameTxtField" layoutX="197.0" layoutY="72.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventPerformersTxtField" layoutX="197.0" layoutY="124.0" prefHeight="25.0" prefWidth="113.0" />
-      <ChoiceBox fx:id="changeEventTypeChoiceBox" layoutX="196.0" layoutY="98.0" prefHeight="25.0" prefWidth="113.0" />
-      <ChoiceBox fx:id="changeEventHallChoiceBox" layoutX="196.0" layoutY="148.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventDateTxtField" layoutX="197.0" layoutY="173.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventTimeTxtField" layoutX="197.0" layoutY="202.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventTicketPriceTxtField" layoutX="197.0" layoutY="228.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextArea fx:id="changeEventProgramTxtArea" layoutX="196.0" layoutY="259.0" prefHeight="85.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventContactPersonTxtField" layoutX="532.0" layoutY="72.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventPhoneTxtField" layoutX="532.0" layoutY="98.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventEmailTxtField" layoutX="532.0" layoutY="124.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventWebpageTxtField" layoutX="532.0" layoutY="148.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventFirmTxtField" layoutX="532.0" layoutY="173.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventOtherTxtField" layoutX="532.0" layoutY="202.0" prefHeight="25.0" prefWidth="113.0" />
-      <Label fx:id="registeredEventContactPersonLabel" layoutX="475.0" layoutY="76.0" text="Label" />
-      <Label fx:id="registeredEventPhoneLabel" layoutX="475.0" layoutY="102.0" text="Label" />
-      <Label fx:id="registeredEventEmailLabel" layoutX="475.0" layoutY="128.0" text="Label" />
-      <Label fx:id="registeredEventWebpageLabel" layoutX="475.0" layoutY="152.0" text="Label" />
-      <Label fx:id="registeredEventFirmLabel" layoutX="475.0" layoutY="177.0" text="Label" />
-      <Label fx:id="registeredEventOtherLabel" layoutX="475.0" layoutY="206.0" text="Label" />
+      <TextField fx:id="changeEventNameTxtField" layoutX="231.0" layoutY="72.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventPerformersTxtField" layoutX="231.0" layoutY="124.0" prefHeight="25.0" prefWidth="113.0" />
+      <ChoiceBox fx:id="changeEventTypeChoiceBox" layoutX="231.0" layoutY="98.0" prefHeight="25.0" prefWidth="113.0" />
+      <ChoiceBox fx:id="changeEventHallChoiceBox" layoutX="231.0" layoutY="148.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventDateTxtField" layoutX="231.0" layoutY="173.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventTimeTxtField" layoutX="231.0" layoutY="202.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventTicketPriceTxtField" layoutX="231.0" layoutY="228.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextArea fx:id="changeEventProgramTxtArea" layoutX="231.0" layoutY="253.0" prefHeight="85.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventContactPersonTxtField" layoutX="578.0" layoutY="72.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventPhoneTxtField" layoutX="578.0" layoutY="98.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventEmailTxtField" layoutX="578.0" layoutY="124.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventWebpageTxtField" layoutX="578.0" layoutY="148.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventFirmTxtField" layoutX="578.0" layoutY="173.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventOtherTxtField" layoutX="578.0" layoutY="202.0" prefHeight="25.0" prefWidth="113.0" />
+      <Label fx:id="registeredEventContactPersonLabel" layoutX="489.0" layoutY="76.0" text="Label" />
+      <Label fx:id="registeredEventPhoneLabel" layoutX="489.0" layoutY="102.0" text="Label" />
+      <Label fx:id="registeredEventEmailLabel" layoutX="489.0" layoutY="128.0" text="Label" />
+      <Label fx:id="registeredEventWebpageLabel" layoutX="489.0" layoutY="152.0" text="Label" />
+      <Label fx:id="registeredEventFirmLabel" layoutX="489.0" layoutY="177.0" text="Label" />
+      <Label fx:id="registeredEventOtherLabel" layoutX="489.0" layoutY="206.0" maxWidth="50.0" text="Label" textOverrun="CLIP" wrapText="true" />
     </children>
 </AnchorPane>
