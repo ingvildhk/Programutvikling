@@ -10,32 +10,36 @@ import org.kulturhusfx.model.HallModel;
 
 import java.util.List;
 
-public class RoomRegistrationConfirmationPopController {
+import static org.kulturhusfx.util.SceneUtils.generateConfirmationAlert;
 
+public class RoomRegistrationConfirmationPopController {
 
     @FXML
     Label registeredRoomNameLabel, registeredRoomTypeLabel, registeredRoomNumberSeatsLabel;
     @FXML
     TextField changeRoomNameTxtField, changeRoomTypeTxtField, changeRoomNumberSeatsTxtField;
 
-    private HallModel hallmodel;
-
-    public RoomRegistrationConfirmationPopController(){
-        this.hallmodel = HallModel.getInstance();
-    }
+    private HallModel hallmodel = HallModel.getInstance();
+    private List hallList = hallmodel.getHallList();
+    private Hall registeredHall = (Hall)hallList.get(hallList.size()-1);
 
     // Metoden setter lablene i roomRegistrationConfirmationPop.fxml til verdiene til Hall'en som akkurat er registrert
     public void setValuetoLabels(){
-        List hallList = hallmodel.getHallList();
-        Hall registeredHall = (Hall)hallList.get(hallList.size()-1);
         registeredRoomNameLabel.setText(registeredHall.getHallName());
         registeredRoomTypeLabel.setText(registeredHall.getHallType());
         registeredRoomNumberSeatsLabel.setText(registeredHall.getNumberOfSeats());
     }
 
-    public void editRoomBtn() {
-
-
+    public void editRoomBtn(ActionEvent event) {
+        String roomName = changeRoomNameTxtField.getText();
+        String roomType = changeRoomTypeTxtField.getText();
+        String numberOfSeats = changeRoomNumberSeatsTxtField.getText();
+        if(!changeRoomNameTxtField.getText().isEmpty() || !changeRoomTypeTxtField.getText().isEmpty() ||
+                !changeRoomNumberSeatsTxtField.getText().isEmpty()){
+            registeredHall.changeHallInformation(roomName, roomType, numberOfSeats);
+            setValuetoLabels();
+        }
+        //generateConfirmationAlert();
     }
 
     public void initialize() {

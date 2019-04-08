@@ -25,7 +25,6 @@ public class MainPageController {
         this.contactPersonModel = new ContactPersonModel();
     }
 
-
     public void handleAdminLoginBtnAction(ActionEvent event) throws IOException {
         SceneUtils.launchScene(event, MainPageController.class, "adminMainPage.fxml");
     }

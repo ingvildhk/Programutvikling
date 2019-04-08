@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +29,16 @@ public class SceneUtils {
             e.printStackTrace();
             return;
         }
+    }
+
+
+    public static void generateConfirmationAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Bekreftelse");
+        alert.setHeaderText("Bekreftelse på registrert sal");
+        alert.setContentText("Sal er registrert");
+
+        alert.showAndWait();
     }
 
 

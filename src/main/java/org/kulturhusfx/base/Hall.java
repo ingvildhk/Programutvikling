@@ -1,6 +1,10 @@
 package org.kulturhusfx.base;
 
+import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.Checker;
+
+
+import java.util.List;
 
 public class Hall {
     private String hallName;
@@ -45,6 +49,7 @@ public class Hall {
         setHallType(hallType);
         setNumberOfSeats(numberOfSeats);
     }
+
 
     public String toString() {
         return (hallName + " " + hallType + " " + numberOfSeats);
