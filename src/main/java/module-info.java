@@ -6,4 +6,7 @@ module hellofx {
 
     exports org.kulturhusfx;
     exports org.kulturhusfx.controllers;
+    exports org.kulturhusfx.base;
+    exports org.kulturhusfx.util;
+    exports org.kulturhusfx.model;
 }

@@ -4,14 +4,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
-import org.kulturhusfx.model.ContactPersonModel;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.SceneUtils;
@@ -22,11 +20,11 @@ import java.util.List;
 public class MainPageController {
 
     @FXML
-    private TableView<eventOrder> tableViewEvents;
+    private TableView<Event> tableViewEvents;
     @FXML
-    private TableColumn<eventOrder, String> EventColumn, TypeColumn, DateColumn, AvailableColumn;
+    private TableColumn<Event, String> EventColumn, TypeColumn, DateColumn, AvailableColumn;
     @FXML
-    private TableColumn<eventOrder, Void> OrderColumn;
+    private TableColumn<Event, Void> OrderColumn;
 
     private HallModel hallModel = HallModel.getInstance();
     private EventModel eventModel = EventModel.getInstance();
@@ -39,9 +37,9 @@ public class MainPageController {
     }
 
 
-    private ObservableList<eventOrder> getEvents(){
+    private ObservableList<Event> getEvents(){
         //eventOrder er en ny klasse som kun tar inn den informasjonen vi vil vise på forsiden
-        ObservableList<eventOrder> events = FXCollections.observableArrayList();
+        ObservableList<Event> events = FXCollections.observableArrayList();
         Hall hovedsal = hallList.get(0);
 
         if (eventList == null || eventList.isEmpty()){
@@ -51,8 +49,7 @@ public class MainPageController {
                     "folk", "foredrag","program", hovedsal, "10/11/11", "10:10","200.00");
         }
         for (Event event : eventList){
-            eventOrder eventOrder = new eventOrder(event.getName(), event.getType(), event.getDate());
-            events.add(eventOrder);
+            events.add(event);
         }
         return events;
     }
@@ -62,38 +59,10 @@ public class MainPageController {
         if (hallModel.getHallList().isEmpty()) {
             hallModel.createHall("Hovedsalen", "Konsertsal", "150");
         }
-        EventColumn.setCellValueFactory(new PropertyValueFactory<eventOrder, String>("name"));
-        TypeColumn.setCellValueFactory(new PropertyValueFactory<eventOrder, String>("type"));
-        DateColumn.setCellValueFactory(new PropertyValueFactory<eventOrder, String>("date"));
+        EventColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
+        TypeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
+        DateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
         tableViewEvents.setItems(getEvents());
-    }
 
-    //Lagde en ny klasse, som bare inneholder den informasjonen vi vil vise i billettbestilling
-    //Dette er fordi da jeg prøvde å gjøre det med den vanlige Eventklassen fikk jeg feilmeldinger da
-    //kolonnene ikke klarte å hente ut den dataen vi ville vise, og ga en feilmelding
-    //Hvis vi vil vise andre ting på forsiden må vi dermed legge til det i denne klassen som f.eks
-    //private int availabletickets - når vi kommer så langt
-    public class eventOrder{
-        private String name;
-        private String type;
-        private String date;
-
-        public eventOrder(String name, String type, String date){
-            this.name = name;
-            this.type = type;
-            this.date = date;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public String getDate() {
-            return date;
-        }
     }
 }
