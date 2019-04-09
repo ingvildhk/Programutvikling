@@ -44,11 +44,12 @@ public class MainPageController {
         ObservableList<eventOrder> events = FXCollections.observableArrayList();
         Hall hovedsal = hallList.get(0);
 
-        eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 1",
-                "folk", "konsert","program", hovedsal, "10/11/11", "10:10","200.00");
-        eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 2",
-                "folk", "foredrag","program", hovedsal, "10/11/11", "10:10","200.00");
-
+        if (eventList == null || eventList.isEmpty()){
+            eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 1",
+                    "folk", "konsert","program", hovedsal, "10/11/11", "10:10","200.00");
+            eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 2",
+                    "folk", "foredrag","program", hovedsal, "10/11/11", "10:10","200.00");
+        }
         for (Event event : eventList){
             eventOrder eventOrder = new eventOrder(event.getName(), event.getType(), event.getDate());
             events.add(eventOrder);
