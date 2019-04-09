@@ -23,13 +23,16 @@ public class HallModel {
 
     private List<Hall> hallList = new ArrayList<Hall>();
 
-    public List getHallList() {
+    public List<Hall> getHallList() {
         return hallList;
     }
 
     public void createHall(String hallName, String hallType, String numberOfSeats) {
-        if (hallList.contains(hallName)) {
-            InvalidInputHandler.generateAlert(new InvalidHallException("Salen finnes fra før av"));
+        //endret på metoden slik at den faktisk sjekker om hallname finnes fra før av
+        for (Hall hall : hallList){
+            if (hall.getHallName().equals(hallName)){
+                InvalidInputHandler.generateAlert(new InvalidHallException("Salen finnes fra før av"));
+            }
         }
         hallList.add((new Hall(hallName, hallType, numberOfSeats)));
     }

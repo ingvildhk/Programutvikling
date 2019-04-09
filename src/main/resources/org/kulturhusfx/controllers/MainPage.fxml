@@ -20,7 +20,7 @@
             </font>
         </Label>
         <Button id="adminLoginButton" fx:id="adminLoginBtn" layoutX="463.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleAdminLoginBtnAction" text="Admin Login" />
-      <TableView fx:id="tableViewArr" layoutX="16.0" layoutY="111.0" prefHeight="381.0" prefWidth="675.0">
+      <TableView fx:id="tableViewEvents" layoutX="16.0" layoutY="111.0" prefHeight="381.0" prefWidth="675.0">
         <columns>
           <TableColumn fx:id="EventColumn" prefWidth="146.66666221618652" text="Arrangement" />
           <TableColumn fx:id="TypeColumn" prefWidth="128.66664123535156" text="Type" />

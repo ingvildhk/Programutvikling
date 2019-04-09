@@ -25,7 +25,7 @@ public class EventModel {
         eventList.add(new Event(contactPerson, name, performers, schedule, location, type, date, time, ticketPrice));
     }
 
-    public List getEventList() {
+    public List<Event> getEventList() {
         return eventList;
     }
 

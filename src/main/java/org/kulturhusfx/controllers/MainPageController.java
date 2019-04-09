@@ -22,41 +22,77 @@ import java.util.List;
 public class MainPageController {
 
     @FXML
-    private TableView<Event> tableViewEvents;
+    private TableView<eventOrder> tableViewEvents;
     @FXML
-    private TableColumn<Event, String> EventColumn, TypeColumn, DateColumn, AvailableColumn;
+    private TableColumn<eventOrder, String> EventColumn, TypeColumn, DateColumn, AvailableColumn;
     @FXML
-    private TableColumn<Event, Void> OrderColumn;
+    private TableColumn<eventOrder, Void> OrderColumn;
 
     private HallModel hallModel = HallModel.getInstance();
     private EventModel eventModel = EventModel.getInstance();
-    private List eventList = eventModel.getEventList();
+    private List<Event> eventList = eventModel.getEventList();
+    private List<Hall> hallList = hallModel.getHallList();
+
 
     public void handleAdminLoginBtnAction(ActionEvent event) throws IOException {
         SceneUtils.launchScene(event, MainPageController.class, "adminMainPage.fxml");
     }
 
-    /*
-    public void setTableView(){
-        EventColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
-        TypeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
-        DateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
-    }
 
-    private ObservableList<Event> getEvents(){
-        ObservableList<Event> events = FXCollections.observableArrayList();
-        events.add(new Event(new ContactPerson("Navn", "12345678", "hei@mail","","", ""), "Arr1",
-                "folk", "prog", new Hall("Sal1", "konsert", "123"),"konsert",
-                "10/11/11", "10:10","200.00"));
+    private ObservableList<eventOrder> getEvents(){
+        //eventOrder er en ny klasse som kun tar inn den informasjonen vi vil vise på forsiden
+        ObservableList<eventOrder> events = FXCollections.observableArrayList();
+        Hall hovedsal = hallList.get(0);
+
+        eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 1",
+                "folk", "konsert","program", hovedsal, "10/11/11", "10:10","200.00");
+        eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 2",
+                "folk", "foredrag","program", hovedsal, "10/11/11", "10:10","200.00");
+
+        for (Event event : eventList){
+            eventOrder eventOrder = new eventOrder(event.getName(), event.getType(), event.getDate());
+            events.add(eventOrder);
+        }
         return events;
-    }*/
+    }
 
     public void initialize() {
         // TODO
-        //setTableView();
-        //tableViewEvents.setItems(getEvents());
         if (hallModel.getHallList().isEmpty()) {
             hallModel.createHall("Hovedsalen", "Konsertsal", "150");
+        }
+        EventColumn.setCellValueFactory(new PropertyValueFactory<eventOrder, String>("name"));
+        TypeColumn.setCellValueFactory(new PropertyValueFactory<eventOrder, String>("type"));
+        DateColumn.setCellValueFactory(new PropertyValueFactory<eventOrder, String>("date"));
+        tableViewEvents.setItems(getEvents());
+    }
+
+    //Lagde en ny klasse, som bare inneholder den informasjonen vi vil vise i billettbestilling
+    //Dette er fordi da jeg prøvde å gjøre det med den vanlige Eventklassen fikk jeg feilmeldinger da
+    //kolonnene ikke klarte å hente ut den dataen vi ville vise, og ga en feilmelding
+    //Hvis vi vil vise andre ting på forsiden må vi dermed legge til det i denne klassen som f.eks
+    //private int availabletickets - når vi kommer så langt
+    public class eventOrder{
+        private String name;
+        private String type;
+        private String date;
+
+        public eventOrder(String name, String type, String date){
+            this.name = name;
+            this.type = type;
+            this.date = date;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public String getDate() {
+            return date;
         }
     }
 }

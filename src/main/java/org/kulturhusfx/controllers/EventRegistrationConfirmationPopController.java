@@ -40,8 +40,8 @@ public class EventRegistrationConfirmationPopController {
 
     private EventModel eventModel = EventModel.getInstance();
     private HallModel hallModel = HallModel.getInstance();
-    private List eventList = eventModel.getEventList();
-    private Event registeredEvent = (Event)eventList.get(eventList.size() - 1);
+    private List<Event> eventList = eventModel.getEventList();
+    private Event registeredEvent = eventList.get(eventList.size() - 1);
 
     public void changeEventBtn(ActionEvent event){
         System.out.println(registeredEvent.toString());
@@ -84,9 +84,9 @@ public class EventRegistrationConfirmationPopController {
         Checker.checkValidEmail(email);
         Checker.checkValidPhone(phone);
 
-        List aList = hallModel.getHallList();
+        List<Hall> aList = hallModel.getHallList();
         int hallIndex = hallModel.getHallIndex(room);
-        Hall hall = (Hall)aList.get(hallIndex);
+        Hall hall = aList.get(hallIndex);
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
         registeredEvent.changeEventInformation(contactPerson, name, performer, type, program, hall, date, time, ticket);
 

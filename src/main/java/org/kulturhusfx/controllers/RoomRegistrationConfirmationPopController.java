@@ -22,8 +22,8 @@ public class RoomRegistrationConfirmationPopController {
     TextField changeRoomNameTxtField, changeRoomTypeTxtField, changeRoomNumberSeatsTxtField;
 
     private HallModel hallmodel = HallModel.getInstance();
-    private List hallList = hallmodel.getHallList();
-    private Hall registeredHall = (Hall)hallList.get(hallList.size()-1);
+    private List<Hall> hallList = hallmodel.getHallList();
+    private Hall registeredHall = hallList.get(hallList.size()-1);
 
     // Metoden setter lablene i roomRegistrationConfirmationPop.fxml til verdiene til Hall'en som akkurat er registrert
     public void setValuetoLabels(){

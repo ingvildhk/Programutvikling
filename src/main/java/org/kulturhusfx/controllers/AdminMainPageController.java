@@ -67,9 +67,9 @@ public class AdminMainPageController {
         Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
         // Room er av typen Hall
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
-        List aList = hallModel.getHallList();
+        List<Hall> aList = hallModel.getHallList();
         int hallIndex = hallModel.getHallIndex(room);
-        Hall hall = (Hall)aList.get(hallIndex);
+        Hall hall = aList.get(hallIndex);
 
         eventModel.createEvent(contactPerson, name, performer, type, program, hall, date, time, ticket);
         SceneUtils.launchScene(event, EventRegistrationConfirmationPopController.class, "eventRegistrationConfirmationPop.fxml");
