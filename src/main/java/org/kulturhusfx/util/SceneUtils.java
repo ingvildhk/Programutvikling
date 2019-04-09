@@ -59,8 +59,7 @@ public class SceneUtils {
 
     //Updates the choicebox with the hallnames
     public static void updateRoomList(ChoiceBox box, HallModel hallModel){
-        for (Object i : hallModel.getHallList()) {
-            Hall hall = (Hall)i;
+        for (Hall hall : hallModel.getHallList()) {
             String hallName = hall.getHallName();
             //makes sure that only unique hallnames are added to the choicebox
             if(!box.getItems().contains(hallName)){
