@@ -14,6 +14,7 @@ public class InvalidInputHandler {
         alert.setContentText(exception.getMessage());
 
         alert.showAndWait();
-        throw exception;
+        throw exception; // Hvilket Exception?
+
     }
 }

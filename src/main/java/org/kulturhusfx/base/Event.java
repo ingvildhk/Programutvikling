@@ -23,7 +23,7 @@ public class Event {
     private TicketModel ticketList;
     private int numberOfTickets;
 
-    //Kjøres etter inlest fil for å kontrollere at id-ene holdes unike
+    //Kjøres etter innlest fil for å kontrollere at id-ene holdes unike
     public static void setMinId(int id) {
         if (id > counter) {
             counter = id;
@@ -106,11 +106,13 @@ public class Event {
         this.contactPerson = contactPerson;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
+        Checker.checkIfFieldIsEmpty(name);
         this.name = name;
     }
 
-    private void setPerformers(String performers) {
+    public void setPerformers(String performers) {
+        Checker.checkIfFieldIsEmpty(name);
         this.performers = performers;
     }
 
@@ -118,7 +120,8 @@ public class Event {
         this.type = type;
     }
 
-    private void setSchedule(String schedule) {
+    public void setSchedule(String schedule) {
+        Checker.checkIfFieldIsEmpty(name);
         this.schedule = schedule;
     }
 
@@ -126,15 +129,18 @@ public class Event {
         this.location = location;
     }
 
-    private void setDate(String date) {
+    public void setDate(String date) {
+        Checker.checkValidDate(date);
         this.date = date;
     }
 
-    private void setTime(String time) {
+    public void setTime(String time) {
+        Checker.checkValidTime(time);
         this.time = time;
     }
 
-    private void setTicketPrice(String ticketPrice) {
+    public void setTicketPrice(String ticketPrice) {
+        Checker.checkValidTicketPrice(ticketPrice);
         this.ticketPrice = ticketPrice;
     }
 

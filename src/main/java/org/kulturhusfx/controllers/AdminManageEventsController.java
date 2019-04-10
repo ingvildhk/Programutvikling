@@ -41,35 +41,62 @@ public class AdminManageEventsController {
 
     // Method to list the registrered events in tableView
     private ObservableList<Event> getEvents(){
-        //eventOrder er en ny klasse som kun tar inn den informasjonen vi vil vise på forsiden
         ObservableList<Event> events = FXCollections.observableArrayList();
-
         for (Event event : eventList){
             events.add(event);
         }
         return events;
     }
 
-     // Funker ikke enda
-     public void editEventNameEvent (TableColumn.CellEditEvent edittedCell){
+    // Methods to change and set eventdata i tableView with double-click
+    public void editEventNameCellEvent (TableColumn.CellEditEvent edittedCell){
         Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
-        //eventSelected.changeEventInformation(edittedCell.getNewValue());
+        eventSelected.setName(edittedCell.getNewValue().toString());
     }
-    
+
+    public void editEventPerformersCellEvent (TableColumn.CellEditEvent edittedCell){
+        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        eventSelected.setPerformers(edittedCell.getNewValue().toString());
+    }
+
+    public void editEventTimeCellEvent (TableColumn.CellEditEvent edittedCell){
+        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        eventSelected.setTime(edittedCell.getNewValue().toString());
+    }
+
+    public void editEventDateCellEvent (TableColumn.CellEditEvent edittedCell){
+        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        eventSelected.setDate(edittedCell.getNewValue().toString());
+    }
+
+    public void editEventScheduleCellEvent (TableColumn.CellEditEvent edittedCell){
+        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        eventSelected.setSchedule(edittedCell.getNewValue().toString());
+    }
+
+    public void editEventPriceCellEvent (TableColumn.CellEditEvent edittedCell){
+        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        eventSelected.setTicketPrice(edittedCell.getNewValue().toString());
+    }
+
     public void deleteEventBtn(){
+        deleteEventFromTableView();
+    }
+
+    public void deleteEventFromTableView(){
         ObservableList<Event> selectedRows;
 
         // contains the selected rows
-        selectedRows = tableViewEvents.getSelectionModel().getSelectedItems();
+         selectedRows = tableViewEvents.getSelectionModel().getSelectedItems();
         for (Event event : selectedRows){
             eventList.remove(event);
-            // Updating the tableView when pushing deletebutton
-            for(Object obj : eventModel.getEventList()){
-                Event events = (Event)obj;
-                tableViewEvents.getItems().remove(events);
-            }
+        }
+        for(Event events : eventModel.getEventList()) {
+            tableViewEvents.getItems().remove(events);
+
         }
     }
+
 
     public void initialize(){
         nameColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
@@ -84,13 +111,19 @@ public class AdminManageEventsController {
 
         tableViewEvents.setItems(getEvents());
 
-        // To change textfields, editable must be true
+        // To change text fields, editable must be true
         tableViewEvents.setEditable(true);
+
+        // To make columns editable
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        performersColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        timeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        programColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        priceColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
         // To select multipe rows with, men fungerer ikke med deleteButton
         tableViewEvents.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
     }
 
 

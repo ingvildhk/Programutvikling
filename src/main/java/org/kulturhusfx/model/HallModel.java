@@ -67,6 +67,7 @@ public class HallModel {
         return hallMap;
     }*/
 
+    // TODO Trenger man deleteEventMetoden i HallModel?
     public void deleteEvent(String hallName) {
 
         hallList.removeIf(e -> e.getHallName().equals(hallName));

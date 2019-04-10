@@ -45,6 +45,8 @@ public class SceneUtils {
         alert.showAndWait();
     }
 
+   //////////// OPPRETTE EN NY UTIL-KLASSE FOR DISSE METODENE? /////////////
+
     //Updates the value of elements of objects when changing information after adding a new hall or event
     public static String changeInformation(TextField textField, Label label){
         String s;
@@ -70,11 +72,9 @@ public class SceneUtils {
         }
     }
 
-
-
     //General method for adding types of events to the choicebox
     public static void addEventType(ChoiceBox box){
-        box.getItems().addAll("Konsert", "Teater");
+        box.getItems().addAll("Konsert", "Teater", "Konferanse", "Forestilling", "Annet");
     }
 
 
