@@ -48,13 +48,14 @@ public class Checker {
     // Metode for å sjekke om Dato-input er i riktig format
     public static void checkValidDate(String date) {
         // Sjekk at regexen er riktig, fjern kommentar når gjort
-        String regex = "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{2}$";
+        //String regex = "^(3[01]|[12][0-9]|0[1-9])-(1[0-2]|0[1-9])-[0-9]{4}$";
+        String regex = "^[0-9]{4}-(1[0-2]|0[1-9])-(3[01]|[12][0-9]|0[1-9])$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(date);
         boolean validDate = m.matches();
         if (!validDate) {
             InvalidInputHandler.generateAlert(new InvalidDateException
-                    ("Datoformat feil. Event ble ikke oppdatert "));
+                    ("Datoformat feil. Skal være i dette formatet: 'yyyy-mm-dd' Event ble ikke oppdatert "));
         }
     }
 

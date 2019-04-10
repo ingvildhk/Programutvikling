@@ -3,6 +3,7 @@ package org.kulturhusfx.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.kulturhusfx.base.ContactPerson;
@@ -20,13 +21,15 @@ import java.util.List;
 public class AdminMainPageController {
 
     @FXML
-    TextField roomName, roomType, totalNumberofSeats, performers, eventTime, ticketPrice, eventName;
+    TextField roomName, roomType, totalNumberofSeats, performers, eventTime, ticketPrice, eventName, eventDate;
     @FXML
-    TextField contactName, contactPhone, contactEmail, contactWebsite, contactFirm, contactOther, eventDate;
+    TextField contactName, contactPhone, contactEmail, contactWebsite, contactFirm, contactOther;
     @FXML
     TextArea eventProgram;
     @FXML
     ChoiceBox eventType, eventRoom;
+    @FXML
+    DatePicker datePicker;
 
     private HallModel hallModel;
     private EventModel eventModel;
@@ -54,7 +57,8 @@ public class AdminMainPageController {
         String performer = performers.getText();
         String room = eventRoom.getValue().toString();
         String time = eventTime.getText();
-        String date = eventDate.getText();
+        //String date = eventDate.getText();
+        String date = datePicker.getValue().toString();
         String program = eventProgram.getText();
         String contact = contactName.getText();
         String phone = contactPhone.getText();
@@ -64,13 +68,15 @@ public class AdminMainPageController {
         String other = contactOther.getText();
         String ticket = ticketPrice.getText();
 
-        Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
+        Checker.checkIfFieldIsEmpty(name, type, performer, room, time, program, contact, phone, email, ticket);
+        // Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
         // Room er av typen Hall
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
         List<Hall> aList = hallModel.getHallList();
         int hallIndex = hallModel.getHallIndex(room);
         Hall hall = aList.get(hallIndex);
 
+       // eventModel.createEvent(contactPerson, name, performer, type, program, hall, date, time, ticket);
         eventModel.createEvent(contactPerson, name, performer, type, program, hall, date, time, ticket);
         SceneUtils.launchScene(event, EventRegistrationConfirmationPopController.class, "eventRegistrationConfirmationPop.fxml");
     }
