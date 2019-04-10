@@ -1,9 +1,12 @@
 package org.kulturhusfx.controllers;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,24 +27,37 @@ import java.util.List;
 
 public class MainPageController {
 
-    @FXML
+   @FXML
     private TableView<Event> tableViewEvents;
     @FXML
     private TableColumn<Event, String> EventColumn, TypeColumn, DateColumn, AvailableColumn;
     @FXML
-    private TableColumn<Event, Void> OrderColumn;
+    private TableColumn<Event, Boolean> OrderColumn;
 
     private HallModel hallModel = HallModel.getInstance();
     private EventModel eventModel = EventModel.getInstance();
     private List<Event> eventList = eventModel.getEventList();
     private List<Hall> hallList = hallModel.getHallList();
 
+
+    public void initialize(){
+        if (hallModel.getHallList().isEmpty()) {
+            hallModel.createHall("Hovedsalen", "Konsertsal", "150");
+        }
+
+        EventColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
+        TypeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
+        DateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
+        AvailableColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("numberOfTickets"));
+        tableViewEvents.setItems(getEvents());
+        addButtons();
+    }
+
     public void handleAdminLoginBtnAction(ActionEvent event) throws IOException {
         SceneUtils.launchScene(event, MainPageController.class, "adminMainPage.fxml");
     }
 
     private ObservableList<Event> getEvents(){
-        //eventOrder er en ny klasse som kun tar inn den informasjonen vi vil vise på forsiden
         ObservableList<Event> events = FXCollections.observableArrayList();
         Hall hovedsal = hallList.get(0);
         if (eventList == null || eventList.isEmpty()){
@@ -56,54 +72,52 @@ public class MainPageController {
         return events;
     }
 
-    public void addButton(){
-        //legger til knapper i bestill-kolonnen
-        OrderColumn.setCellFactory(col -> {
-            Button orderButton = new Button("Bestill");
-            TableCell<Event, Void> cell = new TableCell<Event, Void>() {
-                @Override
-                public void updateItem(Void v, boolean empty) {
-                    super.updateItem(v, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        setGraphic(orderButton);
+    private void addButtons(){
+        OrderColumn.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<Event, Boolean>,
+                        ObservableValue<Boolean>>() {
+
+                    @Override
+                    public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Event, Boolean> property) {
+                        return new SimpleBooleanProperty(property.getValue() != null);
                     }
+                });
+
+        //Legger til knapp i cell
+        OrderColumn.setCellFactory(
+                new Callback<TableColumn<Event, Boolean>, TableCell<Event, Boolean>>() {
+
+                    @Override
+                    public TableCell<Event, Boolean> call(TableColumn<Event, Boolean> property) {
+                        return new ButtonCell();
+                    }
+                });
+    }
+    }
+
+     class ButtonCell extends TableCell<Event, Boolean> {
+        final Button cellButton = new Button("Bestill");
+
+        ButtonCell(){
+            //Hva som skjer når man trykker på bestill
+            cellButton.setOnAction(new EventHandler<ActionEvent>(){
+
+                @Override
+                public void handle(ActionEvent event) {
+                    ///Henter ut det eventet som er på raden man trykker på
+                    Event currentEvent = (Event) ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex());
+                    System.out.println(currentEvent.toString());
+                    SceneUtils.launchScene(event, MainPageController.class, "purchaseTicket.fxml");
                 }
-            };
-
-            orderButtonAction(orderButton);
-            return cell ;
-        });
-    }
-
-    public void orderButtonAction(Button button){
-        //Cannot use SceneUtils.launch as it gives error
-        //Cannot use node with lambda expressions apparently
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("purchaseTicket.fxml"));
-        Scene scene = null;
-        try {
-            scene = new Scene(fxmlLoader.load(), 800, 500);
-        } catch (IOException e) {
-            e.printStackTrace();
+            });
         }
-        Stage stage = new Stage();
-        stage.setTitle("Programutvikling Semesteroppgave");
-        stage.setScene(scene);
-        button.setOnAction(e -> stage.show());
-    }
 
-    public void initialize() {
-        // TODO
-        if (hallModel.getHallList().isEmpty()) {
-            hallModel.createHall("Hovedsalen", "Konsertsal", "150");
+        //Legger til knapp hvis raden ikke er tom
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if(!empty){
+                setGraphic(cellButton);
+            }
         }
-        EventColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
-        TypeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
-        DateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
-        AvailableColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("numberOfTickets"));
-        tableViewEvents.setItems(getEvents());
-        addButton();
-    }
 }
