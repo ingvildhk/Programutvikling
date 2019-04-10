@@ -12,7 +12,7 @@ public class FileExceptionHandler {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Filhåndtering feil");
         alert.setHeaderText("Filhåndtering feil");
-        alert.setContentText("Feil oppstod i lagringen av personen. \nMelding: " + e.getMessage());
+        alert.setContentText("Feil oppstod i lagringen av arrangementet. \nMelding: " + e.getMessage());
 
         alert.showAndWait();
     }
