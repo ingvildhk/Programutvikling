@@ -32,15 +32,18 @@ public class RoomRegistrationConfirmationPopController {
         registeredRoomNumberSeatsLabel.setText(registeredHall.getNumberOfSeats());
     }
 
-    public void editRoomBtn(ActionEvent event) {
+    public void editRoomBtn() {
+        editRoom();
+        generateConfirmationAlert();
+    }
+
+    public void editRoom(){
         String name = SceneUtils.changeInformation(changeRoomNameTxtField, registeredRoomNameLabel);
         String type = SceneUtils.changeInformation(changeRoomTypeTxtField, registeredRoomTypeLabel);
         String seats = SceneUtils.changeInformation(changeRoomNumberSeatsTxtField, registeredRoomNumberSeatsLabel);
 
         registeredHall.changeHallInformation(name, type, seats);
         setValuetoLabels();
-
-        generateConfirmationAlert();
     }
 
     public void backToAdminMainPage(ActionEvent event) throws IOException {

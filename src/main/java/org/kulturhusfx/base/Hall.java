@@ -31,15 +31,18 @@ public class Hall {
         return numberOfSeats;
     }
 
-    private void setHallName(String hallName) {
+    public void setHallName(String hallName) {
+        Checker.checkIfFieldIsEmpty(hallName);
         this.hallName = hallName;
     }
 
-    private void setHallType(String hallType) {
+    public void setHallType(String hallType) {
+        Checker.checkIfFieldIsEmpty(hallType);
         this.hallType = hallType;
     }
 
-    private void setNumberOfSeats(String numberOfSeats) {
+    public void setNumberOfSeats(String numberOfSeats) {
+        Checker.checkValidNumberOfSeats(numberOfSeats);
         this.numberOfSeats = numberOfSeats;
     }
 

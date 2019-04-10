@@ -40,6 +40,12 @@ public class AdminMainPageController {
     }
 
     public void roomRegistrationBtn(ActionEvent event) {
+        registerRoom();
+        updateRoomList();
+        SceneUtils.launchScene(event, AdminMainPageController.class, "roomRegistrationConfirmationPop.fxml");
+    }
+
+    public void registerRoom(){
         String room = roomName.getText();
         String type = roomType.getText();
         String seat = totalNumberofSeats.getText();
@@ -47,17 +53,23 @@ public class AdminMainPageController {
         Checker.checkIfFieldIsEmpty(room, type, seat);
 
         this.hallModel.createHall(room, type, seat);
-        updateRoomList();
-        SceneUtils.launchScene(event, AdminMainPageController.class, "roomRegistrationConfirmationPop.fxml");
+    }
+
+    public void updateRoomList() {
+        SceneUtils.updateRoomList(eventRoom, hallModel);
     }
 
     public void eventRegistrationBtn(ActionEvent event) {
+        registerEvent();
+        SceneUtils.launchScene(event, EventRegistrationConfirmationPopController.class, "eventRegistrationConfirmationPop.fxml");
+    }
+
+    public void registerEvent(){
         String name = eventName.getText();
         String type = eventType.getValue().toString();
         String performer = performers.getText();
         String room = eventRoom.getValue().toString();
         String time = eventTime.getText();
-        //String date = eventDate.getText();
         String date = datePicker.getValue().toString();
         String program = eventProgram.getText();
         String contact = contactName.getText();
@@ -70,15 +82,13 @@ public class AdminMainPageController {
 
         Checker.checkIfFieldIsEmpty(name, type, performer, room, time, program, contact, phone, email, ticket);
         // Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
-        // Room er av typen Hall
+
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
         List<Hall> aList = hallModel.getHallList();
         int hallIndex = hallModel.getHallIndex(room);
         Hall hall = aList.get(hallIndex);
 
-       // eventModel.createEvent(contactPerson, name, performer, type, program, hall, date, time, ticket);
         eventModel.createEvent(contactPerson, name, performer, type, program, hall, date, time, ticket);
-        SceneUtils.launchScene(event, EventRegistrationConfirmationPopController.class, "eventRegistrationConfirmationPop.fxml");
     }
 
     public void backToMainPageBtn(ActionEvent event) throws IOException {
@@ -90,11 +100,7 @@ public class AdminMainPageController {
     }
 
     public void seeAllEventsBtn(ActionEvent event) throws IOException {
-        SceneUtils.launchScene(event, AdminMainPageController.class, "adminSeeAllEvents.fxml");
-    }
-
-    public void updateRoomList() {
-        SceneUtils.updateRoomList(eventRoom, hallModel);
+        SceneUtils.launchScene(event, AdminMainPageController.class, "adminManageHalls.fxml");
     }
 
     public void addEventType() {

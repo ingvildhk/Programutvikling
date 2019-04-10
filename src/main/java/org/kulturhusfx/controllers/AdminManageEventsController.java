@@ -22,7 +22,6 @@ import java.util.List;
 
 public class AdminManageEventsController {
 
-    // Skal den ta inn eventOrder ehr
     @FXML
     private TableView<Event> tableViewEvents;
 
@@ -34,10 +33,6 @@ public class AdminManageEventsController {
     private EventModel eventModel = EventModel.getInstance();
     private List<Event> eventList = eventModel.getEventList();
     private List<Hall> hallList = hallModel.getHallList();
-
-    public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
-        SceneUtils.launchScene(event, AdminManageEventsController.class, "adminMainPage.fxml");
-    }
 
     // Method to list the registrered events in tableView
     private ObservableList<Event> getEvents(){
@@ -93,12 +88,15 @@ public class AdminManageEventsController {
         }
         for(Event events : eventModel.getEventList()) {
             tableViewEvents.getItems().remove(events);
-
         }
     }
 
+    public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
+        SceneUtils.launchScene(event, AdminManageEventsController.class, "adminMainPage.fxml");
+    }
 
     public void initialize(){
+        // TODO Bare en tanke, men er det litt voldsomt å ha alt dette i initialize? Ha det i metoder i stede? Idk(:
         nameColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
         performersColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("performers"));

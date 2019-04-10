@@ -33,7 +33,6 @@ public class EventModel {
         eventList.removeIf(e -> e.getId().equals(id));
     }
 
-    // TODO demme skal kanskje i HallModel?
     public void deleteHallEvents(String hallName) {
         eventList.removeIf(e -> e.getLocation().getHallName().equals(hallName));
     }

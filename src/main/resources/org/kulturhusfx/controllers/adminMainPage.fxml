@@ -63,9 +63,8 @@
       <TextArea fx:id="eventProgram" layoutX="21.0" layoutY="391.0" prefHeight="102.0" prefWidth="182.0" />
       <TextField fx:id="eventName" layoutX="20.0" layoutY="106.0" />
       <Button layoutX="18.0" layoutY="12.0" mnemonicParsing="false" onAction="#backToMainPageBtn" text="Tilbake" />
-      <Button layoutX="479.0" layoutY="24.0" mnemonicParsing="false" onAction="#seeAllEventsBtn" text="Se alle arrangementer" />
-      <Button layoutX="643.0" layoutY="24.0" mnemonicParsing="false" onAction="#manageEventsBtn" text="Endre arrangementer" />
-      <TextField fx:id="eventDate" layoutX="112.0" layoutY="359.0" prefHeight="27.0" prefWidth="83.0" promptText="dd/mm/yy" />
+      <Button layoutX="669.0" layoutY="26.0" mnemonicParsing="false" onAction="#seeAllEventsBtn" text="Endre lokaler" />
+      <Button layoutX="462.0" layoutY="24.0" mnemonicParsing="false" onAction="#manageEventsBtn" text="Endre arrangementer" />
       <Label layoutX="110.0" layoutY="295.0" text="Dato (dd/mm/yy)" />
       <DatePicker fx:id="datePicker" editable="false" layoutX="106.0" layoutY="319.0" />
     </children>
