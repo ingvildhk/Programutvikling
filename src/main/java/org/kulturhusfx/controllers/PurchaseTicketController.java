@@ -89,6 +89,9 @@ public class PurchaseTicketController {
             ticketModel.createTicket(phone);
         }
 
+        //setter hvor mange billetter som er ledige
+        currentEvent.setNumberOfTickets(currentEvent.getNumberOfTickets() - orderManyTickets);
+
         SceneUtils.launchScene(event, AdminMainPageController.class, "ticketConfirmationPop.fxml");
     }
 
