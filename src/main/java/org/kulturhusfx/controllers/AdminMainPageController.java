@@ -13,7 +13,9 @@ import org.kulturhusfx.model.ContactPersonModel;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.Checker;
+import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.SceneUtils;
+import org.kulturhusfx.util.exception.InvalidInputException;
 
 import java.io.IOException;
 import java.util.List;
@@ -79,6 +81,16 @@ public class AdminMainPageController {
         String firm = contactFirm.getText();
         String other = contactOther.getText();
         String ticket = ticketPrice.getText();
+
+        //added these as we get a nullpointerexception if there's no input in any fields
+        if (eventRoom.getValue() == null){
+            InvalidInputHandler.generateAlert(
+                    new InvalidInputException("Alle felt må fylles ut"));
+        }
+        if (eventType.getValue() == null){
+            InvalidInputHandler.generateAlert(
+                    new InvalidInputException("Alle felt må fylles ut"));
+        }
 
         Checker.checkIfFieldIsEmpty(name, type, performer, room, time, program, contact, phone, email, ticket);
         // Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);

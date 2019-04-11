@@ -20,7 +20,7 @@ public class Event {
     private String date;
     private String time;
     private String ticketPrice;
-    private TicketModel ticketList;
+    private TicketModel ticketModel;
     private int numberOfTickets;
 
     //Kjøres etter innlest fil for å kontrollere at id-ene holdes unike
@@ -49,11 +49,7 @@ public class Event {
 
 
         //Må opprette ny liste med billetter for hvert arrangement så kanskje noe som
-        createNewTicketList();
-    }
-
-    private void createNewTicketList() {
-        this.ticketList = new TicketModel();
+        ticketModel = new TicketModel();
     }
 
     public ContactPerson getContactPerson() {
@@ -98,8 +94,8 @@ public class Event {
 
     public int getNumberOfTickets() { return numberOfTickets; }
 
-    public TicketModel getTicketList() {
-        return ticketList;
+    public TicketModel getTicketModel() {
+        return ticketModel;
     }
 
     private void setContactPerson(ContactPerson contactPerson) {
