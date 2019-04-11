@@ -102,6 +102,10 @@ public class Event {
         this.contactPerson = contactPerson;
     }
 
+    public void setNumberOfTickets(int numberOfTickets){
+        this.numberOfTickets = numberOfTickets;
+    }
+
     public void setName(String name) {
         Checker.checkIfFieldIsEmpty(name);
         this.name = name;
