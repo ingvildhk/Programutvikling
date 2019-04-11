@@ -20,8 +20,7 @@
         <Label layoutX="542.0" layoutY="190.0" text="Telefonnummer" />
         <Label layoutX="547.0" layoutY="250.0" text="Antall Billetter" />
         <ChoiceBox fx:id="numberOfTicketsChoiceBox" layoutX="516.0" layoutY="280.0" prefWidth="150.0" />
-        <Label fx:id="sumLabel" layoutX="529.0" layoutY="322.0" text="SUM" />
-        <Button layoutX="603.0" layoutY="318.0" mnemonicParsing="false" onAction="#orderBtn" text="Bestill" />
+        <Button layoutX="560.0" layoutY="322.0" mnemonicParsing="false" onAction="#orderBtn" text="Bestill" />
       <Button layoutX="21.0" layoutY="24.0" mnemonicParsing="false" onAction="#backToMainPageBtn" text="Tilbake" />
       <Label fx:id="timeLabel" layoutX="271.0" layoutY="190.0" text="Klokkeslett" />
       <Label fx:id="performersLabel" layoutX="58.0" layoutY="241.0" text="Deltakende Personer" />

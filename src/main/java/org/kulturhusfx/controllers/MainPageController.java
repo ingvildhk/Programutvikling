@@ -27,6 +27,10 @@ import java.util.List;
 
 public class MainPageController {
 
+    //Ikke slik vi bør gjøre det,er jeg ganske sikker på, men currentEvent er statisk slik at vi skal
+    //få tak i det i purchaseTicket
+    public static Event currentEvent;
+
    @FXML
     private TableView<Event> tableViewEvents;
     @FXML
@@ -89,24 +93,23 @@ public class MainPageController {
 
                     @Override
                     public TableCell<Event, Boolean> call(TableColumn<Event, Boolean> property) {
-                        return new ButtonCell();
+                        return new OrderButtonAction();
                     }
                 });
     }
     }
 
-     class ButtonCell extends TableCell<Event, Boolean> {
+     class OrderButtonAction extends TableCell<Event, Boolean> {
         final Button cellButton = new Button("Bestill");
 
-        ButtonCell(){
+        OrderButtonAction(){
             //Hva som skjer når man trykker på bestill
             cellButton.setOnAction(new EventHandler<ActionEvent>(){
 
                 @Override
                 public void handle(ActionEvent event) {
                     ///Henter ut det eventet som er på raden man trykker på
-                    Event currentEvent = (Event) ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex());
-                    System.out.println(currentEvent.toString());
+                    MainPageController.currentEvent = OrderButtonAction.this.getTableView().getItems().get(OrderButtonAction.this.getIndex());
                     SceneUtils.launchScene(event, MainPageController.class, "purchaseTicket.fxml");
                 }
             });
