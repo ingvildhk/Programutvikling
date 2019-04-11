@@ -67,6 +67,17 @@ public class AdminMainPageController {
     }
 
     public void registerEvent(){
+
+        //added these as we get a nullpointerexception if there's no input in any fields
+        if (eventRoom.getValue() == null){
+            InvalidInputHandler.generateAlert(
+                    new InvalidInputException("Alle felt må fylles ut"));
+        }
+        if (eventType.getValue() == null){
+            InvalidInputHandler.generateAlert(
+                    new InvalidInputException("Alle felt må fylles ut"));
+        }
+        
         String name = eventName.getText();
         String type = eventType.getValue().toString();
         String performer = performers.getText();
@@ -81,16 +92,6 @@ public class AdminMainPageController {
         String firm = contactFirm.getText();
         String other = contactOther.getText();
         String ticket = ticketPrice.getText();
-
-        //added these as we get a nullpointerexception if there's no input in any fields
-        if (eventRoom.getValue() == null){
-            InvalidInputHandler.generateAlert(
-                    new InvalidInputException("Alle felt må fylles ut"));
-        }
-        if (eventType.getValue() == null){
-            InvalidInputHandler.generateAlert(
-                    new InvalidInputException("Alle felt må fylles ut"));
-        }
 
         Checker.checkIfFieldIsEmpty(name, type, performer, room, time, program, contact, phone, email, ticket);
         // Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
