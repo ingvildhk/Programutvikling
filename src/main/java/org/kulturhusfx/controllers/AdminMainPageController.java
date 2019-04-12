@@ -6,6 +6,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
@@ -16,7 +17,9 @@ import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.SceneUtils;
 import org.kulturhusfx.util.exception.InvalidInputException;
+import org.kulturhusfx.util.fileHandling.FileWriterCsv;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -41,19 +44,29 @@ public class AdminMainPageController {
         this.eventModel = EventModel.getInstance();
     }
 
+    public void registerFromFileBtn(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Velg fil");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Tekstfiler", "*.csv", "*.jobj")
+        );
+        File selectedFile = fileChooser.showOpenDialog(null);
+        String filePath = selectedFile.getPath();
+    }
+
     public void roomRegistrationBtn(ActionEvent event) {
+
         registerRoom();
         updateRoomList();
         SceneUtils.launchScene(event, AdminMainPageController.class, "roomRegistrationConfirmationPop.fxml");
     }
 
-    public void registerRoom(){
+    public void registerRoom() {
         String room = roomName.getText();
         String type = roomType.getText();
         String seat = totalNumberofSeats.getText();
 
         Checker.checkIfFieldIsEmpty(room, type, seat);
-
         this.hallModel.createHall(room, type, seat);
     }
 

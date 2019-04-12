@@ -5,10 +5,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.SceneUtils;
+import org.kulturhusfx.util.fileHandling.FileWriterCsv;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -50,9 +53,23 @@ public class RoomRegistrationConfirmationPopController {
         SceneUtils.launchScene(event, RoomRegistrationConfirmationPopController.class, "adminMainPage.fxml");
     }
 
+    public void saveHallBtn(ActionEvent event) throws IOException {
+        //Fil blir lagret i samme mappe som repository, vet ikke hvordan man kan endre det
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Jobj eller csv", "*.jobj", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+        File file = fileChooser.showSaveDialog(null);
+        String fileName = file.getName();
+
+        if (file != null) {
+
+            FileWriterCsv csv = new FileWriterCsv(fileName);
+            csv.saveHallCsv(registeredHall.getHallName(), registeredHall.getHallType(), registeredHall.getNumberOfSeats(), fileName);
+        }
+    }
+
     public void initialize() {
         setValuetoLabels();
-
     }
 
 

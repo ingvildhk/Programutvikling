@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.AdminMainPageController">
     <children>
-        <Label layoutX="193.0" layoutY="14.0" text="Småkommunens Kulturhus">
+        <Label layoutX="161.0" layoutY="10.0" text="Småkommunens Kulturhus">
             <font>
                 <Font size="18.0" />
             </font>
@@ -58,14 +58,20 @@
         <TextField fx:id="contactWebsite" layoutX="310.0" layoutY="268.0" prefHeight="27.0" prefWidth="196.0" />
         <TextField fx:id="contactFirm" layoutX="311.0" layoutY="327.0" prefHeight="27.0" prefWidth="196.0" />
         <TextField fx:id="contactOther" layoutX="314.0" layoutY="377.0" prefHeight="27.0" prefWidth="196.0" />
-        <Separator layoutX="577.0" layoutY="65.0" orientation="VERTICAL" prefHeight="388.0" prefWidth="0.0" />
+        <Separator layoutX="577.0" layoutY="65.0" orientation="VERTICAL" prefHeight="331.0" prefWidth="0.0" />
         <Button layoutX="354.0" layoutY="456.0" mnemonicParsing="false" onAction="#eventRegistrationBtn" text="Registrer arrangement" />
       <TextArea fx:id="eventProgram" layoutX="21.0" layoutY="391.0" prefHeight="102.0" prefWidth="182.0" />
       <TextField fx:id="eventName" layoutX="20.0" layoutY="106.0" />
       <Button layoutX="18.0" layoutY="12.0" mnemonicParsing="false" onAction="#backToMainPageBtn" text="Tilbake" />
-      <Button layoutX="669.0" layoutY="26.0" mnemonicParsing="false" onAction="#seeAllEventsBtn" text="Endre lokaler" />
-      <Button layoutX="462.0" layoutY="24.0" mnemonicParsing="false" onAction="#manageEventsBtn" text="Endre arrangementer" />
+      <Button layoutX="699.0" layoutY="24.0" mnemonicParsing="false" onAction="#seeAllEventsBtn" text="Endre lokaler" />
+      <Button layoutX="555.0" layoutY="24.0" mnemonicParsing="false" onAction="#manageEventsBtn" text="Endre arrangementer" />
       <Label layoutX="110.0" layoutY="295.0" text="Dato (dd/mm/yy)" />
       <DatePicker fx:id="datePicker" editable="false" layoutX="106.0" layoutY="319.0" />
+      <Button layoutX="610.0" layoutY="456.0" mnemonicParsing="false" onAction="#registerFromFileBtn" text="Registrer data fra fil" />
+      <Label layoutX="564.0" layoutY="420.0" text="Registrer arrangement eller sal fra fil">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
