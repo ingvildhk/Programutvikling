@@ -93,6 +93,7 @@ public class EventRegistrationConfirmationPopController {
         System.out.println(registeredEvent.toString());
         System.out.println(eventList.size());
         setLabels();
+        SceneUtils.generateConfirmationAlert();
 
 
     }
