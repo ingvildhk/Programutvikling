@@ -8,11 +8,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.util.FileExceptionHandler;
 import org.kulturhusfx.util.SceneUtils;
 import org.kulturhusfx.util.fileHandling.FileWriterCsv;
+import org.kulturhusfx.util.fileHandling.FileWriterJobj;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InvalidObjectException;
 import java.util.List;
 
 import static org.kulturhusfx.util.SceneUtils.generateConfirmationAlert;
@@ -56,16 +59,26 @@ public class RoomRegistrationConfirmationPopController {
     public void saveHallBtn(ActionEvent event) throws IOException {
         //Fil blir lagret i samme mappe som repository, vet ikke hvordan man kan endre det
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Jobj eller csv", "*.jobj", "*.csv");
-        fileChooser.getExtensionFilters().add(extFilter);
+        FileChooser.ExtensionFilter jobjFilter = new FileChooser.ExtensionFilter("jobj", "*.jobj");
+        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("csv", "*.csv");
+        fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
         File file = fileChooser.showSaveDialog(null);
         String fileName = file.getName();
+        System.out.println(fileName);
 
         if (file != null) {
-
-            FileWriterCsv csv = new FileWriterCsv(fileName);
-            csv.saveHallCsv(registeredHall.getHallName(), registeredHall.getHallType(), registeredHall.getNumberOfSeats(), fileName);
-        }
+            if(fileChooser.getSelectedExtensionFilter() == jobjFilter){
+                FileWriterJobj jobj = new FileWriterJobj(fileName);
+                jobj.saveHallToFile(registeredHall, fileName);
+            }
+            else if(fileChooser.getSelectedExtensionFilter() == csvFilter){
+                FileWriterCsv csv = new FileWriterCsv(fileName);
+                csv.saveHallToFile(registeredHall.getHallName(), registeredHall.getHallType(), registeredHall.getNumberOfSeats(), fileName);
+            }
+            else{
+                FileExceptionHandler.generateIOExceptionMsg(new InvalidObjectException("Filtype må være jobj eller csv"));
+            }
+            }
     }
 
     public void initialize() {

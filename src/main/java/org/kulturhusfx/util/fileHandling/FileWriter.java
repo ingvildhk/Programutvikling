@@ -1,5 +1,9 @@
 package org.kulturhusfx.util.fileHandling;
 
-public abstract class FileWriter {
+abstract class FileWriter {
+
+    abstract public void saveHallToFile();
+    abstract public void saveEventToFile();
+    abstract public void saveTicketToFile();
 
 }
