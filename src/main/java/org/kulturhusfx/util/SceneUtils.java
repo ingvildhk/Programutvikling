@@ -36,16 +36,16 @@ public class SceneUtils {
         }
     }
 
-    public static void generateConfirmationAlert() {
+    public static void generateConfirmationAlert(String headerTxt, String contentTxt) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Bekreftelse");
-        alert.setHeaderText("Bekreftelse på registrert sal");
-        alert.setContentText("Sal er registrert");
+        alert.setHeaderText(headerTxt);
+        alert.setContentText(contentTxt);
 
         alert.showAndWait();
     }
 
-   //////////// OPPRETTE EN NY UTIL-KLASSE FOR DISSE METODENE? /////////////
+    //////////// OPPRETTE EN NY UTIL-KLASSE FOR DISSE METODENE? /////////////
 
     //Updates the value of elements of objects when changing information after adding a new hall or event
     public static String changeInformation(TextField textField, Label label){
@@ -75,12 +75,5 @@ public class SceneUtils {
     public static void addEventType(ChoiceBox box){
         box.getItems().addAll("Konsert", "Teater", "Konferanse", "Forestilling", "Annet");
     }
-
-    public static void getEventType(){
-
-    }
-
-
-
 }
 

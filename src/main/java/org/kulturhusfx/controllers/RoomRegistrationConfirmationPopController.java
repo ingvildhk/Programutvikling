@@ -40,7 +40,7 @@ public class RoomRegistrationConfirmationPopController {
 
     public void editRoomBtn() {
         editRoom();
-        generateConfirmationAlert();
+        generateConfirmationAlert("Bekreftelse på registrert sal", "Sal er registrert");
     }
 
     public void editRoom(){

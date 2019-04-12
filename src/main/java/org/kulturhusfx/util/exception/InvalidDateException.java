@@ -1,6 +1,6 @@
 package org.kulturhusfx.util.exception;
 
-public class InvalidDateException extends RuntimeException {
+public class InvalidDateException extends InvalidInputException {
     public InvalidDateException(String msg) {
         super(msg);
     }
