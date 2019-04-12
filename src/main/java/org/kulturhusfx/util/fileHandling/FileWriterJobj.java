@@ -1,4 +1,4 @@
-package org.kulturhusfx.base;
+package org.kulturhusfx.util.fileHandling;
 
 import java.io.FileWriter;
 import java.io.IOException;
