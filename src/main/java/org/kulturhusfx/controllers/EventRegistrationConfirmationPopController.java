@@ -6,21 +6,16 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
 import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.Checker;
-import org.kulturhusfx.util.FileExceptionHandler;
 import org.kulturhusfx.util.SceneUtils;
-import org.kulturhusfx.util.fileHandling.FileWriterCsv;
-import org.kulturhusfx.util.fileHandling.FileWriterJobj;
+import org.kulturhusfx.util.FileChooserMethods;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InvalidObjectException;
 import java.util.List;
 
 public class EventRegistrationConfirmationPopController {
@@ -28,7 +23,7 @@ public class EventRegistrationConfirmationPopController {
     @FXML
     private Label registeredEventNameLabel, registeredEventTypeLabel, registeredEventPerformersLabel, registeredEventHallLabel;
     @FXML
-    private Label registeredEventDateLabel,registeredEventTimeLabel, registeredEventTicketPriceLabel, registeredEventScheduleLabel;
+    private Label registeredEventDateLabel, registeredEventTimeLabel, registeredEventTicketPriceLabel, registeredEventScheduleLabel;
     @FXML
     private Label registeredEventContactPersonLabel, registeredEventPhoneLabel, registeredEventEmailLabel, registeredEventWebpageLabel;
     @FXML
@@ -36,7 +31,7 @@ public class EventRegistrationConfirmationPopController {
     @FXML
     private TextField changeEventNameTxtField, changeEventPerformersTxtField, changeEventDateTxtField, changeEventTimeTxtField;
     @FXML
-    private TextField changeEventTicketPriceTxtField, changeEventContactPersonTxtField,changeEventPhoneTxtField, changeEventEmailTxtField;
+    private TextField changeEventTicketPriceTxtField, changeEventContactPersonTxtField, changeEventPhoneTxtField, changeEventEmailTxtField;
     @FXML
     private TextField changeEventWebpageTxtField, changeEventFirmTxtField, changeEventOtherTxtField;
     @FXML
@@ -55,37 +50,18 @@ public class EventRegistrationConfirmationPopController {
         setLabels();
     }
 
-    public void changeEventBtn(ActionEvent event){
+    public void changeEventBtn(ActionEvent event) {
         setChangedInformation();
         setLabels();
         SceneUtils.generateConfirmationAlert("Bekreftelse på registrert arrangement", "Arrangement er registrert");
     }
 
-    public void backToAdminBtn(ActionEvent event){
+    public void backToAdminBtn(ActionEvent event) {
         SceneUtils.launchScene(event, AdminMainPageController.class, "adminMainPage.fxml");
     }
 
     public void saveToFileBtn(ActionEvent event) throws IOException {
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter jobjFilter = new FileChooser.ExtensionFilter("jobj", "*.jobj");
-        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("csv", "*.csv");
-        fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
-        File file = fileChooser.showSaveDialog(null);
-        String fileName = file.getName();
-
-        if (file != null) {
-            if(fileChooser.getSelectedExtensionFilter() == jobjFilter){
-                FileWriterJobj jobj = new FileWriterJobj(fileName);
-                jobj.saveEventToFile(registeredEvent, fileName);
-            }
-            else if(fileChooser.getSelectedExtensionFilter() == csvFilter){
-                FileWriterCsv csv = new FileWriterCsv(fileName);
-                csv.saveEventToFile(registeredEvent, fileName);
-            }
-            else{
-                FileExceptionHandler.generateIOExceptionMsg(new InvalidObjectException("Filtype må være jobj eller csv"));
-            }
-        }
+        FileChooserMethods.saveEventToFile(registeredEvent);
     }
 
     //Legger til saler i choicebox
@@ -98,7 +74,7 @@ public class EventRegistrationConfirmationPopController {
         SceneUtils.addEventType(changeEventTypeChoiceBox);
     }
 
-    public void setLabels(){
+    public void setLabels() {
         registeredEventNameLabel.setText(registeredEvent.getName());
         registeredEventTypeLabel.setText(registeredEvent.getType());
         registeredEventPerformersLabel.setText(registeredEvent.getPerformers());
@@ -118,7 +94,7 @@ public class EventRegistrationConfirmationPopController {
         registeredEventOtherLabel.setText(registeredEvent.getContactPerson().getOtherInformation());
     }
 
-    private void setChangedInformation(){
+    private void setChangedInformation() {
         String type, room, program;
         String name = SceneUtils.changeInformation(changeEventNameTxtField, registeredEventNameLabel);
         String performer = SceneUtils.changeInformation(changeEventPerformersTxtField, registeredEventPerformersLabel);
@@ -132,24 +108,21 @@ public class EventRegistrationConfirmationPopController {
         String other = SceneUtils.changeInformation(changeEventOtherTxtField, registeredEventOtherLabel);
         String ticket = SceneUtils.changeInformation(changeEventTicketPriceTxtField, registeredEventTicketPriceLabel);
 
-        if(changeEventTypeChoiceBox.getValue() == null){
+        if (changeEventTypeChoiceBox.getValue() == null) {
             type = registeredEventTypeLabel.getText();
-        }
-        else {
+        } else {
             type = changeEventTypeChoiceBox.getValue().toString();
         }
 
-        if(changeEventHallChoiceBox.getValue() == null){
+        if (changeEventHallChoiceBox.getValue() == null) {
             room = registeredEventHallLabel.getText();
-        }
-        else{
+        } else {
             room = changeEventHallChoiceBox.getValue().toString();
         }
 
-        if (changeEventProgramTxtArea.getText() == null || changeEventProgramTxtArea.getText().isEmpty()){
+        if (changeEventProgramTxtArea.getText() == null || changeEventProgramTxtArea.getText().isEmpty()) {
             program = registeredEventScheduleLabel.getText();
-        }
-        else{
+        } else {
             program = changeEventProgramTxtArea.getText();
         }
 
