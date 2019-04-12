@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.EventRegistrationConfirmationPopController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.EventRegistrationConfirmationPopController">
     <children>
         <Label layoutX="299.0" layoutY="14.0" text="Småkommunens Kulturhus">
             <font>
@@ -19,10 +19,8 @@
         <Label layoutX="34.0" layoutY="76.0" text="Arrangementsnavn:" />
         <Label layoutX="71.0" layoutY="102.0" text="Type:" />
         <Label layoutX="29.0" layoutY="128.0" text="Deltakende Personer:" />
-        <Label layoutX="328.0" layoutY="401.0" text="Lagre som fil?" />
         <Button layoutX="334.0" layoutY="351.0" mnemonicParsing="false" onAction="#changeEventBtn" text="Endre?" />
-        <Button layoutX="310.0" layoutY="434.0" mnemonicParsing="false" text=".csv" />
-        <Button layoutX="377.0" layoutY="434.0" mnemonicParsing="false" text=".jobj" />
+        <Button layoutX="341.0" layoutY="434.0" mnemonicParsing="false" onAction="#saveToFileBtn" text="Lagre til fil" />
         <Label layoutX="61.0" layoutY="277.0" text="Program:" />
         <Label layoutX="76.0" layoutY="152.0" text="Sal:" />
         <Label layoutX="58.0" layoutY="206.0" text="Tidspunkt:" />

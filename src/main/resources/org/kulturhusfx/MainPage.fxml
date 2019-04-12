@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.MainPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.MainPageController">
     <children>
         <Label layoutX="175.0" layoutY="14.0" text="Småkommunens Kulturhus">
             <font>
@@ -22,8 +22,8 @@
         <Button id="adminLoginButton" fx:id="adminLoginBtn" layoutX="463.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleAdminLoginBtnAction" text="Admin Login" />
         <TableView fx:id="tableViewEvents" layoutX="16.0" layoutY="111.0" prefHeight="381.0" prefWidth="675.0">
             <columns>
-                <TableColumn fx:id="EventColumn" prefWidth="174.0" text="Arrangement" />
-                <TableColumn fx:id="TypeColumn" prefWidth="102.0" text="Type" />
+                <TableColumn fx:id="EventColumn" prefWidth="175.0" text="Arrangement" />
+                <TableColumn fx:id="TypeColumn" prefWidth="101.0" text="Type" />
                 <TableColumn fx:id="DateColumn" prefWidth="105.33331298828125" text="Dato" />
                 <TableColumn fx:id="AvailableColumn" prefWidth="135.33340454101562" text="Antall Ledige" />
                 <TableColumn fx:id="OrderColumn" prefWidth="136.66668701171875" text="Bestill" />
