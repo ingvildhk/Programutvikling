@@ -20,6 +20,7 @@ import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.util.OrderButton;
 import org.kulturhusfx.util.SceneUtils;
 
 import java.io.IOException;
@@ -27,8 +28,7 @@ import java.util.List;
 
 public class MainPageController {
 
-    //Ikke slik vi bør gjøre det,er jeg ganske sikker på, men currentEvent er statisk slik at vi skal
-    //få tak i det i purchaseTicket
+    //Dette er ok :)
     public static Event currentEvent;
 
    @FXML
@@ -45,35 +45,17 @@ public class MainPageController {
 
 
     public void initialize(){
+        //Skal bort etterhvert, når vi finner ut hvordan man leser fra fil
         if (hallModel.getHallList().isEmpty()) {
             hallModel.createHall("Hovedsalen", "Konsertsal", "150");
         }
 
-        EventColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
-        TypeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
-        DateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
-        AvailableColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("availableTickets"));
-        tableViewEvents.setItems(getEvents());
         addButtons();
+        setColumnValues();
     }
 
     public void handleAdminLoginBtnAction(ActionEvent event) throws IOException {
         SceneUtils.launchScene(event, MainPageController.class, "adminMainPage.fxml");
-    }
-
-    private ObservableList<Event> getEvents(){
-        ObservableList<Event> events = FXCollections.observableArrayList();
-        Hall hovedsal = hallList.get(0);
-        if (eventList == null || eventList.isEmpty()){
-            eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 1",
-                    "folk", "konsert","program", hovedsal, "2019-09-21", "10:10","200.00");
-            eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 2",
-                    "folk", "foredrag","program", hovedsal, "2020-09-22", "10:10","200.00");
-        }
-        for (Event event : eventList){
-            events.add(event);
-        }
-        return events;
     }
 
     private void addButtons(){
@@ -93,34 +75,34 @@ public class MainPageController {
 
                     @Override
                     public TableCell<Event, Boolean> call(TableColumn<Event, Boolean> property) {
-                        return new OrderButtonAction();
+                        return new OrderButton();
                     }
                 });
     }
+
+    private void setColumnValues(){
+        EventColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
+        TypeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
+        DateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
+        AvailableColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("availableTickets"));
+        tableViewEvents.setItems(getEvents());
     }
 
-     class OrderButtonAction extends TableCell<Event, Boolean> {
-        final Button cellButton = new Button("Bestill");
+    private ObservableList<Event> getEvents(){
+        ObservableList<Event> events = FXCollections.observableArrayList();
 
-        OrderButtonAction(){
-            //Hva som skjer når man trykker på bestill
-            cellButton.setOnAction(new EventHandler<ActionEvent>(){
-
-                @Override
-                public void handle(ActionEvent event) {
-                    ///Henter ut det eventet som er på raden man trykker på
-                    MainPageController.currentEvent = OrderButtonAction.this.getTableView().getItems().get(OrderButtonAction.this.getIndex());
-                    SceneUtils.launchScene(event, MainPageController.class, "purchaseTicket.fxml");
-                }
-            });
+        //Skal bort etterhvert, når vi finner ut hvordan man leser fra fil
+        Hall hovedsal = hallList.get(0);
+        if (eventList == null || eventList.isEmpty()){
+            eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 1",
+                    "folk", "konsert","program", hovedsal, "2019-09-21", "10:10","200.00");
+            eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 2",
+                    "folk", "foredrag","program", hovedsal, "2020-09-22", "10:10","200.00");
         }
 
-        //Legger til knapp hvis raden ikke er tom
-        @Override
-        protected void updateItem(Boolean t, boolean empty) {
-            super.updateItem(t, empty);
-            if(!empty){
-                setGraphic(cellButton);
-            }
+        for (Event event : eventList){
+            events.add(event);
         }
+        return events;
+    }
 }

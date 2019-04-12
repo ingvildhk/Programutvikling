@@ -7,13 +7,13 @@ import java.io.IOException;
 
 public class SeeOrdersToEventController {
 
+    public void initialize(){
+
+    }
+
     public void backToAdminMagageEventsBtn(ActionEvent event) throws IOException {
         SceneUtils.launchScene(event, SeeOrdersToEventController.class, "adminManageEvents.fxml");
     }
 
     // TODO Forloop gjennom tickcketModel, +1 nytt tfl
-
-    public void initialize(){
-
-    }
 }

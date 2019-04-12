@@ -49,8 +49,76 @@ public class EventRegistrationConfirmationPopController {
     private List<Event> eventList = eventModel.getEventList();
     private Event registeredEvent = eventList.get(eventList.size() - 1);
 
+    public void initialize() {
+        updateRoomList();
+        addEventType();
+        setLabels();
+    }
+
     public void changeEventBtn(ActionEvent event){
-        System.out.println(registeredEvent.toString());
+        setChangedInformation();
+        setLabels();
+        SceneUtils.generateConfirmationAlert("Bekreftelse på registrert arrangement", "Arrangement er registrert");
+    }
+
+    public void backToAdminBtn(ActionEvent event){
+        SceneUtils.launchScene(event, AdminMainPageController.class, "adminMainPage.fxml");
+    }
+
+    public void saveToFileBtn(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter jobjFilter = new FileChooser.ExtensionFilter("jobj", "*.jobj");
+        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("csv", "*.csv");
+        fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
+        File file = fileChooser.showSaveDialog(null);
+        String fileName = file.getName();
+
+        if (file != null) {
+            if(fileChooser.getSelectedExtensionFilter() == jobjFilter){
+                FileWriterJobj jobj = new FileWriterJobj(fileName);
+                jobj.saveEventToFile(registeredEvent, fileName);
+            }
+            else if(fileChooser.getSelectedExtensionFilter() == csvFilter){
+                FileWriterCsv csv = new FileWriterCsv(fileName);
+                csv.saveEventToFile(registeredEvent, fileName);
+            }
+            else{
+                FileExceptionHandler.generateIOExceptionMsg(new InvalidObjectException("Filtype må være jobj eller csv"));
+            }
+        }
+    }
+
+    //Legger til saler i choicebox
+    public void updateRoomList() {
+        SceneUtils.updateRoomList(changeEventHallChoiceBox, hallModel);
+    }
+
+    //Legger til arrangementstyper i choicebox
+    public void addEventType() {
+        SceneUtils.addEventType(changeEventTypeChoiceBox);
+    }
+
+    public void setLabels(){
+        registeredEventNameLabel.setText(registeredEvent.getName());
+        registeredEventTypeLabel.setText(registeredEvent.getType());
+        registeredEventPerformersLabel.setText(registeredEvent.getPerformers());
+        registeredEventHallLabel.setText(registeredEvent.getHall().getHallName());
+        registeredEventDateLabel.setText(registeredEvent.getDate());
+        registeredEventTimeLabel.setText(registeredEvent.getTime());
+        registeredEventTicketPriceLabel.setText(registeredEvent.getTicketPrice());
+        registeredEventScheduleLabel.setText(registeredEvent.getSchedule());
+        registeredEventContactPersonLabel.setText(registeredEvent.getContactPerson().getName());
+        registeredEventPhoneLabel.setText(registeredEvent.getContactPerson().getPhoneNumber());
+        registeredEventEmailLabel.setText(registeredEvent.getContactPerson().getEmail());
+        registeredEventWebpageLabel.setText(registeredEvent.getContactPerson().getWebpage());
+        registeredEventFirmLabel.setText(registeredEvent.getContactPerson().getFirm());
+        /* Setting size and text wrap on label
+        registeredEventOtherLabel.setWrapText(true);
+        registeredEventOtherLabel.setMaxWidth(20.00);*/
+        registeredEventOtherLabel.setText(registeredEvent.getContactPerson().getOtherInformation());
+    }
+
+    private void setChangedInformation(){
         String type, room, program;
         String name = SceneUtils.changeInformation(changeEventNameTxtField, registeredEventNameLabel);
         String performer = SceneUtils.changeInformation(changeEventPerformersTxtField, registeredEventPerformersLabel);
@@ -84,6 +152,7 @@ public class EventRegistrationConfirmationPopController {
         else{
             program = changeEventProgramTxtArea.getText();
         }
+
         Checker.checkValidDate(date);
         Checker.checkValidTime(time);
         Checker.checkValidTicketPrice(ticket);
@@ -93,76 +162,9 @@ public class EventRegistrationConfirmationPopController {
         List<Hall> aList = hallModel.getHallList();
         int hallIndex = hallModel.getHallIndex(room);
         Hall hall = aList.get(hallIndex);
+
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
+
         registeredEvent.changeEventInformation(contactPerson, name, performer, type, program, hall, date, time, ticket);
-
-        System.out.println(registeredEvent.toString());
-        System.out.println(eventList.size());
-        setLabels();
-        SceneUtils.generateConfirmationAlert("Bekreftelse på registrert arrangement", "Arrangement er registrert");
     }
-
-    public void backToAdminBtn(ActionEvent event){
-        SceneUtils.launchScene(event, AdminMainPageController.class, "adminMainPage.fxml");
-    }
-
-    public void saveToFileBtn(ActionEvent event) throws IOException {
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter jobjFilter = new FileChooser.ExtensionFilter("jobj", "*.jobj");
-        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("csv", "*.csv");
-        fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
-        File file = fileChooser.showSaveDialog(null);
-        String fileName = file.getName();
-        System.out.println(fileName);
-
-        if (file != null) {
-            if(fileChooser.getSelectedExtensionFilter() == jobjFilter){
-                FileWriterJobj jobj = new FileWriterJobj(fileName);
-                jobj.saveEventToFile(registeredEvent, fileName);
-            }
-            else if(fileChooser.getSelectedExtensionFilter() == csvFilter){
-                FileWriterCsv csv = new FileWriterCsv(fileName);
-                csv.saveEventToFile(registeredEvent, fileName);
-            }
-            else{
-                FileExceptionHandler.generateIOExceptionMsg(new InvalidObjectException("Filtype må være jobj eller csv"));
-            }
-        }
-    }
-
-    public void setLabels(){
-        registeredEventNameLabel.setText(registeredEvent.getName());
-        registeredEventTypeLabel.setText(registeredEvent.getType());
-        registeredEventPerformersLabel.setText(registeredEvent.getPerformers());
-        registeredEventHallLabel.setText(registeredEvent.getHall().getHallName());
-        registeredEventDateLabel.setText(registeredEvent.getDate());
-        registeredEventTimeLabel.setText(registeredEvent.getTime());
-        registeredEventTicketPriceLabel.setText(registeredEvent.getTicketPrice());
-        registeredEventScheduleLabel.setText(registeredEvent.getSchedule());
-        registeredEventContactPersonLabel.setText(registeredEvent.getContactPerson().getName());
-        registeredEventPhoneLabel.setText(registeredEvent.getContactPerson().getPhoneNumber());
-        registeredEventEmailLabel.setText(registeredEvent.getContactPerson().getEmail());
-        registeredEventWebpageLabel.setText(registeredEvent.getContactPerson().getWebpage());
-        registeredEventFirmLabel.setText(registeredEvent.getContactPerson().getFirm());
-        /* Setting size and text wrap on label
-        registeredEventOtherLabel.setWrapText(true);
-        registeredEventOtherLabel.setMaxWidth(20.00);*/
-        registeredEventOtherLabel.setText(registeredEvent.getContactPerson().getOtherInformation());
-    }
-
-    public void updateRoomList() {
-        SceneUtils.updateRoomList(changeEventHallChoiceBox, hallModel);
-    }
-
-    public void addEventType() {
-        SceneUtils.addEventType(changeEventTypeChoiceBox);
-    }
-
-    public void initialize() {
-        updateRoomList();
-        addEventType();
-        setLabels();
-    }
-
-
 }

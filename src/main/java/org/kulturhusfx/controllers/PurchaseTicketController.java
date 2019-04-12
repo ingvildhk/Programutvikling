@@ -41,6 +41,20 @@ public class PurchaseTicketController {
     private EventModel eventModel = EventModel.getInstance();
     private HallModel hallModel = HallModel.getInstance();
 
+    public void initialize(){
+        setLabels();
+        numberOfTicketsChoiceBox.getItems().addAll("1", "2", "3", "4", "5","6", "7", "8", "9");
+    }
+
+    public void orderBtn(ActionEvent event){
+        createNewTickets();
+        SceneUtils.launchScene(event, AdminMainPageController.class, "ticketConfirmationPop.fxml");
+    }
+
+    public void backToMainPageBtn(ActionEvent event) {
+        SceneUtils.launchScene(event, MainPageController.class,"MainPage.fxml" );
+    }
+
     private void setLabels(){
         eventLabel.setText(currentEvent.getName());
         hallLabel.setText(currentEvent.getHall().getHallName());
@@ -52,21 +66,14 @@ public class PurchaseTicketController {
         ticketPriceLabel.setText(currentEvent.getTicketPrice());
     }
 
-    public void initialize(){
-        setLabels();
-        numberOfTicketsChoiceBox.getItems().addAll("1", "2", "3", "4", "5","6", "7", "8", "9");
-    }
-
-    public void orderBtn(ActionEvent event){
+    private void createNewTickets(){
         String phone = phoneTxtField.getText();
-        if (numberOfTicketsChoiceBox.getValue() == null){
-            InvalidInputHandler.generateAlert(
-                    new InvalidInputException("Alle felt må fylles ut"));
-        }
+        Checker.checkIfFieldIsEmpty(phone);
+        Checker.checkIfChoiceBoxIsEmpty(numberOfTicketsChoiceBox);
         String numberOfTickets = numberOfTicketsChoiceBox.getValue().toString();
+
         int orderManyTickets = Integer.parseInt(numberOfTickets);
         currentNumberofTickets = numberOfTickets;
-        Checker.checkIfFieldIsEmpty(phone);
 
         if (ticketList.size() >=  Integer.parseInt(currentEvent.getHall().getNumberOfSeats())){
             InvalidInputHandler.generateAlert(
@@ -85,11 +92,5 @@ public class PurchaseTicketController {
 
         //setter hvor mange billetter som er ledige
         currentEvent.setAvailableTickets(currentEvent.getAvailableTickets() - orderManyTickets);
-
-        SceneUtils.launchScene(event, AdminMainPageController.class, "ticketConfirmationPop.fxml");
-    }
-
-    public void backToMainPageBtn(ActionEvent event) {
-        SceneUtils.launchScene(event, MainPageController.class,"MainPage.fxml" );
     }
 }

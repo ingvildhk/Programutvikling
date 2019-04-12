@@ -35,25 +35,9 @@ public class RoomRegistrationConfirmationPopController {
         setValuetoLabels();
     }
 
-    // Metoden setter lablene i roomRegistrationConfirmationPop.fxml til verdiene til Hall'en som akkurat er registrert
-    public void setValuetoLabels(){
-        registeredRoomNameLabel.setText(registeredHall.getHallName());
-        registeredRoomTypeLabel.setText(registeredHall.getHallType());
-        registeredRoomNumberSeatsLabel.setText(registeredHall.getNumberOfSeats());
-    }
-
     public void editRoomBtn() {
         editRoom();
         generateConfirmationAlert("Bekreftelse på registrert sal", "Sal er registrert");
-    }
-
-    public void editRoom(){
-        String name = SceneUtils.changeInformation(changeRoomNameTxtField, registeredRoomNameLabel);
-        String type = SceneUtils.changeInformation(changeRoomTypeTxtField, registeredRoomTypeLabel);
-        String seats = SceneUtils.changeInformation(changeRoomNumberSeatsTxtField, registeredRoomNumberSeatsLabel);
-
-        registeredHall.changeHallInformation(name, type, seats);
-        setValuetoLabels();
     }
 
     public void backToAdminMainPage(ActionEvent event) throws IOException {
@@ -85,9 +69,19 @@ public class RoomRegistrationConfirmationPopController {
         }
     }
 
+    // Metoden setter lablene i roomRegistrationConfirmationPop.fxml til verdiene til Hall'en som akkurat er registrert
+    public void setValuetoLabels(){
+        registeredRoomNameLabel.setText(registeredHall.getHallName());
+        registeredRoomTypeLabel.setText(registeredHall.getHallType());
+        registeredRoomNumberSeatsLabel.setText(registeredHall.getNumberOfSeats());
+    }
 
+    public void editRoom(){
+        String name = SceneUtils.changeInformation(changeRoomNameTxtField, registeredRoomNameLabel);
+        String type = SceneUtils.changeInformation(changeRoomTypeTxtField, registeredRoomTypeLabel);
+        String seats = SceneUtils.changeInformation(changeRoomNumberSeatsTxtField, registeredRoomNumberSeatsLabel);
 
-
-
-
+        registeredHall.changeHallInformation(name, type, seats);
+        setValuetoLabels();
+    }
 }
