@@ -55,7 +55,6 @@ public class AdminMainPageController {
     }
 
     public void roomRegistrationBtn(ActionEvent event) {
-
         registerRoom();
         updateRoomList();
         SceneUtils.launchScene(event, AdminMainPageController.class, "roomRegistrationConfirmationPop.fxml");

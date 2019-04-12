@@ -60,7 +60,6 @@ public class SceneUtils {
     }
 
 
-
     //Updates the choicebox with the hallnames
     public static void updateRoomList(ChoiceBox box, HallModel hallModel){
         for (Hall hall : hallModel.getHallList()) {
@@ -76,6 +75,11 @@ public class SceneUtils {
     public static void addEventType(ChoiceBox box){
         box.getItems().addAll("Konsert", "Teater", "Konferanse", "Forestilling", "Annet");
     }
+
+    public static void getEventType(){
+
+    }
+
 
 
 }

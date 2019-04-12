@@ -22,5 +22,6 @@
             <TableColumn fx:id="numberOfSeatsColumn" minWidth="0.0" onEditCommit="#editNumberOfSeatsCellEvent" prefWidth="148.0" text="Antall plasser" />
         </columns>
       </TableView>
+      <Button fx:id="deleteHallBtn" layoutX="35.0" layoutY="353.0" mnemonicParsing="false" onAction="#deleteHallFromTableView" prefHeight="27.0" prefWidth="110.0" text="Slett sal" />
          </children>
       </AnchorPane>
