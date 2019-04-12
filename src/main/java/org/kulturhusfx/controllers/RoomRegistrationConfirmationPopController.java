@@ -77,7 +77,7 @@ public class RoomRegistrationConfirmationPopController {
             }
             else if(fileChooser.getSelectedExtensionFilter() == csvFilter){
                 FileWriterCsv csv = new FileWriterCsv(fileName);
-                csv.saveHallToFile(registeredHall.getHallName(), registeredHall.getHallType(), registeredHall.getNumberOfSeats(), fileName);
+                csv.saveHallToFile(registeredHall, fileName);
             }
             else{
                 FileExceptionHandler.generateIOExceptionMsg(new InvalidObjectException("Filtype må være jobj eller csv"));

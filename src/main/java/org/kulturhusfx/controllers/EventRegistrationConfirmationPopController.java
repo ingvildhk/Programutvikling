@@ -6,14 +6,21 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.Checker;
+import org.kulturhusfx.util.FileExceptionHandler;
 import org.kulturhusfx.util.SceneUtils;
+import org.kulturhusfx.util.fileHandling.FileWriterCsv;
+import org.kulturhusfx.util.fileHandling.FileWriterJobj;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InvalidObjectException;
 import java.util.List;
 
 public class EventRegistrationConfirmationPopController {
@@ -92,12 +99,35 @@ public class EventRegistrationConfirmationPopController {
         System.out.println(registeredEvent.toString());
         System.out.println(eventList.size());
         setLabels();
-
-
+        SceneUtils.generateConfirmationAlert("Bekreftelse på registrert arrangement", "Arrangement er registrert");
     }
 
     public void backToAdminBtn(ActionEvent event){
         SceneUtils.launchScene(event, AdminMainPageController.class, "adminMainPage.fxml");
+    }
+
+    public void saveToFileBtn(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter jobjFilter = new FileChooser.ExtensionFilter("jobj", "*.jobj");
+        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("csv", "*.csv");
+        fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
+        File file = fileChooser.showSaveDialog(null);
+        String fileName = file.getName();
+        System.out.println(fileName);
+
+        if (file != null) {
+            if(fileChooser.getSelectedExtensionFilter() == jobjFilter){
+                FileWriterJobj jobj = new FileWriterJobj(fileName);
+                jobj.saveEventToFile(registeredEvent, fileName);
+            }
+            else if(fileChooser.getSelectedExtensionFilter() == csvFilter){
+                FileWriterCsv csv = new FileWriterCsv(fileName);
+                csv.saveEventToFile(registeredEvent, fileName);
+            }
+            else{
+                FileExceptionHandler.generateIOExceptionMsg(new InvalidObjectException("Filtype må være jobj eller csv"));
+            }
+        }
     }
 
     public void setLabels(){

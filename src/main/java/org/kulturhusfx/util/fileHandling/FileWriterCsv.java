@@ -1,5 +1,9 @@
 package org.kulturhusfx.util.fileHandling;
 
+import org.kulturhusfx.base.Event;
+import org.kulturhusfx.base.Hall;
+import org.kulturhusfx.base.Ticket;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,13 +15,13 @@ public class FileWriterCsv extends FileWriter {
         super(fileName);
     }
 
-    public static void saveHallToFile(String hallName, String hallType, String numberOfSeats, String filePath){
+    public static void saveHallToFile(Hall hall, String filePath){
         try{
             FileWriter fileWriter = new FileWriter(filePath, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             PrintWriter printWriter = new PrintWriter(bufferedWriter);
 
-            printWriter.println(hallName + "," + hallType +"," + numberOfSeats);
+            printWriter.println(hall.getHallName() + "," + hall.getHallType() +"," + hall.getNumberOfSeats());
             printWriter.close();
 
             System.out.println("Lagret til fil");
@@ -27,20 +31,36 @@ public class FileWriterCsv extends FileWriter {
         }
     }
 
-    public static void saveEventToFile(String contactName, String phoneNumber, String email, String webpage,
-                                       String firm, String otherInformation, String eventName, String performers,
-                                       String schedule, String hallName, String hallType, String numberOfSeats, String eventType,
-                                       String date, String time, String ticketPrice, String filePath){
+    public static void saveEventToFile(Event event, String filePath){
+
+        try{
+            FileWriter fileWriter = new FileWriter(filePath, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            PrintWriter printWriter = new PrintWriter(bufferedWriter);
+
+            printWriter.println(event.getContactPerson().getName() + "," + event.getContactPerson().getPhoneNumber()+ "," +
+                    event.getContactPerson().getEmail() + "," + event.getContactPerson().getWebpage() + "," + event.getContactPerson().getFirm()+ "," +
+                    event.getContactPerson().getOtherInformation() + "," + event.getName() + "," + event.getPerformers() + "," +
+                    event.getSchedule() + "," + event.getLocation().getHallName() + "," + event.getLocation().getHallType() + "," +
+                    event.getLocation().getNumberOfSeats() + "," + event.getType() + "," + event.getDate() + "," +
+                    event.getTime() + "," + event.getTicketPrice());
+            printWriter.close();
+
+            System.out.println("Lagret til fil");
+        }
+        catch (Exception e){
+            System.out.println("Ikke lagret til fil");
+        }
 
     }
 
-    public static void saveTicketToFile(String phoneNumber, String filePath){
+    public static void saveTicketToFile(Ticket ticket, String filePath){
         try {
             FileWriter fileWriter = new FileWriter(filePath, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             PrintWriter printWriter = new PrintWriter(bufferedWriter);
 
-            printWriter.println(phoneNumber);
+            printWriter.println(ticket.getPhoneNumber());
             printWriter.close();
             System.out.println("Lagret til fil");
         }
@@ -50,3 +70,4 @@ public class FileWriterCsv extends FileWriter {
 
     }
 }
+
