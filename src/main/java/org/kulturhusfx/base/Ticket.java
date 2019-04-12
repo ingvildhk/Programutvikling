@@ -10,9 +10,7 @@ import java.util.Date;
 
 public class Ticket {
 
-    private static int counter = 0;
-
-
+    //TODO Date må implementeres
     private String phoneNumber;
     private Date timeOfPurchase;
 

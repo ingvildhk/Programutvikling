@@ -14,6 +14,8 @@ public class ContactPerson {
     //være tomme uten at det skaper noen problemer
     public ContactPerson(String name, String phoneNumber, String email, String webpage,
                          String firm, String otherInformation) {
+        Checker.checkValidPhone(phoneNumber);
+        Checker.checkValidEmail(email);
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -83,6 +85,7 @@ public class ContactPerson {
         setOtherInformation(otherInformation);
     }
 
+    // TODO trenger ikke toString metoder i levering
     public String toString() {
         String s = name + " " + phoneNumber + " " + email + " " + webpage + " " + firm + " " + otherInformation;
         return s;

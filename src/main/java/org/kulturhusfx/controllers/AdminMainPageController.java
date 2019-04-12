@@ -38,36 +38,7 @@ public class AdminMainPageController {
 
     public void initialize() {
         addEventType();
-        updateRoomList();
-    }
-
-    public void registerFromFileBtn(ActionEvent event){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Velg fil");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Tekstfiler", "*.csv", "*.jobj")
-        );
-        File selectedFile = fileChooser.showOpenDialog(null);
-        String filePath = selectedFile.getPath();
-    }
-
-     public void roomRegistrationBtn(ActionEvent event) {
-        registerRoom();
-        updateRoomList();
-        SceneUtils.launchScene(event, AdminMainPageController.class, "roomRegistrationConfirmationPop.fxml");
-    }
-
-    public void registerRoom() {
-        String room = hallName.getText();
-        String type = hallType.getText();
-        String seat = totalNumberOfSeats.getText();
-
-        Checker.checkIfFieldIsEmpty(room, type, seat);
-        this.hallModel.createHall(room, type, seat);
-    }
-
-    public void updateRoomList() {
-        SceneUtils.updateRoomList(eventHall, hallModel);
+        updateHallList();
     }
 
     public void eventRegistrationBtn(ActionEvent event) {
@@ -75,17 +46,47 @@ public class AdminMainPageController {
         SceneUtils.launchScene(event, EventRegistrationConfirmationPopController.class, "eventRegistrationConfirmationPop.fxml");
     }
 
+    public void roomRegistrationBtn(ActionEvent event) {
+        registerRoom();
+        updateHallList();
+        SceneUtils.launchScene(event, AdminMainPageController.class, "roomRegistrationConfirmationPop.fxml");
+    }
+
+    public void registerFromFileBtn(ActionEvent event){
+        //Later som dette er kun knapp for å laste inn arrangementer. Tilsvarende lages for sal
+        //Metoden er ikke ferdigskrevet enda
+        FileChooser fileChooser = newFileChooser("Velg arrangementsfil");
+        File selectedFile = fileChooser.showOpenDialog(null);
+        String filePath = selectedFile.getPath();
+    }
+
+    public void backToMainPageBtn(ActionEvent event) throws IOException {
+        SceneUtils.launchScene(event, AdminMainPageController.class, "MainPage.fxml");
+    }
+
+    public void manageEventsBtn(ActionEvent event) throws IOException {
+        SceneUtils.launchScene(event, AdminMainPageController.class, "adminManageEvents.fxml");
+    }
+
+    public void seeAllEventsBtn(ActionEvent event) throws IOException {
+        SceneUtils.launchScene(event, AdminMainPageController.class, "adminManageHalls.fxml");
+    }
+
+    //Legger til valg i arrangementstype - choicebox
+    public void addEventType() {
+        SceneUtils.addEventType(eventType);
+    }
+
+    //Legger til saler i salvalg - choicebox
+    public void updateHallList() {
+        SceneUtils.updateRoomList(eventHall, hallModel);
+    }
+
     public void registerEvent(){
-        //added these as we get a nullpointerexception if there's no input in any fields
-        if (eventHall.getValue() == null){
-            InvalidInputHandler.generateAlert(
-                    new InvalidInputException("Alle felt må fylles ut"));
-        }
-        if (eventType.getValue() == null){
-            InvalidInputHandler.generateAlert(
-                    new InvalidInputException("Alle felt må fylles ut"));
-        }
-        
+        //Egen checkmetode for å sjekke om choiceboxer er tomme
+        Checker.checkIfChoiceBoxIsEmpty(eventHall);
+        Checker.checkIfChoiceBoxIsEmpty(eventType);
+
         String name = eventName.getText();
         String type = eventType.getValue().toString();
         String performer = performers.getText();
@@ -104,27 +105,31 @@ public class AdminMainPageController {
         Checker.checkIfFieldIsEmpty(name, type, performer, room, time, program, contact, phone, email, ticket);
 
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
-        List<Hall> aList = hallModel.getHallList();
+
+        //Finner hall-objektet ut ifra på hallName
+        List<Hall> list = hallModel.getHallList();
         int hallIndex = hallModel.getHallIndex(room);
-        Hall hall = aList.get(hallIndex);
+        Hall hall = list.get(hallIndex);
 
         eventModel.createEvent(contactPerson, name, performer, type, program, hall, date, time, ticket);
     }
 
-    public void addEventType() {
-        SceneUtils.addEventType(eventType);
+    public void registerRoom() {
+        String room = hallName.getText();
+        String type = hallType.getText();
+        String seat = totalNumberOfSeats.getText();
+
+        Checker.checkIfFieldIsEmpty(room, type, seat);
+        this.hallModel.createHall(room, type, seat);
     }
 
-    public void backToMainPageBtn(ActionEvent event) throws IOException {
-        SceneUtils.launchScene(event, AdminMainPageController.class, "MainPage.fxml");
-    }
-
-    public void manageEventsBtn(ActionEvent event) throws IOException {
-        SceneUtils.launchScene(event, AdminMainPageController.class, "adminManageEvents.fxml");
-    }
-
-    public void seeAllEventsBtn(ActionEvent event) throws IOException {
-        SceneUtils.launchScene(event, AdminMainPageController.class, "adminManageHalls.fxml");
+    private FileChooser newFileChooser(String string){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(string);
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter(".csv eller .jobj", "*.csv", "*.jobj")
+        );
+        return fileChooser;
     }
 }
 

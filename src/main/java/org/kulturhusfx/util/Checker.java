@@ -1,5 +1,6 @@
 package org.kulturhusfx.util;
 
+import javafx.scene.control.ChoiceBox;
 import org.kulturhusfx.util.exception.*;
 
 import java.util.regex.Matcher;
@@ -7,7 +8,7 @@ import java.util.regex.Pattern;
 
 //egen klasse med alle check-metodene, kan brukes flere steder om nødvendig
 public class Checker {
-    
+
     public static void checkValidNumberOfSeats(String numberOfSeats) {
         try {
             int seat = Integer.parseInt(numberOfSeats);
@@ -89,6 +90,13 @@ public class Checker {
             if (str == null || str.trim().length() == 0) {
                 InvalidInputHandler.generateAlert(new InvalidInputException("Alle felt må fylles ut"));
             }
+        }
+    }
+
+    public static void checkIfChoiceBoxIsEmpty(ChoiceBox box) {
+        if (box.getValue() == null) {
+            InvalidInputHandler.generateAlert(
+                    new InvalidInputException("Alle felt må fylles ut"));
         }
     }
 }

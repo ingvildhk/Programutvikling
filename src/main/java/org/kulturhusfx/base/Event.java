@@ -5,6 +5,7 @@ import org.kulturhusfx.util.Checker;
 
 public class Event {
 
+    // TODO slette denne også hvis vi ikke skal bruke setMinId
     private static int counter = 0;
 
     private ContactPerson contactPerson;
@@ -46,7 +47,7 @@ public class Event {
         this.availableTickets = Integer.parseInt(hall.getNumberOfSeats());
 
 
-        //Må opprette ny liste med billetter for hvert arrangement så kanskje noe som
+        //Oppretter ny liste med billetter for hvert arrangement som opprettes
         ticketModel = new TicketModel();
     }
 
@@ -142,6 +143,7 @@ public class Event {
         this.ticketPrice = ticketPrice;
     }
 
+
     public void changeEventInformation(ContactPerson contactPerson, String name,
                                        String performers, String type, String schedule, Hall hall,
                                        String date, String time, String ticketPrice) {
@@ -156,6 +158,7 @@ public class Event {
         setTicketPrice(ticketPrice);
     }
 
+    // TODO trenger ikke toString metoder i levering
     public String toString() {
         String s = contactPerson.toString() + " " + name + " " + performers + type + " " + schedule + " " +
                 hall.toString() + " " + date + " " + time + " " + ticketPrice;

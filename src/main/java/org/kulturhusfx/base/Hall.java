@@ -12,10 +12,9 @@ public class Hall {
     private String numberOfSeats;
 
     public Hall(String hallName, String hallType, String numberOfSeats) {
-        //sjekker om seteantall er et tall i konstruktøren, slik at det ikke opprettes objekter med feil
+        Checker.checkValidNumberOfSeats(numberOfSeats);
         this.hallName = hallName;
         this.hallType = hallType;
-        Checker.checkValidNumberOfSeats(numberOfSeats);
         this.numberOfSeats = numberOfSeats;
     }
 
@@ -54,6 +53,7 @@ public class Hall {
     }
 
 
+    //TODO Trenger ikke toString i levering
     public String toString() {
         return (hallName + " " + hallType + " " + numberOfSeats);
     }
