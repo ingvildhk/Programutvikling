@@ -32,6 +32,22 @@ public class FileWriterCsv extends FileWriter {
                                        String schedule, String hallName, String hallType, String numberOfSeats, String eventType,
                                        String date, String time, String ticketPrice, String filePath){
 
+        try{
+            FileWriter fileWriter = new FileWriter(filePath, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            PrintWriter printWriter = new PrintWriter(bufferedWriter);
+
+            printWriter.println(contactName + "," + phoneNumber +"," + email + "," + webpage + "," + firm + "," +
+                    otherInformation + "," + eventName + "," + performers + "," + schedule + "," + hallName + "," +
+                    hallType + "," + numberOfSeats + "," + eventType + "," + date + "," + time + "," + ticketPrice);
+            printWriter.close();
+
+            System.out.println("Lagret til fil");
+        }
+        catch (Exception e){
+            System.out.println("Ikke lagret til fil");
+        }
+
     }
 
     public static void saveTicketToFile(String phoneNumber, String filePath){
@@ -50,3 +66,4 @@ public class FileWriterCsv extends FileWriter {
 
     }
 }
+
