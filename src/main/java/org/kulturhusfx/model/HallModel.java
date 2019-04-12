@@ -7,9 +7,7 @@ import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.exception.InvalidHallException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class HallModel {
 
@@ -53,6 +51,6 @@ public class HallModel {
 
     // Sletter arrangementene som hører til salen som blir slettet
     public void deleteEvent(String hallName) {
-        eventList.removeIf(e -> e.getLocation().getHallName().equals(hallName));
+        eventList.removeIf(e -> e.getHall().getHallName().equals(hallName));
     }
 }

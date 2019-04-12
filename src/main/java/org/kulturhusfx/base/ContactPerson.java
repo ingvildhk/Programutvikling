@@ -70,6 +70,7 @@ public class ContactPerson {
         this.otherInformation = otherInformation;
     }
 
+    // TODO Er denne nødvendig? Vurdere etterhvert om den blir brukt
     public void changeContactPersonInformation(String name, String phoneNumber, String email,
                                                String webpage, String firm, String otherInformation) {
         Checker.checkValidEmail(email);

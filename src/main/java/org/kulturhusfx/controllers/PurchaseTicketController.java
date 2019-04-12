@@ -2,14 +2,10 @@ package org.kulturhusfx.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import org.kulturhusfx.base.Event;
-import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.base.Ticket;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
@@ -20,8 +16,6 @@ import org.kulturhusfx.util.SceneUtils;
 import org.kulturhusfx.util.exception.InvalidInputException;
 import org.kulturhusfx.util.exception.InvalidNumberOfSeatsException;
 
-import java.io.IOException;
-import java.lang.annotation.Repeatable;
 import java.util.List;
 
 public class PurchaseTicketController {
@@ -38,18 +32,18 @@ public class PurchaseTicketController {
     public List<Ticket> ticketList = ticketModel.getTicketList();
 
     @FXML
-    Label eventLabel, hallLabel, performersLabel, dateLabel, timeLabel, typeLabel, scheduleLabel, ticketPriceLabel;
+    private Label eventLabel, hallLabel, performersLabel, dateLabel, timeLabel, typeLabel, scheduleLabel, ticketPriceLabel;
     @FXML
-    TextField phoneTxtField;
+    private TextField phoneTxtField;
     @FXML
-    ChoiceBox numberOfTicketsChoiceBox;
+    private ChoiceBox numberOfTicketsChoiceBox;
 
     private EventModel eventModel = EventModel.getInstance();
     private HallModel hallModel = HallModel.getInstance();
 
     private void setLabels(){
         eventLabel.setText(currentEvent.getName());
-        hallLabel.setText(currentEvent.getLocation().getHallName());
+        hallLabel.setText(currentEvent.getHall().getHallName());
         performersLabel.setText(currentEvent.getPerformers());
         dateLabel.setText(currentEvent.getDate());
         timeLabel.setText(currentEvent.getTime());
@@ -74,12 +68,12 @@ public class PurchaseTicketController {
         currentNumberofTickets = numberOfTickets;
         Checker.checkIfFieldIsEmpty(phone);
 
-        if (ticketList.size() >=  Integer.parseInt(currentEvent.getLocation().getNumberOfSeats())){
+        if (ticketList.size() >=  Integer.parseInt(currentEvent.getHall().getNumberOfSeats())){
             InvalidInputHandler.generateAlert(
                     new InvalidNumberOfSeatsException("Arrangementet er utsolgt"));
         }
 
-        if (ticketList.size() + orderManyTickets >  Integer.parseInt(currentEvent.getLocation().getNumberOfSeats())){
+        if (ticketList.size() + orderManyTickets >  Integer.parseInt(currentEvent.getHall().getNumberOfSeats())){
             InvalidInputHandler.generateAlert(
                     new InvalidNumberOfSeatsException("Ikke nok ledige plasser til å kjøpe så mange billetter"));
         }
@@ -90,7 +84,7 @@ public class PurchaseTicketController {
         }
 
         //setter hvor mange billetter som er ledige
-        currentEvent.setNumberOfTickets(currentEvent.getNumberOfTickets() - orderManyTickets);
+        currentEvent.setAvailableTickets(currentEvent.getAvailableTickets() - orderManyTickets);
 
         SceneUtils.launchScene(event, AdminMainPageController.class, "ticketConfirmationPop.fxml");
     }

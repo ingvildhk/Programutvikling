@@ -65,7 +65,7 @@ public class AdminManageEventsController {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
         performersColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("performers"));
-        hallColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        hallColumn.setCellValueFactory(new PropertyValueFactory<>("hall"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("time"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
         programColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("schedule"));
@@ -140,6 +140,11 @@ public class AdminManageEventsController {
             tableViewEvents.getItems().remove(events);
         }
         tableViewEvents.setItems(getEvents());
+    }
+
+    public void seeOrdersToEventbtn(ActionEvent event) throws IOException {
+        SceneUtils.launchScene(event, AdminManageEventsController.class, "seeOrdersToEvent.fxml");
+
     }
 
     public void backToAdminMainPageBtn(ActionEvent event) throws IOException {

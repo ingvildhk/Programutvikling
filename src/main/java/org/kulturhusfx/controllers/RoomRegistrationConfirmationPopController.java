@@ -23,13 +23,17 @@ import static org.kulturhusfx.util.SceneUtils.generateConfirmationAlert;
 public class RoomRegistrationConfirmationPopController {
 
     @FXML
-    Label registeredRoomNameLabel, registeredRoomTypeLabel, registeredRoomNumberSeatsLabel;
+    private Label registeredRoomNameLabel, registeredRoomTypeLabel, registeredRoomNumberSeatsLabel;
     @FXML
-    TextField changeRoomNameTxtField, changeRoomTypeTxtField, changeRoomNumberSeatsTxtField;
+    private TextField changeRoomNameTxtField, changeRoomTypeTxtField, changeRoomNumberSeatsTxtField;
 
     private HallModel hallmodel = HallModel.getInstance();
     private List<Hall> hallList = hallmodel.getHallList();
     private Hall registeredHall = hallList.get(hallList.size()-1);
+
+    public void initialize() {
+        setValuetoLabels();
+    }
 
     // Metoden setter lablene i roomRegistrationConfirmationPop.fxml til verdiene til Hall'en som akkurat er registrert
     public void setValuetoLabels(){
@@ -78,11 +82,7 @@ public class RoomRegistrationConfirmationPopController {
             else{
                 FileExceptionHandler.generateIOExceptionMsg(new InvalidObjectException("Filtype må være jobj eller csv"));
             }
-            }
-    }
-
-    public void initialize() {
-        setValuetoLabels();
+        }
     }
 
 

@@ -8,16 +8,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import org.kulturhusfx.base.ContactPerson;
-import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
-import org.kulturhusfx.model.ContactPersonModel;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.SceneUtils;
 import org.kulturhusfx.util.exception.InvalidInputException;
-import org.kulturhusfx.util.fileHandling.FileWriterCsv;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,22 +23,22 @@ import java.util.List;
 public class AdminMainPageController {
 
     @FXML
-    TextField roomName, roomType, totalNumberofSeats, performers, eventTime, ticketPrice, eventName, eventDate;
+    private TextField hallName, hallType, totalNumberOfSeats, performers, eventTime, ticketPrice, eventName;
     @FXML
-    TextField contactName, contactPhone, contactEmail, contactWebsite, contactFirm, contactOther;
+    private TextField contactName, contactPhone, contactEmail, contactWebsite, contactFirm, contactOther;
     @FXML
-    TextArea eventProgram;
+    private TextArea eventSchedule;
     @FXML
-    ChoiceBox eventType, eventRoom;
+    private ChoiceBox eventType, eventHall;
     @FXML
-    DatePicker datePicker;
+    private DatePicker datePicker;
 
-    private HallModel hallModel;
-    private EventModel eventModel;
+    private HallModel hallModel = HallModel.getInstance();
+    private EventModel eventModel = EventModel.getInstance();
 
-    public AdminMainPageController() {
-        this.hallModel = HallModel.getInstance();
-        this.eventModel = EventModel.getInstance();
+    public void initialize() {
+        addEventType();
+        updateRoomList();
     }
 
     public void registerFromFileBtn(ActionEvent event){
@@ -54,23 +51,23 @@ public class AdminMainPageController {
         String filePath = selectedFile.getPath();
     }
 
-    public void roomRegistrationBtn(ActionEvent event) {
+     public void roomRegistrationBtn(ActionEvent event) {
         registerRoom();
         updateRoomList();
         SceneUtils.launchScene(event, AdminMainPageController.class, "roomRegistrationConfirmationPop.fxml");
     }
 
     public void registerRoom() {
-        String room = roomName.getText();
-        String type = roomType.getText();
-        String seat = totalNumberofSeats.getText();
+        String room = hallName.getText();
+        String type = hallType.getText();
+        String seat = totalNumberOfSeats.getText();
 
         Checker.checkIfFieldIsEmpty(room, type, seat);
         this.hallModel.createHall(room, type, seat);
     }
 
     public void updateRoomList() {
-        SceneUtils.updateRoomList(eventRoom, hallModel);
+        SceneUtils.updateRoomList(eventHall, hallModel);
     }
 
     public void eventRegistrationBtn(ActionEvent event) {
@@ -79,9 +76,8 @@ public class AdminMainPageController {
     }
 
     public void registerEvent(){
-
         //added these as we get a nullpointerexception if there's no input in any fields
-        if (eventRoom.getValue() == null){
+        if (eventHall.getValue() == null){
             InvalidInputHandler.generateAlert(
                     new InvalidInputException("Alle felt må fylles ut"));
         }
@@ -93,10 +89,10 @@ public class AdminMainPageController {
         String name = eventName.getText();
         String type = eventType.getValue().toString();
         String performer = performers.getText();
-        String room = eventRoom.getValue().toString();
+        String room = eventHall.getValue().toString();
         String time = eventTime.getText();
         String date = datePicker.getValue().toString();
-        String program = eventProgram.getText();
+        String program = eventSchedule.getText();
         String contact = contactName.getText();
         String phone = contactPhone.getText();
         String email = contactEmail.getText();
@@ -106,7 +102,6 @@ public class AdminMainPageController {
         String ticket = ticketPrice.getText();
 
         Checker.checkIfFieldIsEmpty(name, type, performer, room, time, program, contact, phone, email, ticket);
-        // Checker.checkIfFieldIsEmpty(name, type, performer, room, time, date, program, contact, phone, email, ticket);
 
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
         List<Hall> aList = hallModel.getHallList();
@@ -114,6 +109,10 @@ public class AdminMainPageController {
         Hall hall = aList.get(hallIndex);
 
         eventModel.createEvent(contactPerson, name, performer, type, program, hall, date, time, ticket);
+    }
+
+    public void addEventType() {
+        SceneUtils.addEventType(eventType);
     }
 
     public void backToMainPageBtn(ActionEvent event) throws IOException {
@@ -126,15 +125,6 @@ public class AdminMainPageController {
 
     public void seeAllEventsBtn(ActionEvent event) throws IOException {
         SceneUtils.launchScene(event, AdminMainPageController.class, "adminManageHalls.fxml");
-    }
-
-    public void addEventType() {
-        SceneUtils.addEventType(eventType);
-    }
-
-    public void initialize() {
-        addEventType();
-        updateRoomList();
     }
 }
 

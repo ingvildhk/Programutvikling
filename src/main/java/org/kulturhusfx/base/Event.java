@@ -1,10 +1,7 @@
 package org.kulturhusfx.base;
 
-import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.model.TicketModel;
 import org.kulturhusfx.util.Checker;
-
-import java.util.List;
 
 public class Event {
 
@@ -16,13 +13,14 @@ public class Event {
     private String type;
     private String performers;
     private String schedule;
-    private Hall location;
+    private Hall hall;
     private String date;
     private String time;
     private String ticketPrice;
     private TicketModel ticketModel;
-    private int numberOfTickets;
+    private int availableTickets;
 
+    // TODO ??
     //Kjøres etter innlest fil for å kontrollere at id-ene holdes unike
     public static void setMinId(int id) {
         if (id > counter) {
@@ -31,7 +29,7 @@ public class Event {
     }
 
     public Event(ContactPerson contactPerson, String name, String performers,
-                 String schedule, Hall location, String type, String date, String time, String ticketPrice) {
+                 String schedule, Hall hall, String type, String date, String time, String ticketPrice) {
         Checker.checkValidDate(date);
         Checker.checkValidTime(time);
         Checker.checkValidTicketPrice(ticketPrice);
@@ -40,12 +38,12 @@ public class Event {
         this.performers = performers;
         this.type = type;
         this.schedule = schedule;
-        this.location = location;
+        this.hall = hall;
         this.date = date;
         this.time = time;
         this.ticketPrice = ticketPrice;
         this.id = "" + counter++;
-        this.numberOfTickets = Integer.parseInt(location.getNumberOfSeats());
+        this.availableTickets = Integer.parseInt(hall.getNumberOfSeats());
 
 
         //Må opprette ny liste med billetter for hvert arrangement så kanskje noe som
@@ -72,8 +70,8 @@ public class Event {
         return type;
     }
 
-    public Hall getLocation() {
-        return location;
+    public Hall getHall() {
+        return hall;
     }
 
     public String getDate() {
@@ -92,7 +90,7 @@ public class Event {
         return id;
     }
 
-    public int getNumberOfTickets() { return numberOfTickets; }
+    public int getAvailableTickets() { return availableTickets; }
 
     public TicketModel getTicketModel() {
         return ticketModel;
@@ -102,8 +100,8 @@ public class Event {
         this.contactPerson = contactPerson;
     }
 
-    public void setNumberOfTickets(int numberOfTickets){
-        this.numberOfTickets = numberOfTickets;
+    public void setAvailableTickets(int availableTickets){
+        this.availableTickets = availableTickets;
     }
 
     public void setName(String name) {
@@ -125,8 +123,8 @@ public class Event {
         this.schedule = schedule;
     }
 
-    private void setLocation(Hall location) {
-        this.location = location;
+    private void setHall(Hall hall) {
+        this.hall = hall;
     }
 
     public void setDate(String date) {
@@ -145,14 +143,14 @@ public class Event {
     }
 
     public void changeEventInformation(ContactPerson contactPerson, String name,
-                                       String performers, String type, String schedule, Hall location,
+                                       String performers, String type, String schedule, Hall hall,
                                        String date, String time, String ticketPrice) {
         setContactPerson(contactPerson);
         setName(name);
         setPerformers(performers);
         setType(type);
         setSchedule(schedule);
-        setLocation(location);
+        setHall(hall);
         setDate(date);
         setTime(time);
         setTicketPrice(ticketPrice);
@@ -160,10 +158,11 @@ public class Event {
 
     public String toString() {
         String s = contactPerson.toString() + " " + name + " " + performers + type + " " + schedule + " " +
-                location.toString() + " " + date + " " + time + " " + ticketPrice;
+                hall.toString() + " " + date + " " + time + " " + ticketPrice;
         return s;
     }
 
+    // TODO brukes denne?
     public int soldTickets() {
         return 0;
     }

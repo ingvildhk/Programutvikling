@@ -52,7 +52,7 @@ public class MainPageController {
         EventColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
         TypeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
         DateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
-        AvailableColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("numberOfTickets"));
+        AvailableColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("availableTickets"));
         tableViewEvents.setItems(getEvents());
         addButtons();
     }

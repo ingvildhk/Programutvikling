@@ -2,7 +2,6 @@ package org.kulturhusfx.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -20,23 +19,23 @@ import java.util.List;
 public class EventRegistrationConfirmationPopController {
 
     @FXML
-    Label registeredEventNameLabel, registeredEventTypeLabel, registeredEventPerformersLabel, registeredEventHallLabel;
+    private Label registeredEventNameLabel, registeredEventTypeLabel, registeredEventPerformersLabel, registeredEventHallLabel;
     @FXML
-    Label registeredEventDateLabel,registeredEventTimeLabel, registeredEventTicketPriceLabel, registeredEventScheduleLabel;
+    private Label registeredEventDateLabel,registeredEventTimeLabel, registeredEventTicketPriceLabel, registeredEventScheduleLabel;
     @FXML
-    Label registeredEventContactPersonLabel, registeredEventPhoneLabel, registeredEventEmailLabel, registeredEventWebpageLabel;
+    private Label registeredEventContactPersonLabel, registeredEventPhoneLabel, registeredEventEmailLabel, registeredEventWebpageLabel;
     @FXML
-    Label registeredEventFirmLabel, registeredEventOtherLabel;
+    private Label registeredEventFirmLabel, registeredEventOtherLabel;
     @FXML
-    TextField changeEventNameTxtField, changeEventPerformersTxtField, changeEventDateTxtField, changeEventTimeTxtField;
+    private TextField changeEventNameTxtField, changeEventPerformersTxtField, changeEventDateTxtField, changeEventTimeTxtField;
     @FXML
-    TextField changeEventTicketPriceTxtField, changeEventContactPersonTxtField,changeEventPhoneTxtField, changeEventEmailTxtField;
+    private TextField changeEventTicketPriceTxtField, changeEventContactPersonTxtField,changeEventPhoneTxtField, changeEventEmailTxtField;
     @FXML
-    TextField changeEventWebpageTxtField, changeEventFirmTxtField, changeEventOtherTxtField;
+    private TextField changeEventWebpageTxtField, changeEventFirmTxtField, changeEventOtherTxtField;
     @FXML
-    TextArea changeEventProgramTxtArea;
+    private TextArea changeEventProgramTxtArea;
     @FXML
-    ChoiceBox changeEventTypeChoiceBox, changeEventHallChoiceBox;
+    private ChoiceBox changeEventTypeChoiceBox, changeEventHallChoiceBox;
 
     private EventModel eventModel = EventModel.getInstance();
     private HallModel hallModel = HallModel.getInstance();
@@ -105,7 +104,7 @@ public class EventRegistrationConfirmationPopController {
         registeredEventNameLabel.setText(registeredEvent.getName());
         registeredEventTypeLabel.setText(registeredEvent.getType());
         registeredEventPerformersLabel.setText(registeredEvent.getPerformers());
-        registeredEventHallLabel.setText(registeredEvent.getLocation().getHallName());
+        registeredEventHallLabel.setText(registeredEvent.getHall().getHallName());
         registeredEventDateLabel.setText(registeredEvent.getDate());
         registeredEventTimeLabel.setText(registeredEvent.getTime());
         registeredEventTicketPriceLabel.setText(registeredEvent.getTicketPrice());

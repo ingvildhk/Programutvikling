@@ -28,7 +28,9 @@
             <TableColumn fx:id="contactPersonColumn" prefWidth="113.0" text="Kontaktperson?" />
         </columns>
       </TableView>
-      <Button layoutX="26.0" layoutY="442.0" mnemonicParsing="false" onAction="#deleteEventBtn" prefHeight="27.0" prefWidth="155.0" text="Slett arrangement" />
+      <Button layoutX="26.0" layoutY="456.0" mnemonicParsing="false" onAction="#deleteEventBtn" prefHeight="27.0" prefWidth="155.0" text="Slett arrangement" />
       <Label layoutX="26.0" layoutY="77.0" prefHeight="17.0" prefWidth="397.0" text="Dobbelklikk på arrangement for å endre. Trykk enter for å lagre" />
+      <Button fx:id="seeOrdersBtn" layoutX="254.0" layoutY="456.0" mnemonicParsing="false" onAction="#seeOrdersToEventbtn" prefHeight="27.0" prefWidth="239.0" text="Se bestilling" />
+      <Label layoutX="254.0" layoutY="430.0" text="Marker arrangementet du vil se bestillingene til og klikk &quot;Se bestilling&quot;." />
     </children>
 </AnchorPane>

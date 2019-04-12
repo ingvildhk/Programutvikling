@@ -34,7 +34,7 @@ public class EventModel {
     }
 
     public void deleteHallEvents(String hallName) {
-        eventList.removeIf(e -> e.getLocation().getHallName().equals(hallName));
+        eventList.removeIf(e -> e.getHall().getHallName().equals(hallName));
     }
 }
 
