@@ -36,6 +36,23 @@ public class AdminManageHallsController {
         return halls;
     }
 
+    public void deleteHallFromTableView(){
+        ObservableList<Hall> selectedRows;
+
+        // contains the selected rows
+        selectedRows = tableViewHalls.getSelectionModel().getSelectedItems();
+        for (Hall hall : selectedRows){
+            hallList.remove(hall);
+            hallModel.deleteEvent(hall.getHallName());
+        }
+        for(Hall hall : hallModel.getHallList()) {
+            tableViewHalls.getItems().remove(hall);
+        }
+        tableViewHalls.setItems(getHalls());
+
+
+    }
+
     // Methods to change and set eventdata i tableView with double-click
     public void editHallNameCellEvent (TableColumn.CellEditEvent edittedCell){
         Hall hallSelected = tableViewHalls.getSelectionModel().getSelectedItem();
