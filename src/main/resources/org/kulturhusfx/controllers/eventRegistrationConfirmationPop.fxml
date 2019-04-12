@@ -16,50 +16,50 @@
             </font>
         </Label>
         <Label layoutX="316.0" layoutY="41.0" text="Du har registrert arrangement" />
-        <Label layoutX="34.0" layoutY="76.0" text="Arrangementsnavn:" />
-        <Label layoutX="71.0" layoutY="102.0" text="Type:" />
-        <Label layoutX="29.0" layoutY="128.0" text="Deltakende Personer:" />
-        <Button layoutX="334.0" layoutY="351.0" mnemonicParsing="false" onAction="#changeEventBtn" text="Endre?" />
-        <Button layoutX="341.0" layoutY="434.0" mnemonicParsing="false" onAction="#saveToFileBtn" text="Lagre til fil" />
-        <Label layoutX="61.0" layoutY="277.0" text="Program:" />
-        <Label layoutX="76.0" layoutY="152.0" text="Sal:" />
-        <Label layoutX="58.0" layoutY="206.0" text="Tidspunkt:" />
-        <Label layoutX="60.0" layoutY="232.0" text="Billettpris:" />
-        <Label layoutX="355.0" layoutY="76.0" text="Kontaktperson:" />
-        <Label layoutX="353.0" layoutY="102.0" text="Telefonnummer:" />
-        <Label layoutX="384.0" layoutY="128.0" text="Epost:" />
-        <Label layoutX="383.0" layoutY="152.0" text="Nettside" />
-        <Label layoutX="390.0" layoutY="177.0" text="Firma:" />
-        <Label layoutX="354.0" layoutY="206.0" text="Annen Informasjon:" />
-      <Label layoutX="71.0" layoutY="175.0" text="Dato:" />
-      <Label fx:id="registeredEventNameLabel" layoutX="153.0" layoutY="76.0" text="Label" />
-      <Label fx:id="registeredEventTypeLabel" layoutX="153.0" layoutY="102.0" text="Label" />
-      <Label fx:id="registeredEventTicketPriceLabel" layoutX="153.0" layoutY="232.0" text="Label" />
-      <Label fx:id="registeredEventPerformersLabel" layoutX="153.0" layoutY="128.0" text="Label" />
-      <Label fx:id="registeredEventDateLabel" layoutX="153.0" layoutY="177.0" text="Label" />
-      <Label fx:id="registeredEventHallLabel" layoutX="153.0" layoutY="152.0" text="Label" />
-      <Label fx:id="registeredEventTimeLabel" layoutX="153.0" layoutY="206.0" text="Label" />
-      <Label fx:id="registeredEventScheduleLabel" layoutX="153.0" layoutY="277.0" text="Label" />
-      <TextField fx:id="changeEventNameTxtField" layoutX="231.0" layoutY="72.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventPerformersTxtField" layoutX="231.0" layoutY="124.0" prefHeight="25.0" prefWidth="113.0" />
-      <ChoiceBox fx:id="changeEventTypeChoiceBox" layoutX="231.0" layoutY="98.0" prefHeight="25.0" prefWidth="113.0" />
-      <ChoiceBox fx:id="changeEventHallChoiceBox" layoutX="231.0" layoutY="148.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventDateTxtField" layoutX="231.0" layoutY="173.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventTimeTxtField" layoutX="231.0" layoutY="202.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventTicketPriceTxtField" layoutX="231.0" layoutY="228.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextArea fx:id="changeEventProgramTxtArea" layoutX="231.0" layoutY="253.0" prefHeight="85.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventContactPersonTxtField" layoutX="578.0" layoutY="72.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventPhoneTxtField" layoutX="578.0" layoutY="98.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventEmailTxtField" layoutX="578.0" layoutY="124.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventWebpageTxtField" layoutX="578.0" layoutY="148.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventFirmTxtField" layoutX="578.0" layoutY="173.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeEventOtherTxtField" layoutX="578.0" layoutY="202.0" prefHeight="25.0" prefWidth="113.0" />
-      <Label fx:id="registeredEventContactPersonLabel" layoutX="489.0" layoutY="76.0" text="Label" />
-      <Label fx:id="registeredEventPhoneLabel" layoutX="489.0" layoutY="102.0" text="Label" />
-      <Label fx:id="registeredEventEmailLabel" layoutX="489.0" layoutY="128.0" text="Label" />
-      <Label fx:id="registeredEventWebpageLabel" layoutX="489.0" layoutY="152.0" text="Label" />
-      <Label fx:id="registeredEventFirmLabel" layoutX="489.0" layoutY="177.0" text="Label" />
-      <Label fx:id="registeredEventOtherLabel" layoutX="489.0" layoutY="206.0" maxWidth="50.0" text="Label" textOverrun="CLIP" wrapText="true" />
+        <Label layoutX="45.0" layoutY="93.0" text="Arrangementsnavn:" />
+        <Label layoutX="110.0" layoutY="128.0" text="Type:" />
+        <Label layoutX="41.0" layoutY="160.0" text="Deltakende Personer:" />
+        <Button layoutX="463.0" layoutY="443.0" mnemonicParsing="false" onAction="#changeEventBtn" text="Endre?" />
+        <Button layoutX="453.0" layoutY="508.0" mnemonicParsing="false" onAction="#saveToFileBtn" text="Lagre til fil" />
+        <Label layoutX="100.0" layoutY="359.0" text="Program:" />
+        <Label layoutX="115.0" layoutY="201.0" text="Sal:" />
+        <Label layoutX="97.0" layoutY="269.0" text="Tidspunkt:" />
+        <Label layoutX="98.0" layoutY="304.0" text="Billettpris:" />
+        <Label layoutX="540.0" layoutY="128.0" text="Kontaktperson:" />
+        <Label layoutX="540.0" layoutY="177.0" text="Telefonnummer:" />
+        <Label layoutX="593.0" layoutY="214.0" text="Epost:" />
+        <Label layoutX="580.0" layoutY="257.0" text="Nettside" />
+        <Label layoutX="587.0" layoutY="304.0" text="Firma:" />
+        <Label layoutX="531.0" layoutY="359.0" text="Annen Informasjon:" />
+      <Label layoutX="110.0" layoutY="232.0" text="Dato:" />
+      <Label fx:id="registeredEventNameLabel" layoutX="167.0" layoutY="93.0" text="Label" />
+      <Label fx:id="registeredEventTypeLabel" layoutX="167.0" layoutY="128.0" text="Label" />
+      <Label fx:id="registeredEventTicketPriceLabel" layoutX="167.0" layoutY="304.0" text="Label" />
+      <Label fx:id="registeredEventPerformersLabel" layoutX="167.0" layoutY="160.0" text="Label" />
+      <Label fx:id="registeredEventDateLabel" layoutX="167.0" layoutY="232.0" text="Label" />
+      <Label fx:id="registeredEventHallLabel" layoutX="167.0" layoutY="197.0" text="Label" />
+      <Label fx:id="registeredEventTimeLabel" layoutX="167.0" layoutY="269.0" text="Label" />
+      <Label fx:id="registeredEventScheduleLabel" layoutX="167.0" layoutY="359.0" text="Label" />
+      <TextField fx:id="changeEventNameTxtField" layoutX="338.0" layoutY="89.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventPerformersTxtField" layoutX="338.0" layoutY="158.0" prefHeight="25.0" prefWidth="113.0" />
+      <ChoiceBox fx:id="changeEventTypeChoiceBox" layoutX="338.0" layoutY="124.0" prefHeight="25.0" prefWidth="113.0" />
+      <ChoiceBox fx:id="changeEventHallChoiceBox" layoutX="338.0" layoutY="193.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventDateTxtField" layoutX="338.0" layoutY="228.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventTimeTxtField" layoutX="338.0" layoutY="265.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventTicketPriceTxtField" layoutX="338.0" layoutY="300.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextArea fx:id="changeEventProgramTxtArea" layoutX="338.0" layoutY="337.0" prefHeight="85.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventContactPersonTxtField" layoutX="831.0" layoutY="124.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventPhoneTxtField" layoutX="831.0" layoutY="171.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventEmailTxtField" layoutX="831.0" layoutY="210.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventWebpageTxtField" layoutX="831.0" layoutY="253.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventFirmTxtField" layoutX="831.0" layoutY="300.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="changeEventOtherTxtField" layoutX="831.0" layoutY="355.0" prefHeight="25.0" prefWidth="113.0" />
+      <Label fx:id="registeredEventContactPersonLabel" layoutX="644.0" layoutY="128.0" text="Label" />
+      <Label fx:id="registeredEventPhoneLabel" layoutX="644.0" layoutY="177.0" text="Label" />
+      <Label fx:id="registeredEventEmailLabel" layoutX="644.0" layoutY="214.0" text="Label" />
+      <Label fx:id="registeredEventWebpageLabel" layoutX="644.0" layoutY="257.0" text="Label" />
+      <Label fx:id="registeredEventFirmLabel" layoutX="644.0" layoutY="304.0" text="Label" />
+      <Label fx:id="registeredEventOtherLabel" layoutX="644.0" layoutY="359.0" maxWidth="50.0" text="Label" textOverrun="CLIP" wrapText="true" />
       <Button layoutX="45.0" layoutY="28.0" mnemonicParsing="false" onAction="#backToAdminBtn" text="Lagre og gå tilbake" />
     </children>
 </AnchorPane>
