@@ -27,11 +27,26 @@ public class FileWriterCsv extends FileWriter {
         }
     }
 
-    public static void saveEventToFile(){
+    public static void saveEventToFile(String contactName, String phoneNumber, String email, String webpage,
+                                       String firm, String otherInformation, String eventName, String performers,
+                                       String schedule, String hallName, String hallType, String numberOfSeats, String eventType,
+                                       String date, String time, String ticketPrice, String filePath){
 
     }
 
-    public static void saveTicketToFile(){
+    public static void saveTicketToFile(String phoneNumber, String filePath){
+        try {
+            FileWriter fileWriter = new FileWriter(filePath, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            PrintWriter printWriter = new PrintWriter(bufferedWriter);
+
+            printWriter.println(phoneNumber);
+            printWriter.close();
+            System.out.println("Lagret til fil");
+        }
+        catch (Exception e){
+            System.out.println("Ikke lagret til fil");
+        }
 
     }
 }
