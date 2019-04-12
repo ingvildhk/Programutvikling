@@ -4,11 +4,14 @@ import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.exception.InvalidNumberOfSeatsException;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Ticket {
 
     private static int counter = 0;
+
 
     private String phoneNumber;
     private Date timeOfPurchase;
@@ -22,8 +25,8 @@ public class Ticket {
         return phoneNumber;
     }
 
-    /*public Date getDate(){
-        return date;
-    }*/
+    public Date getDate(){
+        return timeOfPurchase;
+    }
 }
 
