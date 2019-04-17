@@ -154,8 +154,7 @@ public class AdminMainPageController {
     }
 
 
-    //These methods are here as they cannot be refered to from static context - aka not allowed to move
-    //them to another class.
+    //These methods are here at the moment as they cannot be refered to from static context
     private void createHallsFromCsvFile(File file){
         BufferedReader bufferedReader = null;
         try {
@@ -200,8 +199,9 @@ public class AdminMainPageController {
                 String [] eventDetails = line.split(",");
                 if (eventDetails.length > 0){
                     for (Hall hall : hallList) {
-                        if (hall.getHallName() == eventDetails[10]){
-                            int hallIndex = hallModel.getHallIndex(eventDetails[10]);
+                        //Hvis salen som legges inn finnes fra før av så opprettes ikke salen på nytt
+                        if (hall.getHallName() == eventDetails[9]){
+                            int hallIndex = hallModel.getHallIndex(eventDetails[9]);
                             Hall aHall = hallList.get(hallIndex);
                             eventModel.createEvent(new ContactPerson(eventDetails[0], eventDetails[1], eventDetails[2], eventDetails[3],
                                             eventDetails[4], eventDetails[5]), eventDetails[6], eventDetails[7], eventDetails[8],
