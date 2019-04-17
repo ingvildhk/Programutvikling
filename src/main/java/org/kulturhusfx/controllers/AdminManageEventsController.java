@@ -61,6 +61,8 @@ public class AdminManageEventsController {
 
     public void initialize(){
 
+        //TODO Legge inn sjekk-metoder som sørger for at felt som MÅ fylles ut ikke kan endres til å være tomme
+
         // TODO Bare en tanke, men er det litt voldsomt å ha alt dette i initialize? Ha det i metoder i stede? Idk(:
         nameColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
@@ -146,11 +148,34 @@ public class AdminManageEventsController {
         eventSelected.setHall((Hall)edittedCell.getNewValue());
     }
 
-
-    // TODO Hvordan få tak i Contactperson.setContactName??
     public void editEventContactNameCellEvent (TableColumn.CellEditEvent edittedCell){
         Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
-       // eventSelected.setContactPerson(ContactPerson.setContactName(edittedCell.getNewValue().toString()));
+        eventSelected.setContactPersonName(edittedCell.getNewValue().toString());
+    }
+
+    public void editEventContactPhoneCellEvent (TableColumn.CellEditEvent edittedCell){
+        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        eventSelected.setContactPersonPhone(edittedCell.getNewValue().toString());
+    }
+
+    public void editEventContactEmailCellEvent (TableColumn.CellEditEvent edittedCell){
+        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        eventSelected.setContactPersonEmail(edittedCell.getNewValue().toString());
+    }
+
+    public void editEventContactWebpageCellEvent (TableColumn.CellEditEvent edittedCell) {
+        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        eventSelected.setContactPersonWebpage(edittedCell.getNewValue().toString());
+    }
+
+    public void editEventContactFirmCellEvent (TableColumn.CellEditEvent edittedCell){
+        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        eventSelected.setContactPersonFirm(edittedCell.getNewValue().toString());
+    }
+
+    public void editEventContactOtherCellEvent (TableColumn.CellEditEvent edittedCell){
+        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        eventSelected.setContactPersonOther(edittedCell.getNewValue().toString());
     }
 
 

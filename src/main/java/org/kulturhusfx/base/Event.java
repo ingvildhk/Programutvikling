@@ -96,6 +96,32 @@ public class Event {
         return ticketModel;
     }
 
+    public void setContactPersonName(String name) {
+        this.contactPerson.setContactName(name);
+    }
+
+    public void setContactPersonPhone(String phone) {
+        Checker.checkValidPhone(phone);
+        this.contactPerson.setPhoneNumber(phone);
+    }
+
+    public void setContactPersonEmail(String email) {
+        Checker.checkValidEmail(email);
+        this.contactPerson.setEmail(email);
+    }
+
+    public void setContactPersonWebpage(String webpage){
+        this.contactPerson.setWebpage(webpage);
+    }
+
+    public void setContactPersonFirm(String firm){
+        this.contactPerson.setFirm(firm);
+    }
+
+    public void setContactPersonOther(String otherInformation){
+        this.contactPerson.setOtherInformation(otherInformation);
+    }
+
     public void setContactPerson(ContactPerson contactPerson) {
         this.contactPerson = contactPerson;
     }

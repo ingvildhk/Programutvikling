@@ -51,23 +51,23 @@ public class ContactPerson {
         this.contactName = contactName;
     }
 
-    private void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    private void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    private void setWebpage(String webpage) {
+    public void setWebpage(String webpage) {
         this.webpage = webpage;
     }
 
-    private void setFirm(String firm) {
+    public void setFirm(String firm) {
         this.firm = firm;
     }
 
-    private void setOtherInformation(String otherInformation) {
+    public void setOtherInformation(String otherInformation) {
         this.otherInformation = otherInformation;
     }
 
