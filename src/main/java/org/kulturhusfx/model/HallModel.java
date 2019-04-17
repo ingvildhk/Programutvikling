@@ -24,7 +24,7 @@ public class HallModel {
         return hallModel;
     }
 
-    private List<Hall> hallList = new ArrayList<Hall>();
+    private List<Hall> hallList = new ArrayList<>();
 
     public List<Hall> getHallList() {
         return hallList;

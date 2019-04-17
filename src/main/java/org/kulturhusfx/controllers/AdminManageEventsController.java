@@ -1,20 +1,18 @@
 package org.kulturhusfx.controllers;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.util.converter.DefaultStringConverter;
-import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
+import org.kulturhusfx.base.ContactPerson;
+import org.kulturhusfx.model.ContactPersonModel;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.SceneUtils;
@@ -29,7 +27,8 @@ public class AdminManageEventsController {
 
     @FXML
     private TableColumn<Event, String> nameColumn, typeColumn, performersColumn,
-         timeColumn, dateColumn, programColumn, priceColumn, contactPersonColumn;
+            timeColumn, dateColumn, programColumn, priceColumn, contactNameCol,
+            contactFirmCol, contactWebsiteCol, contactPhoneCol, contactEmailCol, contactOtherCol;
 
     @FXML
     private  TableColumn<Event, Hall> hallColumn;
@@ -39,6 +38,7 @@ public class AdminManageEventsController {
     private EventModel eventModel = EventModel.getInstance();
     private List<Event> eventList = eventModel.getEventList();
     private List<Hall> hallList = hallModel.getHallList();
+
 
 
     // Method to list the registrered events in tableView
@@ -58,8 +58,8 @@ public class AdminManageEventsController {
         return halls;
     }
 
-    public void initialize(){
 
+    public void initialize(){
 
         // TODO Bare en tanke, men er det litt voldsomt å ha alt dette i initialize? Ha det i metoder i stede? Idk(:
         nameColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
@@ -70,12 +70,18 @@ public class AdminManageEventsController {
         dateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
         programColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("schedule"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("ticketPrice"));
-        contactPersonColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("contactPerson"));
-
+        contactNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getContactName()));
+        contactPhoneCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getPhoneNumber()));
+        contactEmailCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getEmail()));
+        contactFirmCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getFirm()));
+        contactWebsiteCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getWebpage()));
+        contactOtherCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getOtherInformation()));
         tableViewEvents.setItems(getEvents());
 
         // To change text fields, editable must be true
         tableViewEvents.setEditable(true);
+
+        // String date = dateColumn.getCellFactory().call(dateColumn.getCellValueFactory());
 
         // To make columns editable
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -85,12 +91,18 @@ public class AdminManageEventsController {
         dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         programColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         priceColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
         hallColumn.setCellFactory(ComboBoxTableCell.forTableColumn(getHalls()));
+
+        contactNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        contactPhoneCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        contactEmailCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        contactWebsiteCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        contactFirmCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        contactOtherCol.setCellFactory(TextFieldTableCell.forTableColumn());
 
         // To select multipe rows with, men fungerer ikke med deleteButton
         tableViewEvents.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-
     }
 
     // Methods to change and set eventdata i tableView with double-click
@@ -124,6 +136,24 @@ public class AdminManageEventsController {
         eventSelected.setTicketPrice(edittedCell.getNewValue().toString());
     }
 
+    public void editEventTypeCellEvent(TableColumn.CellEditEvent edittedCell){
+        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        eventSelected.setType(edittedCell.getNewValue().toString());
+    }
+
+    public void editEventHallCellEvent (TableColumn.CellEditEvent edittedCell){
+        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        eventSelected.setHall((Hall)edittedCell.getNewValue());
+    }
+
+
+    // TODO Hvordan få tak i Contactperson.setContactName??
+    public void editEventContactNameCellEvent (TableColumn.CellEditEvent edittedCell){
+        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+       // eventSelected.setContactPerson(ContactPerson.setContactName(edittedCell.getNewValue().toString()));
+    }
+
+
     public void deleteEventBtn(){
         deleteEventFromTableView();
     }
@@ -144,14 +174,12 @@ public class AdminManageEventsController {
 
     public void seeOrdersToEventbtn(ActionEvent event) throws IOException {
         SceneUtils.launchScene(event, AdminManageEventsController.class, "seeOrdersToEvent.fxml");
-
     }
 
     public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
         SceneUtils.launchScene(event, AdminManageEventsController.class, "adminMainPage.fxml");
     }
 
-
-
-
+    private class ContactPerson {
+    }
 }

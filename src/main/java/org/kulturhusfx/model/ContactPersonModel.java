@@ -1,13 +1,32 @@
 package org.kulturhusfx.model;
 
 import org.kulturhusfx.base.ContactPerson;
+import org.kulturhusfx.base.Event;
+import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.exception.InvalidContactPersonException;
+import org.kulturhusfx.util.exception.InvalidHallException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ContactPersonModel {
+    /*
+
+    private static final ContactPersonModel contactPersonModel = new ContactPersonModel();
+
+
+    private ContactPersonModel() {
+    }
+
+    public static ContactPersonModel getInstance() {
+        return contactPersonModel;
+    }
+*/
+
+
     private Map<String, ContactPerson> contactPersonMap;
 
     public ContactPersonModel() {
@@ -29,4 +48,5 @@ public class ContactPersonModel {
     public void deleteContactPerson(String email) {
         contactPersonMap.entrySet().removeIf(e -> e.getKey().equals(email));
     }
+
 }

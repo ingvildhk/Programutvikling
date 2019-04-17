@@ -96,7 +96,7 @@ public class Event {
         return ticketModel;
     }
 
-    private void setContactPerson(ContactPerson contactPerson) {
+    public void setContactPerson(ContactPerson contactPerson) {
         this.contactPerson = contactPerson;
     }
 
@@ -114,7 +114,7 @@ public class Event {
         this.performers = performers;
     }
 
-    private void setType(String type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -123,7 +123,7 @@ public class Event {
         this.schedule = schedule;
     }
 
-    private void setHall(Hall hall) {
+    public void setHall(Hall hall) {
         this.hall = hall;
     }
 

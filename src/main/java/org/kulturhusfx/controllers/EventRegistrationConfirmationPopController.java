@@ -139,7 +139,7 @@ public class EventRegistrationConfirmationPopController {
         registeredEventTimeLabel.setText(registeredEvent.getTime());
         registeredEventTicketPriceLabel.setText(registeredEvent.getTicketPrice());
         registeredEventScheduleLabel.setText(registeredEvent.getSchedule());
-        registeredEventContactPersonLabel.setText(registeredEvent.getContactPerson().getName());
+        registeredEventContactPersonLabel.setText(registeredEvent.getContactPerson().getContactName());
         registeredEventPhoneLabel.setText(registeredEvent.getContactPerson().getPhoneNumber());
         registeredEventEmailLabel.setText(registeredEvent.getContactPerson().getEmail());
         registeredEventWebpageLabel.setText(registeredEvent.getContactPerson().getWebpage());

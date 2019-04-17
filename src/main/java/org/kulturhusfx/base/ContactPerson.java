@@ -1,9 +1,10 @@
 package org.kulturhusfx.base;
 
 import org.kulturhusfx.util.Checker;
+import org.kulturhusfx.model.ContactPersonModel;
 
 public class ContactPerson {
-    private String name;
+    private String contactName;
     private String phoneNumber;
     private String email;
     private String webpage;
@@ -14,7 +15,7 @@ public class ContactPerson {
     //være tomme uten at det skaper noen problemer
     public ContactPerson(String name, String phoneNumber, String email, String webpage,
                          String firm, String otherInformation) {
-        this.name = name;
+        this.contactName = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.webpage = webpage;
@@ -22,8 +23,8 @@ public class ContactPerson {
         this.otherInformation = otherInformation;
     }
 
-    public String getName() {
-        return name;
+    public String getContactName() {
+        return contactName;
     }
 
     public String getPhoneNumber() {
@@ -46,8 +47,8 @@ public class ContactPerson {
         return otherInformation;
     }
 
-    private void setName(String name) {
-        this.name = name;
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
 
     private void setPhoneNumber(String phoneNumber) {
@@ -75,7 +76,7 @@ public class ContactPerson {
                                                String webpage, String firm, String otherInformation) {
         Checker.checkValidEmail(email);
         Checker.checkValidPhone(phoneNumber);
-        setName(name);
+        setContactName(name);
         setPhoneNumber(phoneNumber);
         setEmail(email);
         setWebpage(webpage);
@@ -84,7 +85,7 @@ public class ContactPerson {
     }
 
     public String toString() {
-        String s = name + " " + phoneNumber + " " + email + " " + webpage + " " + firm + " " + otherInformation;
+        String s = contactName + " " + phoneNumber + " " + email + " " + webpage + " " + firm + " " + otherInformation;
         return s;
     }
 

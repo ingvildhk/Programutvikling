@@ -104,6 +104,7 @@ public class AdminMainPageController {
         Checker.checkIfFieldIsEmpty(name, type, performer, room, time, program, contact, phone, email, ticket);
 
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
+
         List<Hall> aList = hallModel.getHallList();
         int hallIndex = hallModel.getHallIndex(room);
         Hall hall = aList.get(hallIndex);
