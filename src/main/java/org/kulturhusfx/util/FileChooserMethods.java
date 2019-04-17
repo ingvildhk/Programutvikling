@@ -4,14 +4,17 @@ import javafx.stage.FileChooser;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.base.Ticket;
+import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.util.fileHandling.FileWriterCsv;
 import org.kulturhusfx.util.fileHandling.FileWriterJobj;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InvalidObjectException;
+import java.io.*;
+import java.util.List;
 
 public class FileChooserMethods {
+
+    EventModel eventModel = EventModel.getInstance();
+    List<Event> eventList = eventModel.getEventList();
 
     //general method for saving and reading from file possibly
 

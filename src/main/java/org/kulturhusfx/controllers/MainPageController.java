@@ -95,9 +95,9 @@ public class MainPageController {
         Hall hovedsal = hallList.get(0);
         if (eventList == null || eventList.isEmpty()){
             eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 1",
-                    "folk", "konsert","program", hovedsal, "2019-09-21", "10:10","200.00");
+                    "folk","program", hovedsal, "konsert", "2019-09-21", "10:10","200.00");
             eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 2",
-                    "folk", "foredrag","program", hovedsal, "2020-09-22", "10:10","200.00");
+                    "folk","program", hovedsal, "foredrag", "2020-09-22", "10:10","200.00");
         }
 
         for (Event event : eventList){

@@ -20,8 +20,8 @@ public class EventModel {
 
     private List<Event> eventList = new ArrayList<Event>();
 
-    public void createEvent(ContactPerson contactPerson, String name, String performers, String type, String schedule,
-                            Hall location, String date, String time, String ticketPrice) {
+    public void createEvent(ContactPerson contactPerson, String name, String performers, String schedule,
+                            Hall location, String type, String date, String time, String ticketPrice) {
         eventList.add(new Event(contactPerson, name, performers, schedule, location, type, date, time, ticketPrice));
     }
 

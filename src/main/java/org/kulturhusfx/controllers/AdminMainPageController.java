@@ -8,16 +8,22 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import org.kulturhusfx.base.ContactPerson;
+import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.Checker;
+import org.kulturhusfx.util.FileChooserMethods;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.SceneUtils;
+import org.kulturhusfx.util.exception.InvalidHallException;
 import org.kulturhusfx.util.exception.InvalidInputException;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 public class AdminMainPageController {
@@ -35,6 +41,8 @@ public class AdminMainPageController {
 
     private HallModel hallModel = HallModel.getInstance();
     private EventModel eventModel = EventModel.getInstance();
+    private List <Event> eventList = eventModel.getEventList();
+    private List <Hall> hallList = hallModel.getHallList();
 
     public void initialize() {
         addEventType();
@@ -52,12 +60,34 @@ public class AdminMainPageController {
         SceneUtils.launchScene(event, AdminMainPageController.class, "roomRegistrationConfirmationPop.fxml");
     }
 
-    public void registerFromFileBtn(ActionEvent event){
-        //Later som dette er kun knapp for å laste inn arrangementer. Tilsvarende lages for sal
+    public void registerEventFromFileBtn(ActionEvent event){
         //Metoden er ikke ferdigskrevet enda
-        FileChooser fileChooser = newFileChooser("Velg arrangementsfil");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Velg arrangementsfil");
+        FileChooser.ExtensionFilter jobjFilter = new FileChooser.ExtensionFilter("jobj", "*.jobj");
+        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("csv", "*.csv");
+        fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
         File selectedFile = fileChooser.showOpenDialog(null);
-        String filePath = selectedFile.getPath();
+        System.out.println(selectedFile.getName());
+        if (fileChooser.getSelectedExtensionFilter() == csvFilter){
+            createEventsFromCsvFile(selectedFile);
+        }
+        updateHallList();
+    }
+
+    public void registerHallFromFileBtn(ActionEvent event){
+        //Metoden er ikke ferdigskrevet enda
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Velg salfil");
+        FileChooser.ExtensionFilter jobjFilter = new FileChooser.ExtensionFilter("jobj", "*.jobj");
+        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("csv", "*.csv");
+        fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
+        File selectedFile = fileChooser.showOpenDialog(null);
+        System.out.println(selectedFile.getName());
+        if (fileChooser.getSelectedExtensionFilter() == csvFilter){
+            createHallsFromCsvFile(selectedFile);
+        }
+        updateHallList();
     }
 
     public void backToMainPageBtn(ActionEvent event) throws IOException {
@@ -111,7 +141,7 @@ public class AdminMainPageController {
         int hallIndex = hallModel.getHallIndex(room);
         Hall hall = list.get(hallIndex);
 
-        eventModel.createEvent(contactPerson, name, performer, type, program, hall, date, time, ticket);
+        eventModel.createEvent(contactPerson, name, performer, program, hall, type, date, time, ticket);
     }
 
     public void registerRoom() {
@@ -123,13 +153,84 @@ public class AdminMainPageController {
         this.hallModel.createHall(room, type, seat);
     }
 
-    private FileChooser newFileChooser(String string){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(string);
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter(".csv eller .jobj", "*.csv", "*.jobj")
-        );
-        return fileChooser;
+
+    //These methods are here as they cannot be refered to from static context - aka not allowed to move
+    //them to another class.
+    private void createHallsFromCsvFile(File file){
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(file));
+            String line = "";
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] hallDetails = line.split(",");
+                if (hallDetails.length > 0) {
+                    for (Hall hall : hallList){
+                        if (hall.getHallName() == hallDetails[0]){
+                            InvalidInputHandler.generateAlert(new InvalidHallException("En av salene du forsøker å" +
+                                    " registrere finnes fra før av: " + hall.getHallName()));
+                        }
+                    }
+                    hallModel.createHall(hallDetails[0], hallDetails[1], hallDetails[2]);
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            InvalidInputHandler.generateAlert(new RuntimeException("Feil i lesing fra fil"));
+            e.printStackTrace();
+        }
+        finally {
+            try{
+                bufferedReader.close();
+            }
+            catch (IOException ie){
+                InvalidInputHandler.generateAlert(new RuntimeException("Feil oppsto ved lukking av fil"));
+                ie.printStackTrace();
+            }
+        }
+    }
+
+    private void createEventsFromCsvFile(File file){
+
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(file));
+            String line = "";
+            while ((line = bufferedReader.readLine()) != null){
+                String [] eventDetails = line.split(",");
+                if (eventDetails.length > 0){
+                    for (Hall hall : hallList) {
+                        if (hall.getHallName() == eventDetails[10]){
+                            int hallIndex = hallModel.getHallIndex(eventDetails[10]);
+                            Hall aHall = hallList.get(hallIndex);
+                            eventModel.createEvent(new ContactPerson(eventDetails[0], eventDetails[1], eventDetails[2], eventDetails[3],
+                                            eventDetails[4], eventDetails[5]), eventDetails[6], eventDetails[7], eventDetails[8],
+                                     aHall, eventDetails[9], eventDetails[13], eventDetails[14], eventDetails[15]);
+                        }
+                        else {
+                            eventModel.createEvent(new ContactPerson(eventDetails[0], eventDetails[1], eventDetails[2], eventDetails[3],
+                                            eventDetails[4], eventDetails[5]), eventDetails[6], eventDetails[7], eventDetails[8],
+                                    new Hall(eventDetails[9], eventDetails[10], eventDetails[11]), eventDetails[12], eventDetails[13],
+                                    eventDetails[14], eventDetails[15]);
+                        }
+                    }
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            InvalidInputHandler.generateAlert(new RuntimeException("Feil i lesing fra fil"));
+            e.printStackTrace();
+        }
+        finally {
+            try{
+                bufferedReader.close();
+            }
+            catch (IOException ie){
+                InvalidInputHandler.generateAlert(new RuntimeException("Feil oppsto ved lukking av fil"));
+            }
+        }
+
     }
 }
 

@@ -67,11 +67,12 @@
       <Button layoutX="555.0" layoutY="24.0" mnemonicParsing="false" onAction="#manageEventsBtn" text="Endre arrangementer" />
       <Label layoutX="110.0" layoutY="295.0" text="Dato (dd/mm/yy)" />
       <DatePicker fx:id="datePicker" editable="false" layoutX="106.0" layoutY="319.0" />
-      <Button layoutX="610.0" layoutY="456.0" mnemonicParsing="false" onAction="#registerFromFileBtn" text="Registrer data fra fil" />
+      <Button layoutX="555.0" layoutY="456.0" mnemonicParsing="false" onAction="#registerEventFromFileBtn" text="Registrer arrangement fra fil" />
       <Label layoutX="564.0" layoutY="420.0" text="Registrer arrangement eller sal fra fil">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
+      <Button layoutX="759.0" layoutY="458.0" mnemonicParsing="false" onAction="#registerHallFromFileBtn" text="Registrer sal fra fil" />
     </children>
 </AnchorPane>
