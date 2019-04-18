@@ -62,7 +62,6 @@ public class AdminManageEventsController {
     public void initialize(){
 
         //TODO Legge inn sjekk-metoder som sørger for at felt som MÅ fylles ut ikke kan endres til å være tomme
-
         // TODO Bare en tanke, men er det litt voldsomt å ha alt dette i initialize? Ha det i metoder i stede? Idk(:
         nameColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
@@ -206,6 +205,4 @@ public class AdminManageEventsController {
         SceneUtils.launchScene(event, AdminManageEventsController.class, "adminMainPage.fxml");
     }
 
-    private class ContactPerson {
-    }
 }
