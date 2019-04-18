@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.FileExceptionHandler;
 import org.kulturhusfx.util.SceneUtils;
 import org.kulturhusfx.util.fileHandling.FileWriterCsv;
@@ -44,7 +45,8 @@ public class RoomRegistrationConfirmationPopController {
 
     public void editRoomBtn() {
         editRoom();
-        generateConfirmationAlert("Bekreftelse på registrert sal", "Sal er registrert");
+        // TODO Denne var kanskje litt voldsom å få hver gang man endret noe?
+        //generateConfirmationAlert("Bekreftelse på registrert sal", "Sal er registrert");
     }
 
     public void editRoom(){
@@ -52,6 +54,7 @@ public class RoomRegistrationConfirmationPopController {
         String type = SceneUtils.changeInformation(changeRoomTypeTxtField, registeredRoomTypeLabel);
         String seats = SceneUtils.changeInformation(changeRoomNumberSeatsTxtField, registeredRoomNumberSeatsLabel);
 
+        Checker.checkIfHallExcists(name, hallList);
         registeredHall.changeHallInformation(name, type, seats);
         setValuetoLabels();
     }

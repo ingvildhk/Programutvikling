@@ -20,7 +20,6 @@ public class Event {
     private TicketModel ticketModel;
     private int availableTickets;
 
-    // TODO ??
     //Kjøres etter innlest fil for å kontrollere at id-ene holdes unike
     public static void setMinId(int id) {
         if (id > counter) {
@@ -44,7 +43,6 @@ public class Event {
         this.ticketPrice = ticketPrice;
         this.id = "" + counter++;
         this.availableTickets = Integer.parseInt(hall.getNumberOfSeats());
-
 
         //Må opprette ny liste med billetter for hvert arrangement så kanskje noe som
         ticketModel = new TicketModel();
@@ -97,6 +95,7 @@ public class Event {
     }
 
     public void setContactPersonName(String name) {
+        Checker.checkIfFieldIsEmpty(name);
         this.contactPerson.setContactName(name);
     }
 
@@ -136,16 +135,17 @@ public class Event {
     }
 
     public void setPerformers(String performers) {
-        Checker.checkIfFieldIsEmpty(name);
+        Checker.checkIfFieldIsEmpty(performers);
         this.performers = performers;
     }
 
     public void setType(String type) {
+        Checker.checkIfFieldIsEmpty(type);
         this.type = type;
     }
 
     public void setSchedule(String schedule) {
-        Checker.checkIfFieldIsEmpty(name);
+        Checker.checkIfFieldIsEmpty(schedule);
         this.schedule = schedule;
     }
 

@@ -15,6 +15,7 @@ import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.model.ContactPersonModel;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.SceneUtils;
 
 import java.io.IOException;
@@ -57,7 +58,6 @@ public class AdminManageEventsController {
         }
         return halls;
     }
-
 
     public void initialize(){
 
@@ -150,6 +150,7 @@ public class AdminManageEventsController {
 
     public void editEventContactNameCellEvent (TableColumn.CellEditEvent edittedCell){
         Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+
         eventSelected.setContactPersonName(edittedCell.getNewValue().toString());
     }
 

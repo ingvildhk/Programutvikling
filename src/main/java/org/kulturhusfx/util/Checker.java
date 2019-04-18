@@ -1,7 +1,11 @@
 package org.kulturhusfx.util;
 
+import org.kulturhusfx.base.Hall;
+import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.exception.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -88,6 +92,14 @@ public class Checker {
         for (String str : args) {
             if (str == null || str.trim().length() == 0) {
                 InvalidInputHandler.generateAlert(new InvalidInputException("Alle felt må fylles ut"));
+            }
+        }
+    }
+
+    public static void checkIfHallExcists(String hallName, List<Hall> liste){
+        for (Hall hall : liste){
+            if (hall.getHallName().equals(hallName)){
+                InvalidInputHandler.generateAlert(new InvalidHallException("Salen finnes fra før av"));
             }
         }
     }
