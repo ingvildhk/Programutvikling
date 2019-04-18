@@ -1,9 +1,10 @@
 package org.kulturhusfx.base;
 
 import org.kulturhusfx.util.Checker;
+import org.kulturhusfx.model.ContactPersonModel;
 
 public class ContactPerson {
-    private String name;
+    private String contactName;
     private String phoneNumber;
     private String email;
     private String webpage;
@@ -16,7 +17,7 @@ public class ContactPerson {
                          String firm, String otherInformation) {
         Checker.checkValidPhone(phoneNumber);
         Checker.checkValidEmail(email);
-        this.name = name;
+        this.contactName = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.webpage = webpage;
@@ -24,8 +25,8 @@ public class ContactPerson {
         this.otherInformation = otherInformation;
     }
 
-    public String getName() {
-        return name;
+    public String getContactName() {
+        return contactName;
     }
 
     public String getPhoneNumber() {
@@ -48,27 +49,27 @@ public class ContactPerson {
         return otherInformation;
     }
 
-    private void setName(String name) {
-        this.name = name;
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
 
-    private void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    private void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    private void setWebpage(String webpage) {
+    public void setWebpage(String webpage) {
         this.webpage = webpage;
     }
 
-    private void setFirm(String firm) {
+    public void setFirm(String firm) {
         this.firm = firm;
     }
 
-    private void setOtherInformation(String otherInformation) {
+    public void setOtherInformation(String otherInformation) {
         this.otherInformation = otherInformation;
     }
 
@@ -77,7 +78,7 @@ public class ContactPerson {
                                                String webpage, String firm, String otherInformation) {
         Checker.checkValidEmail(email);
         Checker.checkValidPhone(phoneNumber);
-        setName(name);
+        setContactName(name);
         setPhoneNumber(phoneNumber);
         setEmail(email);
         setWebpage(webpage);
@@ -87,7 +88,7 @@ public class ContactPerson {
 
     // TODO trenger ikke toString metoder i levering
     public String toString() {
-        String s = name + " " + phoneNumber + " " + email + " " + webpage + " " + firm + " " + otherInformation;
+        String s = contactName + " " + phoneNumber + " " + email + " " + webpage + " " + firm + " " + otherInformation;
         return s;
     }
 

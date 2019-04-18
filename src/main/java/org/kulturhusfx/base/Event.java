@@ -21,7 +21,6 @@ public class Event {
     private TicketModel ticketModel;
     private int availableTickets;
 
-    // TODO ??
     //Kjøres etter innlest fil for å kontrollere at id-ene holdes unike
     public static void setMinId(int id) {
         if (id > counter) {
@@ -46,8 +45,8 @@ public class Event {
         this.id = "" + counter++;
         this.availableTickets = Integer.parseInt(hall.getNumberOfSeats());
 
-
         //Oppretter ny liste med billetter for hvert arrangement som opprettes
+        //Må opprette ny liste med billetter for hvert arrangement så kanskje noe som
         ticketModel = new TicketModel();
     }
 
@@ -97,7 +96,34 @@ public class Event {
         return ticketModel;
     }
 
-    private void setContactPerson(ContactPerson contactPerson) {
+    public void setContactPersonName(String name) {
+        Checker.checkIfFieldIsEmpty(name);
+        this.contactPerson.setContactName(name);
+    }
+
+    public void setContactPersonPhone(String phone) {
+        Checker.checkValidPhone(phone);
+        this.contactPerson.setPhoneNumber(phone);
+    }
+
+    public void setContactPersonEmail(String email) {
+        Checker.checkValidEmail(email);
+        this.contactPerson.setEmail(email);
+    }
+
+    public void setContactPersonWebpage(String webpage){
+        this.contactPerson.setWebpage(webpage);
+    }
+
+    public void setContactPersonFirm(String firm){
+        this.contactPerson.setFirm(firm);
+    }
+
+    public void setContactPersonOther(String otherInformation){
+        this.contactPerson.setOtherInformation(otherInformation);
+    }
+
+    public void setContactPerson(ContactPerson contactPerson) {
         this.contactPerson = contactPerson;
     }
 
@@ -111,20 +137,21 @@ public class Event {
     }
 
     public void setPerformers(String performers) {
-        Checker.checkIfFieldIsEmpty(name);
+        Checker.checkIfFieldIsEmpty(performers);
         this.performers = performers;
     }
 
-    private void setType(String type) {
+    public void setType(String type) {
+        Checker.checkIfFieldIsEmpty(type);
         this.type = type;
     }
 
     public void setSchedule(String schedule) {
-        Checker.checkIfFieldIsEmpty(name);
+        Checker.checkIfFieldIsEmpty(schedule);
         this.schedule = schedule;
     }
 
-    private void setHall(Hall hall) {
+    public void setHall(Hall hall) {
         this.hall = hall;
     }
 

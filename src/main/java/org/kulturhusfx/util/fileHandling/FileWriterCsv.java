@@ -38,7 +38,7 @@ public class FileWriterCsv extends FileWriter {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             PrintWriter printWriter = new PrintWriter(bufferedWriter);
 
-            printWriter.println(event.getContactPerson().getName() + "," + event.getContactPerson().getPhoneNumber()+ "," +
+            printWriter.println(event.getContactPerson().getContactName() + "," + event.getContactPerson().getPhoneNumber()+ "," +
                     event.getContactPerson().getEmail() + "," + event.getContactPerson().getWebpage() + "," + event.getContactPerson().getFirm()+ "," +
                     event.getContactPerson().getOtherInformation() + "," + event.getName() + "," + event.getPerformers() + "," +
                     event.getSchedule() + "," + event.getHall().getHallName() + "," + event.getHall().getHallType() + "," +

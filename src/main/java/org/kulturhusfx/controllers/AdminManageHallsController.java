@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.SceneUtils;
 
 import java.io.IOException;
@@ -38,6 +39,8 @@ public class AdminManageHallsController {
     // Methods to change and set eventdata i tableView with double-click
     public void editHallNameCellEvent (TableColumn.CellEditEvent edittedCell){
         Hall hallSelected = tableViewHalls.getSelectionModel().getSelectedItem();
+        // TODO La denne her
+        Checker.checkIfHallExcists(edittedCell.getNewValue().toString(), hallList);
         hallSelected.setHallName(edittedCell.getNewValue().toString());
     }
 

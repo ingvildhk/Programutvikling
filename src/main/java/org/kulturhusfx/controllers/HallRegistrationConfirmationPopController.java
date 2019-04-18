@@ -8,6 +8,7 @@ import javafx.stage.FileChooser;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.FileChooserMethods;
+import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.FileExceptionHandler;
 import org.kulturhusfx.util.SceneUtils;
 import org.kulturhusfx.util.fileHandling.FileWriterCsv;
@@ -37,7 +38,7 @@ public class HallRegistrationConfirmationPopController {
 
     public void editRoomBtn() {
         editRoom();
-        generateConfirmationAlert("Bekreftelse på registrert sal", "Sal er registrert");
+        //generateConfirmationAlert("Bekreftelse på registrert sal", "Sal er registrert");
     }
 
     public void backToAdminMainPage(ActionEvent event) throws IOException {
@@ -61,6 +62,7 @@ public class HallRegistrationConfirmationPopController {
         String type = SceneUtils.changeInformation(changeRoomTypeTxtField, registeredRoomTypeLabel);
         String seats = SceneUtils.changeInformation(changeRoomNumberSeatsTxtField, registeredRoomNumberSeatsLabel);
 
+        Checker.checkIfHallExcists(name, hallList);
         registeredHall.changeHallInformation(name, type, seats);
         setValuetoLabels();
     }
