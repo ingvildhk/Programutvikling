@@ -5,6 +5,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.base.ContactPerson;
@@ -25,6 +29,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class AdminManageEventsController {
+
 
     @FXML
     private TableView<Event> tableViewEvents;
@@ -62,7 +67,18 @@ public class AdminManageEventsController {
     }
 
     public void seeOrdersToEventbtn(ActionEvent event) throws IOException {
-        SceneUtils.launchScene(event, AdminManageEventsController.class, "seeOrdersToEvent.fxml");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("seeOrdersToEvent.fxml"));
+        Parent parent = loader.load();
+
+        SceneUtils.showScene(parent, event);
+
+        SeeOrdersToEventController controller = loader.getController();
+
+        // Access the controller and call a method
+        controller.initData(tableViewEvents.getSelectionModel().getSelectedItem());
+
+        //SceneUtils.launchScene(event, AdminManageEventsController.class, "seeOrdersToEvent.fxml");
     }
 
     public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
@@ -99,7 +115,6 @@ public class AdminManageEventsController {
         Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
         eventSelected.setTicketPrice(edittedCell.getNewValue().toString());
     }
-
 
     private void setColumnValues(){
         nameColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
@@ -205,6 +220,7 @@ public class AdminManageEventsController {
         }
         tableViewEvents.setItems(getEvents());
     }
+
     /*
 
     // Method to list the registrered events in tableView

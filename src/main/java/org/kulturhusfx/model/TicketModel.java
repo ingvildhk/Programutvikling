@@ -8,7 +8,7 @@ import java.util.List;
 
 public class TicketModel {
 
-    private List<Ticket> ticketList = new ArrayList<>();;
+    private List<Ticket> ticketList = new ArrayList<>();
 
     public TicketModel() {
     }
@@ -20,6 +20,7 @@ public class TicketModel {
     public List<Ticket> getTicketList(){
         return ticketList;
     }
+
 
     public int getSeatNumber(){
         return ticketList.size();
