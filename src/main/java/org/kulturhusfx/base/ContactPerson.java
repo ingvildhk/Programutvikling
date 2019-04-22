@@ -3,7 +3,9 @@ package org.kulturhusfx.base;
 import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.model.ContactPersonModel;
 
-public class ContactPerson {
+import java.io.Serializable;
+
+public class ContactPerson implements Serializable {
     private String contactName;
     private String phoneNumber;
     private String email;

@@ -19,10 +19,7 @@ import org.kulturhusfx.util.SceneUtils;
 import org.kulturhusfx.util.exception.InvalidHallException;
 import org.kulturhusfx.util.exception.InvalidInputException;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -60,7 +57,7 @@ public class AdminMainPageController {
         SceneUtils.launchScene(event, AdminMainPageController.class, "roomRegistrationConfirmationPop.fxml");
     }
 
-    public void registerEventFromFileBtn(ActionEvent event){
+    public void registerEventFromFileBtn(ActionEvent event) throws IOException, ClassNotFoundException {
         //Metoden er ikke ferdigskrevet enda
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Velg arrangementsfil");
@@ -72,10 +69,13 @@ public class AdminMainPageController {
         if (fileChooser.getSelectedExtensionFilter() == csvFilter){
             createEventsFromCsvFile(selectedFile);
         }
+        else if (fileChooser.getSelectedExtensionFilter() == jobjFilter){
+            createEventsFromJobjFile(selectedFile);
+        }
         updateHallList();
     }
 
-    public void registerHallFromFileBtn(ActionEvent event){
+    public void registerHallFromFileBtn(ActionEvent event) throws IOException, ClassNotFoundException {
         //Metoden er ikke ferdigskrevet enda
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Velg salfil");
@@ -86,6 +86,9 @@ public class AdminMainPageController {
         System.out.println(selectedFile.getName());
         if (fileChooser.getSelectedExtensionFilter() == csvFilter){
             createHallsFromCsvFile(selectedFile);
+        }
+        else if (fileChooser.getSelectedExtensionFilter() == jobjFilter){
+            createHallsFromJobjFile(selectedFile);
         }
         updateHallList();
     }
@@ -155,6 +158,28 @@ public class AdminMainPageController {
 
 
     //These methods are here at the moment as they cannot be refered to from static context
+    private void createHallsFromJobjFile (File file) throws IOException, ClassNotFoundException{
+        String fileName = file.getName();
+        try (FileInputStream fileInputStream = new FileInputStream(fileName);
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream))
+        {
+            Hall newHall = (Hall) objectInputStream.readObject();
+            hallList.add(newHall);
+        }
+    }
+
+    private void createEventsFromJobjFile (File file) throws IOException, ClassNotFoundException{
+        String fileName = file.getName();
+        try (FileInputStream fileInputStream = new FileInputStream(fileName);
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream))
+        {
+            Event newEvent = (Event) objectInputStream.readObject();
+            newEvent.createTicketModel();
+            eventList.add(newEvent);
+            System.out.print("lagt til!");
+        }
+    }
+
     private void createHallsFromCsvFile(File file){
         BufferedReader bufferedReader = null;
         try {

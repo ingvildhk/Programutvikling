@@ -28,8 +28,12 @@ public class FileChooserMethods {
 
         if (file != null) {
             if(fileChooser.getSelectedExtensionFilter() == jobjFilter){
-                FileWriterJobj jobj = new FileWriterJobj(fileName);
-                jobj.saveEventToFile(event, fileName);
+                try (
+                        FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+                ) {
+                    objectOutputStream.writeObject(event);
+                }
             }
             else if(fileChooser.getSelectedExtensionFilter() == csvFilter){
                 FileWriterCsv csv = new FileWriterCsv(fileName);
@@ -51,8 +55,12 @@ public class FileChooserMethods {
 
         if (file != null) {
             if(fileChooser.getSelectedExtensionFilter() == jobjFilter){
-                FileWriterJobj jobj = new FileWriterJobj(fileName);
-                jobj.saveHallToFile(hall, fileName);
+                try (
+                        FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+                ) {
+                    objectOutputStream.writeObject(hall);
+                }
             }
             else if(fileChooser.getSelectedExtensionFilter() == csvFilter){
                 FileWriterCsv csv = new FileWriterCsv(fileName);
@@ -74,8 +82,12 @@ public class FileChooserMethods {
 
         if (file != null) {
             if(fileChooser.getSelectedExtensionFilter() == jobjFilter){
-                FileWriterJobj jobj = new FileWriterJobj(fileName);
-                jobj.saveTicketToFile(ticket, fileName);
+                try (
+                        FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+                ) {
+                    objectOutputStream.writeObject(ticket);
+                }
             }
             else if(fileChooser.getSelectedExtensionFilter() == csvFilter){
                 FileWriterCsv csv = new FileWriterCsv(fileName);

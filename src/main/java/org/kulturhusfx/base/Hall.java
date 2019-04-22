@@ -4,9 +4,10 @@ import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.Checker;
 
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Hall {
+public class Hall implements Serializable {
     private String hallName;
     private String hallType;
     private String numberOfSeats;

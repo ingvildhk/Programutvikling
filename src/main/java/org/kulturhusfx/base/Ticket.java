@@ -4,11 +4,12 @@ import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.exception.InvalidNumberOfSeatsException;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Ticket {
+public class Ticket implements Serializable {
 
     //TODO Date må implementeres
     private String phoneNumber;

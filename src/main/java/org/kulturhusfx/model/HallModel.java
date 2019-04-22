@@ -6,10 +6,11 @@ import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.exception.InvalidHallException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HallModel {
+public class HallModel implements Serializable {
 
     private static final HallModel hallModel = new HallModel();
 

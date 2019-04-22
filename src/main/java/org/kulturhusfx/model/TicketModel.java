@@ -3,10 +3,11 @@ package org.kulturhusfx.model;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Ticket;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketModel {
+public class TicketModel implements Serializable{
 
     private List<Ticket> ticketList = new ArrayList<>();;
 
