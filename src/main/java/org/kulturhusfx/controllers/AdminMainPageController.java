@@ -47,6 +47,9 @@ public class AdminMainPageController {
     public void initialize() {
         addEventType();
         updateHallList();
+        // Setter default value på choiceboxene
+        eventHall.setValue(hallList.get(0).getHallName());
+        eventType.setValue("Konsert");
     }
 
     public void eventRegistrationBtn(ActionEvent event) {
