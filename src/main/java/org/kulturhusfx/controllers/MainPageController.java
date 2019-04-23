@@ -34,7 +34,7 @@ public class MainPageController {
    @FXML
     private TableView<Event> tableViewEvents;
     @FXML
-    private TableColumn<Event, String> EventColumn, TypeColumn, DateColumn, AvailableColumn;
+    private TableColumn<Event, String> EventColumn, TypeColumn, DateColumn, TimeColumn,  AvailableColumn;
     @FXML
     private TableColumn<Event, Boolean> OrderColumn;
 
@@ -84,6 +84,7 @@ public class MainPageController {
         EventColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
         TypeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
         DateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
+        TimeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
         AvailableColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("availableTickets"));
         tableViewEvents.setItems(getEvents());
     }

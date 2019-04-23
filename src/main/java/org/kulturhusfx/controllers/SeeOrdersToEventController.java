@@ -20,27 +20,39 @@ public class SeeOrdersToEventController {
     TableView <Ticket> tableViewTickets;
 
     @FXML
-    TableColumn <Ticket, String> phoneCol;
+    TableColumn <Ticket, String> phoneCol, numberOfTicketsCol;
 
 
     private Event selectedEvent;
+    private int numberOfTickets;
 
 
     public void initData(Event event) {
         this.selectedEvent = event;
 
-        ObservableList<Ticket> tickets = FXCollections.observableArrayList();
-        for (Ticket ticket : event.getTicketModel().getTicketList()){
-            tickets.add(ticket);
-        }
+        ObservableList<Ticket> orders = FXCollections.observableArrayList();
 
-        tableViewTickets.setItems(tickets);
+
+        for (Ticket ticket : event.getTicketModel().getTicketList()){
+            if(ticket.getPhoneNumber().equals(ticket) ) {
+                // Gir antall billetter som er bestilt på telefonnummer. Må legge til OG equals timePurchased også
+                numberOfTickets ++;
+               // Add ticket.getPhoneNumber only once
+                orders.add(ticket);
+            }
+
+        }
+        System.out.println(numberOfTickets);
+
+
+        tableViewTickets.setItems(orders);
     }
         // Sjekke at den henter listen
         //System.out.println(event.getTicketModel().getTicketList().toString());
 
     public void setColumnValues(){
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+       // numberOfTicketsCol.setCellValueFactory(new PropertyValueFactory<>((numberOfTickets)));
     }
 
     public void initialize(){
