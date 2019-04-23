@@ -12,7 +12,6 @@ import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.SceneUtils;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -26,6 +25,7 @@ public class AdminManageHallsController {
 
     private HallModel hallModel = HallModel.getInstance();
     private List<Hall> hallList = hallModel.getHallList();
+    private SceneUtils sceneUtils = SceneUtils.getInstance();
 
     public void initialize(){
         setColumnValues();
@@ -33,7 +33,7 @@ public class AdminManageHallsController {
     }
 
     public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
-        SceneUtils.launchScene(event, AdminManageHallsController.class, "adminMainPage.fxml");
+        sceneUtils.launchScene(event, AdminManageHallsController.class, "adminMainPage.fxml");
     }
 
     // Methods to change and set eventdata i tableView with double-click

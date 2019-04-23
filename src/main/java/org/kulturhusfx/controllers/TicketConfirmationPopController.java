@@ -8,6 +8,8 @@ import org.kulturhusfx.util.SceneUtils;
 
 public class TicketConfirmationPopController {
 
+    private SceneUtils sceneUtils = SceneUtils.getInstance();
+
     private String numberOfTickets = PurchaseTicketController.currentNumberofTickets;
     private Event currentEvent = MainPageController.currentEvent;
     private double numOfTickets = Double.parseDouble(numberOfTickets);
@@ -24,6 +26,6 @@ public class TicketConfirmationPopController {
     }
 
     public void handleBackToMainPageBtn(ActionEvent event){
-        SceneUtils.launchScene(event, MainPageController.class, "MainPage.fxml");
+        sceneUtils.launchScene(event, MainPageController.class, "MainPage.fxml");
     }
 }

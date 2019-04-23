@@ -42,6 +42,7 @@ public class MainPageController {
     private EventModel eventModel = EventModel.getInstance();
     private List<Event> eventList = eventModel.getEventList();
     private List<Hall> hallList = hallModel.getHallList();
+    private SceneUtils sceneUtils = SceneUtils.getInstance();
 
 
     public void initialize(){
@@ -55,29 +56,35 @@ public class MainPageController {
     }
 
     public void handleAdminLoginBtnAction(ActionEvent event) throws IOException {
-        SceneUtils.launchScene(event, MainPageController.class, "adminMainPage.fxml");
+        sceneUtils.launchScene(event, MainPageController.class, "adminMainPage.fxml");
     }
 
     private void addButtons(){
         OrderColumn.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Event, Boolean>,
+                property -> new SimpleBooleanProperty(property.getValue() != null));
+
+        //Trenger ikke denne koden da den er erstattet med lambda. Ligger her i tilfelle noe går galt
+                /*new Callback<TableColumn.CellDataFeatures<Event, Boolean>,
                         ObservableValue<Boolean>>() {
 
                     @Override
                     public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Event, Boolean> property) {
                         return new SimpleBooleanProperty(property.getValue() != null);
                     }
-                });
+                });*/
 
         //Legger til knapp i cell
         OrderColumn.setCellFactory(
+                property -> new OrderButton());
+
+        /*Trenger ikke denne koden da den er erstattet med lambda. Ligger her i tilfelle noe går galt
                 new Callback<TableColumn<Event, Boolean>, TableCell<Event, Boolean>>() {
 
                     @Override
                     public TableCell<Event, Boolean> call(TableColumn<Event, Boolean> property) {
                         return new OrderButton();
                     }
-                });
+                });*/
     }
 
     private void setColumnValues(){

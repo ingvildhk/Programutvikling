@@ -8,19 +8,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
-import org.kulturhusfx.base.ContactPerson;
-import org.kulturhusfx.model.ContactPersonModel;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
-import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.SceneUtils;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -41,6 +36,7 @@ public class AdminManageEventsController {
     private EventModel eventModel = EventModel.getInstance();
     private List<Event> eventList = eventModel.getEventList();
     private List<Hall> hallList = hallModel.getHallList();
+    private SceneUtils sceneUtils = SceneUtils.getInstance();
 
 
     public void initialize() {
@@ -62,11 +58,11 @@ public class AdminManageEventsController {
     }
 
     public void seeOrdersToEventbtn(ActionEvent event) throws IOException {
-        SceneUtils.launchScene(event, AdminManageEventsController.class, "seeOrdersToEvent.fxml");
+        sceneUtils.launchScene(event, AdminManageEventsController.class, "seeOrdersToEvent.fxml");
     }
 
     public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
-        SceneUtils.launchScene(event, AdminManageEventsController.class, "adminMainPage.fxml");
+        sceneUtils.launchScene(event, AdminManageEventsController.class, "adminMainPage.fxml");
     }
 
     // Methods to change and set eventdata i tableView with double-click
@@ -99,7 +95,6 @@ public class AdminManageEventsController {
         Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
         eventSelected.setTicketPrice(edittedCell.getNewValue().toString());
     }
-
 
     private void setColumnValues(){
         nameColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
@@ -186,12 +181,6 @@ public class AdminManageEventsController {
         eventSelected.setContactPersonOther(edittedCell.getNewValue().toString());
     }
 
-
-   /* public void deleteEventBtn(){
-        deleteEventFromTableView();
-    }
-    */
-
     public void deleteEventFromTableView(){
         ObservableList<Event> selectedRows;
 
@@ -205,21 +194,6 @@ public class AdminManageEventsController {
         }
         tableViewEvents.setItems(getEvents());
     }
-    /*
-
-    // Method to list the registrered events in tableView
-    private ObservableList<Event> getEvents() {
-        ObservableList<Event> events = FXCollections.observableArrayList();
-        for (Event event : eventList) {
-            events.add(event);
-        }
-        return events;
-    }
-
-    public void seeOrdersToEventbtn(ActionEvent event) throws IOException {
-        SceneUtils.launchScene(event, AdminManageEventsController.class, "seeOrdersToEvent.fxml");
-    }
-    */
 
     private ObservableList<Hall> getHalls(){
         ObservableList<Hall> halls = FXCollections.observableArrayList();
@@ -228,5 +202,4 @@ public class AdminManageEventsController {
         }
         return halls;
     }
-
 }

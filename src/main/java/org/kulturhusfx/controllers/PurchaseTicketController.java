@@ -13,9 +13,7 @@ import org.kulturhusfx.model.TicketModel;
 import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.SceneUtils;
-import org.kulturhusfx.util.exception.InvalidInputException;
 import org.kulturhusfx.util.exception.InvalidNumberOfSeatsException;
-
 import java.util.List;
 
 public class PurchaseTicketController {
@@ -23,13 +21,12 @@ public class PurchaseTicketController {
     //Hvis vi vil skrive ut hvilket billettnummer, altså hvilken plass man får når man bestiller
     //så blir billettnummeret ticketList.getIndex(ticket) + 1
 
-    //Igjen, antakelig ikke slik vi bør gjøre det, men currentNumberofTickets er statisk slik at vi kan
-    //få den med oss til TicketConfirmation
     private Event currentEvent = MainPageController.currentEvent;
     public static String currentNumberofTickets;
 
     public TicketModel ticketModel = currentEvent.getTicketModel();
     public List<Ticket> ticketList = ticketModel.getTicketList();
+    private SceneUtils sceneUtils = SceneUtils.getInstance();
 
     @FXML
     private Label eventLabel, hallLabel, performersLabel, dateLabel, timeLabel, typeLabel, scheduleLabel, ticketPriceLabel;
@@ -38,9 +35,6 @@ public class PurchaseTicketController {
     @FXML
     private ChoiceBox numberOfTicketsChoiceBox;
 
-    private EventModel eventModel = EventModel.getInstance();
-    private HallModel hallModel = HallModel.getInstance();
-
     public void initialize(){
         setLabels();
         numberOfTicketsChoiceBox.getItems().addAll("1", "2", "3", "4", "5","6", "7", "8", "9");
@@ -48,11 +42,11 @@ public class PurchaseTicketController {
 
     public void orderBtn(ActionEvent event){
         createNewTickets();
-        SceneUtils.launchScene(event, AdminMainPageController.class, "ticketConfirmationPop.fxml");
+        sceneUtils.launchScene(event, TicketConfirmationPopController.class, "ticketConfirmationPop.fxml");
     }
 
     public void backToMainPageBtn(ActionEvent event) {
-        SceneUtils.launchScene(event, MainPageController.class,"MainPage.fxml" );
+        sceneUtils.launchScene(event, MainPageController.class,"MainPage.fxml" );
     }
 
     private void setLabels(){
