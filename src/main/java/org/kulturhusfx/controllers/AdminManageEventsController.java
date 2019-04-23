@@ -5,12 +5,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.EventModel;
@@ -20,6 +25,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class AdminManageEventsController {
+
 
     @FXML
     private TableView<Event> tableViewEvents;
@@ -57,8 +63,36 @@ public class AdminManageEventsController {
         deleteEventFromTableView();
     }
 
+    public void showScene(Parent parent, ActionEvent event) {
+        Scene MainPageScene = new Scene(parent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(MainPageScene);
+        window.show();
+    }
+
     public void seeOrdersToEventbtn(ActionEvent event) throws IOException {
+
         sceneUtils.launchScene(event, AdminManageEventsController.class, "seeOrdersToEvent.fxml");
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("seeOrdersToEvent.fxml"));
+        Parent parent = loader.load();
+
+        showScene(parent, event);
+
+        /*
+
+        Scene scene = new Scene(parent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+        */
+
+        SeeOrdersToEventController controller = loader.getController();
+
+        // Access the controller and call a method
+        controller.initData(tableViewEvents.getSelectionModel().getSelectedItem());
+
     }
 
     public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
@@ -194,6 +228,7 @@ public class AdminManageEventsController {
         }
         tableViewEvents.setItems(getEvents());
     }
+
 
     private ObservableList<Hall> getHalls(){
         ObservableList<Hall> halls = FXCollections.observableArrayList();

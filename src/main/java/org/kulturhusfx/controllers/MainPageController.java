@@ -35,6 +35,7 @@ public class MainPageController {
     private TableView<Event> tableViewEvents;
     @FXML
     private TableColumn<Event, String> EventColumn, TypeColumn, DateColumn, TimeColumn, AvailableColumn;
+
     @FXML
     private TableColumn<Event, Boolean> OrderColumn;
 

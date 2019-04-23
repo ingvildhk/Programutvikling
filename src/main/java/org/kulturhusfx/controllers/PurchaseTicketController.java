@@ -38,6 +38,7 @@ public class PurchaseTicketController {
     public void initialize(){
         setLabels();
         numberOfTicketsChoiceBox.getItems().addAll("1", "2", "3", "4", "5","6", "7", "8", "9");
+        numberOfTicketsChoiceBox.setValue("1");
     }
 
     public void orderBtn(ActionEvent event){

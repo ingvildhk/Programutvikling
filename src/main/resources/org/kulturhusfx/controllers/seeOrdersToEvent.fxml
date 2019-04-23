@@ -5,15 +5,15 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.SeeOrdersToEventController">
    <children>
       <Button layoutX="43.0" layoutY="32.0" mnemonicParsing="false" onAction="#backToAdminMagageEventsBtn" text="Tilbake" />
-      <TableView layoutX="23.0" layoutY="78.0" prefHeight="385.0" prefWidth="602.0">
+      <TableView fx:id="tableViewTickets" layoutX="23.0" layoutY="78.0" prefHeight="385.0" prefWidth="602.0">
         <columns>
-          <TableColumn prefWidth="132.0" text="Telefonnummer" />
-            <TableColumn prefWidth="142.0" text="Tid bestilt" />
-          <TableColumn minWidth="4.0" prefWidth="143.0" text="Antall billetter" />
+          <TableColumn fx:id="phoneCol" prefWidth="168.0" text="Telefonnummer" />
+            <TableColumn fx:id="timeOrderedCol" prefWidth="144.0" text="Tid bestilt" />
+          <TableColumn fx:id="numberOfTicketsCol" minWidth="4.0" prefWidth="154.0" text="Antall billetter" />
+            <TableColumn prefWidth="135.0" text="Navn ?" />
         </columns>
       </TableView>
    </children>

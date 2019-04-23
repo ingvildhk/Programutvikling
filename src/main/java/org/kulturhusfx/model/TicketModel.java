@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TicketModel{
 
-    private List<Ticket> ticketList = new ArrayList<>();;
+    private List<Ticket> ticketList = new ArrayList<>();
 
     public void createTicket(String phoneNumber) {
         ticketList.add(new Ticket(phoneNumber));
@@ -16,8 +16,10 @@ public class TicketModel{
         return ticketList;
     }
 
+
     //TODO vi har ikke satt opp at man skal få setenummer når man bestiller
     //Må enten implementere det, eller fjerne denne metoden
+
     public int getSeatNumber(){
         return ticketList.size();
     }
