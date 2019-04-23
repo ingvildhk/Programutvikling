@@ -1,8 +1,6 @@
 package org.kulturhusfx.base;
 
 import org.kulturhusfx.util.Checker;
-import org.kulturhusfx.model.ContactPersonModel;
-
 import java.io.Serializable;
 
 public class ContactPerson implements Serializable {

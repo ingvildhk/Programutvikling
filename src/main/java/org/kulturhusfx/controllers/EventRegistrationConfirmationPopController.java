@@ -12,9 +12,9 @@ import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.Checker;
+import org.kulturhusfx.util.ControllerHelper;
 import org.kulturhusfx.util.SceneUtils;
 import org.kulturhusfx.util.FileChooserMethods;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -43,6 +43,8 @@ public class EventRegistrationConfirmationPopController {
     private HallModel hallModel = HallModel.getInstance();
     private List<Event> eventList = eventModel.getEventList();
     private Event registeredEvent = eventList.get(eventList.size() - 1);
+    private SceneUtils sceneUtils = SceneUtils.getInstance();
+    private FileChooserMethods fileChooserMethods = FileChooserMethods.getInstance();
 
     public void initialize() {
         updateRoomList();
@@ -53,25 +55,26 @@ public class EventRegistrationConfirmationPopController {
     public void changeEventBtn(ActionEvent event) {
         setChangedInformation();
         setLabels();
-        SceneUtils.generateConfirmationAlert("Bekreftelse på registrert arrangement", "Arrangement er registrert");
+        sceneUtils.generateConfirmationAlert("Bekreftelse på endring i registrert arrangement", "Arrangement er endret");
     }
 
     public void backToAdminBtn(ActionEvent event) {
-        SceneUtils.launchScene(event, AdminMainPageController.class, "adminMainPage.fxml");
+        sceneUtils.launchScene(event, AdminMainPageController.class, "adminMainPage.fxml");
     }
 
     public void saveToFileBtn(ActionEvent event) throws IOException {
-        FileChooserMethods.saveEventToFile(registeredEvent);
+        fileChooserMethods.saveEventToFile(registeredEvent);
+        sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring", "Arrangementet er lagret til fil");
     }
 
     //Legger til saler i choicebox
     public void updateRoomList() {
-        SceneUtils.updateRoomList(changeEventHallChoiceBox, hallModel);
+        ControllerHelper.updateRoomList(changeEventHallChoiceBox, hallModel);
     }
 
     //Legger til arrangementstyper i choicebox
     public void addEventType() {
-        SceneUtils.addEventType(changeEventTypeChoiceBox);
+        ControllerHelper.addEventType(changeEventTypeChoiceBox);
     }
 
     public void setLabels() {
@@ -96,17 +99,17 @@ public class EventRegistrationConfirmationPopController {
 
     private void setChangedInformation() {
         String type, room, program;
-        String name = SceneUtils.changeInformation(changeEventNameTxtField, registeredEventNameLabel);
-        String performer = SceneUtils.changeInformation(changeEventPerformersTxtField, registeredEventPerformersLabel);
-        String time = SceneUtils.changeInformation(changeEventTimeTxtField, registeredEventTimeLabel);
-        String date = SceneUtils.changeInformation(changeEventDateTxtField, registeredEventDateLabel);
-        String contact = SceneUtils.changeInformation(changeEventContactPersonTxtField, registeredEventContactPersonLabel);
-        String phone = SceneUtils.changeInformation(changeEventPhoneTxtField, registeredEventPhoneLabel);
-        String email = SceneUtils.changeInformation(changeEventEmailTxtField, registeredEventEmailLabel);
-        String website = SceneUtils.changeInformation(changeEventWebpageTxtField, registeredEventWebpageLabel);
-        String firm = SceneUtils.changeInformation(changeEventFirmTxtField, registeredEventFirmLabel);
-        String other = SceneUtils.changeInformation(changeEventOtherTxtField, registeredEventOtherLabel);
-        String ticket = SceneUtils.changeInformation(changeEventTicketPriceTxtField, registeredEventTicketPriceLabel);
+        String name = ControllerHelper.changeInformation(changeEventNameTxtField, registeredEventNameLabel);
+        String performer = ControllerHelper.changeInformation(changeEventPerformersTxtField, registeredEventPerformersLabel);
+        String time = ControllerHelper.changeInformation(changeEventTimeTxtField, registeredEventTimeLabel);
+        String date = ControllerHelper.changeInformation(changeEventDateTxtField, registeredEventDateLabel);
+        String contact = ControllerHelper.changeInformation(changeEventContactPersonTxtField, registeredEventContactPersonLabel);
+        String phone = ControllerHelper.changeInformation(changeEventPhoneTxtField, registeredEventPhoneLabel);
+        String email = ControllerHelper.changeInformation(changeEventEmailTxtField, registeredEventEmailLabel);
+        String website = ControllerHelper.changeInformation(changeEventWebpageTxtField, registeredEventWebpageLabel);
+        String firm = ControllerHelper.changeInformation(changeEventFirmTxtField, registeredEventFirmLabel);
+        String other = ControllerHelper.changeInformation(changeEventOtherTxtField, registeredEventOtherLabel);
+        String ticket = ControllerHelper.changeInformation(changeEventTicketPriceTxtField, registeredEventTicketPriceLabel);
 
         if (changeEventTypeChoiceBox.getValue() == null) {
             type = registeredEventTypeLabel.getText();

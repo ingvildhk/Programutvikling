@@ -2,7 +2,6 @@ package org.kulturhusfx.base;
 
 import org.kulturhusfx.model.TicketModel;
 import org.kulturhusfx.util.Checker;
-
 import java.io.Serializable;
 
 public class Event implements Serializable {
@@ -24,17 +23,15 @@ public class Event implements Serializable {
     private transient TicketModel ticketModel;
     private int availableTickets;
 
+    //Får ofte feilmelding hvis ikke SVUID er satt, tallet er tilfelding
     private static final long serialVersionUID = -3210158538721287756L;
 
     //Kjøres etter innlest fil for å kontrollere at id-ene holdes unike
+    //TODO brukes ikke, kan nok slettes
     public static void setMinId(int id) {
         if (id > counter) {
             counter = id;
         }
-    }
-
-    public void createTicketModel(){
-        ticketModel = new TicketModel();
     }
 
     public Event(ContactPerson contactPerson, String name, String performers,
@@ -51,12 +48,16 @@ public class Event implements Serializable {
         this.date = date;
         this.time = time;
         this.ticketPrice = ticketPrice;
+        //TODO ID brukes ikke kan nok slettes
         this.id = "" + counter++;
         this.availableTickets = Integer.parseInt(hall.getNumberOfSeats());
 
         //Oppretter ny liste med billetter for hvert arrangement som opprettes
-        //Må opprette ny liste med billetter for hvert arrangement så kanskje noe som
         createTicketModel();
+    }
+
+    public void createTicketModel(){
+        ticketModel = new TicketModel();
     }
 
     public ContactPerson getContactPerson() {

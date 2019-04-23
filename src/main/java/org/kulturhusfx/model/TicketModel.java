@@ -1,18 +1,12 @@
 package org.kulturhusfx.model;
 
-import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Ticket;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketModel implements Serializable{
+public class TicketModel{
 
     private List<Ticket> ticketList = new ArrayList<>();;
-
-    public TicketModel() {
-    }
 
     public void createTicket(String phoneNumber) {
         ticketList.add(new Ticket(phoneNumber));
@@ -22,6 +16,8 @@ public class TicketModel implements Serializable{
         return ticketList;
     }
 
+    //TODO vi har ikke satt opp at man skal få setenummer når man bestiller
+    //Må enten implementere det, eller fjerne denne metoden
     public int getSeatNumber(){
         return ticketList.size();
     }

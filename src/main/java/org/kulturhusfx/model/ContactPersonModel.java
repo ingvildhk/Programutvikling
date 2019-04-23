@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ContactPersonModel implements Serializable {
+
+    //TODO Hele denne klassen brukes ikke, da kontaktpersoner ikke blir lagret i en egen liste
+    //TODO Men kun i Hall og Hallmodel. ContactPersonModel kan nok fjernes
     /*
 
     private static final ContactPersonModel contactPersonModel = new ContactPersonModel();

@@ -9,6 +9,7 @@ import org.kulturhusfx.controllers.MainPageController;
 
 public class OrderButton extends TableCell<Event, Boolean> {
     final Button cellButton = new Button("Bestill");
+    private SceneUtils sceneUtils = SceneUtils.getInstance();
 
     public OrderButton(){
         //Hva som skjer når man trykker på bestill
@@ -18,7 +19,7 @@ public class OrderButton extends TableCell<Event, Boolean> {
             public void handle(ActionEvent event) {
                 ///Henter ut det eventet som er på raden man trykker på
                 MainPageController.currentEvent = OrderButton.this.getTableView().getItems().get(OrderButton.this.getIndex());
-                SceneUtils.launchScene(event, MainPageController.class, "purchaseTicket.fxml");
+                sceneUtils.launchScene(event, MainPageController.class, "purchaseTicket.fxml");
             }
         });
     }
