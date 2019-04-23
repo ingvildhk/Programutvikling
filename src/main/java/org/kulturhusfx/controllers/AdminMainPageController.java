@@ -60,11 +60,13 @@ public class AdminMainPageController {
     public void registerEventFromFileBtn(ActionEvent event) throws IOException, ClassNotFoundException {
         fileChooserMethods.registerEventFromFile();
         updateHallList();
+        sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Arrangement er opprettet fra fil");
     }
 
     public void registerHallFromFileBtn(ActionEvent event) throws IOException, ClassNotFoundException {
         fileChooserMethods.registerHallFromFile();
         updateHallList();
+        sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Sal er opprettet fra fil");
     }
 
     public void backToMainPageBtn(ActionEvent event) throws IOException {
