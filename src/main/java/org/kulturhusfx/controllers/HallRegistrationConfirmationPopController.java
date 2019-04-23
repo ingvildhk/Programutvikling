@@ -2,19 +2,13 @@ package org.kulturhusfx.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.*;
-import org.kulturhusfx.util.fileHandling.FileWriterCsv;
-import org.kulturhusfx.util.fileHandling.FileWriterJobj;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InvalidObjectException;
 import java.util.List;
 
 public class HallRegistrationConfirmationPopController {
