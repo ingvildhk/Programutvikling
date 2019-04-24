@@ -1,6 +1,7 @@
 package org.kulturhusfx.base;
 
 import org.kulturhusfx.util.Checker;
+import org.kulturhusfx.util.ControllerHelper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -11,7 +12,7 @@ public class Ticket {
 
     //TODO Date må implementeres
     private String phoneNumber;
-    private String timeOfPurchase;
+    //private String timeOfPurchase;
 
     public Ticket(String phoneNumber) {
         Checker.checkValidPhone(phoneNumber);
@@ -22,15 +23,16 @@ public class Ticket {
         return phoneNumber;
     }
 
-    public String getDate(){
-        return timeOfPurchase;
-    }
-
     /*
-    public void setTimeOfPurchase(String dato){
-        LocalDate dato = LocalDate.now().toString();
+    public void setTimeOfPurchase(){
+        String dato = ControllerHelper.getLocalDate().toString();
         this.timeOfPurchase = dato;
     }
+
+    public String getTimeOfPurchase(){
+        return timeOfPurchase;
+    }
     */
+
 }
 

@@ -152,7 +152,7 @@ public class Event implements Serializable {
     }
 
     public void setType(String type) {
-        Checker.checkIfFieldIsEmpty(type);
+       // Checker.checkIfFieldIsEmpty(type);
         this.type = type;
     }
 

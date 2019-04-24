@@ -19,9 +19,12 @@ import org.kulturhusfx.util.Threads.CsvHallThread;
 import org.kulturhusfx.util.Threads.JobjEventThread;
 import org.kulturhusfx.util.Threads.JobjHallThread;
 import java.io.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import static org.kulturhusfx.util.ControllerHelper.getLocalDate;
 
 public class AdminMainPageController {
 
@@ -53,6 +56,18 @@ public class AdminMainPageController {
         // Setter default value på choiceboxene
         eventHall.setValue(hallList.get(0).getHallName());
         eventType.setValue("Konsert");
+        datePicker.setValue(ControllerHelper.getLocalDate());
+
+        /*
+        Forsøk på å disable passerte datoer, finner ikke helt utav det
+        LocalDate date = datePicker.getValue();
+        LocalDate today = LocalDate.now();
+        if(date.compareTo(today) < 0) {
+            boolean invalidDate = true;
+            datePicker.setDisable();
+        }
+        */
+
     }
 
     public void eventRegistrationBtn(ActionEvent event) {

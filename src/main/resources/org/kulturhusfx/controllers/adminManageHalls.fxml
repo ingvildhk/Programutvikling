@@ -9,19 +9,24 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.AdminManageHallsController">
          <children>
-            <Button layoutX="33.0" layoutY="25.0" mnemonicParsing="false" onAction="#backToAdminMainPageBtn" text="Tilbake" />
-            <Label layoutX="33.0" layoutY="93.0" prefHeight="17.0" prefWidth="255.0" text="Oversikt over lokaler:">
+            <Button layoutX="22.0" layoutY="31.0" mnemonicParsing="false" onAction="#backToAdminMainPageBtn" text="Tilbake" />
+            <Label layoutX="22.0" layoutY="93.0" prefHeight="17.0" prefWidth="255.0" text="Oversikt over saler:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-      <TableView fx:id="tableViewHalls" layoutX="33.0" layoutY="123.0" prefHeight="200.0" prefWidth="740.0">
+      <TableView fx:id="tableViewHalls" layoutX="22.0" layoutY="124.0" prefHeight="297.0" prefWidth="485.0">
         <columns>
           <TableColumn fx:id="nameColumn" onEditCommit="#editHallNameCellEvent" prefWidth="159.0" text="Navn" />
-          <TableColumn fx:id="typeOfHallColumn" onEditCommit="#editHallTypeCellEvent" prefWidth="121.0" text="Type lokale" />
-            <TableColumn fx:id="numberOfSeatsColumn" minWidth="0.0" onEditCommit="#editNumberOfSeatsCellEvent" prefWidth="148.0" text="Antall plasser" />
+          <TableColumn fx:id="typeOfHallColumn" onEditCommit="#editHallTypeCellEvent" prefWidth="165.0" text="Type lokale" />
+            <TableColumn fx:id="numberOfSeatsColumn" minWidth="0.0" onEditCommit="#editNumberOfSeatsCellEvent" prefWidth="167.0" text="Antall plasser" />
         </columns>
       </TableView>
-      <Button fx:id="deleteHallBtn" layoutX="35.0" layoutY="353.0" mnemonicParsing="false" onAction="#deleteHallFromTableView" prefHeight="27.0" prefWidth="110.0" text="Slett sal" />
+      <Button fx:id="deleteHallBtn" layoutX="33.0" layoutY="448.0" mnemonicParsing="false" onAction="#deleteHallFromTableView" prefHeight="27.0" prefWidth="110.0" text="Slett sal" />
+      <Label layoutX="228.0" layoutY="30.0" text="Småkommunens kulturhus">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
          </children>
       </AnchorPane>

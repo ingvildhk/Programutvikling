@@ -8,71 +8,83 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.AdminMainPageController">
     <children>
-        <Label layoutX="161.0" layoutY="10.0" text="Småkommunens Kulturhus">
+        <Label layoutX="206.0" layoutY="14.0" text="Småkommunens Kulturhus">
             <font>
-                <Font size="18.0" />
+                <Font size="24.0" />
             </font>
         </Label>
-        <Label layoutX="21.0" layoutY="61.0" text="Legg til arrangement">
+      <VBox layoutX="14.0" layoutY="80.0" prefHeight="199.0" prefWidth="192.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#seeAllEventsBtn" text="Administrer saler" />
+            <Button mnemonicParsing="false" onAction="#manageEventsBtn" text="Administrer arrangementer" />
+         </children>
+      </VBox>
+      <VBox layoutX="466.0" layoutY="113.0" prefHeight="331.0" prefWidth="235.0">
+         <children>
+              <Label text="Navn på kontaktperson" />
+              <TextField fx:id="contactName" prefHeight="27.0" prefWidth="196.0" />
+              <Label text="Kontaktpersons tlf" />
+              <TextField fx:id="contactPhone" prefHeight="27.0" prefWidth="196.0" />
+              <Label text="Kontaktpersons epost" />
+              <TextField fx:id="contactEmail" prefHeight="27.0" prefWidth="196.0" />
+              <Label prefHeight="10.0" prefWidth="151.0" text="Kontaktpersons nettside" />
+              <TextField fx:id="contactWebsite" prefHeight="27.0" prefWidth="196.0" />
+              <Label text="Kontaktpersons firma" />
+              <TextField fx:id="contactFirm" prefHeight="27.0" prefWidth="196.0" />
+              <Label text="Annet" />
+              <TextField fx:id="contactOther" prefHeight="27.0" prefWidth="196.0" />
+         </children>
+      </VBox>
+      <VBox layoutX="206.0" layoutY="113.0" prefHeight="482.0" prefWidth="235.0">
+         <children>
+              <Label text="Navn på Arrangementet" />
+            <TextField fx:id="eventName" />
+              <Label text="Type" />
+              <ChoiceBox fx:id="eventType" prefHeight="27.0" prefWidth="174.0" />
+              <Label text="Opptredende Personer" />
+              <TextField id="performers" fx:id="performers" prefHeight="27.0" prefWidth="174.0" />
+              <Label text="Sal" />
+              <ChoiceBox id="room" fx:id="eventHall" prefHeight="25.0" prefWidth="121.0" />
+              <Label text="Klokke (hh:mm)" />
+              <TextField fx:id="eventTime" prefHeight="27.0" prefWidth="83.0" promptText="hh:mm" />
+            <Label text="Dato" />
+            <DatePicker fx:id="datePicker" editable="false" />
+              <Label text="Billettpris" />
+              <TextField fx:id="ticketPrice" prefHeight="27.0" prefWidth="72.0" promptText="00,00" />
+              <Label text="Program" />
+            <TextArea fx:id="eventSchedule" prefHeight="102.0" prefWidth="182.0" />
+         </children>
+      </VBox>
+        <Label layoutX="741.0" layoutY="80.0" text="Legg til sal">
             <font>
-                <Font size="14.0" />
+                <Font size="16.0" />
             </font>
         </Label>
-        <Label layoutX="646.0" layoutY="70.0" text="Legg til sal">
+        <Button layoutX="466.0" layoutY="443.0" mnemonicParsing="false" onAction="#eventRegistrationBtn" text="Registrer arrangement" />
+        <Separator layoutX="718.0" layoutY="80.0" orientation="VERTICAL" prefHeight="463.0" prefWidth="0.0" />
+      <Button layoutX="466.0" layoutY="486.0" mnemonicParsing="false" onAction="#registerEventFromFileBtn" text="Registrer arrangement fra fil" />
+        <Label layoutX="206.0" layoutY="80.0" text="Legg til arrangement">
             <font>
-                <Font size="14.0" />
+                <Font size="16.0" />
             </font>
         </Label>
-        <Label layoutX="645.0" layoutY="111.0" text="Salens navn" />
-        <Label layoutX="644.0" layoutY="161.0" text="Type" />
-        <Label layoutX="641.0" layoutY="225.0" text="Antall plasser" />
-        <TextField fx:id="hallName" layoutX="641.0" layoutY="130.0" prefHeight="25.0" prefWidth="115.0" />
-        <TextField fx:id="hallType" layoutX="641.0" layoutY="188.0" prefHeight="25.0" prefWidth="115.0" />
-        <TextField fx:id="totalNumberOfSeats" layoutX="641.0" layoutY="251.0" prefHeight="25.0" prefWidth="115.0" />
-        <Button layoutX="644.0" layoutY="295.0" mnemonicParsing="false" onAction="#roomRegistrationBtn" text="Registrer sal" />
-        <Label layoutX="16.0" layoutY="89.0" text="Navn på Arrangementet" />
-        <Label layoutX="16.0" layoutY="135.0" text="Type" />
-        <Label layoutX="19.0" layoutY="182.0" text="Opptredende Personer" />
-        <Label layoutX="21.0" layoutY="364.0" text="Program" />
-        <Label layoutX="22.0" layoutY="242.0" text="Sal" />
-        <Label layoutX="12.0" layoutY="295.0" text="Klokke (hh:mm)" />
-        <Label layoutX="232.0" layoutY="421.0" text="Billettpris" />
-        <TextField id="performers" fx:id="performers" layoutX="19.0" layoutY="207.0" prefHeight="27.0" prefWidth="174.0" />
-        <TextField fx:id="eventTime" layoutX="19.0" layoutY="319.0" prefHeight="27.0" prefWidth="83.0" promptText="hh:mm" />
-        <TextField fx:id="ticketPrice" layoutX="232.0" layoutY="443.0" prefHeight="27.0" prefWidth="72.0" promptText="00,00" />
-        <ChoiceBox fx:id="eventType" layoutX="16.0" layoutY="156.0" prefHeight="27.0" prefWidth="174.0" />
-        <ChoiceBox id="room" fx:id="eventHall" layoutX="21.0" layoutY="260.0" prefHeight="25.0" prefWidth="121.0" />
-        <Label layoutX="312.0" layoutY="89.0" text="Navn på kontaktperson" />
-        <Label layoutX="310.0" layoutY="143.0" text="Kontaktpersons tlf" />
-        <Label layoutX="314.0" layoutY="190.0" text="Kontaktpersons epost" />
-        <Label layoutX="311.0" layoutY="246.0" prefHeight="10.0" prefWidth="151.0" text="Kontaktpersons nettside" />
-        <Label layoutX="309.0" layoutY="303.0" text="Kontaktpersons firma" />
-        <Label layoutX="309.0" layoutY="355.0" text="Annet" />
-        <TextField fx:id="contactName" layoutX="311.0" layoutY="106.0" prefHeight="27.0" prefWidth="196.0" />
-        <TextField fx:id="contactPhone" layoutX="310.0" layoutY="164.0" prefHeight="27.0" prefWidth="196.0" />
-        <TextField fx:id="contactEmail" layoutX="310.0" layoutY="214.0" prefHeight="27.0" prefWidth="196.0" />
-        <TextField fx:id="contactWebsite" layoutX="310.0" layoutY="268.0" prefHeight="27.0" prefWidth="196.0" />
-        <TextField fx:id="contactFirm" layoutX="311.0" layoutY="327.0" prefHeight="27.0" prefWidth="196.0" />
-        <TextField fx:id="contactOther" layoutX="314.0" layoutY="377.0" prefHeight="27.0" prefWidth="196.0" />
-        <Separator layoutX="577.0" layoutY="65.0" orientation="VERTICAL" prefHeight="331.0" prefWidth="0.0" />
-        <Button layoutX="354.0" layoutY="456.0" mnemonicParsing="false" onAction="#eventRegistrationBtn" text="Registrer arrangement" />
-      <TextArea fx:id="eventSchedule" layoutX="21.0" layoutY="391.0" prefHeight="102.0" prefWidth="182.0" />
-      <TextField fx:id="eventName" layoutX="20.0" layoutY="106.0" />
-      <Button layoutX="18.0" layoutY="12.0" mnemonicParsing="false" onAction="#backToMainPageBtn" text="Tilbake" />
-      <Button layoutX="699.0" layoutY="24.0" mnemonicParsing="false" onAction="#seeAllEventsBtn" text="Endre lokaler" />
-      <Button layoutX="555.0" layoutY="24.0" mnemonicParsing="false" onAction="#manageEventsBtn" text="Endre arrangementer" />
-      <Label layoutX="110.0" layoutY="295.0" text="Dato (dd/mm/yy)" />
-      <DatePicker fx:id="datePicker" editable="false" layoutX="106.0" layoutY="319.0" />
-      <Button layoutX="555.0" layoutY="456.0" mnemonicParsing="false" onAction="#registerEventFromFileBtn" text="Registrer arrangement fra fil" />
-      <Label layoutX="564.0" layoutY="420.0" text="Registrer arrangement eller sal fra fil">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Button layoutX="759.0" layoutY="458.0" mnemonicParsing="false" onAction="#registerHallFromFileBtn" text="Registrer sal fra fil" />
+      <VBox layoutX="741.0" layoutY="113.0" prefHeight="160.0" prefWidth="235.0">
+         <children>
+              <Label text="Salens navn" />
+              <TextField fx:id="hallName" prefHeight="25.0" prefWidth="115.0" />
+              <Label text="Type" />
+              <TextField fx:id="hallType" prefHeight="25.0" prefWidth="115.0" />
+              <Label text="Antall plasser" />
+              <TextField fx:id="totalNumberOfSeats" prefHeight="25.0" prefWidth="115.0" />
+         </children>
+      </VBox>
+      <Button layoutX="741.0" layoutY="341.0" mnemonicParsing="false" onAction="#registerHallFromFileBtn" text="Registrer sal fra fil" />
+        <Button layoutX="741.0" layoutY="300.0" mnemonicParsing="false" onAction="#roomRegistrationBtn" text="Registrer sal" />
+      <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#backToMainPageBtn" text="Tilbake" />
     </children>
 </AnchorPane>

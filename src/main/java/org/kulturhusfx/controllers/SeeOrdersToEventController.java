@@ -10,9 +10,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Ticket;
+import org.kulturhusfx.model.TicketModel;
 import org.kulturhusfx.util.SceneUtils;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SeeOrdersToEventController {
 
@@ -23,29 +28,27 @@ public class SeeOrdersToEventController {
         TableView<Ticket> tableViewTickets;
 
         @FXML
-        TableColumn<Ticket, String> phoneCol, numberOfTicketsCol;
+        TableColumn<Ticket, String> phoneCol;
+
+        @FXML
+        TableColumn<Ticket, Integer> numberOfTicketsCol;
 
 
         private Event selectedEvent;
         private int numberOfTickets;
-
 
         public void initData (Event event){
             this.selectedEvent = event;
 
             ObservableList<Ticket> orders = FXCollections.observableArrayList();
 
-
-            for (Ticket ticket : event.getTicketModel().getTicketList()) {
-                /*if (ticket.getPhoneNumber().equals(ticket)) {
-                    // Gir antall billetter som er bestilt på telefonnummer. Må legge til OG equals timePurchased også
-                    numberOfTickets++;
-                    // Add ticket.getPhoneNumber only once
-
-                }*/
+            Set<Ticket> liste = new HashSet<>(orders);
+            for (Ticket ticket : event.getTicketModel().getTicketList()){
+                numberOfTickets = Collections.frequency(orders, ticket.getPhoneNumber());
+                numberOfTicketsCol.setCellValueFactory(new PropertyValueFactory<>(Integer.toString(numberOfTickets)));
                 orders.add(ticket);
-
             }
+
             System.out.println(numberOfTickets);
 
 
