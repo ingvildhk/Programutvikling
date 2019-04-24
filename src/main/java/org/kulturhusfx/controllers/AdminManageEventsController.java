@@ -81,7 +81,6 @@ public class AdminManageEventsController {
         showScene(parent, event);
 
         /*
-
         Scene scene = new Scene(parent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);

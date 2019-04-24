@@ -1,33 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.PurchaseTicketController">
     <children>
+      <HBox layoutX="125.0" layoutY="148.0" prefHeight="281.0" prefWidth="725.0">
+         <children>
+            <VBox prefHeight="288.0" prefWidth="199.0" spacing="10.0">
+               <children>
+                  <Label text="Arrangement:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Dato:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Klokkeslett:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Deltakelse personer:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Type arrangement:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Sted:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Program:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Billettpris:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets right="15.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="281.0" prefWidth="289.0" spacing="10.0">
+               <children>
+                    <Label fx:id="eventLabel" text="Arrangement">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="dateLabel" text="Dato">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="timeLabel" text="Klokkeslett">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="performersLabel" text="Deltakende Personer">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="typeLabel" text="Type Arrangement">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hallLabel" text="Sal">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="scheduleLabel" text="Program">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="ticketPriceLabel" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="264.0" prefWidth="210.0" spacing="10.0">
+               <children>
+                    <Label text="Telefonnummer">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                    <TextField fx:id="phoneTxtField" />
+                    <Label text="Antall Billetter">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                    <ChoiceBox fx:id="numberOfTicketsChoiceBox" prefWidth="150.0" />
+                    <Button mnemonicParsing="false" onAction="#orderBtn" text="Bestill" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
         <Label layoutX="409.0" layoutY="23.0" text="Småkommunens Kulturhus">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label fx:id="eventLabel" layoutX="331.0" layoutY="136.0" text="Arrangement" />
-        <Label fx:id="dateLabel" layoutX="419.0" layoutY="205.0" text="Dato" />
-        <TextField fx:id="phoneTxtField" layoutX="780.0" layoutY="223.0" />
-        <Label layoutX="805.0" layoutY="190.0" text="Telefonnummer" />
-        <Label layoutX="817.0" layoutY="284.0" text="Antall Billetter" />
-        <ChoiceBox fx:id="numberOfTicketsChoiceBox" layoutX="779.0" layoutY="322.0" prefWidth="150.0" />
-        <Button layoutX="830.0" layoutY="385.0" mnemonicParsing="false" onAction="#orderBtn" text="Bestill" />
       <Button layoutX="21.0" layoutY="24.0" mnemonicParsing="false" onAction="#backToMainPageBtn" text="Tilbake" />
-      <Label fx:id="timeLabel" layoutX="544.0" layoutY="205.0" text="Klokkeslett" />
-      <Label fx:id="performersLabel" layoutX="193.0" layoutY="266.0" text="Deltakende Personer" />
-      <Label fx:id="typeLabel" layoutX="451.0" layoutY="266.0" text="Type Arrangement" />
-      <Label fx:id="hallLabel" layoutX="232.0" layoutY="205.0" text="Sal" />
-      <Label fx:id="scheduleLabel" layoutX="343.0" layoutY="347.0" text="Program" />
-      <Label layoutX="779.0" layoutY="145.0" text="Billettpris:" />
-      <Label fx:id="ticketPriceLabel" layoutX="878.0" layoutY="145.0" text="Label" />
     </children>
 </AnchorPane>

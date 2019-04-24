@@ -6,6 +6,11 @@ import javafx.scene.control.TextField;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+
 public class ControllerHelper {
 
     public static String changeInformation(TextField textField, Label label){
@@ -33,5 +38,13 @@ public class ControllerHelper {
     //General method for adding types of events to the choicebox
     public static void addEventType(ChoiceBox box){
         box.getItems().addAll("Konsert", "Teater", "Konferanse", "Forestilling", "Annet");
+    }
+
+    // Method to get date now
+    public static final LocalDate getLocalDate(){
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(date , formatter);
+        return localDate;
     }
 }
