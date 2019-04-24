@@ -1,22 +1,27 @@
 package org.kulturhusfx.controllers;
 
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
-import org.kulturhusfx.util.Checker;
-import org.kulturhusfx.util.ControllerHelper;
-import org.kulturhusfx.util.FileChooserMethods;
-import org.kulturhusfx.util.SceneUtils;
+import org.kulturhusfx.util.*;
+import org.kulturhusfx.util.Threads.CsvEventThread;
+import org.kulturhusfx.util.Threads.CsvHallThread;
+import org.kulturhusfx.util.Threads.JobjEventThread;
+import org.kulturhusfx.util.Threads.JobjHallThread;
 import java.io.*;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class AdminMainPageController {
 
@@ -33,10 +38,14 @@ public class AdminMainPageController {
 
     private HallModel hallModel = HallModel.getInstance();
     private EventModel eventModel = EventModel.getInstance();
-    private List <Event> eventList = eventModel.getEventList();
     private List <Hall> hallList = hallModel.getHallList();
     private SceneUtils sceneUtils = SceneUtils.getInstance();
-    private FileChooserMethods fileChooserMethods = FileChooserMethods.getInstance();
+    private FileChooser fileChooser = new FileChooser();
+    private FileChooser.ExtensionFilter jobjFilter = new FileChooser.ExtensionFilter("jobj", "*.jobj");
+    private FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("csv", "*.csv");
+    private ExecutorService service = Executors.newSingleThreadExecutor();
+    //static file for being able to run read from file in threads
+    public static File file;
 
     public void initialize() {
         addEventType();
@@ -58,13 +67,41 @@ public class AdminMainPageController {
     }
 
     public void registerEventFromFileBtn(ActionEvent event) throws IOException, ClassNotFoundException {
-        fileChooserMethods.registerEventFromFile();
+        setFileChooserFilters();
+        fileChooser.setTitle("Velg arrangementsfil");
+        File selectedFile = fileChooser.showOpenDialog(null);
+        file = selectedFile;
+        if (fileChooser.getSelectedExtensionFilter() == csvFilter){
+            Task<Void> task = new CsvEventThread(this::eventConfirmation);
+            service.execute(task);
+        }
+        else if (fileChooser.getSelectedExtensionFilter() == jobjFilter){
+            Task<Void> task = new JobjEventThread(this::eventConfirmation);
+            service.execute(task);
+        }
+    }
+
+    public void eventConfirmation(){
         updateHallList();
         sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Arrangement er opprettet fra fil");
     }
 
     public void registerHallFromFileBtn(ActionEvent event) throws IOException, ClassNotFoundException {
-        fileChooserMethods.registerHallFromFile();
+        setFileChooserFilters();
+        fileChooser.setTitle("Velg salfil");
+        File selectedFile = fileChooser.showOpenDialog(null);
+        file = selectedFile;
+        if (fileChooser.getSelectedExtensionFilter() == csvFilter){
+            Task<Void> task = new CsvHallThread(this::hallConfirmation);
+            service.execute(task);
+        }
+        else if (fileChooser.getSelectedExtensionFilter() == jobjFilter){
+            Task<Void> task = new JobjHallThread(this::hallConfirmation);
+            service.execute(task);
+        }
+    }
+
+    public void hallConfirmation(){
         updateHallList();
         sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Sal er opprettet fra fil");
     }
@@ -79,6 +116,12 @@ public class AdminMainPageController {
 
     public void seeAllEventsBtn(ActionEvent event) throws IOException {
         sceneUtils.launchScene(event, AdminManageHallsController.class, "adminManageHalls.fxml");
+    }
+
+    public void setFileChooserFilters(){
+        if(!fileChooser.getExtensionFilters().contains(jobjFilter)){
+            fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
+        }
     }
 
     //Legger til valg i arrangementstype - choicebox
