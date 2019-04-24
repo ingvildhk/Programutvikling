@@ -5,6 +5,7 @@ import org.kulturhusfx.controllers.AdminMainPageController;
 import org.kulturhusfx.util.fileHandling.ReadFileJobj;
 
 import java.io.File;
+import java.io.IOException;
 
 public class JobjHallThread extends Task<Void> {
 
@@ -22,7 +23,8 @@ public class JobjHallThread extends Task<Void> {
             Thread.sleep(3000);
             readFileJobj.readHallFromFile(file);
         }
-        catch (Exception e){
+        catch(Exception e){
+
         }
         return null;
     }

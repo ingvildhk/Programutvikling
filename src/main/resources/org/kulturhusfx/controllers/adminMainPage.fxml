@@ -20,8 +20,8 @@
         </Label>
       <VBox layoutX="14.0" layoutY="80.0" prefHeight="199.0" prefWidth="192.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#seeAllEventsBtn" text="Administrer saler" />
-            <Button mnemonicParsing="false" onAction="#manageEventsBtn" text="Administrer arrangementer" />
+            <Button fx:id="btnManageHalls" mnemonicParsing="false" onAction="#seeAllEventsBtn" text="Administrer saler" />
+            <Button fx:id="btnManageEvents" mnemonicParsing="false" onAction="#manageEventsBtn" text="Administrer arrangementer" />
          </children>
       </VBox>
       <VBox layoutX="466.0" layoutY="113.0" prefHeight="331.0" prefWidth="235.0">
@@ -65,9 +65,9 @@
                 <Font size="16.0" />
             </font>
         </Label>
-        <Button layoutX="466.0" layoutY="443.0" mnemonicParsing="false" onAction="#eventRegistrationBtn" text="Registrer arrangement" />
+        <Button fx:id="btnRegisterEvent" layoutX="466.0" layoutY="443.0" mnemonicParsing="false" onAction="#eventRegistrationBtn" text="Registrer arrangement" />
         <Separator layoutX="718.0" layoutY="80.0" orientation="VERTICAL" prefHeight="463.0" prefWidth="0.0" />
-      <Button layoutX="466.0" layoutY="486.0" mnemonicParsing="false" onAction="#registerEventFromFileBtn" text="Registrer arrangement fra fil" />
+      <Button fx:id="btnRegisterEventFile" layoutX="466.0" layoutY="486.0" mnemonicParsing="false" onAction="#registerEventFromFileBtn" text="Registrer arrangement fra fil" />
         <Label layoutX="206.0" layoutY="80.0" text="Legg til arrangement">
             <font>
                 <Font size="16.0" />
@@ -83,8 +83,8 @@
               <TextField fx:id="totalNumberOfSeats" prefHeight="25.0" prefWidth="115.0" />
          </children>
       </VBox>
-      <Button layoutX="741.0" layoutY="341.0" mnemonicParsing="false" onAction="#registerHallFromFileBtn" text="Registrer sal fra fil" />
-        <Button layoutX="741.0" layoutY="300.0" mnemonicParsing="false" onAction="#roomRegistrationBtn" text="Registrer sal" />
-      <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#backToMainPageBtn" text="Tilbake" />
+      <Button fx:id="btnRegisterHallFile" layoutX="741.0" layoutY="341.0" mnemonicParsing="false" onAction="#registerHallFromFileBtn" text="Registrer sal fra fil" />
+        <Button fx:id="btnRegisterHall" layoutX="741.0" layoutY="300.0" mnemonicParsing="false" onAction="#roomRegistrationBtn" text="Registrer sal" />
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#backToMainPageBtn" text="Tilbake" />
     </children>
 </AnchorPane>

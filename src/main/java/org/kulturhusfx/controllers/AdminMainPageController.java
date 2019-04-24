@@ -3,10 +3,7 @@ package org.kulturhusfx.controllers;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Event;
@@ -18,6 +15,9 @@ import org.kulturhusfx.util.Threads.CsvEventThread;
 import org.kulturhusfx.util.Threads.CsvHallThread;
 import org.kulturhusfx.util.Threads.JobjEventThread;
 import org.kulturhusfx.util.Threads.JobjHallThread;
+import org.kulturhusfx.util.exception.InvalidHallException;
+import org.kulturhusfx.util.exception.InvalidInputException;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -28,6 +28,8 @@ import static org.kulturhusfx.util.ControllerHelper.getLocalDate;
 
 public class AdminMainPageController {
 
+    @FXML
+    private Button btnBack, btnManageEvents, btnManageHalls, btnRegisterEvent, btnRegisterEventFile, btnRegisterHallFile, btnRegisterHall;
     @FXML
     private TextField hallName, hallType, totalNumberOfSeats, performers, eventTime, ticketPrice, eventName;
     @FXML
@@ -81,55 +83,62 @@ public class AdminMainPageController {
         sceneUtils.launchScene(event, HallRegistrationConfirmationPopController.class, "hallRegistrationConfirmationPop.fxml");
     }
 
-    public void registerEventFromFileBtn(ActionEvent event) throws IOException, ClassNotFoundException {
+    public void registerEventFromFileBtn(ActionEvent event){
         setFileChooserFilters();
         fileChooser.setTitle("Velg arrangementsfil");
         File selectedFile = fileChooser.showOpenDialog(null);
         file = selectedFile;
         if (fileChooser.getSelectedExtensionFilter() == csvFilter){
+            disableButtons();
             Task<Void> task = new CsvEventThread(this::eventConfirmation);
             service.execute(task);
         }
         else if (fileChooser.getSelectedExtensionFilter() == jobjFilter){
+            disableButtons();
             Task<Void> task = new JobjEventThread(this::eventConfirmation);
             service.execute(task);
         }
     }
 
     public void eventConfirmation(){
+        openButtons();
         updateHallList();
         sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Arrangement er opprettet fra fil");
     }
 
-    public void registerHallFromFileBtn(ActionEvent event) throws IOException, ClassNotFoundException {
+    public void registerHallFromFileBtn(ActionEvent event) {
         setFileChooserFilters();
         fileChooser.setTitle("Velg salfil");
         File selectedFile = fileChooser.showOpenDialog(null);
         file = selectedFile;
         if (fileChooser.getSelectedExtensionFilter() == csvFilter){
+            disableButtons();
             Task<Void> task = new CsvHallThread(this::hallConfirmation);
             service.execute(task);
         }
         else if (fileChooser.getSelectedExtensionFilter() == jobjFilter){
-            Task<Void> task = new JobjHallThread(this::hallConfirmation);
-            service.execute(task);
+
+                disableButtons();
+                Task<Void> task = new JobjHallThread(this::hallConfirmation);
+                service.execute(task);
         }
     }
 
     public void hallConfirmation(){
+        openButtons();
         updateHallList();
         sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Sal er opprettet fra fil");
     }
 
-    public void backToMainPageBtn(ActionEvent event) throws IOException {
+    public void backToMainPageBtn(ActionEvent event) {
         sceneUtils.launchScene(event, MainPageController.class, "MainPage.fxml");
     }
 
-    public void manageEventsBtn(ActionEvent event) throws IOException {
+    public void manageEventsBtn(ActionEvent event) {
         sceneUtils.launchScene(event, AdminManageEventsController.class, "adminManageEvents.fxml");
     }
 
-    public void seeAllEventsBtn(ActionEvent event) throws IOException {
+    public void seeAllEventsBtn(ActionEvent event) {
         sceneUtils.launchScene(event, AdminManageHallsController.class, "adminManageHalls.fxml");
     }
 
@@ -137,6 +146,26 @@ public class AdminMainPageController {
         if(!fileChooser.getExtensionFilters().contains(jobjFilter)){
             fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
         }
+    }
+
+    public void disableButtons(){
+        btnBack.setDisable(true);
+        btnManageEvents.setDisable(true);
+        btnManageHalls.setDisable(true);
+        btnRegisterEvent.setDisable(true);
+        btnRegisterEventFile.setDisable(true);
+        btnRegisterHallFile.setDisable(true);
+        btnRegisterHall.setDisable(true);
+    }
+
+    public void openButtons(){
+        btnBack.setDisable(false);
+        btnManageEvents.setDisable(false);
+        btnManageHalls.setDisable(false);
+        btnRegisterEvent.setDisable(false);
+        btnRegisterEventFile.setDisable(false);
+        btnRegisterHallFile.setDisable(false);
+        btnRegisterHall.setDisable(false);
     }
 
     //Legger til valg i arrangementstype - choicebox
