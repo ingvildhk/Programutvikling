@@ -29,38 +29,6 @@ public class FileChooserMethods {
     FileChooser.ExtensionFilter jobjFilter = new FileChooser.ExtensionFilter("jobj", "*.jobj");
     FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("csv", "*.csv");
 
-    public void registerHallFromFile() throws  IOException, ClassNotFoundException{
-        fileChooser.setTitle("Velg salfil");
-        if(!fileChooser.getExtensionFilters().contains(jobjFilter)){
-            fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
-        }
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (fileChooser.getSelectedExtensionFilter() == csvFilter){
-            ReadFileCsv fileReaderCsv = new ReadFileCsv();
-            fileReaderCsv.readHallFromFile(selectedFile);
-        }
-        else if (fileChooser.getSelectedExtensionFilter() == jobjFilter){
-            ReadFileJobj fileReaderJobj = new ReadFileJobj();
-            fileReaderJobj.readHallFromFile(selectedFile);
-        }
-    }
-
-    public void registerEventFromFile() throws IOException, ClassNotFoundException{
-        fileChooser.setTitle("Velg arrangementsfil");
-        if(!fileChooser.getExtensionFilters().contains(jobjFilter)){
-            fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
-        }
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (fileChooser.getSelectedExtensionFilter() == csvFilter){
-            ReadFileCsv fileReaderCsv = new ReadFileCsv();
-            fileReaderCsv.readEventFromFile(selectedFile);
-        }
-        else if (fileChooser.getSelectedExtensionFilter() == jobjFilter){
-            ReadFileJobj fileReaderJobj = new ReadFileJobj();
-            fileReaderJobj.readEventFromFile(selectedFile);
-        }
-    }
-
     public void saveEventToFile(Event event) throws IOException {
         if(!fileChooser.getExtensionFilters().contains(jobjFilter)){
             fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);

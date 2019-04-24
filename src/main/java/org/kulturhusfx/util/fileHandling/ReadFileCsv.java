@@ -1,5 +1,6 @@
 package org.kulturhusfx.util.fileHandling;
 
+import javafx.concurrent.Task;
 import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.util.InvalidInputHandler;

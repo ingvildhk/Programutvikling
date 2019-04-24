@@ -1,14 +1,16 @@
 package org.kulturhusfx.util.fileHandling;
 
+import javafx.concurrent.Task;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-public abstract class ReadFile {
+public abstract class ReadFile{
 
     HallModel hallModel = HallModel.getInstance();
     List<Hall> hallList = hallModel.getHallList();
