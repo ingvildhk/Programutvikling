@@ -2,13 +2,14 @@ package org.kulturhusfx.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.util.SceneUtils;
 
 public class TicketConfirmationPopController {
 
-    private SceneUtils sceneUtils = SceneUtils.getInstance();
+   // private SceneUtils sceneUtils = SceneUtils.getInstance();
 
     private String numberOfTickets = PurchaseTicketController.currentNumberofTickets;
     private Event currentEvent = MainPageController.currentEvent;
@@ -25,7 +26,9 @@ public class TicketConfirmationPopController {
         totalSumLabel.setText(Double.toString(totalSum));
     }
 
-    public void handleBackToMainPageBtn(ActionEvent event){
-        sceneUtils.launchScene(event, MainPageController.class, "MainPage.fxml");
+    // Method to close pop-up with button
+    public void closeWindowBtn(ActionEvent event){
+        //sceneUtils.launchScene(event, MainPageController.class, "MainPage.fxml");
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 }

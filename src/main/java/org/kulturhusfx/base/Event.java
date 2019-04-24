@@ -22,6 +22,7 @@ public class Event implements Serializable {
     //transient for at Event skal kunne serialiseres
     private transient TicketModel ticketModel;
     private int availableTickets;
+    private int orderedTickets;
 
     //Får ofte feilmelding hvis ikke SVUID er satt, tallet er tilfelding
     private static final long serialVersionUID = -3210158538721287756L;
