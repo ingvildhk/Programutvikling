@@ -13,6 +13,7 @@ public class Ticket {
     //TODO Date må implementeres
     private String phoneNumber;
     //private String timeOfPurchase;
+    private int antallBilletter;
 
     public Ticket(String phoneNumber) {
         Checker.checkValidPhone(phoneNumber);
@@ -21,6 +22,15 @@ public class Ticket {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public void setAntallBilletter(int antallBilletter){
+        this.antallBilletter = antallBilletter;
+
+    }
+
+    public int getAntallBilletter(){
+        return antallBilletter;
     }
 
     /*

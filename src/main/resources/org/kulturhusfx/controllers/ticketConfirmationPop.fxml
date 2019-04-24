@@ -5,22 +5,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.TicketConfirmationPopController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.TicketConfirmationPopController">
     <children>
-        <Label layoutX="403.0" layoutY="28.0" text="Småkommunens Kulturhus">
+        <Label layoutX="187.0" layoutY="31.0" text="Småkommunens Kulturhus">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="464.0" layoutY="137.0" text="Du har bestilt" />
-        <Label fx:id="numberOfTicketsLabel" layoutX="464.0" layoutY="169.0" text="2" />
-        <Label layoutX="495.0" layoutY="222.0" text="til" />
-        <Label fx:id="eventLabel" layoutX="455.0" layoutY="263.0" text="arrangement" />
-        <Button layoutX="439.0" layoutY="452.0" mnemonicParsing="false" text="Lagre bestilling til fil" />
-      <Button layoutX="34.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleBackToMainPageBtn" text="Tilbake" />
-      <Label layoutX="489.0" layoutY="169.0" text="billetter" />
-      <Label layoutX="437.0" layoutY="317.0" text="Total:" />
-      <Label fx:id="totalSumLabel" layoutX="497.0" layoutY="317.0" text="1000" />
-      <Label layoutX="557.0" layoutY="317.0" text="kr" />
+        <Label layoutX="196.0" layoutY="119.0" text="Bekreftelse på bestilling:" />
+        <Label fx:id="numberOfTicketsLabel" layoutX="192.0" layoutY="150.0" text="2" />
+        <Label layoutX="277.0" layoutY="150.0" text="til" />
+        <Label fx:id="eventLabel" layoutX="300.0" layoutY="150.0" text="arrangement" />
+      <Button layoutX="14.0" layoutY="29.0" mnemonicParsing="false" onAction="#closeWindowBtn" text="Tilbake" />
+      <Label layoutX="211.0" layoutY="150.0" text="billett(er)" />
+      <Label layoutX="194.0" layoutY="200.0" text="Total:" />
+      <Label fx:id="totalSumLabel" layoutX="251.0" layoutY="200.0" text="1000" />
+      <Label layoutX="306.0" layoutY="200.0" text="kr" />
     </children>
 </AnchorPane>

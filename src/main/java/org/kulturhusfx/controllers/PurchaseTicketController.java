@@ -2,9 +2,14 @@ package org.kulturhusfx.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Ticket;
 import org.kulturhusfx.model.EventModel;
@@ -14,6 +19,8 @@ import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.SceneUtils;
 import org.kulturhusfx.util.exception.InvalidNumberOfSeatsException;
+
+import java.io.IOException;
 import java.util.List;
 
 public class PurchaseTicketController {
@@ -41,9 +48,16 @@ public class PurchaseTicketController {
         numberOfTicketsChoiceBox.setValue("1");
     }
 
-    public void orderBtn(ActionEvent event){
+    public void orderBtn(ActionEvent event) throws IOException {
         createNewTickets();
-        sceneUtils.launchScene(event, TicketConfirmationPopController.class, "ticketConfirmationPop.fxml");
+
+        //sceneUtils.launchScene(event, TicketConfirmationPopController.class, "ticketConfirmationPop.fxml");
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ticketConfirmationPop.fxml"));
+        Parent parent = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     public void backToMainPageBtn(ActionEvent event) {

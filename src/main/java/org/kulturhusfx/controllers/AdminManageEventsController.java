@@ -63,6 +63,7 @@ public class AdminManageEventsController {
         deleteEventFromTableView();
     }
 
+    // Test om det fungerte med egen metode
     public void showScene(Parent parent, ActionEvent event) {
         Scene MainPageScene = new Scene(parent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -72,7 +73,7 @@ public class AdminManageEventsController {
 
     public void seeOrdersToEventbtn(ActionEvent event) throws IOException {
 
-        sceneUtils.launchScene(event, AdminManageEventsController.class, "seeOrdersToEvent.fxml");
+       // sceneUtils.launchScene(event, AdminManageEventsController.class, "seeOrdersToEvent.fxml");
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("seeOrdersToEvent.fxml"));
@@ -161,6 +162,7 @@ public class AdminManageEventsController {
         dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         programColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         priceColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        //hallColumn.setCellFactory(ComboBoxTableCell.forTableColumn(getHalls()));
         hallColumn.setCellFactory(ComboBoxTableCell.forTableColumn(getHalls()));
 
         contactNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -236,4 +238,5 @@ public class AdminManageEventsController {
         }
         return halls;
     }
+
 }

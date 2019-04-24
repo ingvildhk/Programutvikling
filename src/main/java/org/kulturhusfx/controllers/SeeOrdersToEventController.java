@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -14,62 +15,57 @@ import org.kulturhusfx.model.TicketModel;
 import org.kulturhusfx.util.SceneUtils;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class SeeOrdersToEventController {
 
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
-
         @FXML
-        TableView<Ticket> tableViewTickets;
+        TableView <Ticket> tableViewTickets;
 
         @FXML
         TableColumn<Ticket, String> phoneCol;
 
         @FXML
-        TableColumn<Ticket, Integer> numberOfTicketsCol;
+        TableColumn<Integer, Integer> numberOfTicketsCol;
 
+        @FXML
+        ListView orderListView;
 
         private Event selectedEvent;
-        private int numberOfTickets;
+       // private int numberOfTickets;
+
+    public void initialize () {
+    }
 
         public void initData (Event event){
             this.selectedEvent = event;
 
             ObservableList<Ticket> orders = FXCollections.observableArrayList();
 
-            Set<Ticket> liste = new HashSet<>(orders);
-            for (Ticket ticket : event.getTicketModel().getTicketList()){
-                numberOfTickets = Collections.frequency(orders, ticket.getPhoneNumber());
-                numberOfTicketsCol.setCellValueFactory(new PropertyValueFactory<>(Integer.toString(numberOfTickets)));
-                orders.add(ticket);
+            Map <String, Integer> frequencyMap = new HashMap<>();
+            for (Ticket t : event.getTicketModel().getTicketList()){
+                Integer count = frequencyMap.get(t.getPhoneNumber());
+                if (count == null)
+                    count = 0;
+
+                frequencyMap.put(t.getPhoneNumber(), count +1);
+                orders.add(t);
+
             }
 
-            System.out.println(numberOfTickets);
-
-
-            tableViewTickets.setItems(orders);
-        }
-        // Sjekke at den henter listen
-        //System.out.println(event.getTicketModel().getTicketList().toString());
-
-        public void setColumnValues(){
-            phoneCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-            // numberOfTicketsCol.setCellValueFactory(new PropertyValueFactory<>((numberOfTickets)));
-        }
-
-        public void initialize () {
-            setColumnValues();
+            for (Map.Entry<String, Integer> entry : frequencyMap.entrySet()){
+               // System.out.println(entry.getKey() + ": " + entry.getValue());
+                String uttekst = "Telefonnummer: " + entry.getKey() + " har bestilt " + entry.getValue() + " billett(er).";
+                System.out.println(uttekst);
+               // int numberOfTickets = entry.getValue();
+                orderListView.getItems().addAll(uttekst);
+            }
         }
 
         public void backToAdminMagageEventsBtn (ActionEvent event) throws IOException {
             sceneUtils.launchScene(event, SeeOrdersToEventController.class, "adminManageEvents.fxml");
         }
-
-        // TODO Forloop gjennom tickcketModel, +1 nytt tfl
     }
 
