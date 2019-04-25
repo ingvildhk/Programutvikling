@@ -36,9 +36,6 @@ public class Event implements Serializable {
 
     public Event(ContactPerson contactPerson, String name, String performers,
                  String schedule, Hall hall, String type, String date, String time, String ticketPrice) {
-        Checker.checkValidDate(date);
-        Checker.checkValidTime(time);
-        Checker.checkValidTicketPrice(ticketPrice);
         this.contactPerson = contactPerson;
         this.name = name;
         this.performers = performers;
@@ -107,17 +104,14 @@ public class Event implements Serializable {
     }
 
     public void setContactPersonName(String name) {
-        Checker.checkIfFieldIsEmpty(name);
         this.contactPerson.setContactName(name);
     }
 
     public void setContactPersonPhone(String phone) {
-        Checker.checkValidPhone(phone);
         this.contactPerson.setPhoneNumber(phone);
     }
 
     public void setContactPersonEmail(String email) {
-        Checker.checkValidEmail(email);
         this.contactPerson.setEmail(email);
     }
 
@@ -142,22 +136,18 @@ public class Event implements Serializable {
     }
 
     public void setName(String name) {
-        Checker.checkIfFieldIsEmpty(name);
         this.name = name;
     }
 
     public void setPerformers(String performers) {
-        Checker.checkIfFieldIsEmpty(performers);
         this.performers = performers;
     }
 
     public void setType(String type) {
-       // Checker.checkIfFieldIsEmpty(type);
         this.type = type;
     }
 
     public void setSchedule(String schedule) {
-        Checker.checkIfFieldIsEmpty(schedule);
         this.schedule = schedule;
     }
 
@@ -166,17 +156,14 @@ public class Event implements Serializable {
     }
 
     public void setDate(String date) {
-        Checker.checkValidDate(date);
         this.date = date;
     }
 
     public void setTime(String time) {
-        Checker.checkValidTime(time);
         this.time = time;
     }
 
     public void setTicketPrice(String ticketPrice) {
-        Checker.checkValidTicketPrice(ticketPrice);
         this.ticketPrice = ticketPrice;
     }
 

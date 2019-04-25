@@ -1,8 +1,8 @@
 package org.kulturhusfx.util.fileHandling;
 
-import javafx.concurrent.Task;
 import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Hall;
+import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.exception.InvalidHallException;
 import java.io.*;
@@ -10,7 +10,7 @@ import java.io.*;
 public class ReadFileCsv extends ReadFile {
 
     @Override
-    public void readEventFromFile(File file) {
+    public void readEventFromFile(File file) throws IOException {
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new java.io.FileReader(file));
@@ -37,48 +37,46 @@ public class ReadFileCsv extends ReadFile {
                 }
             }
         }
-        catch(Exception e) {
-            InvalidInputHandler.generateAlert(new RuntimeException("Feil i lesing fra fil"));
-            e.printStackTrace();
+        catch(IOException e) {
+            throw new IOException();
         }
         finally {
             try{
                 bufferedReader.close();
             }
             catch (IOException ie){
-                InvalidInputHandler.generateAlert(new RuntimeException("Feil oppsto ved lukking av fil"));
+                throw new IOException();
             }
         }
     }
 
     @Override
-    public void readHallFromFile(File file) {
+    public void readHallFromFile(File file) throws InvalidHallException, IOException{
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new java.io.FileReader(file));
             String line = "";
             while ((line = bufferedReader.readLine()) != null) {
                 String[] hallDetails = line.split(",");
-                if (hallDetails.length > 0) {
-                    for (Hall hall : hallList) {
-                        if (hall.getHallName() == hallDetails[0]) {
-                            InvalidInputHandler.generateAlert(new InvalidHallException("En av salene du forsøker å" +
-                                    " registrere finnes fra før av: " + hall.getHallName()));
+                for (Hall hall : hallList) {
+                    for (int i = 0; i < hallDetails.length; i++){
+                        if (hallDetails[i] == hall.getHallName()) {
+                            System.out.println("Heiheihei");
+                            throw new InvalidHallException("");
                         }
                     }
-                    hallModel.createHall(hallDetails[0], hallDetails[1], hallDetails[2]);
                 }
+                hallModel.createHall(hallDetails[0], hallDetails[1], hallDetails[2]);
             }
-
-        } catch (Exception e) {
-            InvalidInputHandler.generateAlert(new RuntimeException("Feil i lesing fra fil"));
-            e.printStackTrace();
-        } finally {
+        }
+        catch (IOException e) {
+            throw new IOException();
+        }
+        finally {
             try {
                 bufferedReader.close();
             } catch (IOException ie) {
-                InvalidInputHandler.generateAlert(new RuntimeException("Feil oppsto ved lukking av fil"));
-                ie.printStackTrace();
+                throw new IOException();
             }
         }
     }

@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 public class SaveFileCsv extends SaveFile {
 
     @Override
-    public void saveEventToFile(Event event, String path) {
+    public void saveEventToFile(Event event, String path) throws IOException {
         try{
             FileWriter fileWriter = new FileWriter(path, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -28,12 +28,12 @@ public class SaveFileCsv extends SaveFile {
             printWriter.close();
         }
         catch (IOException e){
-            FileExceptionHandler.generateIOExceptionMsg(e);
+            throw new IOException();
         }
     }
 
     @Override
-    public void saveHallToFile(Hall hall, String path) {
+    public void saveHallToFile(Hall hall, String path) throws IOException{
         try{
             FileWriter fileWriter = new FileWriter(path, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -43,7 +43,7 @@ public class SaveFileCsv extends SaveFile {
             printWriter.close();
         }
         catch (IOException e){
-            FileExceptionHandler.generateIOExceptionMsg(e);
+            throw new IOException();
         }
     }
 }

@@ -15,7 +15,6 @@ public class Ticket {
     //private String timeOfPurchase;
 
     public Ticket(String phoneNumber) {
-        Checker.checkValidPhone(phoneNumber);
         this.phoneNumber = phoneNumber;
     }
 

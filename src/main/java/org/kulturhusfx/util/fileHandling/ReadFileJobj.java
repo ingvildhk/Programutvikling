@@ -21,7 +21,7 @@ public class ReadFileJobj extends ReadFile {
     }
 
     @Override
-    public void readHallFromFile(File file) throws IOException, ClassNotFoundException {
+    public void readHallFromFile(File file) throws InvalidHallException, IOException, ClassNotFoundException {
         String fileName = file.getName();
         try (FileInputStream fileInputStream = new FileInputStream(fileName);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream))
@@ -29,8 +29,7 @@ public class ReadFileJobj extends ReadFile {
             Hall newHall = (Hall) objectInputStream.readObject();
             for(Hall hall : hallList){
                 if (hall.getHallName() == newHall.getHallName()){
-                    InvalidInputHandler.generateAlert(new InvalidHallException("En av salene du forsøker å" +
-                            " registrere finnes fra før av: " + newHall.getHallName()));
+                    throw new InvalidHallException("");
                 }
             }
             hallList.add(newHall);

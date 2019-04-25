@@ -40,7 +40,7 @@ public class AdminManageHallsController {
     public void editHallNameCellEvent (TableColumn.CellEditEvent edittedCell){
         Hall hallSelected = tableViewHalls.getSelectionModel().getSelectedItem();
         // TODO La denne her
-        Checker.checkIfHallExcists(edittedCell.getNewValue().toString(), hallList);
+        Checker.checkIfHallExists(edittedCell.getNewValue().toString(), hallList);
         hallSelected.setHallName(edittedCell.getNewValue().toString());
     }
 
@@ -51,6 +51,7 @@ public class AdminManageHallsController {
 
     public void editNumberOfSeatsCellEvent (TableColumn.CellEditEvent edittedCell){
         Hall hallSelected = tableViewHalls.getSelectionModel().getSelectedItem();
+        Checker.checkValidNumberOfSeats(edittedCell.getNewValue().toString());
         hallSelected.setNumberOfSeats(edittedCell.getNewValue().toString());
     }
 

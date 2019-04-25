@@ -20,6 +20,7 @@ import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.SceneUtils;
 import java.io.IOException;
 import java.util.List;
@@ -111,11 +112,13 @@ public class AdminManageEventsController {
 
     public void editEventTimeCellEvent (TableColumn.CellEditEvent edittedCell){
         Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        Checker.checkValidTime(edittedCell.getNewValue().toString());
         eventSelected.setTime(edittedCell.getNewValue().toString());
     }
 
     public void editEventDateCellEvent (TableColumn.CellEditEvent edittedCell){
         Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        Checker.checkValidDate(edittedCell.getNewValue().toString());
         eventSelected.setDate(edittedCell.getNewValue().toString());
     }
 
@@ -126,6 +129,7 @@ public class AdminManageEventsController {
 
     public void editEventPriceCellEvent (TableColumn.CellEditEvent edittedCell){
         Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        Checker.checkValidTicketPrice(edittedCell.getNewValue().toString());
         eventSelected.setTicketPrice(edittedCell.getNewValue().toString());
     }
 
@@ -191,11 +195,13 @@ public class AdminManageEventsController {
 
     public void editEventContactPhoneCellEvent (TableColumn.CellEditEvent edittedCell){
         Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        Checker.checkValidPhone(edittedCell.getNewValue().toString());
         eventSelected.setContactPersonPhone(edittedCell.getNewValue().toString());
     }
 
     public void editEventContactEmailCellEvent (TableColumn.CellEditEvent edittedCell){
         Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        Checker.checkValidEmail(edittedCell.getNewValue().toString());
         eventSelected.setContactPersonEmail(edittedCell.getNewValue().toString());
     }
 

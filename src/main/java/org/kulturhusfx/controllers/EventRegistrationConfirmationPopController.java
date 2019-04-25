@@ -91,9 +91,6 @@ public class EventRegistrationConfirmationPopController {
         registeredEventEmailLabel.setText(registeredEvent.getContactPerson().getEmail());
         registeredEventWebpageLabel.setText(registeredEvent.getContactPerson().getWebpage());
         registeredEventFirmLabel.setText(registeredEvent.getContactPerson().getFirm());
-        /* Setting size and text wrap on label
-        registeredEventOtherLabel.setWrapText(true);
-        registeredEventOtherLabel.setMaxWidth(20.00);*/
         registeredEventOtherLabel.setText(registeredEvent.getContactPerson().getOtherInformation());
     }
 

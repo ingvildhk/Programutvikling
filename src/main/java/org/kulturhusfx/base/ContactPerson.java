@@ -15,8 +15,6 @@ public class ContactPerson implements Serializable {
     //være tomme uten at det skaper noen problemer
     public ContactPerson(String name, String phoneNumber, String email, String webpage,
                          String firm, String otherInformation) {
-        Checker.checkValidPhone(phoneNumber);
-        Checker.checkValidEmail(email);
         this.contactName = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -76,8 +74,6 @@ public class ContactPerson implements Serializable {
     // TODO Er denne nødvendig? Vurdere etterhvert om den blir brukt
     public void changeContactPersonInformation(String name, String phoneNumber, String email,
                                                String webpage, String firm, String otherInformation) {
-        Checker.checkValidEmail(email);
-        Checker.checkValidPhone(phoneNumber);
         setContactName(name);
         setPhoneNumber(phoneNumber);
         setEmail(email);

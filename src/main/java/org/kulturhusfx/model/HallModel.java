@@ -30,11 +30,6 @@ public class HallModel implements Serializable {
     }
 
     public void createHall(String hallName, String hallType, String numberOfSeats) {
-        for (Hall hall : hallList){
-            if (hall.getHallName().equals(hallName)){
-                InvalidInputHandler.generateAlert(new InvalidHallException("Salen finnes fra før av"));
-            }
-        }
         hallList.add((new Hall(hallName, hallType, numberOfSeats)));
     }
 

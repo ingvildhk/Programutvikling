@@ -7,8 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Ticket;
-import org.kulturhusfx.model.EventModel;
-import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.model.TicketModel;
 import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.InvalidInputHandler;

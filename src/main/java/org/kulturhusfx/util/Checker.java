@@ -102,7 +102,7 @@ public class Checker {
                     new InvalidInputException("Alle felt må fylles ut"));
         }
     }
-    public static void checkIfHallExcists(String hallName, List<Hall> liste){
+    public static void checkIfHallExists(String hallName, List<Hall> liste){
         for (Hall hall : liste){
             if (hall.getHallName().equals(hallName)){
                 InvalidInputHandler.generateAlert(new InvalidHallException("Salen finnes fra før av"));
