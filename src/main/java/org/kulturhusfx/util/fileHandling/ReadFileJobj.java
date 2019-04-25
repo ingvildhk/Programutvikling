@@ -4,6 +4,7 @@ import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.exception.InvalidHallException;
+import org.kulturhusfx.util.exception.InvalidNumberOfSeatsException;
 
 import java.io.*;
 
@@ -27,9 +28,11 @@ public class ReadFileJobj extends ReadFile {
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream))
         {
             Hall newHall = (Hall) objectInputStream.readObject();
-            for(Hall hall : hallList){
-                if (hall.getHallName() == newHall.getHallName()){
-                    throw new InvalidHallException("");
+            if (!hallList.isEmpty()){
+                for(Hall hall : hallList){
+                    if (hall.getHallName().equals(newHall.getHallName())){
+                        throw new InvalidHallException("");
+                    }
                 }
             }
             hallList.add(newHall);

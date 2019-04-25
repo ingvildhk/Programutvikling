@@ -2,9 +2,11 @@ package org.kulturhusfx.util.fileHandling;
 
 import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Hall;
-import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.exception.InvalidHallException;
+import org.kulturhusfx.util.exception.InvalidInputException;
+import org.kulturhusfx.util.exception.InvalidNumberOfSeatsException;
+
 import java.io.*;
 
 public class ReadFileCsv extends ReadFile {
@@ -51,19 +53,38 @@ public class ReadFileCsv extends ReadFile {
     }
 
     @Override
-    public void readHallFromFile(File file) throws InvalidHallException, IOException{
+    public void readHallFromFile(File file) throws InvalidInputException, InvalidHallException, IOException{
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new java.io.FileReader(file));
             String line = "";
             while ((line = bufferedReader.readLine()) != null) {
                 String[] hallDetails = line.split(",");
-                for (Hall hall : hallList) {
-                    for (int i = 0; i < hallDetails.length; i++){
-                        if (hallDetails[i] == hall.getHallName()) {
-                            System.out.println("Heiheihei");
-                            throw new InvalidHallException("");
+                for (int i = 0; i < hallDetails.length; i++){
+                    if(hallDetails[i].isEmpty()){
+                        throw new InvalidInputException("");
+                    }
+                }
+                //Only checks the name of halls
+                for (int i = 0; i < hallDetails.length; i=i+3){
+                    //Makes sure there is a object in the hallList available for comparison
+                    if (!hallList.isEmpty()){
+                        for (Hall hall : hallList) {
+                            if (hallDetails[i].equals(hall.getHallName())) {
+                                throw new InvalidHallException("");
+                            }
                         }
+                    }
+                }
+                //Only checks the number of seats in halls
+                for (int i = 2; i < hallDetails.length; i=i+3){
+                    try {
+                        int seat = Integer.parseInt(hallDetails[i]);
+                        if (seat < 0) {
+                            throw new InvalidNumberOfSeatsException("");                   }
+                    }
+                    catch (NumberFormatException e) {
+                        throw new InvalidNumberOfSeatsException("");
                     }
                 }
                 hallModel.createHall(hallDetails[0], hallDetails[1], hallDetails[2]);

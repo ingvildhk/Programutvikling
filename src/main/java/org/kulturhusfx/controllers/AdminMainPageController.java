@@ -56,7 +56,10 @@ public class AdminMainPageController {
         addEventType();
         updateHallList();
         // Setter default value på choiceboxene
-        eventHall.setValue(hallList.get(0).getHallName());
+        //if test unngår nullpointerexception hvis alle saler er slettet
+        if(!hallList.isEmpty()){
+            eventHall.setValue(hallList.get(0).getHallName());
+        }
         eventType.setValue("Konsert");
         datePicker.setValue(ControllerHelper.getLocalDate());
 
@@ -103,7 +106,6 @@ public class AdminMainPageController {
     public void eventConfirmation(){
         openButtons();
         updateHallList();
-        sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Arrangement er opprettet fra fil");
     }
 
     public void registerHallFromFileBtn(ActionEvent event) {
@@ -126,7 +128,6 @@ public class AdminMainPageController {
     public void hallConfirmation(){
         openButtons();
         updateHallList();
-        sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Sal er opprettet fra fil");
     }
 
     public void backToMainPageBtn(ActionEvent event) {
