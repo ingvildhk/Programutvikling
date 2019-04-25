@@ -29,6 +29,7 @@ public class EventModel implements Serializable {
         return eventList;
     }
 
+    //TODO brukes ikke
     public void deleteEvent(String id) {
         eventList.removeIf(e -> e.getId().equals(id));
     }

@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.controllers.MainPageController;
+import org.kulturhusfx.controllers.PurchaseTicketController;
 
 public class OrderButton extends TableCell<Event, Boolean> {
     final Button cellButton = new Button("Bestill");
@@ -19,7 +20,7 @@ public class OrderButton extends TableCell<Event, Boolean> {
             public void handle(ActionEvent event) {
                 ///Henter ut det eventet som er på raden man trykker på
                 MainPageController.currentEvent = OrderButton.this.getTableView().getItems().get(OrderButton.this.getIndex());
-                sceneUtils.launchScene(event, MainPageController.class, "purchaseTicket.fxml");
+                sceneUtils.launchScene(event, PurchaseTicketController.class, "purchaseTicket.fxml");
             }
         });
     }
