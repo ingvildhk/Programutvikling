@@ -76,15 +76,15 @@ public class CsvHallThread extends Task<Void> {
     protected void succeeded(){
         if (hallExists){
             counter++;
-            InvalidInputHandler.generateAlert(new InvalidHallException("En av salene du forsøker å registrere finnes fra før"));
+            InvalidInputHandler.generateThreadAlert(new InvalidHallException("En av salene du forsøker å registrere finnes fra før"));
         }
         if (numberOfSeats){
             counter++;
-            InvalidInputHandler.generateAlert(new InvalidNumberOfSeatsException("Antall seter må være et positivt heltall"));
+            InvalidInputHandler.generateThreadAlert(new InvalidNumberOfSeatsException("Antall seter må være et positivt heltall"));
         }
         if (input){
             counter++;
-            InvalidInputHandler.generateAlert(new InvalidInputException("All informasjon må fylles ut"));
+            InvalidInputHandler.generateThreadAlert(new InvalidInputException("All informasjon må fylles ut"));
         }
         if (readException | interruptedException){
             counter++;
