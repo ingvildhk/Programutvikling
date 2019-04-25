@@ -56,7 +56,10 @@ public class AdminMainPageController {
         addEventType();
         updateHallList();
         // Setter default value på choiceboxene
-        eventHall.setValue(hallList.get(0).getHallName());
+        //if test unngår nullpointerexception hvis alle saler er slettet
+        if(!hallList.isEmpty()){
+            eventHall.setValue(hallList.get(0).getHallName());
+        }
         eventType.setValue("Konsert");
         datePicker.setValue(ControllerHelper.getLocalDate());
 
@@ -103,7 +106,6 @@ public class AdminMainPageController {
     public void eventConfirmation(){
         openButtons();
         updateHallList();
-        sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Arrangement er opprettet fra fil");
     }
 
     public void registerHallFromFileBtn(ActionEvent event) {
@@ -117,17 +119,15 @@ public class AdminMainPageController {
             service.execute(task);
         }
         else if (fileChooser.getSelectedExtensionFilter() == jobjFilter){
-
-                disableButtons();
-                Task<Void> task = new JobjHallThread(this::hallConfirmation);
-                service.execute(task);
+            disableButtons();
+            Task<Void> task = new JobjHallThread(this::hallConfirmation);
+            service.execute(task);
         }
     }
 
     public void hallConfirmation(){
         openButtons();
         updateHallList();
-        sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Sal er opprettet fra fil");
     }
 
     public void backToMainPageBtn(ActionEvent event) {
@@ -199,10 +199,15 @@ public class AdminMainPageController {
         String ticket = ticketPrice.getText();
 
         Checker.checkIfFieldIsEmpty(name, type, performer, room, time, program, contact, phone, email, ticket);
+        Checker.checkValidPhone(phone);
+        Checker.checkValidEmail(email);
+        Checker.checkValidDate(date);
+        Checker.checkValidTime(time);
+        Checker.checkValidTicketPrice(ticket);
 
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
 
-        //Finner hall-objektet ut i fra hallName
+        //Finner room-objektet ut i fra hallName
         List<Hall> list = hallModel.getHallList();
         int hallIndex = hallModel.getHallIndex(room);
         Hall hall = list.get(hallIndex);
@@ -216,6 +221,8 @@ public class AdminMainPageController {
         String seat = totalNumberOfSeats.getText();
 
         Checker.checkIfFieldIsEmpty(room, type, seat);
+        Checker.checkValidNumberOfSeats(seat);
+        Checker.checkIfHallExists(room, hallList);
         this.hallModel.createHall(room, type, seat);
     }
 }

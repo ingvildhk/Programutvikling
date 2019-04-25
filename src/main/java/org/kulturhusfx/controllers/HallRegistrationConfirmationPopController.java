@@ -54,8 +54,8 @@ public class HallRegistrationConfirmationPopController {
         String name = ControllerHelper.changeInformation(changeHallNameTxtField, registeredHallNameLabel);
         String type = ControllerHelper.changeInformation(changeHallTypeTxtField, registeredHallTypeLabel);
         String seats = ControllerHelper.changeInformation(changeHallNumberSeatsTxtField, registeredHallNumberSeatsLabel);
-
-        Checker.checkIfHallExcists(name, hallList);
+        Checker.checkIfHallExists(name, hallList);
+        Checker.checkValidNumberOfSeats(seats);
         registeredHall.changeHallInformation(name, type, seats);
         setValuetoLabels();
     }

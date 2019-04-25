@@ -21,14 +21,15 @@ public class EventModel implements Serializable {
     private List<Event> eventList = new ArrayList<Event>();
 
     public void createEvent(ContactPerson contactPerson, String name, String performers, String schedule,
-                            Hall location, String type, String date, String time, String ticketPrice) {
-        eventList.add(new Event(contactPerson, name, performers, schedule, location, type, date, time, ticketPrice));
+                            Hall hall, String type, String date, String time, String ticketPrice) {
+        eventList.add(new Event(contactPerson, name, performers, schedule, hall, type, date, time, ticketPrice));
     }
 
     public List<Event> getEventList() {
         return eventList;
     }
 
+    //TODO brukes ikke
     public void deleteEvent(String id) {
         eventList.removeIf(e -> e.getId().equals(id));
     }

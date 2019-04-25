@@ -9,7 +9,6 @@ public class Hall implements Serializable {
     private String numberOfSeats;
 
     public Hall(String hallName, String hallType, String numberOfSeats) {
-        Checker.checkValidNumberOfSeats(numberOfSeats);
         this.hallName = hallName;
         this.hallType = hallType;
         this.numberOfSeats = numberOfSeats;
@@ -28,22 +27,18 @@ public class Hall implements Serializable {
     }
 
     public void setHallName(String hallName) {
-        Checker.checkIfFieldIsEmpty(hallName);
         this.hallName = hallName;
     }
 
     public void setHallType(String hallType) {
-        Checker.checkIfFieldIsEmpty(hallType);
         this.hallType = hallType;
     }
 
     public void setNumberOfSeats(String numberOfSeats) {
-        Checker.checkValidNumberOfSeats(numberOfSeats);
         this.numberOfSeats = numberOfSeats;
     }
 
     public void changeHallInformation(String hallName, String hallType, String numberOfSeats) {
-        Checker.checkValidNumberOfSeats(numberOfSeats);
         setHallName(hallName);
         setHallType(hallType);
         setNumberOfSeats(numberOfSeats);

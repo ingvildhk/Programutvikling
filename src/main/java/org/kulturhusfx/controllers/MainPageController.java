@@ -51,7 +51,6 @@ public class MainPageController {
         if (hallModel.getHallList().isEmpty()) {
             hallModel.createHall("Hovedsalen", "Konsertsal", "150");
         }
-
         addButtons();
         setColumnValues();
     }

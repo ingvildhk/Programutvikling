@@ -16,7 +16,6 @@ public class Ticket {
     private int antallBilletter;
 
     public Ticket(String phoneNumber) {
-        Checker.checkValidPhone(phoneNumber);
         this.phoneNumber = phoneNumber;
     }
 

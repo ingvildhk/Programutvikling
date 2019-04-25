@@ -77,15 +77,27 @@ public class Checker {
         if (splitStringTime.length != 2) {
             InvalidInputHandler.generateAlert(new InvalidTimeException("Husk å dele time og minutt med : "));
         }
-        int hour = Integer.parseInt(splitStringTime[0]);
-        if (hour < 0 || hour > 23) {
+
+        try {
+            int hour = Integer.parseInt(splitStringTime[0]);
+            if (hour < 0 || hour > 23) {
+                InvalidInputHandler.generateAlert(new InvalidTimeException("Time må være et tall mellom 0 og 23"));
+            }
+        }
+        catch (NumberFormatException e){
             InvalidInputHandler.generateAlert(new InvalidTimeException("Time må være et tall mellom 0 og 23"));
         }
 
-        int minute = Integer.parseInt(splitStringTime[1]);
-        if (minute < 0 || minute > 59) {
+        try {
+            int minute = Integer.parseInt(splitStringTime[1]);
+            if (minute < 0 || minute > 59) {
+                InvalidInputHandler.generateAlert(new InvalidTimeException("Minutter må være et tall mellom 0 og 59"));
+            }
+        }
+        catch (NumberFormatException e){
             InvalidInputHandler.generateAlert(new InvalidTimeException("Minutter må være et tall mellom 0 og 59"));
         }
+
     }
 
     public static void checkIfFieldIsEmpty(String... args) {
@@ -102,7 +114,7 @@ public class Checker {
                     new InvalidInputException("Alle felt må fylles ut"));
         }
     }
-    public static void checkIfHallExcists(String hallName, List<Hall> liste){
+    public static void checkIfHallExists(String hallName, List<Hall> liste){
         for (Hall hall : liste){
             if (hall.getHallName().equals(hallName)){
                 InvalidInputHandler.generateAlert(new InvalidHallException("Salen finnes fra før av"));

@@ -3,16 +3,10 @@ package org.kulturhusfx.util;
 import javafx.stage.FileChooser;
 import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
-import org.kulturhusfx.base.Ticket;
-import org.kulturhusfx.model.EventModel;
-import org.kulturhusfx.model.HallModel;
-import org.kulturhusfx.util.fileHandling.ReadFileCsv;
-import org.kulturhusfx.util.fileHandling.ReadFileJobj;
 import org.kulturhusfx.util.fileHandling.SaveFileCsv;
 import org.kulturhusfx.util.fileHandling.SaveFileJobj;
 
 import java.io.*;
-import java.util.List;
 
 public class FileChooserMethods {
 
@@ -46,7 +40,7 @@ public class FileChooserMethods {
                 csv.saveEventToFile(event, fileName);
             }
             else{
-                FileExceptionHandler.generateIOExceptionMsg(new InvalidObjectException("Filtype må være jobj eller csv"));
+                FileExceptionHandler.generateExceptionmsg(new InvalidObjectException("Filtype må være jobj eller csv"));
             }
         }
     }
@@ -68,7 +62,7 @@ public class FileChooserMethods {
                 csv.saveHallToFile(hall, fileName);
             }
             else{
-                FileExceptionHandler.generateIOExceptionMsg(new InvalidObjectException("Filtype må være jobj eller csv"));
+                FileExceptionHandler.generateExceptionmsg(new InvalidObjectException("Filtype må være jobj eller csv"));
             }
         }
     }

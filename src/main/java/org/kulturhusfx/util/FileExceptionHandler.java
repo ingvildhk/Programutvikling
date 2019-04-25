@@ -4,17 +4,14 @@ import javafx.scene.control.Alert;
 
 import java.io.IOException;
 
-//filhåndteringsfeilklasse. tatt fra to vinduer eksempelet
-
 public class FileExceptionHandler {
 
-    public static void generateIOExceptionMsg(IOException e) {
+    public static void generateExceptionmsg(Exception exception) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Filhåndtering feil");
         alert.setHeaderText("Filhåndtering feil");
-        alert.setContentText("Feil oppstod i lagringen av arrangementet. \nMelding: " + e.getMessage());
+        alert.setContentText(exception.getMessage());
 
         alert.showAndWait();
     }
-
 }
