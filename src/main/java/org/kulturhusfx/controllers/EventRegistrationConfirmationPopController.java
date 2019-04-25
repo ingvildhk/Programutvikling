@@ -11,10 +11,8 @@ import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
-import org.kulturhusfx.util.Checker;
-import org.kulturhusfx.util.ControllerHelper;
-import org.kulturhusfx.util.SceneUtils;
-import org.kulturhusfx.util.FileChooserMethods;
+import org.kulturhusfx.util.*;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -62,9 +60,14 @@ public class EventRegistrationConfirmationPopController {
         sceneUtils.launchScene(event, AdminMainPageController.class, "adminMainPage.fxml");
     }
 
-    public void saveToFileBtn(ActionEvent event) throws IOException {
-        fileChooserMethods.saveEventToFile(registeredEvent);
-        sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring", "Arrangementet er lagret til fil");
+    public void saveToFileBtn(ActionEvent event) {
+        try {
+            fileChooserMethods.saveEventToFile(registeredEvent);
+            sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring", "Arrangementet er lagret til fil");
+
+        } catch (IOException e) {
+            FileExceptionHandler.generateExceptionmsg(new IOException("Lagring til fil feilet: " + e.getMessage()));
+        }
     }
 
     //Legger til saler i choicebox

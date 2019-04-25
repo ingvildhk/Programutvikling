@@ -14,10 +14,11 @@ public class SaveFileCsv extends SaveFile {
 
     @Override
     public void saveEventToFile(Event event, String path) throws IOException {
-        try{
-            FileWriter fileWriter = new FileWriter(path, true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            PrintWriter printWriter = new PrintWriter(bufferedWriter);
+        try (
+                FileWriter fileWriter = new FileWriter(path, true);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                PrintWriter printWriter = new PrintWriter(bufferedWriter);
+                ) {
 
             printWriter.println(event.getContactPerson().getContactName() + "," + event.getContactPerson().getPhoneNumber()+ "," +
                     event.getContactPerson().getEmail() + "," + event.getContactPerson().getWebpage() + "," + event.getContactPerson().getFirm()+ "," +
@@ -25,25 +26,18 @@ public class SaveFileCsv extends SaveFile {
                     event.getSchedule() + "," + event.getHall().getHallName() + "," + event.getHall().getHallType() + "," +
                     event.getHall().getNumberOfSeats() + "," + event.getType() + "," + event.getDate() + "," +
                     event.getTime() + "," + event.getTicketPrice());
-            printWriter.close();
-        }
-        catch (IOException e){
-            throw new IOException();
         }
     }
 
     @Override
     public void saveHallToFile(Hall hall, String path) throws IOException{
-        try{
-            FileWriter fileWriter = new FileWriter(path, true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            PrintWriter printWriter = new PrintWriter(bufferedWriter);
+        try (
+                FileWriter fileWriter = new FileWriter(path, true);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                PrintWriter printWriter = new PrintWriter(bufferedWriter);
+                ) {
 
             printWriter.println(hall.getHallName() + "," + hall.getHallType() +"," + hall.getNumberOfSeats());
-            printWriter.close();
-        }
-        catch (IOException e){
-            throw new IOException();
         }
     }
 }

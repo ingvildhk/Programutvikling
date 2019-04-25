@@ -33,14 +33,18 @@ public class HallRegistrationConfirmationPopController {
         sceneUtils.generateConfirmationAlert("Bekreftelse endring i registrert sal", "Sal er endret");
     }
 
-    public void backToAdminMainPage(ActionEvent event) throws IOException {
+    public void backToAdminMainPage(ActionEvent event) {
         sceneUtils.launchScene(event, AdminMainPageController.class, "adminMainPage.fxml");
     }
 
-    public void saveHallBtn(ActionEvent event) throws IOException {
+    public void saveHallBtn(ActionEvent event) {
         //Fil blir lagret i samme mappe som repository, vet ikke hvordan man kan endre det
-        fileChooserMethods.saveHallToFile(registeredHall);
-        sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring", "Sal er lagret til fil");
+        try {
+            fileChooserMethods.saveHallToFile(registeredHall);
+            sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring", "Sal er lagret til fil");
+        } catch (IOException e) {
+            FileExceptionHandler.generateExceptionmsg(new IOException("Lagring til fil feilet: " + e.getMessage()));
+        }
     }
 
     // Metoden setter lablene i hallRegistrationConfirmationPop.fxml til verdiene til Hall'en som akkurat er registrert

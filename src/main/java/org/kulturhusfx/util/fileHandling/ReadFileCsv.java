@@ -12,8 +12,8 @@ import java.util.regex.Pattern;
 public class ReadFileCsv extends ReadFile {
 
     @Override
-    public void readEventFromFile(File file) throws IOException, InvalidInputException, InvalidPhoneException, InvalidEmailException ,
-            InvalidNumberOfSeatsException, InvalidDateException, InvalidTimeException, InvalidTicketPriceException{
+    public void readEventFromFile(File file) throws IOException, InvalidPhoneException, InvalidEmailException ,
+            InvalidNumberOfSeatsException, InvalidDateException, InvalidTimeException, InvalidTicketPriceException, InvalidInputException{
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new java.io.FileReader(file));
@@ -151,9 +151,6 @@ public class ReadFileCsv extends ReadFile {
                 }
             }
         }
-        catch(IOException e) {
-            throw new IOException();
-        }
         finally {
             try{
                 bufferedReader.close();
@@ -201,9 +198,6 @@ public class ReadFileCsv extends ReadFile {
                 }
                 hallModel.createHall(hallDetails[0], hallDetails[1], hallDetails[2]);
             }
-        }
-        catch (IOException e) {
-            throw new IOException();
         }
         finally {
             try {
