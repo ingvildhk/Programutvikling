@@ -60,6 +60,7 @@ public class JobjEventThread extends Task<Void> {
     @Override
     protected void succeeded(){
         if (readException | interruptedException | classException){
+            counter ++;
             FileExceptionHandler.generateExceptionmsg(new IOException("Feil oppstod under lesing fra fil"));
         }
         else if (counter == 0){

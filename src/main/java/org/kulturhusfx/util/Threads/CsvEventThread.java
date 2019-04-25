@@ -17,6 +17,7 @@ public class CsvEventThread extends Task<Void> {
     private ReadFileCsv readFileCsv = new ReadFileCsv();
     private File file = AdminMainPageController.file;
     private SceneUtils sceneUtils = SceneUtils.getInstance();
+    //for some reason succeeded runs twice? This counter makes sure that only one alert pops up
     private int counter = 0;
 
     private Boolean input = false;

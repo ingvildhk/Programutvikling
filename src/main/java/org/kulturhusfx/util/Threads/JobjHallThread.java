@@ -69,6 +69,7 @@ public class JobjHallThread extends Task<Void> {
             InvalidInputHandler.generateThreadAlert(new InvalidHallException("En av salene du forsøker å registrere finnes fra før"));
         }
         if (readException | interruptedException | classException){
+            counter++;
             FileExceptionHandler.generateExceptionmsg(new IOException("Feil oppstod under lesing fra fil"));
         }
         else if (counter == 0){
