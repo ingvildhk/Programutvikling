@@ -20,12 +20,12 @@ import org.kulturhusfx.base.Event;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.SceneUtils;
 import java.io.IOException;
 import java.util.List;
 
 public class AdminManageEventsController {
-
 
     @FXML
     private TableView<Event> tableViewEvents;
@@ -73,13 +73,20 @@ public class AdminManageEventsController {
 
     public void seeOrdersToEventbtn(ActionEvent event) throws IOException {
 
-       // sceneUtils.launchScene(event, AdminManageEventsController.class, "seeOrdersToEvent.fxml");
+        // sceneUtils.launchScene(event, AdminManageEventsController.class, "seeOrdersToEvent.fxml");
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("seeOrdersToEvent.fxml"));
-        Parent parent = loader.load();
+        ObservableList<Event> selectedRows;
+        // contains the selected rows
+        selectedRows = tableViewEvents.getSelectionModel().getSelectedItems();
 
-        showScene(parent, event);
+
+        // TODO IF ELSE funker ikke enda men skal fikses
+        if (selectedRows != null) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("seeOrdersToEvent.fxml"));
+            Parent parent = loader.load();
+            System.out.println("Inne i IF");
+            showScene(parent, event);
 
         /*
         Scene scene = new Scene(parent);
@@ -88,12 +95,16 @@ public class AdminManageEventsController {
         window.show();
         */
 
-        SeeOrdersToEventController controller = loader.getController();
+            SeeOrdersToEventController controller = loader.getController();
 
-        // Access the controller and call a method
-        controller.initData(tableViewEvents.getSelectionModel().getSelectedItem());
-
+            // Access the controller and call a method
+            controller.initData(tableViewEvents.getSelectionModel().getSelectedItem());
+        } else {
+            Checker.generateItemNotSelectedAlert("Arrangement ikke valgt", "For å kunne se billetter til" +
+                    "et arrangement må du markere arrangementet du ønsker å se billetter til. ");
+        }
     }
+
 
     public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
         sceneUtils.launchScene(event, AdminManageEventsController.class, "adminMainPage.fxml");

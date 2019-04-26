@@ -26,7 +26,7 @@ public class TicketConfirmationPopController {
         totalSumLabel.setText(Double.toString(totalSum));
     }
 
-    // Method to close pop-up with button
+    // Method to close window with button
     public void closeWindowBtn(ActionEvent event){
         //sceneUtils.launchScene(event, MainPageController.class, "MainPage.fxml");
         ((Node)(event.getSource())).getScene().getWindow().hide();

@@ -1,5 +1,7 @@
 package org.kulturhusfx.controllers;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -39,6 +41,9 @@ public class MainPageController {
     @FXML
     private TableColumn<Event, Boolean> OrderColumn;
 
+    @FXML
+    private TextField srcTxtField;
+
     private HallModel hallModel = HallModel.getInstance();
     private EventModel eventModel = EventModel.getInstance();
     private List<Event> eventList = eventModel.getEventList();
@@ -54,6 +59,47 @@ public class MainPageController {
 
         addButtons();
         setColumnValues();
+        //onInputMethodTextChanged();
+        filteringTxtField();
+    }
+
+
+    // Skal fikses
+    public void onInputMethodTextChanged(){
+        filteringTxtField();
+    }
+
+    // Endre til lambda
+    // Method that allows user to search for value in cells
+    public void filteringTxtField(){
+        srcTxtField.textProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                if(srcTxtField.textProperty().get().isEmpty()){
+                    tableViewEvents.setItems(getEvents());
+                    return;
+                }
+
+                ObservableList<Event> eventlist = FXCollections.observableArrayList();
+                ObservableList<TableColumn<Event, ?>> columns = tableViewEvents.getColumns();
+
+                for(int i = 0; i < getEvents().size(); i++)
+                    for (int j = 0; j < columns.size(); j++) {
+                        TableColumn col = columns.get(j);
+
+                        String cellValue = col.getCellData(getEvents().get(i)).toString();
+
+                        cellValue = cellValue.toLowerCase();
+
+                        if (cellValue.contains(srcTxtField.textProperty().get().toLowerCase())) {
+                            eventlist.add(getEvents().get(i));
+                            break;
+                        }
+                    }
+
+                tableViewEvents.setItems(eventlist);
+            }
+        });
     }
 
     public void handleAdminLoginBtnAction(ActionEvent event) throws IOException {

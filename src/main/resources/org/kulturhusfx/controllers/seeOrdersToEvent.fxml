@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.SeeOrdersToEventController">
    <children>
       <Button layoutX="43.0" layoutY="32.0" mnemonicParsing="false" onAction="#backToAdminMagageEventsBtn" text="Tilbake" />
-      <TableView fx:id="tableViewTickets" layoutX="23.0" layoutY="78.0" prefHeight="385.0" prefWidth="218.0">
-        <columns>
-          <TableColumn fx:id="phoneCol" prefWidth="118.0" text="Telefonnummer" />
-          <TableColumn fx:id="numberOfTicketsCol" minWidth="4.0" prefWidth="98.0" text="Antall billetter" />
-        </columns>
-      </TableView>
-      <ListView fx:id="orderListView" layoutX="262.0" layoutY="78.0" prefHeight="385.0" prefWidth="394.0" />
+      <ListView fx:id="orderListView" layoutX="149.0" layoutY="118.0" prefHeight="357.0" prefWidth="502.0" />
+      <Label layoutX="234.0" layoutY="21.0" text="Småkommunens kulturhus">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="149.0" layoutY="72.0" text="Ordre til arrangement: " />
+      <Label fx:id="selectedEventName" layoutX="300.0" layoutY="72.0" text="Arrangement" />
    </children>
 </AnchorPane>

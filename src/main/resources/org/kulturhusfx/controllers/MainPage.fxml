@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -30,5 +31,6 @@
                 <TableColumn fx:id="OrderColumn" prefWidth="146.66668701171875" text="Bestill" />
             </columns>
         </TableView>
+      <TextField fx:id="srcTxtField" layoutX="16.0" layoutY="69.0" onInputMethodTextChanged="#filteringTxtField" />
     </children>
 </AnchorPane>
