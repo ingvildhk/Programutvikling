@@ -4,7 +4,7 @@ import org.kulturhusfx.model.TicketModel;
 import org.kulturhusfx.util.Checker;
 import java.io.Serializable;
 
-public class Event implements Serializable {
+public class Happening implements Serializable {
 
     // TODO slette denne også hvis vi ikke skal bruke setMinId
     private static int counter = 0;
@@ -19,7 +19,7 @@ public class Event implements Serializable {
     private String date;
     private String time;
     private String ticketPrice;
-    //transient for at Event skal kunne serialiseres
+    //transient for at Happening skal kunne serialiseres
     private transient TicketModel ticketModel;
     private int availableTickets;
     private int orderedTickets;
@@ -35,8 +35,8 @@ public class Event implements Serializable {
         }
     }
 
-    public Event(ContactPerson contactPerson, String name, String performers,
-                 String schedule, Hall hall, String type, String date, String time, String ticketPrice) {
+    public Happening(ContactPerson contactPerson, String name, String performers,
+                     String schedule, Hall hall, String type, String date, String time, String ticketPrice) {
         this.contactPerson = contactPerson;
         this.name = name;
         this.performers = performers;
@@ -169,9 +169,9 @@ public class Event implements Serializable {
     }
 
 
-    public void changeEventInformation(ContactPerson contactPerson, String name,
-                                       String performers, String type, String schedule, Hall hall,
-                                       String date, String time, String ticketPrice) {
+    public void changeHappeningInformation(ContactPerson contactPerson, String name,
+                                           String performers, String type, String schedule, Hall hall,
+                                           String date, String time, String ticketPrice) {
         setContactPerson(contactPerson);
         setName(name);
         setPerformers(performers);

@@ -4,11 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
-import org.kulturhusfx.base.Event;
+import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.controllers.MainPageController;
 import org.kulturhusfx.controllers.PurchaseTicketController;
 
-public class OrderButton extends TableCell<Event, Boolean> {
+public class OrderButton extends TableCell<Happening, Boolean> {
     final Button cellButton = new Button("Bestill");
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
@@ -19,7 +19,7 @@ public class OrderButton extends TableCell<Event, Boolean> {
             @Override
             public void handle(ActionEvent event) {
                 ///Henter ut det eventet som er på raden man trykker på
-                MainPageController.currentEvent = OrderButton.this.getTableView().getItems().get(OrderButton.this.getIndex());
+                MainPageController.currentHappening = OrderButton.this.getTableView().getItems().get(OrderButton.this.getIndex());
                 sceneUtils.launchScene(event, PurchaseTicketController.class, "purchaseTicket.fxml");
             }
         });

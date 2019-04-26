@@ -63,7 +63,7 @@
             </VBox>
             <VBox prefHeight="281.0" prefWidth="289.0" spacing="10.0">
                <children>
-                    <Label fx:id="eventLabel" text="Arrangement">
+                    <Label fx:id="happeningLabel" text="Arrangement">
                      <font>
                         <Font size="14.0" />
                      </font>

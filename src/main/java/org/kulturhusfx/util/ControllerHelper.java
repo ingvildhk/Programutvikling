@@ -35,8 +35,8 @@ public class ControllerHelper {
         }
     }
 
-    //General method for adding types of events to the choicebox
-    public static void addEventType(ChoiceBox box){
+    //General method for adding types of happenings to the choicebox
+    public static void addHappeningType(ChoiceBox box){
         box.getItems().addAll("Konsert", "Teater", "Konferanse", "Forestilling", "Annet");
     }
 

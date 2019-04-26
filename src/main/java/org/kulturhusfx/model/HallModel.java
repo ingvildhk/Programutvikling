@@ -1,10 +1,9 @@
 package org.kulturhusfx.model;
 
 
-import org.kulturhusfx.base.Event;
+import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.base.Hall;
-import org.kulturhusfx.util.InvalidInputHandler;
-import org.kulturhusfx.util.exception.InvalidHallException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +12,8 @@ public class HallModel implements Serializable {
 
     private static final HallModel hallModel = new HallModel();
 
-    private EventModel eventModel = EventModel.getInstance();
-    private List<Event> eventList = eventModel.getEventList();
+    private HappeningModel happeningModel = HappeningModel.getInstance();
+    private List<Happening> happeningList = happeningModel.getHappeningList();
 
     private HallModel() {
     }
@@ -43,7 +42,7 @@ public class HallModel implements Serializable {
     }
 
     // Sletter arrangementene som hører til salen som blir slettet
-    public void deleteEvent(String hallName) {
-        eventList.removeIf(e -> e.getHall().getHallName().equals(hallName));
+    public void deleteHappening(String hallName) {
+        happeningList.removeIf(e -> e.getHall().getHallName().equals(hallName));
     }
 }

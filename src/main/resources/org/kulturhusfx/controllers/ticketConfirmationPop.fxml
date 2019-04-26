@@ -15,7 +15,7 @@
         <Label layoutX="196.0" layoutY="119.0" text="Bekreftelse på bestilling:" />
         <Label fx:id="numberOfTicketsLabel" layoutX="192.0" layoutY="150.0" text="2" />
         <Label layoutX="277.0" layoutY="150.0" text="til" />
-        <Label fx:id="eventLabel" layoutX="300.0" layoutY="150.0" text="arrangement" />
+        <Label fx:id="happeningLabel" layoutX="300.0" layoutY="150.0" text="arrangement" />
       <Button layoutX="14.0" layoutY="29.0" mnemonicParsing="false" onAction="#closeWindowBtn" text="Tilbake" />
       <Label layoutX="211.0" layoutY="150.0" text="billett(er)" />
       <Label layoutX="194.0" layoutY="200.0" text="Total:" />

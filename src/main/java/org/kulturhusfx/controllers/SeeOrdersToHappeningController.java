@@ -6,14 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import org.kulturhusfx.base.Event;
+import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.base.Ticket;
 import org.kulturhusfx.util.SceneUtils;
 
 import java.io.IOException;
 import java.util.*;
 
-public class SeeOrdersToEventController{
+public class SeeOrdersToHappeningController {
 
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
@@ -21,22 +21,22 @@ public class SeeOrdersToEventController{
     ListView orderListView;
 
     @FXML
-    Label selectedEventName;
+    Label selectedHappeningName;
 
-    private Event selectedEvent;
+    private Happening selectedHappening;
 
     public void initialize () {
     }
 
 
     // Method that count the frequency of tickets with same phonenumber and output result in listView
-    public void initData (Event event){
-            this.selectedEvent = event;
+    public void initData (Happening happening){
+            this.selectedHappening = happening;
 
             ObservableList<Ticket> orders = FXCollections.observableArrayList();
 
             Map <String, Integer> frequencyMap = new HashMap<>();
-            for (Ticket ticket : event.getTicketModel().getTicketList()){
+            for (Ticket ticket : happening.getTicketModel().getTicketList()){
                 Integer count = frequencyMap.get(ticket.getPhoneNumber());
                 if (count == null)
                     count = 0;
@@ -52,11 +52,11 @@ public class SeeOrdersToEventController{
             }
 
         // To set lable to the selected eventName
-        selectedEventName.setText(selectedEvent.getName());
+        selectedHappeningName.setText(selectedHappening.getName());
     }
 
         public void backToAdminMagageEventsBtn (ActionEvent event) throws IOException {
-            sceneUtils.launchScene(event, SeeOrdersToEventController.class, "adminManageEvents.fxml");
+            sceneUtils.launchScene(event, SeeOrdersToHappeningController.class, "adminManageHappenings.fxml");
         }
     }
 

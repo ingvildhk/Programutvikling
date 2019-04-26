@@ -6,7 +6,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.SeeOrdersToEventController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.kulturhusfx.controllers.SeeOrdersToHappeningController">
    <children>
       <Button layoutX="43.0" layoutY="32.0" mnemonicParsing="false" onAction="#backToAdminMagageEventsBtn" text="Tilbake" />
       <ListView fx:id="orderListView" layoutX="149.0" layoutY="118.0" prefHeight="357.0" prefWidth="502.0" />
@@ -16,6 +17,6 @@
          </font>
       </Label>
       <Label layoutX="149.0" layoutY="72.0" text="Ordre til arrangement: " />
-      <Label fx:id="selectedEventName" layoutX="300.0" layoutY="72.0" text="Arrangement" />
+      <Label fx:id="selectedHappeningName" layoutX="300.0" layoutY="72.0" text="Arrangement" />
    </children>
 </AnchorPane>

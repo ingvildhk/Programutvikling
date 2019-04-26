@@ -58,7 +58,7 @@ public class Checker {
         boolean validDate = m.matches();
         if (!validDate) {
             InvalidInputHandler.generateAlert(new InvalidDateException
-                    ("Datoformat feil. Skal være i dette formatet: 'yyyy-mm-dd' Event ble ikke oppdatert "));
+                    ("Datoformat feil. Skal være i dette formatet: 'yyyy-mm-dd' Happening ble ikke oppdatert "));
         }
     }
 

@@ -1,16 +1,11 @@
 package org.kulturhusfx.model;
 
 import org.kulturhusfx.base.ContactPerson;
-import org.kulturhusfx.base.Event;
-import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.exception.InvalidContactPersonException;
-import org.kulturhusfx.util.exception.InvalidHallException;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ContactPersonModel implements Serializable {

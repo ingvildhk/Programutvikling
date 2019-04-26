@@ -79,7 +79,7 @@ public class AdminManageHallsController {
         selectedRows = tableViewHalls.getSelectionModel().getSelectedItems();
         for (Hall hall : selectedRows){
             hallList.remove(hall);
-            hallModel.deleteEvent(hall.getHallName());
+            hallModel.deleteHappening(hall.getHallName());
         }
         for(Hall hall : hallModel.getHallList()) {
             tableViewHalls.getItems().remove(hall);

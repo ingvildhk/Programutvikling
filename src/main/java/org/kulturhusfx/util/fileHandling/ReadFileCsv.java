@@ -124,7 +124,7 @@ public class ReadFileCsv extends ReadFile {
                     }
 
                     if (hallList.isEmpty()){
-                        eventModel.createEvent(new ContactPerson(eventDetails[0], eventDetails[1], eventDetails[2], eventDetails[3],
+                        happeningModel.createHappening(new ContactPerson(eventDetails[0], eventDetails[1], eventDetails[2], eventDetails[3],
                                         eventDetails[4], eventDetails[5]), eventDetails[6], eventDetails[7], eventDetails[8],
                                 new Hall(eventDetails[9], eventDetails[10], eventDetails[11]), eventDetails[12], eventDetails[13],
                                 eventDetails[14], eventDetails[15]);
@@ -136,12 +136,12 @@ public class ReadFileCsv extends ReadFile {
                             if (hall.getHallName().equals(eventDetails[9])){
                                 int hallIndex = hallModel.getHallIndex(eventDetails[9]);
                                 Hall aHall = hallList.get(hallIndex);
-                                eventModel.createEvent(new ContactPerson(eventDetails[0], eventDetails[1], eventDetails[2], eventDetails[3],
+                                happeningModel.createHappening(new ContactPerson(eventDetails[0], eventDetails[1], eventDetails[2], eventDetails[3],
                                                 eventDetails[4], eventDetails[5]), eventDetails[6], eventDetails[7], eventDetails[8],
                                         aHall, eventDetails[9], eventDetails[13], eventDetails[14], eventDetails[15]);
                             }
                             else {
-                                eventModel.createEvent(new ContactPerson(eventDetails[0], eventDetails[1], eventDetails[2], eventDetails[3],
+                                happeningModel.createHappening(new ContactPerson(eventDetails[0], eventDetails[1], eventDetails[2], eventDetails[3],
                                                 eventDetails[4], eventDetails[5]), eventDetails[6], eventDetails[7], eventDetails[8],
                                         new Hall(eventDetails[9], eventDetails[10], eventDetails[11]), eventDetails[12], eventDetails[13],
                                         eventDetails[14], eventDetails[15]);

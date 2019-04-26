@@ -1,6 +1,6 @@
 package org.kulturhusfx.util.fileHandling;
 
-import org.kulturhusfx.base.Event;
+import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.util.exception.InvalidHallException;
 
@@ -13,12 +13,12 @@ public class ReadFileJobj extends ReadFile {
         try (FileInputStream fileInputStream = new FileInputStream(fileName);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream))
         {
-            Event newEvent = (Event) objectInputStream.readObject();
-            newEvent.createTicketModel();
-            eventList.add(newEvent);
+            Happening newHappening = (Happening) objectInputStream.readObject();
+            newHappening.createTicketModel();
+            happeningList.add(newHappening);
             for (Hall hall : hallList){
-                if (!newEvent.getHall().getHallName().equals(hall.getHallName())){
-                    hallList.add(newEvent.getHall());
+                if (!newHappening.getHall().getHallName().equals(hall.getHallName())){
+                    hallList.add(newHappening.getHall());
                 }
             }
         }

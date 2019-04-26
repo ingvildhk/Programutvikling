@@ -1,9 +1,7 @@
 package org.kulturhusfx.util.fileHandling;
 
-import org.kulturhusfx.base.Event;
+import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.base.Hall;
-import org.kulturhusfx.util.FileExceptionHandler;
-import org.kulturhusfx.util.SceneUtils;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -13,19 +11,19 @@ import java.io.PrintWriter;
 public class SaveFileCsv extends SaveFile {
 
     @Override
-    public void saveEventToFile(Event event, String path) throws IOException {
+    public void saveHappeningToFile(Happening happening, String path) throws IOException {
         try (
                 FileWriter fileWriter = new FileWriter(path, true);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(bufferedWriter);
                 ) {
 
-            printWriter.println(event.getContactPerson().getContactName() + "," + event.getContactPerson().getPhoneNumber()+ "," +
-                    event.getContactPerson().getEmail() + "," + event.getContactPerson().getWebpage() + "," + event.getContactPerson().getFirm()+ "," +
-                    event.getContactPerson().getOtherInformation() + "," + event.getName() + "," + event.getPerformers() + "," +
-                    event.getSchedule() + "," + event.getHall().getHallName() + "," + event.getHall().getHallType() + "," +
-                    event.getHall().getNumberOfSeats() + "," + event.getType() + "," + event.getDate() + "," +
-                    event.getTime() + "," + event.getTicketPrice());
+            printWriter.println(happening.getContactPerson().getContactName() + "," + happening.getContactPerson().getPhoneNumber()+ "," +
+                    happening.getContactPerson().getEmail() + "," + happening.getContactPerson().getWebpage() + "," + happening.getContactPerson().getFirm()+ "," +
+                    happening.getContactPerson().getOtherInformation() + "," + happening.getName() + "," + happening.getPerformers() + "," +
+                    happening.getSchedule() + "," + happening.getHall().getHallName() + "," + happening.getHall().getHallType() + "," +
+                    happening.getHall().getNumberOfSeats() + "," + happening.getType() + "," + happening.getDate() + "," +
+                    happening.getTime() + "," + happening.getTicketPrice());
         }
     }
 

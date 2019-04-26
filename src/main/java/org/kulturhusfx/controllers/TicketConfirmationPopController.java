@@ -4,25 +4,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import org.kulturhusfx.base.Event;
-import org.kulturhusfx.util.SceneUtils;
+import org.kulturhusfx.base.Happening;
 
 public class TicketConfirmationPopController {
 
    // private SceneUtils sceneUtils = SceneUtils.getInstance();
 
     private String numberOfTickets = PurchaseTicketController.currentNumberofTickets;
-    private Event currentEvent = MainPageController.currentEvent;
+    private Happening currentHappening = MainPageController.currentHappening;
     private double numOfTickets = Double.parseDouble(numberOfTickets);
-    private double ticketPrice = Double.parseDouble(currentEvent.getTicketPrice());
+    private double ticketPrice = Double.parseDouble(currentHappening.getTicketPrice());
     private double totalSum = numOfTickets * ticketPrice;
 
     @FXML
-    Label eventLabel, totalSumLabel, numberOfTicketsLabel;
+    Label happeningLabel, totalSumLabel, numberOfTicketsLabel;
 
     public void initialize(){
         numberOfTicketsLabel.setText(numberOfTickets);
-        eventLabel.setText(currentEvent.getName());
+        happeningLabel.setText(currentHappening.getName());
         totalSumLabel.setText(Double.toString(totalSum));
     }
 

@@ -21,7 +21,7 @@
       <VBox layoutX="14.0" layoutY="80.0" prefHeight="199.0" prefWidth="192.0">
          <children>
             <Button fx:id="btnManageHalls" mnemonicParsing="false" onAction="#seeAllEventsBtn" text="Administrer saler" />
-            <Button fx:id="btnManageEvents" mnemonicParsing="false" onAction="#manageEventsBtn" text="Administrer arrangementer" />
+            <Button fx:id="btnManageHappenings" mnemonicParsing="false" onAction="#manageEventsBtn" text="Administrer arrangementer" />
          </children>
       </VBox>
       <VBox layoutX="466.0" layoutY="113.0" prefHeight="331.0" prefWidth="235.0">
@@ -43,21 +43,21 @@
       <VBox layoutX="206.0" layoutY="113.0" prefHeight="482.0" prefWidth="235.0">
          <children>
               <Label text="Navn på Arrangementet" />
-            <TextField fx:id="eventName" />
+            <TextField fx:id="happeningName" />
               <Label text="Type" />
-              <ChoiceBox fx:id="eventType" prefHeight="27.0" prefWidth="174.0" />
+              <ChoiceBox fx:id="happeningType" prefHeight="27.0" prefWidth="174.0" />
               <Label text="Opptredende Personer" />
               <TextField id="performers" fx:id="performers" prefHeight="27.0" prefWidth="174.0" />
               <Label text="Sal" />
-              <ChoiceBox id="room" fx:id="eventHall" prefHeight="25.0" prefWidth="121.0" />
+              <ChoiceBox id="room" fx:id="happeningHall" prefHeight="25.0" prefWidth="121.0" />
               <Label text="Klokke (hh:mm)" />
-              <TextField fx:id="eventTime" prefHeight="27.0" prefWidth="83.0" promptText="hh:mm" />
+              <TextField fx:id="time" prefHeight="27.0" prefWidth="83.0" promptText="hh:mm" />
             <Label text="Dato" />
             <DatePicker fx:id="datePicker" editable="false" />
               <Label text="Billettpris" />
               <TextField fx:id="ticketPrice" prefHeight="27.0" prefWidth="72.0" promptText="00,00" />
               <Label text="Program" />
-            <TextArea fx:id="eventSchedule" prefHeight="102.0" prefWidth="182.0" />
+            <TextArea fx:id="happeningSchedule" prefHeight="102.0" prefWidth="182.0" />
          </children>
       </VBox>
         <Label layoutX="741.0" layoutY="80.0" text="Legg til sal">
@@ -65,9 +65,9 @@
                 <Font size="16.0" />
             </font>
         </Label>
-        <Button fx:id="btnRegisterEvent" layoutX="466.0" layoutY="443.0" mnemonicParsing="false" onAction="#eventRegistrationBtn" text="Registrer arrangement" />
+        <Button fx:id="btnRegisterHappening" layoutX="466.0" layoutY="443.0" mnemonicParsing="false" onAction="#happeningRegistrationBtn" text="Registrer arrangement" />
         <Separator layoutX="718.0" layoutY="80.0" orientation="VERTICAL" prefHeight="463.0" prefWidth="0.0" />
-      <Button fx:id="btnRegisterEventFile" layoutX="466.0" layoutY="486.0" mnemonicParsing="false" onAction="#registerEventFromFileBtn" text="Registrer arrangement fra fil" />
+      <Button fx:id="btnRegisterHappeningFile" layoutX="466.0" layoutY="486.0" mnemonicParsing="false" onAction="#registerHappeningFromFileBtn" text="Registrer arrangement fra fil" />
         <Label layoutX="206.0" layoutY="80.0" text="Legg til arrangement">
             <font>
                 <Font size="16.0" />

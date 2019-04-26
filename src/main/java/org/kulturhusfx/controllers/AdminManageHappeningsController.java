@@ -16,31 +16,31 @@ import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
-import org.kulturhusfx.base.Event;
+import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.base.Hall;
-import org.kulturhusfx.model.EventModel;
+import org.kulturhusfx.model.HappeningModel;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.SceneUtils;
 import java.io.IOException;
 import java.util.List;
 
-public class AdminManageEventsController {
+public class AdminManageHappeningsController {
 
     @FXML
-    private TableView<Event> tableViewEvents;
+    private TableView<Happening> tableViewHappenings;
 
     @FXML
-    private TableColumn<Event, String> nameColumn, typeColumn, performersColumn,
+    private TableColumn<Happening, String> nameColumn, typeColumn, performersColumn,
             timeColumn, dateColumn, programColumn, priceColumn, contactNameCol,
             contactFirmCol, contactWebsiteCol, contactPhoneCol, contactEmailCol, contactOtherCol;
 
     @FXML
-    private  TableColumn<Event, Hall> hallColumn;
+    private  TableColumn<Happening, Hall> hallColumn;
 
     private HallModel hallModel = HallModel.getInstance();
-    private EventModel eventModel = EventModel.getInstance();
-    private List<Event> eventList = eventModel.getEventList();
+    private HappeningModel happeningModel = HappeningModel.getInstance();
+    private List<Happening> happeningList = happeningModel.getHappeningList();
     private List<Hall> hallList = hallModel.getHallList();
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
@@ -51,16 +51,16 @@ public class AdminManageEventsController {
     }
 
     // Method to list the registrered events in tableView
-    private ObservableList<Event> getEvents(){
-        ObservableList<Event> events = FXCollections.observableArrayList();
-        for (Event event : eventList){
-            events.add(event);
+    private ObservableList<Happening> getHappenings(){
+        ObservableList<Happening> happenings = FXCollections.observableArrayList();
+        for (Happening happening : happeningList){
+            happenings.add(happening);
         }
-        return events;
+        return happenings;
     }
 
-    public void deleteEventBtn(){
-        deleteEventFromTableView();
+    public void deleteHappeningBtn(){
+        deleteHappeningFromTableView();
     }
 
     // Test om det fungerte med egen metode
@@ -73,17 +73,17 @@ public class AdminManageEventsController {
 
     public void seeOrdersToEventbtn(ActionEvent event) throws IOException {
 
-        // sceneUtils.launchScene(event, AdminManageEventsController.class, "seeOrdersToEvent.fxml");
+        // sceneUtils.launchScene(event, AdminManageHappeningsController.class, "seeOrdersToHappening.fxml");
 
-        ObservableList<Event> selectedRows;
+        ObservableList<Happening> selectedRows;
         // contains the selected rows
-        selectedRows = tableViewEvents.getSelectionModel().getSelectedItems();
+        selectedRows = tableViewHappenings.getSelectionModel().getSelectedItems();
 
 
         // TODO IF ELSE funker ikke enda men skal fikses
         if (selectedRows != null) {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("seeOrdersToEvent.fxml"));
+            loader.setLocation(getClass().getResource("seeOrdersToHappening.fxml"));
             Parent parent = loader.load();
             System.out.println("Inne i IF");
             showScene(parent, event);
@@ -95,10 +95,10 @@ public class AdminManageEventsController {
         window.show();
         */
 
-            SeeOrdersToEventController controller = loader.getController();
+            SeeOrdersToHappeningController controller = loader.getController();
 
             // Access the controller and call a method
-            controller.initData(tableViewEvents.getSelectionModel().getSelectedItem());
+            controller.initData(tableViewHappenings.getSelectionModel().getSelectedItem());
         } else {
             Checker.generateItemNotSelectedAlert("Arrangement ikke valgt", "For å kunne se billetter til" +
                     "et arrangement må du markere arrangementet du ønsker å se billetter til. ");
@@ -107,52 +107,52 @@ public class AdminManageEventsController {
 
 
     public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
-        sceneUtils.launchScene(event, AdminManageEventsController.class, "adminMainPage.fxml");
+        sceneUtils.launchScene(event, AdminManageHappeningsController.class, "adminMainPage.fxml");
     }
 
     // Methods to change and set eventdata i tableView with double-click
     public void editEventNameCellEvent (TableColumn.CellEditEvent edittedCell){
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
-        eventSelected.setName(edittedCell.getNewValue().toString());
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
+        happeningSelected.setName(edittedCell.getNewValue().toString());
     }
 
     public void editEventPerformersCellEvent (TableColumn.CellEditEvent edittedCell){
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
-        eventSelected.setPerformers(edittedCell.getNewValue().toString());
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
+        happeningSelected.setPerformers(edittedCell.getNewValue().toString());
     }
 
     public void editEventTimeCellEvent (TableColumn.CellEditEvent edittedCell){
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidTime(edittedCell.getNewValue().toString());
-        eventSelected.setTime(edittedCell.getNewValue().toString());
+        happeningSelected.setTime(edittedCell.getNewValue().toString());
     }
 
     public void editEventDateCellEvent (TableColumn.CellEditEvent edittedCell){
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidDate(edittedCell.getNewValue().toString());
-        eventSelected.setDate(edittedCell.getNewValue().toString());
+        happeningSelected.setDate(edittedCell.getNewValue().toString());
     }
 
     public void editEventScheduleCellEvent (TableColumn.CellEditEvent edittedCell){
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
-        eventSelected.setSchedule(edittedCell.getNewValue().toString());
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
+        happeningSelected.setSchedule(edittedCell.getNewValue().toString());
     }
 
     public void editEventPriceCellEvent (TableColumn.CellEditEvent edittedCell){
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidTicketPrice(edittedCell.getNewValue().toString());
-        eventSelected.setTicketPrice(edittedCell.getNewValue().toString());
+        happeningSelected.setTicketPrice(edittedCell.getNewValue().toString());
     }
 
     private void setColumnValues(){
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
-        performersColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("performers"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("name"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("type"));
+        performersColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("performers"));
         hallColumn.setCellValueFactory(new PropertyValueFactory<>("hall"));
-        timeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("time"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
-        programColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("schedule"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("ticketPrice"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("time"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("date"));
+        programColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("schedule"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("ticketPrice"));
 
         contactNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getContactName()));
         contactPhoneCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getPhoneNumber()));
@@ -161,12 +161,12 @@ public class AdminManageEventsController {
         contactWebsiteCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getWebpage()));
         contactOtherCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getOtherInformation()));
 
-        tableViewEvents.setItems(getEvents());
+        tableViewHappenings.setItems(getHappenings());
     }
 
     private void setEditableColumns() {
         // To change text fields, editable must be true
-        tableViewEvents.setEditable(true);
+        tableViewHappenings.setEditable(true);
 
         // To make columns editable
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -187,63 +187,63 @@ public class AdminManageEventsController {
         contactOtherCol.setCellFactory(TextFieldTableCell.forTableColumn());
 
         // To select multipe rows with, men fungerer ikke med deleteButton
-        tableViewEvents.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tableViewHappenings.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     public void editEventTypeCellEvent(TableColumn.CellEditEvent edittedCell){
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
-        eventSelected.setType(edittedCell.getNewValue().toString());
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
+        happeningSelected.setType(edittedCell.getNewValue().toString());
     }
 
     public void editEventHallCellEvent (TableColumn.CellEditEvent edittedCell){
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
-        eventSelected.setHall((Hall)edittedCell.getNewValue());
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
+        happeningSelected.setHall((Hall)edittedCell.getNewValue());
     }
 
     public void editEventContactNameCellEvent (TableColumn.CellEditEvent edittedCell){
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
-        eventSelected.setContactPersonName(edittedCell.getNewValue().toString());
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
+        happeningSelected.setContactPersonName(edittedCell.getNewValue().toString());
     }
 
     public void editEventContactPhoneCellEvent (TableColumn.CellEditEvent edittedCell){
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidPhone(edittedCell.getNewValue().toString());
-        eventSelected.setContactPersonPhone(edittedCell.getNewValue().toString());
+        happeningSelected.setContactPersonPhone(edittedCell.getNewValue().toString());
     }
 
     public void editEventContactEmailCellEvent (TableColumn.CellEditEvent edittedCell){
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidEmail(edittedCell.getNewValue().toString());
-        eventSelected.setContactPersonEmail(edittedCell.getNewValue().toString());
+        happeningSelected.setContactPersonEmail(edittedCell.getNewValue().toString());
     }
 
     public void editEventContactWebpageCellEvent (TableColumn.CellEditEvent edittedCell) {
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
-        eventSelected.setContactPersonWebpage(edittedCell.getNewValue().toString());
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
+        happeningSelected.setContactPersonWebpage(edittedCell.getNewValue().toString());
     }
 
     public void editEventContactFirmCellEvent (TableColumn.CellEditEvent edittedCell){
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
-        eventSelected.setContactPersonFirm(edittedCell.getNewValue().toString());
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
+        happeningSelected.setContactPersonFirm(edittedCell.getNewValue().toString());
     }
 
     public void editEventContactOtherCellEvent (TableColumn.CellEditEvent edittedCell){
-        Event eventSelected = tableViewEvents.getSelectionModel().getSelectedItem();
-        eventSelected.setContactPersonOther(edittedCell.getNewValue().toString());
+        Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
+        happeningSelected.setContactPersonOther(edittedCell.getNewValue().toString());
     }
 
-    public void deleteEventFromTableView(){
-        ObservableList<Event> selectedRows;
+    public void deleteHappeningFromTableView(){
+        ObservableList<Happening> selectedRows;
 
         // contains the selected rows
-        selectedRows = tableViewEvents.getSelectionModel().getSelectedItems();
-        for (Event event : selectedRows){
-            eventList.remove(event);
+        selectedRows = tableViewHappenings.getSelectionModel().getSelectedItems();
+        for (Happening happening : selectedRows){
+            happeningList.remove(happening);
         }
-        for(Event events : eventModel.getEventList()) {
-            tableViewEvents.getItems().remove(events);
+        for(Happening happenings : happeningModel.getHappeningList()) {
+            tableViewHappenings.getItems().remove(happenings);
         }
-        tableViewEvents.setItems(getEvents());
+        tableViewHappenings.setItems(getHappenings());
     }
 
 

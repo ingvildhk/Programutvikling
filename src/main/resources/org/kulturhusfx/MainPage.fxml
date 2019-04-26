@@ -21,9 +21,9 @@
             </font>
         </Label>
         <Button id="adminLoginButton" fx:id="adminLoginBtn" layoutX="884.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleAdminLoginBtnAction" text="Admin Login" />
-        <TableView fx:id="tableViewEvents" layoutX="16.0" layoutY="111.0" prefHeight="465.0" prefWidth="967.0">
+        <TableView fx:id="tableViewHappenings" layoutX="16.0" layoutY="111.0" prefHeight="465.0" prefWidth="967.0">
             <columns>
-                <TableColumn fx:id="EventColumn" prefWidth="237.9999942779541" text="Arrangement" />
+                <TableColumn fx:id="HappeningColumn" prefWidth="237.9999942779541" text="Arrangement" />
                 <TableColumn fx:id="TypeColumn" prefWidth="149.3333282470703" text="Type" />
                 <TableColumn fx:id="DateColumn" prefWidth="131.99996948242188" text="Dato" />
                 <TableColumn fx:id="TimeColumn" prefWidth="145.33331298828125" text="Tidspunkt" />

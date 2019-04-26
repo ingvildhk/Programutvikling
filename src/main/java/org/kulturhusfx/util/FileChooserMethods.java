@@ -1,7 +1,7 @@
 package org.kulturhusfx.util;
 
 import javafx.stage.FileChooser;
-import org.kulturhusfx.base.Event;
+import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.util.fileHandling.SaveFileCsv;
 import org.kulturhusfx.util.fileHandling.SaveFileJobj;
@@ -23,7 +23,7 @@ public class FileChooserMethods {
     FileChooser.ExtensionFilter jobjFilter = new FileChooser.ExtensionFilter("jobj", "*.jobj");
     FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("csv", "*.csv");
 
-    public void saveEventToFile(Event event) throws IOException {
+    public void saveHappeningToFile(Happening happening) throws IOException {
         if(!fileChooser.getExtensionFilters().contains(jobjFilter)){
             fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
         }
@@ -33,11 +33,11 @@ public class FileChooserMethods {
         if (file != null) {
             if(fileChooser.getSelectedExtensionFilter() == jobjFilter){
                 SaveFileJobj jobj = new SaveFileJobj();
-                jobj.saveEventToFile(event, fileName);
+                jobj.saveHappeningToFile(happening, fileName);
             }
             else if(fileChooser.getSelectedExtensionFilter() == csvFilter){
                 SaveFileCsv csv = new SaveFileCsv();
-                csv.saveEventToFile(event, fileName);
+                csv.saveHappeningToFile(happening, fileName);
             }
             else{
                 FileExceptionHandler.generateExceptionmsg(new InvalidObjectException("Filtype må være jobj eller csv"));
