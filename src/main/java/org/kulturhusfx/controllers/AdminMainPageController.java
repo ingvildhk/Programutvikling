@@ -49,8 +49,8 @@ public class AdminMainPageController {
     private FileChooser.ExtensionFilter jobjFilter = new FileChooser.ExtensionFilter("jobj", "*.jobj");
     private FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("csv", "*.csv");
     private ExecutorService service = Executors.newSingleThreadExecutor();
-    //static file for being able to run read from file in threads
-    public static File file;
+    //static filename for being able to run read from file in threads
+    public static String fileName;
 
     public void initialize() {
         addEventType();
@@ -90,7 +90,7 @@ public class AdminMainPageController {
         setFileChooserFilters();
         fileChooser.setTitle("Velg arrangementsfil");
         File selectedFile = fileChooser.showOpenDialog(null);
-        file = selectedFile;
+        fileName = selectedFile.getName();
         if (fileChooser.getSelectedExtensionFilter() == csvFilter){
             disableButtons();
             Task<Void> task = new CsvEventThread(this::eventConfirmation);
@@ -112,7 +112,7 @@ public class AdminMainPageController {
         setFileChooserFilters();
         fileChooser.setTitle("Velg salfil");
         File selectedFile = fileChooser.showOpenDialog(null);
-        file = selectedFile;
+        fileName = selectedFile.getName();
         if (fileChooser.getSelectedExtensionFilter() == csvFilter){
             disableButtons();
             Task<Void> task = new CsvHallThread(this::hallConfirmation);

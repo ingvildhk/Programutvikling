@@ -20,12 +20,12 @@ public class SaveFileCsv extends SaveFile {
                 PrintWriter printWriter = new PrintWriter(bufferedWriter);
                 ) {
 
-            printWriter.println(event.getContactPerson().getContactName() + "," + event.getContactPerson().getPhoneNumber()+ "," +
-                    event.getContactPerson().getEmail() + "," + event.getContactPerson().getWebpage() + "," + event.getContactPerson().getFirm()+ "," +
-                    event.getContactPerson().getOtherInformation() + "," + event.getName() + "," + event.getPerformers() + "," +
-                    event.getSchedule() + "," + event.getHall().getHallName() + "," + event.getHall().getHallType() + "," +
-                    event.getHall().getNumberOfSeats() + "," + event.getType() + "," + event.getDate() + "," +
-                    event.getTime() + "," + event.getTicketPrice());
+            printWriter.println(event.getContactPerson().getContactName() + ";" + event.getContactPerson().getPhoneNumber()+ ";" +
+                    event.getContactPerson().getEmail() + ";" + event.getContactPerson().getWebpage() + ";" + event.getContactPerson().getFirm()+ ";" +
+                    event.getContactPerson().getOtherInformation() + ";" + event.getName() + ";" + event.getPerformers() + ";" +
+                    event.getSchedule() + ";" + event.getHall().getHallName() + ";" + event.getHall().getHallType() + ";" +
+                    event.getHall().getNumberOfSeats() + ";" + event.getType() + ";" + event.getDate() + ";" +
+                    event.getTime() + ";" + event.getTicketPrice());
         }
     }
 
@@ -37,7 +37,7 @@ public class SaveFileCsv extends SaveFile {
                 PrintWriter printWriter = new PrintWriter(bufferedWriter);
                 ) {
 
-            printWriter.println(hall.getHallName() + "," + hall.getHallType() +"," + hall.getNumberOfSeats());
+            printWriter.println(hall.getHallName() + ";" + hall.getHallType() + ";" + hall.getNumberOfSeats());
         }
     }
 }

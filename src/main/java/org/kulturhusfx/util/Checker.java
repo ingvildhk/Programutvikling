@@ -28,16 +28,15 @@ public class Checker {
 
     public static void checkValidPhone(String phoneNumber) {
         try {
-            int phone = Integer.parseInt(phoneNumber);
+            long phone = Long.parseLong(phoneNumber);
+            if (phoneNumber.length() != 8) {
+                InvalidInputHandler.generateAlert(new InvalidPhoneException("Telefonnummer må være 8 siffer"));
+            }
             if (phone < 0) {
                 InvalidInputHandler.generateAlert(new InvalidPhoneException("Telefonnummer kan ikke være et negativt tall"));
             }
         } catch (NumberFormatException e) {
             InvalidInputHandler.generateAlert(new InvalidPhoneException("Telefonnummer må være et tall"));
-        }
-
-        if (phoneNumber.length() != 8) {
-            InvalidInputHandler.generateAlert(new InvalidPhoneException("Telefonnummer må være 8 siffer"));
         }
     }
 

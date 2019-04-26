@@ -24,6 +24,8 @@ import org.kulturhusfx.model.EventModel;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.OrderButton;
 import org.kulturhusfx.util.SceneUtils;
+import org.kulturhusfx.util.fileHandling.ReadFileCsv;
+import org.kulturhusfx.util.fileHandling.ReadFileJobj;
 
 import java.io.IOException;
 import java.util.List;
@@ -52,10 +54,7 @@ public class MainPageController {
 
 
     public void initialize(){
-        //Skal bort etterhvert, når vi finner ut hvordan man leser fra fil
-        if (hallModel.getHallList().isEmpty()) {
-            hallModel.createHall("Hovedsalen", "Konsertsal", "150");
-        }
+
         addButtons();
         setColumnValues();
         //onInputMethodTextChanged();
@@ -144,15 +143,6 @@ public class MainPageController {
 
     private ObservableList<Event> getEvents(){
         ObservableList<Event> events = FXCollections.observableArrayList();
-
-        //Skal bort etterhvert, når vi finner ut hvordan man leser fra fil
-        Hall hovedsal = hallList.get(0);
-        if (eventList == null || eventList.isEmpty()){
-            eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 1",
-                    "folk","program", hovedsal, "konsert", "2019-09-21", "10:10","200.00");
-            eventModel.createEvent((new ContactPerson("Kontaktperson 1", "12345678", "hei@mail.no","","", "")), "Dummy Arrangement 2",
-                    "folk","program", hovedsal, "foredrag", "2020-09-22", "10:10","200.00");
-        }
 
         for (Event event : eventList){
             events.add(event);

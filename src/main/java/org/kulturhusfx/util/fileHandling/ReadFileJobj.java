@@ -8,8 +8,7 @@ import java.io.*;
 
 public class ReadFileJobj extends ReadFile {
     @Override
-    public void readEventFromFile(File file) throws IOException, ClassNotFoundException {
-        String fileName = file.getName();
+    public void readEventFromFile(String fileName) throws IOException, ClassNotFoundException {
         try (FileInputStream fileInputStream = new FileInputStream(fileName);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream))
         {
@@ -25,8 +24,7 @@ public class ReadFileJobj extends ReadFile {
     }
 
     @Override
-    public void readHallFromFile(File file) throws InvalidHallException, IOException, ClassNotFoundException {
-        String fileName = file.getName();
+    public void readHallFromFile(String fileName) throws InvalidHallException, IOException, ClassNotFoundException {
         try (FileInputStream fileInputStream = new FileInputStream(fileName);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream))
         {
