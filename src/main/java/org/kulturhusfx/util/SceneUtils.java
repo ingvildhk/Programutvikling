@@ -31,9 +31,9 @@ public class SceneUtils {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent parent = fxmlLoader.load(myClass.getResource(fxmlPath).openStream());
-            Scene MainPageScene = new Scene(parent);
+            Scene scene = new Scene(parent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(MainPageScene);
+            window.setScene(scene);
             window.show();
         } catch (IOException e) {
             e.printStackTrace();
