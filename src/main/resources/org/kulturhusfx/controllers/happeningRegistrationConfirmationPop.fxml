@@ -39,7 +39,7 @@
       <Label fx:id="registeredHappeningDateLabel" layoutX="167.0" layoutY="232.0" text="Label" />
       <Label fx:id="registeredHappeningHallLabel" layoutX="167.0" layoutY="197.0" text="Label" />
       <Label fx:id="registeredHappeningTimeLabel" layoutX="167.0" layoutY="269.0" text="Label" />
-      <Label fx:id="registeredHappeningScheduleLabel" layoutX="167.0" layoutY="359.0" text="Label" />
+      <Label fx:id="registeredHappeningScheduleLabel" layoutX="167.0" layoutY="359.0" maxWidth="150.0" text="Label" wrapText="true" />
       <TextField fx:id="changeHappeningNameTxtField" layoutX="338.0" layoutY="89.0" prefHeight="25.0" prefWidth="113.0" />
       <TextField fx:id="changeHappeningPerformersTxtField" layoutX="338.0" layoutY="158.0" prefHeight="25.0" prefWidth="113.0" />
       <ChoiceBox fx:id="changeHappeningTypeChoiceBox" layoutX="338.0" layoutY="124.0" prefHeight="25.0" prefWidth="113.0" />

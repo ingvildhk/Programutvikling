@@ -44,7 +44,6 @@ public class MainPageController {
     private List<Hall> hallList = hallModel.getHallList();
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
-
     public void initialize(){
 
         addButtons();
@@ -52,7 +51,6 @@ public class MainPageController {
         //onInputMethodTextChanged();
         filteringTxtField();
     }
-
 
     // Skal fikses
     public void onInputMethodTextChanged(){
