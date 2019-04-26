@@ -30,7 +30,7 @@ public class SceneUtils {
     public void launchScene(ActionEvent event, Class myClass, String fxmlPath) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            Parent parent = fxmlLoader.load(myClass.getResource(fxmlPath).openStream());
+            Parent parent = fxmlLoader.load(myClass.getResource(fxmlPath));
             Scene scene = new Scene(parent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(scene);

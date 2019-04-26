@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.AdminManageHallsController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.AdminManageHallsController">
          <children>
             <Button layoutX="22.0" layoutY="31.0" mnemonicParsing="false" onAction="#backToAdminMainPageBtn" text="Tilbake" />
             <Label layoutX="22.0" layoutY="93.0" prefHeight="17.0" prefWidth="255.0" text="Oversikt over saler:">
