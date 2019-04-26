@@ -21,7 +21,10 @@ import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HappeningModel;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.Checker;
+import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.SceneUtils;
+import org.kulturhusfx.util.exception.InvalidInputException;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -63,48 +66,42 @@ public class AdminManageHappeningsController {
         deleteHappeningFromTableView();
     }
 
-    // Test om det fungerte med egen metode
+    /*Test om det fungerte med egen metode
     public void showScene(Parent parent, ActionEvent event) {
         Scene MainPageScene = new Scene(parent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(MainPageScene);
         window.show();
     }
+    */
 
     public void seeOrdersToEventbtn(ActionEvent event) throws IOException {
-
         // sceneUtils.launchScene(event, AdminManageHappeningsController.class, "seeOrdersToHappening.fxml");
 
         ObservableList<Happening> selectedRows;
-        // contains the selected rows
         selectedRows = tableViewHappenings.getSelectionModel().getSelectedItems();
 
-
         // TODO IF ELSE funker ikke enda men skal fikses
-        if (selectedRows != null) {
+        if (!selectedRows.isEmpty()) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("seeOrdersToHappening.fxml"));
             Parent parent = loader.load();
-            System.out.println("Inne i IF");
-            showScene(parent, event);
+            //showScene(parent, event);
 
-        /*
-        Scene scene = new Scene(parent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-        */
+            Scene scene = new Scene(parent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
 
             SeeOrdersToHappeningController controller = loader.getController();
 
             // Access the controller and call a method
             controller.initData(tableViewHappenings.getSelectionModel().getSelectedItem());
         } else {
-            Checker.generateItemNotSelectedAlert("Arrangement ikke valgt", "For å kunne se billetter til" +
-                    "et arrangement må du markere arrangementet du ønsker å se billetter til. ");
+            InvalidInputHandler.generateAlert(new InvalidInputException("Arrangement er ikke valgt. For å kunne se billetter til" +
+                    "et arrangement må du markere arrangementet du ønsker å se billetter til. "));
         }
     }
-
 
     public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
         sceneUtils.launchScene(event, AdminManageHappeningsController.class, "adminMainPage.fxml");

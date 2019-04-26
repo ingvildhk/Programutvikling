@@ -55,8 +55,8 @@ public class SeeOrdersToHappeningController {
         selectedHappeningName.setText(selectedHappening.getName());
     }
 
-        public void backToAdminMagageEventsBtn (ActionEvent event) throws IOException {
+    public void backToAdminMagageEventsBtn (ActionEvent event) throws IOException {
             sceneUtils.launchScene(event, SeeOrdersToHappeningController.class, "adminManageHappenings.fxml");
-        }
     }
+}
 

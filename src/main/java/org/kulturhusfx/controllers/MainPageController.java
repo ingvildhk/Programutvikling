@@ -59,36 +59,32 @@ public class MainPageController {
         filteringTxtField();
     }
 
-    // Endre til lambda
-    // Method that allows user to search for value in cells
+    // Method that allows user to filter value in cells
     public void filteringTxtField(){
-        srcTxtField.textProperty().addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(Observable observable) {
-                if(srcTxtField.textProperty().get().isEmpty()){
-                    tableViewHappenings.setItems(getHappenings());
-                    return;
-                }
-
-                ObservableList<Happening> happeningList = FXCollections.observableArrayList();
-                ObservableList<TableColumn<Happening, ?>> columns = tableViewHappenings.getColumns();
-
-                for(int i = 0; i < getHappenings().size(); i++)
-                    for (int j = 0; j < columns.size(); j++) {
-                        TableColumn col = columns.get(j);
-
-                        String cellValue = col.getCellData(getHappenings().get(i)).toString();
-
-                        cellValue = cellValue.toLowerCase();
-
-                        if (cellValue.contains(srcTxtField.textProperty().get().toLowerCase())) {
-                            happeningList.add(getHappenings().get(i));
-                            break;
-                        }
-                    }
-
-                tableViewHappenings.setItems(happeningList);
+        srcTxtField.textProperty().addListener(observable -> {
+            if(srcTxtField.textProperty().get().isEmpty()){
+                tableViewHappenings.setItems(getHappenings());
+                return;
             }
+
+            ObservableList<Happening> happeningList = FXCollections.observableArrayList();
+            ObservableList<TableColumn<Happening, ?>> columns = tableViewHappenings.getColumns();
+
+            for(int i = 0; i < getHappenings().size(); i++)
+                for (int j = 0; j < columns.size(); j++) {
+                    TableColumn col = columns.get(j);
+
+                    String cellValue = col.getCellData(getHappenings().get(i)).toString();
+
+                    cellValue = cellValue.toLowerCase();
+
+                    if (cellValue.contains(srcTxtField.textProperty().get().toLowerCase())) {
+                        happeningList.add(getHappenings().get(i));
+                        break;
+                    }
+                }
+            tableViewHappenings.setItems(happeningList);
+            addButtons();
         });
     }
 

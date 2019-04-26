@@ -31,6 +31,8 @@ public class OrderButton extends TableCell<Happening, Boolean> {
         super.updateItem(t, empty);
         if(!empty){
             setGraphic(cellButton);
+        } else {
+            setGraphic(null);
         }
     }
 }
