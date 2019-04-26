@@ -1,5 +1,6 @@
 package org.kulturhusfx.util;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
@@ -121,4 +122,16 @@ public class Checker {
             }
         }
     }
+
+    // Veldig lik den andre alerten??
+    public static void generateItemNotSelectedAlert(String headerTxt, String contentTxt) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Feil");
+        alert.setHeaderText(headerTxt);
+        alert.setContentText(contentTxt);
+
+        alert.showAndWait();
+    }
+
+
 }

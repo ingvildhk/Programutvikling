@@ -4,17 +4,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.MainPageController">
     <children>
-        <Label layoutX="403.0" layoutY="14.0" text="Småkommunens Kulturhus">
+        <Label layoutX="237.0" layoutY="15.0" text="Småkommunens Kulturhus">
             <font>
-                <Font size="18.0" />
+                <Font size="24.0" />
             </font>
         </Label>
-        <Label layoutX="460.0" layoutY="63.0" text="Våre arrangementer">
+        <Label layoutX="322.0" layoutY="64.0" text="Våre arrangementer">
             <font>
                 <Font size="14.0" />
             </font>
@@ -25,10 +26,11 @@
                 <TableColumn fx:id="EventColumn" prefWidth="237.9999942779541" text="Arrangement" />
                 <TableColumn fx:id="TypeColumn" prefWidth="149.3333282470703" text="Type" />
                 <TableColumn fx:id="DateColumn" prefWidth="131.99996948242188" text="Dato" />
-            <TableColumn fx:id="TimeColumn" prefWidth="145.33331298828125" text="Tidspunkt" />
+                <TableColumn fx:id="TimeColumn" prefWidth="145.33331298828125" text="Tidspunkt" />
                 <TableColumn fx:id="AvailableColumn" prefWidth="152.0" text="Antall Ledige" />
                 <TableColumn fx:id="OrderColumn" prefWidth="146.66668701171875" text="Bestill" />
             </columns>
         </TableView>
+        <TextField fx:id="srcTxtField" layoutX="16.0" layoutY="69.0" />
     </children>
 </AnchorPane>
