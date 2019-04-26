@@ -17,13 +17,12 @@ public class SaveFileCsv extends SaveFile {
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(bufferedWriter);
                 ) {
-
-            printWriter.println(happening.getContactPerson().getContactName() + "," + happening.getContactPerson().getPhoneNumber()+ "," +
-                    happening.getContactPerson().getEmail() + "," + happening.getContactPerson().getWebpage() + "," + happening.getContactPerson().getFirm()+ "," +
-                    happening.getContactPerson().getOtherInformation() + "," + happening.getName() + "," + happening.getPerformers() + "," +
-                    happening.getSchedule() + "," + happening.getHall().getHallName() + "," + happening.getHall().getHallType() + "," +
-                    happening.getHall().getNumberOfSeats() + "," + happening.getType() + "," + happening.getDate() + "," +
-                    happening.getTime() + "," + happening.getTicketPrice());
+            printWriter.println(happening.getContactPerson().getContactName() + ";" + happening.getContactPerson().getPhoneNumber()+ ";" +
+                    happening.getContactPerson().getEmail() + ";" + happening.getContactPerson().getWebpage() + ";" + happening.getContactPerson().getFirm()+ ";" +
+                    happening.getContactPerson().getOtherInformation() + ";" + happening.getName() + ";" + happening.getPerformers() + ";" +
+                    happening.getSchedule() + ";" + happening.getHall().getHallName() + ";" + happening.getHall().getHallType() + ";" +
+                    happening.getHall().getNumberOfSeats() + ";" + happening.getType() + ";" + happening.getDate() + ";" +
+                    happening.getTime() + ";" + happening.getTicketPrice());
         }
     }
 
@@ -35,7 +34,7 @@ public class SaveFileCsv extends SaveFile {
                 PrintWriter printWriter = new PrintWriter(bufferedWriter);
                 ) {
 
-            printWriter.println(hall.getHallName() + "," + hall.getHallType() +"," + hall.getNumberOfSeats());
+            printWriter.println(hall.getHallName() + ";" + hall.getHallType() + ";" + hall.getNumberOfSeats());
         }
     }
 }

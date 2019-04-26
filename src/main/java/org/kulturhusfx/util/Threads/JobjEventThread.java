@@ -15,7 +15,7 @@ public class JobjEventThread extends Task<Void> {
 
     private Runnable runme;
     ReadFileJobj readFileJobj = new ReadFileJobj();
-    File file = AdminMainPageController.file;
+    String fileName = AdminMainPageController.fileName;
     SceneUtils sceneUtils = SceneUtils.getInstance();
     private Boolean readException = false;
     private Boolean interruptedException = false;
@@ -41,7 +41,7 @@ public class JobjEventThread extends Task<Void> {
     protected Void call() {
         try {
             Thread.sleep(3000);
-            readFileJobj.readEventFromFile(file);
+            readFileJobj.readEventFromFile(fileName);
         }
 
         catch (InterruptedException e) {

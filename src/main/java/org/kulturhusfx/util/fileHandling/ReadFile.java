@@ -16,7 +16,7 @@ public abstract class ReadFile{
     HappeningModel happeningModel = HappeningModel.getInstance();
     List<Happening> happeningList = happeningModel.getHappeningList();
 
-    public abstract void readEventFromFile(File file) throws IOException, ClassNotFoundException;
-    public abstract void readHallFromFile (File file) throws IOException, ClassNotFoundException;
+    public abstract void readEventFromFile(String fileName) throws IOException, ClassNotFoundException;
+    public abstract void readHallFromFile (String fileName) throws IOException, ClassNotFoundException;
 
 }

@@ -15,7 +15,7 @@ public class JobjHallThread extends Task<Void> {
 
     private Runnable runme;
     ReadFileJobj readFileJobj = new ReadFileJobj();
-    File file = AdminMainPageController.file;
+    String fileName = AdminMainPageController.fileName;
     SceneUtils sceneUtils = SceneUtils.getInstance();
     private Boolean hallExists = false;
     private Boolean readException = false;
@@ -45,7 +45,7 @@ public class JobjHallThread extends Task<Void> {
     protected Void call() {
         try {
             Thread.sleep(3000);
-            readFileJobj.readHallFromFile(file);
+            readFileJobj.readHallFromFile(fileName);
         }
         catch (InvalidHallException ihe){
             setHallExists(true);

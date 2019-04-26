@@ -12,14 +12,14 @@ import java.util.regex.Pattern;
 public class ReadFileCsv extends ReadFile {
 
     @Override
-    public void readEventFromFile(File file) throws IOException, InvalidPhoneException, InvalidEmailException ,
+    public void readEventFromFile(String fileName) throws IOException, InvalidPhoneException, InvalidEmailException ,
             InvalidNumberOfSeatsException, InvalidDateException, InvalidTimeException, InvalidTicketPriceException, InvalidInputException{
         BufferedReader bufferedReader = null;
         try {
-            bufferedReader = new BufferedReader(new java.io.FileReader(file));
+            bufferedReader = new BufferedReader(new java.io.FileReader(fileName));
             String line = "";
             while ((line = bufferedReader.readLine()) != null){
-                String [] eventDetails = line.split(",");
+                String [] eventDetails = line.split(";");
                 if (eventDetails.length > 0){
                     //sjekker at alle felt er fylt ut, fyller de tre valgfrie stringene midlertidig med tekst hvis de er tomme
                     //slik at programmet fortsetter å kjøre
@@ -124,10 +124,13 @@ public class ReadFileCsv extends ReadFile {
                     }
 
                     if (hallList.isEmpty()){
+                        Hall aHall = new Hall(eventDetails[9], eventDetails[10], eventDetails[11]);
                         happeningModel.createHappening(new ContactPerson(eventDetails[0], eventDetails[1], eventDetails[2], eventDetails[3],
+
                                         eventDetails[4], eventDetails[5]), eventDetails[6], eventDetails[7], eventDetails[8],
-                                new Hall(eventDetails[9], eventDetails[10], eventDetails[11]), eventDetails[12], eventDetails[13],
+                                aHall, eventDetails[12], eventDetails[13],
                                 eventDetails[14], eventDetails[15]);
+                        hallList.add(aHall);
                     }
 
                     else {
@@ -141,10 +144,12 @@ public class ReadFileCsv extends ReadFile {
                                         aHall, eventDetails[9], eventDetails[13], eventDetails[14], eventDetails[15]);
                             }
                             else {
+                                Hall aHall = new Hall(eventDetails[9], eventDetails[10], eventDetails[11]);
                                 happeningModel.createHappening(new ContactPerson(eventDetails[0], eventDetails[1], eventDetails[2], eventDetails[3],
                                                 eventDetails[4], eventDetails[5]), eventDetails[6], eventDetails[7], eventDetails[8],
-                                        new Hall(eventDetails[9], eventDetails[10], eventDetails[11]), eventDetails[12], eventDetails[13],
+                                        aHall, eventDetails[12], eventDetails[13],
                                         eventDetails[14], eventDetails[15]);
+                                hallList.add(aHall);
                             }
                         }
                     }
@@ -162,13 +167,13 @@ public class ReadFileCsv extends ReadFile {
     }
 
     @Override
-    public void readHallFromFile(File file) throws InvalidInputException, InvalidHallException, IOException{
+    public void readHallFromFile(String fileName) throws InvalidInputException, InvalidHallException, IOException{
         BufferedReader bufferedReader = null;
         try {
-            bufferedReader = new BufferedReader(new java.io.FileReader(file));
+            bufferedReader = new BufferedReader(new java.io.FileReader(fileName));
             String line = "";
             while ((line = bufferedReader.readLine()) != null) {
-                String[] hallDetails = line.split(",");
+                String[] hallDetails = line.split(";");
                 for (int i = 0; i < hallDetails.length; i++){
                     if(hallDetails[i] == null | hallDetails[i].trim().isEmpty()){
                         throw new InvalidInputException("");

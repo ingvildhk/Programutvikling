@@ -15,7 +15,7 @@ public class CsvEventThread extends Task<Void> {
 
     private Runnable runme;
     private ReadFileCsv readFileCsv = new ReadFileCsv();
-    private File file = AdminMainPageController.file;
+    private String fileName = AdminMainPageController.fileName;
     private SceneUtils sceneUtils = SceneUtils.getInstance();
     //for some reason succeeded runs twice? This counter makes sure that only one alert pops up
     private int counter = 0;
@@ -74,7 +74,7 @@ public class CsvEventThread extends Task<Void> {
     protected Void call() {
         try {
             Thread.sleep(3000);
-            readFileCsv.readEventFromFile(file);
+            readFileCsv.readEventFromFile(fileName);
         }
         catch (InvalidTicketPriceException e){
             setTicket(true);
@@ -110,7 +110,7 @@ public class CsvEventThread extends Task<Void> {
     protected void succeeded(){
         if (input){
             counter++;
-            InvalidInputHandler.generateThreadAlert(new InvalidInputException("Alle data må fylles ut"));
+            InvalidInputHandler.generateThreadAlert(new InvalidInputException("Alle data må fylles ut. Husk å dele variabler med ';'"));
         }
         if (phone){
             counter ++;

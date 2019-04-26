@@ -17,7 +17,7 @@ public class CsvHallThread extends Task<Void> {
 
     private Runnable runme;
     ReadFileCsv readFileCsv = new ReadFileCsv();
-    File file = AdminMainPageController.file;
+    String fileName = AdminMainPageController.fileName;
     SceneUtils sceneUtils = SceneUtils.getInstance();
 
     private Boolean hallExists = false;
@@ -52,7 +52,7 @@ public class CsvHallThread extends Task<Void> {
     protected Void call(){
         try {
             Thread.sleep(3000);
-            readFileCsv.readHallFromFile(file);
+            readFileCsv.readHallFromFile(fileName);
         }
         catch (InvalidHallException ihe){
             setHallExists(true);
@@ -84,7 +84,7 @@ public class CsvHallThread extends Task<Void> {
         }
         if (input){
             counter++;
-            InvalidInputHandler.generateThreadAlert(new InvalidInputException("All informasjon må fylles ut"));
+            InvalidInputHandler.generateThreadAlert(new InvalidInputException("All informasjon må fylles ut. Husk å dele variabler med ';'"));
         }
         if (readException | interruptedException){
             counter++;
