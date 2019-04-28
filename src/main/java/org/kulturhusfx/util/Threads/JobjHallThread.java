@@ -8,7 +8,6 @@ import org.kulturhusfx.util.SceneUtils;
 import org.kulturhusfx.util.exception.InvalidHallException;
 import org.kulturhusfx.util.fileHandling.ReadFileJobj;
 
-import java.io.File;
 import java.io.IOException;
 
 public class JobjHallThread extends Task<Void> {
@@ -17,63 +16,46 @@ public class JobjHallThread extends Task<Void> {
     ReadFileJobj readFileJobj = new ReadFileJobj();
     String fileName = AdminMainPageController.fileName;
     SceneUtils sceneUtils = SceneUtils.getInstance();
-    private Boolean hallExists = false;
-    private Boolean readException = false;
-    private Boolean interruptedException = false;
-    private Boolean classException = false;
-    //for some reason succeeded runs twice? This counter makes sure that only one alert pops up
-    private int counter = 0;
 
-    private void setHallExists(Boolean b){
-        hallExists = b;
-    }
-    private void setReadException(Boolean b){
-        readException = b;
-    }
-    private void setInterruptedException(Boolean b){
-        interruptedException = b;
-    }
-    private void setClassException(Boolean b){
-        classException = b;
-    }
+    private boolean hallExists;
+    private IOException ioException;
+    private InterruptedException interruptedException;
+    private ClassNotFoundException classException;
+    private Exception exception;
 
-    public JobjHallThread(Runnable runme) {
-        this.runme = runme;
-    }
 
     @Override
     protected Void call() {
         try {
             Thread.sleep(3000);
             readFileJobj.readHallFromFile(fileName);
-        }
-        catch (InvalidHallException ihe){
-            setHallExists(true);
-        }
-        catch (InterruptedException e) {
-            setInterruptedException(true);
-        }
-        catch (IOException e) {
-            setReadException(true);
-        }
-        catch (ClassNotFoundException e){
-            setClassException(true);
+        } catch (InvalidHallException e) {
+            hallExists = true;
+        } catch (InterruptedException e) {
+            interruptedException = e;
+        } catch (IOException e) {
+            ioException = e;
+        } catch (ClassNotFoundException e) {
+            classException = e;
+        } catch (Exception e){
+            exception = e;
         }
         return null;
     }
 
     @Override
-    protected void succeeded(){
-        if (hallExists){
-            counter++;
+    protected void succeeded() {
+        if (hallExists) {
             InvalidInputHandler.generateThreadAlert(new InvalidHallException("En av salene du forsøker å registrere finnes fra før"));
-        }
-        if (readException | interruptedException | classException){
-            counter++;
-            FileExceptionHandler.generateExceptionmsg(new IOException("Feil oppstod under lesing fra fil"));
-        }
-        else if (counter == 0){
-            counter++;
+        } else if (ioException != null) {
+            FileExceptionHandler.generateExceptionmsg(new IOException("Feil oppstod under lesing fra fil: " + ioException.getMessage()));
+        } else if (interruptedException != null) {
+            FileExceptionHandler.generateExceptionmsg(new InterruptedException("Feil oppstod under lesing fra fil: " + interruptedException.getMessage()));
+        } else if (classException != null) {
+            FileExceptionHandler.generateExceptionmsg(new ClassNotFoundException("Feil oppstod under lesing fra fil: " + classException.getMessage()));
+        } else if (exception != null) {
+            FileExceptionHandler.generateExceptionmsg(new Exception(exception.getMessage()));
+        } else {
             sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Sal er opprettet fra fil");
         }
         runme.run();

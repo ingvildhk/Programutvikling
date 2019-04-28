@@ -6,12 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.kulturhusfx.base.Hall;
-import org.kulturhusfx.model.HallModel;
 
 import java.io.IOException;
 
@@ -19,14 +14,13 @@ public class SceneUtils {
 
     private static final SceneUtils instance = new SceneUtils();
 
-    private SceneUtils(){
+    private SceneUtils() {
     }
 
-    public static SceneUtils getInstance(){
+    public static SceneUtils getInstance() {
         return instance;
     }
 
-    // Lage en static metode av denne: Just use TheClassName.class instead of getClass().
     public void launchScene(ActionEvent event, Class myClass, String fxmlPath) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();

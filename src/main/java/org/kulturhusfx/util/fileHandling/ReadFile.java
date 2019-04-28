@@ -1,22 +1,22 @@
 package org.kulturhusfx.util.fileHandling;
 
-import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.base.Hall;
-import org.kulturhusfx.model.HappeningModel;
+import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.model.HappeningModel;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public abstract class ReadFile{
+public abstract class ReadFile {
 
-    HallModel hallModel = HallModel.getInstance();
-    List<Hall> hallList = hallModel.getHallList();
-    HappeningModel happeningModel = HappeningModel.getInstance();
-    List<Happening> happeningList = happeningModel.getHappeningList();
+    public HallModel hallModel = HallModel.getInstance();
+    public List<Hall> hallList = hallModel.getHallList();
+    public HappeningModel happeningModel = HappeningModel.getInstance();
+    public List<Happening> happeningList = happeningModel.getHappeningList();
 
-    public abstract void readEventFromFile(String fileName) throws IOException, ClassNotFoundException;
-    public abstract void readHallFromFile (String fileName) throws IOException, ClassNotFoundException;
+    public abstract void readHappeningFromFile(String fileName) throws IOException, ClassNotFoundException;
+
+    public abstract void readHallFromFile(String fileName) throws IOException, ClassNotFoundException;
 
 }

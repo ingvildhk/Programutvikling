@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -20,8 +21,9 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <Button id="adminLoginButton" fx:id="adminLoginBtn" layoutX="884.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleAdminLoginBtnAction" text="Admin Login" />
-        <TableView fx:id="tableViewHappenings" layoutX="16.0" layoutY="111.0" prefHeight="465.0" prefWidth="967.0">
+        <Button id="adminLoginButton" fx:id="adminLoginBtn" layoutX="884.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleAdminLoginBtnAction" text="Admin Login">
+         </Button>
+        <TableView fx:id="tableViewHappenings" layoutX="16.0" layoutY="111.0" prefHeight="465.0" prefWidth="967.0" stylesheets="@styles.css">
             <columns>
                 <TableColumn fx:id="HappeningColumn" prefWidth="237.9999942779541" text="Arrangement" />
                 <TableColumn fx:id="TypeColumn" prefWidth="149.3333282470703" text="Type" />
