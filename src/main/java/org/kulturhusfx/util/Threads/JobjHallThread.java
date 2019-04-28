@@ -23,9 +23,7 @@ public class JobjHallThread extends Task<Void> {
     private ClassNotFoundException classException;
     private Exception exception;
 
-    public JobjHallThread (Runnable runme){
-        this.runme = runme;
-    }
+
     @Override
     protected Void call() {
         try {
