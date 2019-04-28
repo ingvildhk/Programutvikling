@@ -1,13 +1,9 @@
 package org.kulturhusfx.base;
 
 import org.kulturhusfx.model.TicketModel;
-import org.kulturhusfx.util.Checker;
 import java.io.Serializable;
 
 public class Happening implements Serializable {
-
-    // TODO slette denne også hvis vi ikke skal bruke setMinId
-    private static int counter = 0;
 
     private ContactPerson contactPerson;
     private String id;
@@ -19,21 +15,12 @@ public class Happening implements Serializable {
     private String date;
     private String time;
     private String ticketPrice;
-    //transient for at Happening skal kunne serialiseres
-    private transient TicketModel ticketModel;
     private int availableTickets;
-    private int orderedTickets;
+    //TicketModel is transient so that Happening can be serialized
+    private transient TicketModel ticketModel;
 
-    //Får ofte feilmelding hvis ikke SVUID er satt, tallet er tilfelding
+    //SVUID set to a random number
     private static final long serialVersionUID = -3210158538721287756L;
-
-    //Kjøres etter innlest fil for å kontrollere at id-ene holdes unike
-    //TODO brukes ikke, kan nok slettes
-    public static void setMinId(int id) {
-        if (id > counter) {
-            counter = id;
-        }
-    }
 
     public Happening(ContactPerson contactPerson, String name, String performers,
                      String schedule, Hall hall, String type, String date, String time, String ticketPrice) {
@@ -46,11 +33,9 @@ public class Happening implements Serializable {
         this.date = date;
         this.time = time;
         this.ticketPrice = ticketPrice;
-        //TODO ID brukes ikke kan nok slettes
-        this.id = "" + counter++;
         this.availableTickets = Integer.parseInt(hall.getNumberOfSeats());
 
-        //Oppretter ny liste med billetter for hvert arrangement som opprettes
+        //Creates a new list of Tickets for every Happening that is created
         createTicketModel();
     }
 
@@ -168,7 +153,6 @@ public class Happening implements Serializable {
         this.ticketPrice = ticketPrice;
     }
 
-
     public void changeHappeningInformation(ContactPerson contactPerson, String name,
                                            String performers, String type, String schedule, Hall hall,
                                            String date, String time, String ticketPrice) {
@@ -181,17 +165,5 @@ public class Happening implements Serializable {
         setDate(date);
         setTime(time);
         setTicketPrice(ticketPrice);
-    }
-
-    // TODO trenger ikke toString metoder i levering
-    public String toString() {
-        String s = contactPerson.toString() + " " + name + " " + performers + type + " " + schedule + " " +
-                hall.toString() + " " + date + " " + time + " " + ticketPrice;
-        return s;
-    }
-
-    // TODO brukes denne?
-    public int soldTickets() {
-        return 0;
     }
 }

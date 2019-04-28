@@ -17,25 +17,25 @@
       <Button layoutX="26.0" layoutY="29.0" mnemonicParsing="false" onAction="#backToAdminMainPageBtn" text="Tilbake" />
       <TableView fx:id="tableViewHappenings" layoutX="26.0" layoutY="113.0" prefHeight="310.0" prefWidth="968.0">
         <columns>
-          <TableColumn fx:id="nameColumn" minWidth="165.0" onEditCommit="#editEventNameCellEvent" prefWidth="125.0" text="Arrangementnavn" />
-          <TableColumn fx:id="typeColumn" minWidth="100.0" onEditCommit="#editEventTypeCellEvent" prefWidth="58.0" text="Type" />
-            <TableColumn fx:id="performersColumn" minWidth="150.0" onEditCommit="#editEventPerformersCellEvent" text="Opptredere" />
-            <TableColumn fx:id="hallColumn" minWidth="160.0" onEditCommit="#editEventHallCellEvent" prefWidth="37.0" text="Sal" />
-            <TableColumn fx:id="timeColumn" minWidth="60.0" onEditCommit="#editEventTimeCellEvent" prefWidth="54.0" text="Klokke" />
-            <TableColumn fx:id="dateColumn" minWidth="100.0" onEditCommit="#editEventDateCellEvent" prefWidth="47.0" text="Dato" />
-            <TableColumn fx:id="programColumn" minWidth="150.0" onEditCommit="#editEventScheduleCellEvent" prefWidth="64.0" text="Program" />
-            <TableColumn fx:id="priceColumn" minWidth="60.0" onEditCommit="#editEventPriceCellEvent" prefWidth="40.0" text="Pris" />
-            <TableColumn fx:id="contactNameCol" onEditCommit="#editEventContactNameCellEvent" prefWidth="130.0" text="Kontaktperson navn" />
-            <TableColumn fx:id="contactPhoneCol" minWidth="100.0" onEditCommit="#editEventContactPhoneCellEvent" prefWidth="56.0" text="Telefon" />
-            <TableColumn fx:id="contactEmailCol" minWidth="130.0" onEditCommit="#editEventContactEmailCellEvent" prefWidth="59.0" text="Epost" />
-            <TableColumn fx:id="contactWebsiteCol" minWidth="130.0" onEditCommit="#editEventContactWebpageCellEvent" prefWidth="65.0" text="Nettside" />
-            <TableColumn fx:id="contactFirmCol" minWidth="100.0" onEditCommit="#editEventContactFirmCellEvent" prefWidth="48.0" text="Firma" />
-            <TableColumn fx:id="contactOtherCol" minWidth="150.0" onEditCommit="#editEventContactOtherCellEvent" prefWidth="127.0" text="Andre opplysninger" />
+          <TableColumn fx:id="nameColumn" minWidth="165.0" onEditCommit="#editHappeningNameCellEvent" prefWidth="125.0" text="Arrangementnavn" />
+          <TableColumn fx:id="typeColumn" minWidth="100.0" onEditCommit="#editHappeningTypeCellEvent" prefWidth="58.0" text="Type" />
+            <TableColumn fx:id="performersColumn" minWidth="150.0" onEditCommit="#editHappeningPerformersCellEvent" text="Opptredere" />
+            <TableColumn fx:id="hallColumn" minWidth="160.0" onEditCommit="#editHappeningHallCellEvent" prefWidth="37.0" text="Sal" />
+            <TableColumn fx:id="timeColumn" minWidth="60.0" onEditCommit="#editHappeningTimeCellEvent" prefWidth="54.0" text="Klokke" />
+            <TableColumn fx:id="dateColumn" minWidth="100.0" onEditCommit="#editHappeningDateCellEvent" prefWidth="47.0" text="Dato" />
+            <TableColumn fx:id="programColumn" minWidth="150.0" onEditCommit="#editHappeningScheduleCellEvent" prefWidth="64.0" text="Program" />
+            <TableColumn fx:id="priceColumn" minWidth="60.0" onEditCommit="#editHappeningPriceCellEvent" prefWidth="40.0" text="Pris" />
+            <TableColumn fx:id="contactNameCol" onEditCommit="#editHappeningContactNameCellEvent" prefWidth="130.0" text="Kontaktperson navn" />
+            <TableColumn fx:id="contactPhoneCol" minWidth="100.0" onEditCommit="#editHappeningContactPhoneCellEvent" prefWidth="56.0" text="Telefon" />
+            <TableColumn fx:id="contactEmailCol" minWidth="130.0" onEditCommit="#editHappeningContactEmailCellEvent" prefWidth="59.0" text="Epost" />
+            <TableColumn fx:id="contactWebsiteCol" minWidth="130.0" onEditCommit="#editHappeningContactWebpageCellEvent" prefWidth="65.0" text="Nettside" />
+            <TableColumn fx:id="contactFirmCol" minWidth="100.0" onEditCommit="#editHappeningContactFirmCellEvent" prefWidth="48.0" text="Firma" />
+            <TableColumn fx:id="contactOtherCol" minWidth="150.0" onEditCommit="#editHappeningContactOtherCellEvent" prefWidth="127.0" text="Andre opplysninger" />
         </columns>
       </TableView>
       <Button layoutX="26.0" layoutY="456.0" mnemonicParsing="false" onAction="#deleteHappeningBtn" prefHeight="27.0" prefWidth="198.0" text="Slett arrangement" />
       <Label layoutX="26.0" layoutY="77.0" prefHeight="17.0" prefWidth="397.0" text="Dobbelklikk på arrangement for å endre. Trykk enter for å lagre" />
-      <Button fx:id="seeOrdersBtn" layoutX="254.0" layoutY="456.0" mnemonicParsing="false" onAction="#seeOrdersToEventbtn" prefHeight="27.0" prefWidth="239.0" text="Se bestilling" />
+      <Button fx:id="seeOrdersBtn" layoutX="254.0" layoutY="456.0" mnemonicParsing="false" onAction="#seeOrdersToHappeningbtn" prefHeight="27.0" prefWidth="239.0" text="Se bestilling" />
       <Label layoutX="254.0" layoutY="430.0" text="Marker arrangementet du vil se bestillingene til og klikk &quot;Se bestilling&quot;." />
     </children>
 </AnchorPane>
