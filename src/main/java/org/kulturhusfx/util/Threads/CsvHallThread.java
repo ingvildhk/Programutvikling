@@ -7,8 +7,10 @@ import org.kulturhusfx.util.InvalidInputHandler;
 import org.kulturhusfx.util.SceneUtils;
 import org.kulturhusfx.util.exception.InvalidHallException;
 import org.kulturhusfx.util.exception.InvalidInputException;
+import org.kulturhusfx.util.exception.InvalidNumberOfSeatsException;
 import org.kulturhusfx.util.fileHandling.ReadFileCsv;
 
+import java.io.File;
 import java.io.IOException;
 
 public class CsvHallThread extends Task<Void> {
@@ -18,50 +20,78 @@ public class CsvHallThread extends Task<Void> {
     String fileName = AdminMainPageController.fileName;
     SceneUtils sceneUtils = SceneUtils.getInstance();
 
-    private boolean hallExist;
-    private IOException ioException;
-    private InvalidInputException inputException;
-    private Exception exception;
+    private Boolean hallExists = false;
+    private Boolean numberOfSeats = false;
+    private Boolean input = false;
+    private Boolean readException = false;
+    private Boolean interruptedException = false;
+    //for some reason succeeded runs twice? This counter makes sure that only one alert pops up
+    private int counter = 0;
+
+    private void setHallExists(Boolean b){
+        hallExists = b;
+    }
+    private void setNumberOfSeats(Boolean b){
+        numberOfSeats = b;
+    }
+    private void setInput(Boolean b){
+        input = b;
+    }
+    private void setReadException(Boolean b){
+        readException = b;
+    }
+    private void setInterruptedException(Boolean b){
+        interruptedException = b;
+    }
 
     public CsvHallThread(Runnable runme) {
         this.runme = runme;
     }
 
     @Override
-    protected Void call() {
+    protected Void call(){
         try {
+            Thread.sleep(3000);
             readFileCsv.readHallFromFile(fileName);
         }
-        catch (InvalidInputException e) {
-            inputException = e;
+        catch (InvalidHallException ihe){
+            setHallExists(true);
         }
-        catch (InvalidHallException e){
-            hallExist = true;
+        catch (InvalidNumberOfSeatsException ie){
+            setNumberOfSeats(true);
+        }
+        catch (InvalidInputException iie){
+            setInput(true);
+        }
+        catch (InterruptedException e) {
+            setInterruptedException(true);
         }
         catch (IOException e) {
-            ioException = e;
-        }
-        catch (Exception e){
-            exception = e;
+            setReadException(true);
         }
         return null;
     }
 
     @Override
-    protected void succeeded() {
-        if (hallExist){
+    protected void succeeded(){
+        if (hallExists){
+            counter++;
             InvalidInputHandler.generateThreadAlert(new InvalidHallException("En av salene du forsøker å registrere finnes fra før"));
         }
-        if (inputException != null) {
-            InvalidInputHandler.generateThreadAlert(inputException);
+        if (numberOfSeats){
+            counter++;
+            InvalidInputHandler.generateThreadAlert(new InvalidNumberOfSeatsException("Antall seter må være et positivt heltall"));
         }
-        else if (ioException != null) {
-            FileExceptionHandler.generateExceptionmsg(new IOException("Feil oppsto under lesing fra fil: " + ioException.getMessage()));
+        if (input){
+            counter++;
+            InvalidInputHandler.generateThreadAlert(new InvalidInputException("All informasjon må fylles ut. Husk å dele variabler med ';'"));
         }
-        else if (exception != null){
-            FileExceptionHandler.generateExceptionmsg(new Exception(exception.getMessage()));
+        if (readException | interruptedException){
+            counter++;
+            FileExceptionHandler.generateExceptionmsg(new IOException("Feil oppstod under lesing fra fil"));
         }
-        else {
+        else if (counter == 0){
+            counter++;
             sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Sal er opprettet fra fil");
         }
         runme.run();

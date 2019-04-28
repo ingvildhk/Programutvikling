@@ -7,30 +7,27 @@ import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Hall;
-import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.model.HappeningModel;
-import org.kulturhusfx.util.Checker;
-import org.kulturhusfx.util.ControllerHelper;
-import org.kulturhusfx.util.SceneUtils;
+import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.util.*;
 import org.kulturhusfx.util.Threads.CsvEventThread;
 import org.kulturhusfx.util.Threads.CsvHallThread;
 import org.kulturhusfx.util.Threads.JobjEventThread;
 import org.kulturhusfx.util.Threads.JobjHallThread;
 
-import java.io.File;
+import java.io.*;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static org.kulturhusfx.util.Checker.exceptionAlertWrapper;
 
 public class AdminMainPageController {
 
     @FXML
     private Button btnBack, btnManageHappenings, btnManageHalls, btnRegisterHappening, btnRegisterHappeningFile, btnRegisterHallFile, btnRegisterHall;
     @FXML
-    private TextField hallName, hallType, totalNumberOfSeats, performers, time, ticketPrice, happeningName,
-            contactName, contactPhone, contactEmail, contactWebsite, contactFirm, contactOther;
+    private TextField hallName, hallType, totalNumberOfSeats, performers, time, ticketPrice, happeningName;
+    @FXML
+    private TextField contactName, contactPhone, contactEmail, contactWebsite, contactFirm, contactOther;
     @FXML
     private TextArea happeningSchedule;
     @FXML
@@ -40,56 +37,66 @@ public class AdminMainPageController {
 
     private HallModel hallModel = HallModel.getInstance();
     private HappeningModel happeningModel = HappeningModel.getInstance();
-    private List<Hall> hallList = hallModel.getHallList();
+    private List <Hall> hallList = hallModel.getHallList();
     private SceneUtils sceneUtils = SceneUtils.getInstance();
     private FileChooser fileChooser = new FileChooser();
     private FileChooser.ExtensionFilter jobjFilter = new FileChooser.ExtensionFilter("jobj", "*.jobj");
     private FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("csv", "*.csv");
     private ExecutorService service = Executors.newSingleThreadExecutor();
-
     //static filename for being able to run read from file in threads
     public static String fileName;
 
     public void initialize() {
         addHappeningType();
         updateHallList();
-
-        //sets standard choices for choiceboxes and datepicker
-        if (!hallList.isEmpty()) {
+        // Setter default value på choiceboxene
+        //if test unngår nullpointerexception hvis alle saler er slettet
+        if(!hallList.isEmpty()){
             happeningHall.setValue(hallList.get(0).getHallName());
         }
         happeningType.setValue("Konsert");
         datePicker.setValue(ControllerHelper.getLocalDate());
+
+        /*
+        Forsøk på å disable passerte datoer, finner ikke helt utav det
+        LocalDate date = datePicker.getValue();
+        LocalDate today = LocalDate.now();
+        if(date.compareTo(today) < 0) {
+            boolean invalidDate = true;
+            datePicker.setDisable();
+        }
+        */
     }
 
     public void happeningRegistrationBtn(ActionEvent event) {
         registerHappening();
-        sceneUtils.launchScene(event, HappeningRegistrationConfirmationController.class, "happeningRegistrationConfirmationPop.fxml");
+        sceneUtils.launchScene(event, HappeningRegistrationConfirmationPopController.class, "happeningRegistrationConfirmationPop.fxml");
     }
 
     public void roomRegistrationBtn(ActionEvent event) {
-        registerHall();
+        registerRoom();
         updateHallList();
-        sceneUtils.launchScene(event, HallRegistrationConfirmationController.class, "hallRegistrationConfirmationPop.fxml");
+        sceneUtils.launchScene(event, HallRegistrationConfirmationPopController.class, "hallRegistrationConfirmationPop.fxml");
     }
 
-    public void registerHappeningFromFileBtn(ActionEvent event) {
+    public void registerHappeningFromFileBtn(ActionEvent event){
         setFileChooserFilters();
         fileChooser.setTitle("Velg arrangementsfil");
         File selectedFile = fileChooser.showOpenDialog(null);
         fileName = selectedFile.getName();
-        if (fileChooser.getSelectedExtensionFilter() == csvFilter) {
+        if (fileChooser.getSelectedExtensionFilter() == csvFilter){
             disableButtons();
             Task<Void> task = new CsvEventThread(this::happeningConfirmation);
             service.execute(task);
-        } else if (fileChooser.getSelectedExtensionFilter() == jobjFilter) {
+        }
+        else if (fileChooser.getSelectedExtensionFilter() == jobjFilter){
             disableButtons();
             Task<Void> task = new JobjEventThread(this::happeningConfirmation);
             service.execute(task);
         }
     }
 
-    public void happeningConfirmation() {
+    public void happeningConfirmation(){
         openButtons();
         updateHallList();
     }
@@ -99,18 +106,19 @@ public class AdminMainPageController {
         fileChooser.setTitle("Velg salfil");
         File selectedFile = fileChooser.showOpenDialog(null);
         fileName = selectedFile.getName();
-        if (fileChooser.getSelectedExtensionFilter() == csvFilter) {
+        if (fileChooser.getSelectedExtensionFilter() == csvFilter){
             disableButtons();
             Task<Void> task = new CsvHallThread(this::hallConfirmation);
             service.execute(task);
-        } else if (fileChooser.getSelectedExtensionFilter() == jobjFilter) {
+        }
+        else if (fileChooser.getSelectedExtensionFilter() == jobjFilter){
             disableButtons();
             Task<Void> task = new JobjHallThread(this::hallConfirmation);
             service.execute(task);
         }
     }
 
-    public void hallConfirmation() {
+    public void hallConfirmation(){
         openButtons();
         updateHallList();
     }
@@ -127,13 +135,13 @@ public class AdminMainPageController {
         sceneUtils.launchScene(event, AdminManageHallsController.class, "adminManageHalls.fxml");
     }
 
-    public void setFileChooserFilters() {
-        if (!fileChooser.getExtensionFilters().contains(jobjFilter)) {
+    public void setFileChooserFilters(){
+        if(!fileChooser.getExtensionFilters().contains(jobjFilter)){
             fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
         }
     }
 
-    public void disableButtons() {
+    public void disableButtons(){
         btnBack.setDisable(true);
         btnManageHappenings.setDisable(true);
         btnManageHalls.setDisable(true);
@@ -143,7 +151,7 @@ public class AdminMainPageController {
         btnRegisterHall.setDisable(true);
     }
 
-    public void openButtons() {
+    public void openButtons(){
         btnBack.setDisable(false);
         btnManageHappenings.setDisable(false);
         btnManageHalls.setDisable(false);
@@ -153,17 +161,20 @@ public class AdminMainPageController {
         btnRegisterHall.setDisable(false);
     }
 
+    //Legger til valg i arrangementstype - choicebox
     public void addHappeningType() {
         ControllerHelper.addHappeningType(happeningType);
     }
 
+    //Legger til saler i salvalg - choicebox
     public void updateHallList() {
         ControllerHelper.updateRoomList(happeningHall, hallModel);
     }
 
-    public void registerHappening() {
-        exceptionAlertWrapper(() -> Checker.checkIfChoiceBoxIsEmpty(happeningHall));
-        exceptionAlertWrapper(() -> Checker.checkIfChoiceBoxIsEmpty(happeningType));
+    public void registerHappening(){
+        //Egen checkmetode for å sjekke om choiceboxer er tomme
+        Checker.checkIfChoiceBoxIsEmpty(happeningHall);
+        Checker.checkIfChoiceBoxIsEmpty(happeningType);
 
         String name = happeningName.getText();
         String type = happeningType.getValue().toString();
@@ -180,31 +191,32 @@ public class AdminMainPageController {
         String other = contactOther.getText();
         String ticket = ticketPrice.getText();
 
-        exceptionAlertWrapper(() -> Checker.checkIfFieldIsEmpty(name, type, performer, room, time, program, contact, phone, email, ticket));
-        exceptionAlertWrapper(() -> Checker.checkValidPhone(phone));
-        exceptionAlertWrapper(() -> Checker.checkValidEmail(email));
-        exceptionAlertWrapper(() -> Checker.checkValidDate(date));
-        exceptionAlertWrapper(() -> Checker.checkValidTime(time));
-        exceptionAlertWrapper(() -> Checker.checkValidTicketPrice(ticket));
+        Checker.checkIfFieldIsEmpty(name, type, performer, room, time, program, contact, phone, email, ticket);
+        Checker.checkValidPhone(phone);
+        Checker.checkValidEmail(email);
+        Checker.checkValidDate(date);
+        Checker.checkValidTime(time);
+        Checker.checkValidTicketPrice(ticket);
 
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
 
-        //finds the hall object from the hallName
+        //Finner room-objektet ut i fra hallName
+        List<Hall> list = hallModel.getHallList();
         int hallIndex = hallModel.getHallIndex(room);
-        Hall hall = hallList.get(hallIndex);
+        Hall hall = list.get(hallIndex);
 
         happeningModel.createHappening(contactPerson, name, performer, program, hall, type, date, time, ticket);
     }
 
-    public void registerHall() {
+    public void registerRoom() {
         String room = hallName.getText();
         String type = hallType.getText();
         String seat = totalNumberOfSeats.getText();
 
-        exceptionAlertWrapper(() -> Checker.checkIfFieldIsEmpty(room, type, seat));
-        exceptionAlertWrapper(() -> Checker.checkValidNumberOfSeats(seat));
-        exceptionAlertWrapper(() -> Checker.checkIfHallExists(room, hallList));
-        hallModel.createHall(room, type, seat);
+        Checker.checkIfFieldIsEmpty(room, type, seat);
+        Checker.checkValidNumberOfSeats(seat);
+        Checker.checkIfHallExists(room, hallList);
+        this.hallModel.createHall(room, type, seat);
     }
 }
 

@@ -1,5 +1,6 @@
 package org.kulturhusfx.base;
 
+import org.kulturhusfx.util.Checker;
 import java.io.Serializable;
 
 public class Hall implements Serializable {
@@ -41,5 +42,11 @@ public class Hall implements Serializable {
         setHallName(hallName);
         setHallType(hallType);
         setNumberOfSeats(numberOfSeats);
+    }
+
+
+    //TODO Trenger ikke toString i levering
+    public String toString() {
+        return (hallName + " " + hallType + " " + numberOfSeats);
     }
 }

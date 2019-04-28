@@ -2,6 +2,8 @@ package org.kulturhusfx.util;
 
 import javafx.scene.control.Alert;
 
+import java.io.IOException;
+
 public class FileExceptionHandler {
 
     public static void generateExceptionmsg(Exception exception) {

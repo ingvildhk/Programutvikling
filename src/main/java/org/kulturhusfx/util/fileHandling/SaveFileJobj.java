@@ -1,8 +1,7 @@
 package org.kulturhusfx.util.fileHandling;
 
-import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.base.Happening;
-
+import org.kulturhusfx.base.Hall;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;

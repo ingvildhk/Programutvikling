@@ -11,9 +11,7 @@ import org.kulturhusfx.util.*;
 import java.io.IOException;
 import java.util.List;
 
-import static org.kulturhusfx.util.Checker.exceptionAlertWrapper;
-
-public class HallRegistrationConfirmationController {
+public class HallRegistrationConfirmationPopController {
 
     @FXML
     private Label registeredHallNameLabel, registeredHallTypeLabel, registeredHallNumberSeatsLabel;
@@ -22,7 +20,7 @@ public class HallRegistrationConfirmationController {
 
     private HallModel hallmodel = HallModel.getInstance();
     private List<Hall> hallList = hallmodel.getHallList();
-    private Hall registeredHall = hallList.get(hallList.size() - 1);
+    private Hall registeredHall = hallList.get(hallList.size()-1);
     private FileChooserMethods fileChooserMethods = FileChooserMethods.getInstance();
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
@@ -40,28 +38,30 @@ public class HallRegistrationConfirmationController {
     }
 
     public void saveHallBtn(ActionEvent event) {
+        //Fil blir lagret i samme mappe som repository, vet ikke hvordan man kan endre det
         try {
             fileChooserMethods.saveHallToFile(registeredHall);
             sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring", "Sal er lagret til fil");
-        } catch (Exception e) {
-            FileExceptionHandler.generateExceptionmsg(new Exception("Lagring til fil feilet: " + e.getMessage()));
+        } catch (IOException e) {
+            FileExceptionHandler.generateExceptionmsg(new IOException("Lagring til fil feilet: " + e.getMessage()));
         }
     }
 
-    //shows the information of the newly registered hall
-    public void setValuetoLabels() {
+    // Metoden setter lablene i hallRegistrationConfirmationPop.fxml til verdiene til Hall'en som akkurat er registrert
+    public void setValuetoLabels(){
         registeredHallNameLabel.setText(registeredHall.getHallName());
         registeredHallTypeLabel.setText(registeredHall.getHallType());
         registeredHallNumberSeatsLabel.setText(registeredHall.getNumberOfSeats());
     }
 
-    public void editHall() {
+    public void editHall(){
         String name = ControllerHelper.changeInformation(changeHallNameTxtField, registeredHallNameLabel);
         String type = ControllerHelper.changeInformation(changeHallTypeTxtField, registeredHallTypeLabel);
         String seats = ControllerHelper.changeInformation(changeHallNumberSeatsTxtField, registeredHallNumberSeatsLabel);
-        exceptionAlertWrapper(() -> Checker.checkIfHallExists(name, hallList));
-        exceptionAlertWrapper(() -> Checker.checkValidNumberOfSeats(seats));
+        Checker.checkIfHallExists(name, hallList);
+        Checker.checkValidNumberOfSeats(seats);
         registeredHall.changeHallInformation(name, type, seats);
         setValuetoLabels();
     }
+
 }

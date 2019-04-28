@@ -12,25 +12,22 @@ import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.Checker;
 import org.kulturhusfx.util.SceneUtils;
-
 import java.io.IOException;
 import java.util.List;
-
-import static org.kulturhusfx.util.Checker.exceptionAlertWrapper;
 
 public class AdminManageHallsController {
 
     @FXML
-    private TableView<Hall> tableViewHalls;
+    private TableView <Hall> tableViewHalls;
 
     @FXML
-    private TableColumn<Hall, String> nameColumn, typeOfHallColumn, numberOfSeatsColumn;
+    private TableColumn <Hall, String> nameColumn, typeOfHallColumn, numberOfSeatsColumn;
 
     private HallModel hallModel = HallModel.getInstance();
     private List<Hall> hallList = hallModel.getHallList();
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
-    public void initialize() {
+    public void initialize(){
         setColumnValues();
         setEditableColumns();
     }
@@ -39,24 +36,26 @@ public class AdminManageHallsController {
         sceneUtils.launchScene(event, AdminManageHallsController.class, "adminMainPage.fxml");
     }
 
-    public void editHallNameCellEvent(TableColumn.CellEditEvent edittedCell) {
+    // Methods to change and set eventdata i tableView with double-click
+    public void editHallNameCellEvent (TableColumn.CellEditEvent edittedCell){
         Hall hallSelected = tableViewHalls.getSelectionModel().getSelectedItem();
-        exceptionAlertWrapper(() -> Checker.checkIfHallExists(edittedCell.getNewValue().toString(), hallList));
+        // TODO La denne her
+        Checker.checkIfHallExists(edittedCell.getNewValue().toString(), hallList);
         hallSelected.setHallName(edittedCell.getNewValue().toString());
     }
 
-    public void editHallTypeCellEvent(TableColumn.CellEditEvent edittedCell) {
+    public void editHallTypeCellEvent (TableColumn.CellEditEvent edittedCell){
         Hall hallSelected = tableViewHalls.getSelectionModel().getSelectedItem();
         hallSelected.setHallType(edittedCell.getNewValue().toString());
     }
 
-    public void editNumberOfSeatsCellEvent(TableColumn.CellEditEvent edittedCell) {
+    public void editNumberOfSeatsCellEvent (TableColumn.CellEditEvent edittedCell){
         Hall hallSelected = tableViewHalls.getSelectionModel().getSelectedItem();
-        exceptionAlertWrapper(() -> Checker.checkValidNumberOfSeats(edittedCell.getNewValue().toString()));
+        Checker.checkValidNumberOfSeats(edittedCell.getNewValue().toString());
         hallSelected.setNumberOfSeats(edittedCell.getNewValue().toString());
     }
 
-    private void setColumnValues() {
+    private void setColumnValues(){
         nameColumn.setCellValueFactory(new PropertyValueFactory<Hall, String>("hallName"));
         typeOfHallColumn.setCellValueFactory(new PropertyValueFactory<Hall, String>("hallType"));
         numberOfSeatsColumn.setCellValueFactory(new PropertyValueFactory<Hall, String>("numberOfSeats"));
@@ -64,7 +63,8 @@ public class AdminManageHallsController {
         tableViewHalls.setItems(getHalls());
     }
 
-    private void setEditableColumns() {
+    private void setEditableColumns(){
+        // To change text fields, editable must be true
         tableViewHalls.setEditable(true);
 
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -72,23 +72,25 @@ public class AdminManageHallsController {
         numberOfSeatsColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
-    public void deleteHallFromTableView() {
+    public void deleteHallFromTableView(){
         ObservableList<Hall> selectedRows;
 
+        // contains the selected rows
         selectedRows = tableViewHalls.getSelectionModel().getSelectedItems();
-        for (Hall hall : selectedRows) {
+        for (Hall hall : selectedRows){
             hallList.remove(hall);
             hallModel.deleteHappening(hall.getHallName());
         }
-        for (Hall hall : hallModel.getHallList()) {
+        for(Hall hall : hallModel.getHallList()) {
             tableViewHalls.getItems().remove(hall);
         }
         tableViewHalls.setItems(getHalls());
     }
 
-    private ObservableList<Hall> getHalls() {
+    // Method to list the registered halls in tableView
+    private ObservableList<Hall> getHalls(){
         ObservableList<Hall> halls = FXCollections.observableArrayList();
-        for (Hall hall : hallList) {
+        for (Hall hall : hallList){
             halls.add(hall);
         }
         return halls;

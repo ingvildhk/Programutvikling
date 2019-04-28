@@ -1,8 +1,8 @@
 package org.kulturhusfx.model;
 
 
-import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.base.Happening;
+import org.kulturhusfx.base.Hall;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,16 +32,16 @@ public class HallModel implements Serializable {
         hallList.add((new Hall(hallName, hallType, numberOfSeats)));
     }
 
-    public int getHallIndex(String roomName) {
-        for (Hall hall : hallList) {
-            if (hall.getHallName().equals(roomName)) {
+    public int getHallIndex(String roomName){
+        for (Hall hall : hallList){
+            if(hall.getHallName().equals(roomName)){
                 return hallList.indexOf(hall);
             }
         }
         return 0;
     }
 
-    //if hall is deleted, deletes all corresponding happenings
+    // Sletter arrangementene som hører til salen som blir slettet
     public void deleteHappening(String hallName) {
         happeningList.removeIf(e -> e.getHall().getHallName().equals(hallName));
     }

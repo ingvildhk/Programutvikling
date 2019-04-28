@@ -1,30 +1,33 @@
 package org.kulturhusfx.controllers;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.kulturhusfx.base.Hall;
+import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Happening;
-import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HappeningModel;
+import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.OrderButton;
 import org.kulturhusfx.util.SceneUtils;
+import org.kulturhusfx.util.fileHandling.ReadFileCsv;
+import org.kulturhusfx.util.fileHandling.ReadFileJobj;
 
 import java.io.IOException;
 import java.util.List;
 
 public class MainPageController {
 
-    //TODO copy how it's done in managehappeningscontroller?
+    //Dette er ok :)
     public static Happening currentHappening;
 
-    @FXML
+   @FXML
     private TableView<Happening> tableViewHappenings;
     @FXML
     private TableColumn<Happening, String> HappeningColumn, TypeColumn, DateColumn, TimeColumn, AvailableColumn;
@@ -41,7 +44,7 @@ public class MainPageController {
     private List<Hall> hallList = hallModel.getHallList();
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
-    public void initialize() {
+    public void initialize(){
 
         addButtons();
         setColumnValues();
@@ -50,14 +53,14 @@ public class MainPageController {
     }
 
     // Skal fikses
-    public void onInputMethodTextChanged() {
+    public void onInputMethodTextChanged(){
         filteringTxtField();
     }
 
     // Method that allows user to filter value in cells
-    public void filteringTxtField() {
+    public void filteringTxtField(){
         srcTxtField.textProperty().addListener(observable -> {
-            if (srcTxtField.textProperty().get().isEmpty()) {
+            if(srcTxtField.textProperty().get().isEmpty()){
                 tableViewHappenings.setItems(getHappenings());
                 return;
             }
@@ -65,7 +68,7 @@ public class MainPageController {
             ObservableList<Happening> happeningList = FXCollections.observableArrayList();
             ObservableList<TableColumn<Happening, ?>> columns = tableViewHappenings.getColumns();
 
-            for (int i = 0; i < getHappenings().size(); i++)
+            for(int i = 0; i < getHappenings().size(); i++)
                 for (int j = 0; j < columns.size(); j++) {
                     TableColumn col = columns.get(j);
 
@@ -87,16 +90,35 @@ public class MainPageController {
         sceneUtils.launchScene(event, MainPageController.class, "adminMainPage.fxml");
     }
 
-    private void addButtons() {
+    private void addButtons(){
         OrderColumn.setCellValueFactory(
                 property -> new SimpleBooleanProperty(property.getValue() != null));
 
-        //adds buttons to not-empty cells
+        //Trenger ikke denne koden da den er erstattet med lambda. Ligger her i tilfelle noe går galt
+                /*new Callback<TableColumn.CellDataFeatures<Happening, Boolean>,
+                        ObservableValue<Boolean>>() {
+
+                    @Override
+                    public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Happening, Boolean> property) {
+                        return new SimpleBooleanProperty(property.getValue() != null);
+                    }
+                });*/
+
+        //Legger til knapp i cell
         OrderColumn.setCellFactory(
                 property -> new OrderButton());
+
+        /*Trenger ikke denne koden da den er erstattet med lambda. Ligger her i tilfelle noe går galt
+                new Callback<TableColumn<Happening, Boolean>, TableCell<Happening, Boolean>>() {
+
+                    @Override
+                    public TableCell<Happening, Boolean> call(TableColumn<Happening, Boolean> property) {
+                        return new OrderButton();
+                    }
+                });*/
     }
 
-    private void setColumnValues() {
+    private void setColumnValues(){
         HappeningColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("name"));
         TypeColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("type"));
         DateColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("date"));
@@ -105,10 +127,10 @@ public class MainPageController {
         tableViewHappenings.setItems(getHappenings());
     }
 
-    private ObservableList<Happening> getHappenings() {
+    private ObservableList<Happening> getHappenings(){
         ObservableList<Happening> happenings = FXCollections.observableArrayList();
 
-        for (Happening happening : happeningList) {
+        for (Happening happening : happeningList){
             happenings.add(happening);
         }
         return happenings;

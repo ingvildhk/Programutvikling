@@ -6,9 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.kulturhusfx.base.ContactPerson;
+import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.base.Hall;
-import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.model.HappeningModel;
+import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.fileHandling.ReadFileCsv;
 import org.kulturhusfx.util.fileHandling.ReadFileJobj;
 
@@ -30,11 +31,12 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try {
-            readFileCsv.readHappeningFromFile(ARR_FILE_PATH);
-        } catch (Exception e) {
+            readFileCsv.readEventFromFile(ARR_FILE_PATH);
+        }
+        catch (Exception e){
             Hall hall = new Hall("Hovedsalen", "Konsertsal", "150");
             happeningModel.createHappening(new ContactPerson("Lene Hansen", "87654321", "lene.hansen@gmail.com",
-                            "lene.com", "Lene Hansen A/S", "Ressursnr: 12345"), "Lille Eyolf", "Pia Tjelta, Kåre Conradi",
+                    "lene.com", "Lene Hansen A/S", "Ressursnr: 12345"), "Lille Eyolf", "Pia Tjelta, Kåre Conradi",
                     "Lille Eyolf;Pia Tjelta, Kåre Conradi;Lille Eyolf er kanskje det av Ibsens stykker som i minst grad preges av samfunnet rundt.",
                     hall, "Teater", "2019-05-30", "19:00", "450");
             hallList.add(hall);
@@ -42,7 +44,8 @@ public class MainApp extends Application {
 
         try {
             readFileJobj.readHallFromFile(HALL_FILE_PATH);
-        } catch (Exception e) {
+        }
+        catch (Exception e){
             hallModel.createHall("Amfisalen", "Foredragssal", "100");
         }
 

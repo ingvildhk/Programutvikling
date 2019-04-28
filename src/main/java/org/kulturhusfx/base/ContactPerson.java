@@ -1,5 +1,6 @@
 package org.kulturhusfx.base;
 
+import org.kulturhusfx.util.Checker;
 import java.io.Serializable;
 
 public class ContactPerson implements Serializable {
@@ -10,6 +11,8 @@ public class ContactPerson implements Serializable {
     private String firm;
     private String otherInformation;
 
+    //nettside, firma og andreOpplysninger er forsatt med i konstruktøren selv om de er valgfrie, da de kan
+    //være tomme uten at det skaper noen problemer
     public ContactPerson(String name, String phoneNumber, String email, String webpage,
                          String firm, String otherInformation) {
         this.contactName = name;
@@ -67,4 +70,22 @@ public class ContactPerson implements Serializable {
     public void setOtherInformation(String otherInformation) {
         this.otherInformation = otherInformation;
     }
+
+    // TODO Er denne nødvendig? Vurdere etterhvert om den blir brukt
+    public void changeContactPersonInformation(String name, String phoneNumber, String email,
+                                               String webpage, String firm, String otherInformation) {
+        setContactName(name);
+        setPhoneNumber(phoneNumber);
+        setEmail(email);
+        setWebpage(webpage);
+        setFirm(firm);
+        setOtherInformation(otherInformation);
+    }
+
+    // TODO trenger ikke toString metoder i levering
+    public String toString() {
+        String s = contactName + " " + phoneNumber + " " + email + " " + webpage + " " + firm + " " + otherInformation;
+        return s;
+    }
+
 }
