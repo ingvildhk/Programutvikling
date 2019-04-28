@@ -24,6 +24,10 @@ public class JobjHallThread extends Task<Void> {
     private Exception exception;
 
 
+    public JobjHallThread (Runnable runme){
+        this.runme = runme;
+    }
+
     @Override
     protected Void call() {
         try {
