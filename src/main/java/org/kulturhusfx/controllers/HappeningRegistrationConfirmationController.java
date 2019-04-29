@@ -4,16 +4,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.kulturhusfx.base.ContactPerson;
-import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.base.Hall;
-import org.kulturhusfx.model.HappeningModel;
+import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.model.HallModel;
+import org.kulturhusfx.model.HappeningModel;
 import org.kulturhusfx.util.*;
 
 import java.io.IOException;
 import java.util.List;
 
-public class HappeningRegistrationConfirmationPopController {
+import static org.kulturhusfx.util.Checker.exceptionAlertWrapper;
+import static org.kulturhusfx.util.ControllerHelper.changeInformation;
+
+public class HappeningRegistrationConfirmationController {
 
     @FXML
     private Label registeredHappeningNameLabel, registeredHappeningTypeLabel, registeredHappeningPerformersLabel, registeredHappeningHallLabel;
@@ -39,6 +42,7 @@ public class HappeningRegistrationConfirmationPopController {
     private HappeningModel happeningModel = HappeningModel.getInstance();
     private HallModel hallModel = HallModel.getInstance();
     private List<Happening> happeningList = happeningModel.getHappeningList();
+    private List<Hall> hallList = hallModel.getHallList();
     private Happening registeredHappening = happeningList.get(happeningList.size() - 1);
     private SceneUtils sceneUtils = SceneUtils.getInstance();
     private FileChooserMethods fileChooserMethods = FileChooserMethods.getInstance();
@@ -64,17 +68,15 @@ public class HappeningRegistrationConfirmationPopController {
             fileChooserMethods.saveHappeningToFile(registeredHappening);
             sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring", "Arrangementet er lagret til fil");
 
-        } catch (IOException e) {
-            FileExceptionHandler.generateExceptionmsg(new IOException("Lagring til fil feilet: " + e.getMessage()));
+        } catch (Exception e) {
+            FileExceptionHandler.generateExceptionmsg(new Exception("Lagring til fil feilet: " + e.getMessage()));
         }
     }
 
-    //Legger til saler i choicebox
     public void updateRoomList() {
         ControllerHelper.updateRoomList(changeHappeningHallChoiceBox, hallModel);
     }
 
-    //Legger til arrangementstyper i choicebox
     public void addHappeningType() {
         ControllerHelper.addHappeningType(changeHappeningTypeChoiceBox);
     }
@@ -135,15 +137,14 @@ public class HappeningRegistrationConfirmationPopController {
             program = changeHappeningProgramTxtArea.getText();
         }
 
-        Checker.checkValidDate(date);
-        Checker.checkValidTime(time);
-        Checker.checkValidTicketPrice(ticket);
-        Checker.checkValidEmail(email);
-        Checker.checkValidPhone(phone);
+        exceptionAlertWrapper(() -> Checker.checkValidDate(date));
+        exceptionAlertWrapper(() -> Checker.checkValidTime(time));
+        exceptionAlertWrapper(() -> Checker.checkValidTicketPrice(ticket));
+        exceptionAlertWrapper(() -> Checker.checkValidEmail(email));
+        exceptionAlertWrapper(() -> Checker.checkValidPhone(phone));
 
-        List<Hall> aList = hallModel.getHallList();
         int hallIndex = hallModel.getHallIndex(room);
-        Hall hall = aList.get(hallIndex);
+        Hall hall = hallList.get(hallIndex);
 
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
 

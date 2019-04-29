@@ -1,0 +1,68 @@
+.root {
+    -fx-focus-color: #AD95BC;
+    -fx-accent: #AD95BC;
+    -fx-background-color: #F4F4F9;
+}
+
+#header {
+    -fx-font-size: 24;
+}
+
+.button {
+    -fx-font-weight: bold;
+    -fx-background-color: #C2C2D7;
+    -fx-border-color: #8E8E9D;
+    -fx-text-fill: #35353B;
+    -fx-border-radius: 2px;
+    -fx-border-width: 3px;
+}
+
+.button:hover {
+    -fx-background-color: #C59EC3;
+    -fx-text-fill: white;
+    -fx-border-radius: 2px;
+    -fx-border-width: 3px;
+}
+
+.table-view .column-header {
+    -fx-background-color: #92496F;
+    -fx-size:60px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-stroke: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 14;
+    -fx-padding: 10px;
+    -fx-text-fill: white;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #C59EC3;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: #47474F;
+}
+
+.table-row-cell:selected .button {
+    -fx-background-color: #A56A89;
+    -fx-border-color: white;
+    -fx-border-radius: 2px;
+    -fx-border-width: 3px;
+}
+
+.table-row-cell:selected:hover .button {
+    -fx-background-color: #AD95BC;
+}
+
+.table-view .table-column {
+    -fx-alignment: center;
+    -fx-font-size: 13;
+}
+
+.table-view:row-selection {
+    -fx-fixed-cell-size: 50px;
+}

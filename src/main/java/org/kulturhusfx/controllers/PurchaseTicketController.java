@@ -20,16 +20,16 @@ import org.kulturhusfx.util.exception.InvalidNumberOfSeatsException;
 import java.io.IOException;
 import java.util.List;
 
+import static org.kulturhusfx.util.Checker.exceptionAlertWrapper;
+
 public class PurchaseTicketController {
 
-    //Hvis vi vil skrive ut hvilket billettnummer, altså hvilken plass man får når man bestiller
-    //så blir billettnummeret ticketList.getIndex(ticket) + 1
-
+    //TODO copy managehappeningscontroller?
     private Happening currentHappening = MainPageController.currentHappening;
     public static String currentNumberofTickets;
 
-    public TicketModel ticketModel = currentHappening.getTicketModel();
-    public List<Ticket> ticketList = ticketModel.getTicketList();
+    private TicketModel ticketModel = currentHappening.getTicketModel();
+    private List<Ticket> ticketList = ticketModel.getTicketList();
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
     @FXML
@@ -39,29 +39,27 @@ public class PurchaseTicketController {
     @FXML
     private ChoiceBox numberOfTicketsChoiceBox;
 
-    public void initialize(){
+    public void initialize() {
         setLabels();
-        numberOfTicketsChoiceBox.getItems().addAll("1", "2", "3", "4", "5","6", "7", "8", "9");
+        numberOfTicketsChoiceBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9");
         numberOfTicketsChoiceBox.setValue("1");
     }
 
     public void orderBtn(ActionEvent event) throws IOException {
         createNewTickets();
 
-        //sceneUtils.launchScene(event, TicketConfirmationPopController.class, "ticketConfirmationPop.fxml");
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ticketConfirmationPop.fxml"));
-        Parent parent = (Parent) fxmlLoader.load();
+        Parent parent = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(parent));
         stage.show();
     }
 
     public void backToMainPageBtn(ActionEvent event) {
-        sceneUtils.launchScene(event, MainPageController.class,"MainPage.fxml" );
+        sceneUtils.launchScene(event, MainPageController.class, "MainPage.fxml");
     }
 
-    private void setLabels(){
+    private void setLabels() {
         happeningLabel.setText(currentHappening.getName());
         hallLabel.setText(currentHappening.getHall().getHallName());
         performersLabel.setText(currentHappening.getPerformers());
@@ -72,31 +70,31 @@ public class PurchaseTicketController {
         ticketPriceLabel.setText(currentHappening.getTicketPrice());
     }
 
-    private void createNewTickets(){
+    private void createNewTickets() {
         String phone = phoneTxtField.getText();
-        Checker.checkIfFieldIsEmpty(phone);
-        Checker.checkIfChoiceBoxIsEmpty(numberOfTicketsChoiceBox);
+        exceptionAlertWrapper(() -> Checker.checkIfFieldIsEmpty(phone));
+        exceptionAlertWrapper(() -> Checker.checkIfChoiceBoxIsEmpty(numberOfTicketsChoiceBox));
         String numberOfTickets = numberOfTicketsChoiceBox.getValue().toString();
 
         int orderManyTickets = Integer.parseInt(numberOfTickets);
         currentNumberofTickets = numberOfTickets;
 
-        if (ticketList.size() >=  Integer.parseInt(currentHappening.getHall().getNumberOfSeats())){
+        if (ticketList.size() >= Integer.parseInt(currentHappening.getHall().getNumberOfSeats())) {
             InvalidInputHandler.generateAlert(
                     new InvalidNumberOfSeatsException("Arrangementet er utsolgt"));
         }
 
-        if (ticketList.size() + orderManyTickets >  Integer.parseInt(currentHappening.getHall().getNumberOfSeats())){
+        if (ticketList.size() + orderManyTickets > Integer.parseInt(currentHappening.getHall().getNumberOfSeats())) {
             InvalidInputHandler.generateAlert(
                     new InvalidNumberOfSeatsException("Ikke nok ledige plasser til å kjøpe så mange billetter"));
         }
 
-        //Oppretter nye billettobjekter basert på hvor mange billetter man vil bestille
-        for (int i = 1; i <= orderManyTickets; i++){
+        //creates new tickets equal to the number ordered
+        for (int i = 1; i <= orderManyTickets; i++) {
             ticketModel.createTicket(phone);
         }
 
-        //setter hvor mange billetter som er ledige
+        //updates available tickets
         currentHappening.setAvailableTickets(currentHappening.getAvailableTickets() - orderManyTickets);
     }
 }
