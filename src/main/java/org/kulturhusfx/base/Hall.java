@@ -42,4 +42,8 @@ public class Hall implements Serializable {
         setHallType(hallType);
         setNumberOfSeats(numberOfSeats);
     }
+
+    public String toString(){
+        return (hallName + " " + hallType + " " + numberOfSeats);
+    }
 }

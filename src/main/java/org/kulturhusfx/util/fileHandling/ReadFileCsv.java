@@ -68,7 +68,7 @@ public class ReadFileCsv extends ReadFile {
                         Hall aHall = hallList.get(hallIndex);
                         happeningModel.createHappening(new ContactPerson(happeningDetails[0], happeningDetails[1], happeningDetails[2], happeningDetails[3],
                                         happeningDetails[4], happeningDetails[5]), happeningDetails[6], happeningDetails[7], happeningDetails[8],
-                                aHall, happeningDetails[9], happeningDetails[13], happeningDetails[14], happeningDetails[15]);
+                                aHall, happeningDetails[12], happeningDetails[13], happeningDetails[14], happeningDetails[15]);
                     } else {
                         Hall aHall = new Hall(happeningDetails[9], happeningDetails[10], happeningDetails[11]);
                         happeningModel.createHappening(new ContactPerson(happeningDetails[0], happeningDetails[1], happeningDetails[2], happeningDetails[3],
