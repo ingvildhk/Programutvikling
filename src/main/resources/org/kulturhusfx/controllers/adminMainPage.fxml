@@ -13,18 +13,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="anchorpane" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.AdminMainPageController">
     <children>
-        <Label layoutX="206.0" layoutY="14.0" text="Småkommunens Kulturhus">
+        <Label id="header" layoutX="206.0" layoutY="14.0" text="Småkommunens Kulturhus">
             <font>
-                <Font size="24.0" />
+                <Font size="36.0" />
             </font>
         </Label>
-      <VBox layoutX="14.0" layoutY="80.0" prefHeight="199.0" prefWidth="192.0">
-         <children>
-            <Button fx:id="btnManageHalls" mnemonicParsing="false" onAction="#seeAllEventsBtn" text="Administrer saler" />
-            <Button fx:id="btnManageHappenings" mnemonicParsing="false" onAction="#manageEventsBtn" text="Administrer arrangementer" />
-         </children>
-      </VBox>
-      <VBox layoutX="466.0" layoutY="113.0" prefHeight="331.0" prefWidth="235.0">
+      <Button fx:id="btnManageHalls" layoutX="762.0" layoutY="15.0" mnemonicParsing="false" onAction="#seeAllEventsBtn" text="Administrer saler" />
+      <Button fx:id="btnManageHappenings" layoutX="558.0" layoutY="15.0" mnemonicParsing="false" onAction="#manageEventsBtn" text="Administrer arrangementer" />
+      <VBox layoutX="375.0" layoutY="114.0" prefHeight="331.0" prefWidth="235.0">
          <children>
               <Label text="Navn på kontaktperson" />
               <TextField fx:id="contactName" prefHeight="27.0" prefWidth="196.0" />
@@ -40,7 +36,7 @@
               <TextField fx:id="contactOther" prefHeight="27.0" prefWidth="196.0" />
          </children>
       </VBox>
-      <VBox layoutX="206.0" layoutY="113.0" prefHeight="482.0" prefWidth="235.0">
+      <VBox layoutX="115.0" layoutY="114.0" prefHeight="482.0" prefWidth="235.0">
          <children>
               <Label text="Navn på Arrangementet" />
             <TextField fx:id="happeningName" />
@@ -60,20 +56,20 @@
             <TextArea fx:id="happeningSchedule" prefHeight="102.0" prefWidth="182.0" />
          </children>
       </VBox>
-        <Label layoutX="741.0" layoutY="80.0" text="Legg til sal">
+        <Label layoutX="741.0" layoutY="80.0" text="Legg til sal:">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
-        <Button fx:id="btnRegisterHappening" layoutX="466.0" layoutY="443.0" mnemonicParsing="false" onAction="#happeningRegistrationBtn" text="Registrer arrangement" />
-        <Separator layoutX="718.0" layoutY="80.0" orientation="VERTICAL" prefHeight="463.0" prefWidth="0.0" />
-      <Button fx:id="btnRegisterHappeningFile" layoutX="466.0" layoutY="486.0" mnemonicParsing="false" onAction="#registerHappeningFromFileBtn" text="Registrer arrangement fra fil" />
-        <Label layoutX="206.0" layoutY="80.0" text="Legg til arrangement">
+        <Button fx:id="btnRegisterHappening" layoutX="375.0" layoutY="445.0" mnemonicParsing="false" onAction="#happeningRegistrationBtn" text="Registrer arrangement" />
+        <Separator layoutX="619.0" layoutY="82.0" orientation="VERTICAL" prefHeight="463.0" prefWidth="0.0" />
+      <Button fx:id="btnRegisterHappeningFile" layoutX="375.0" layoutY="486.0" mnemonicParsing="false" onAction="#registerHappeningFromFileBtn" text="Registrer arrangement fra fil" />
+        <Label layoutX="115.0" layoutY="80.0" text="Legg til arrangement:">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
-      <VBox layoutX="741.0" layoutY="113.0" prefHeight="160.0" prefWidth="235.0">
+      <VBox layoutX="650.0" layoutY="114.0" prefHeight="160.0" prefWidth="235.0">
          <children>
               <Label text="Salens navn" />
               <TextField fx:id="hallName" prefHeight="25.0" prefWidth="115.0" />
@@ -83,8 +79,8 @@
               <TextField fx:id="totalNumberOfSeats" prefHeight="25.0" prefWidth="115.0" />
          </children>
       </VBox>
-      <Button fx:id="btnRegisterHallFile" layoutX="741.0" layoutY="341.0" mnemonicParsing="false" onAction="#registerHallFromFileBtn" text="Registrer sal fra fil" />
-        <Button fx:id="btnRegisterHall" layoutX="741.0" layoutY="300.0" mnemonicParsing="false" onAction="#roomRegistrationBtn" text="Registrer sal" />
+      <Button fx:id="btnRegisterHallFile" layoutX="650.0" layoutY="342.0" mnemonicParsing="false" onAction="#registerHallFromFileBtn" text="Registrer sal fra fil" />
+        <Button fx:id="btnRegisterHall" layoutX="650.0" layoutY="300.0" mnemonicParsing="false" onAction="#roomRegistrationBtn" text="Registrer sal" />
       <Button fx:id="btnBack" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#backToMainPageBtn" text="Tilbake" />
     </children>
 </AnchorPane>

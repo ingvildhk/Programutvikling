@@ -10,7 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.PurchaseTicketController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.PurchaseTicketController">
     <children>
       <HBox layoutX="125.0" layoutY="148.0" prefHeight="428.0" prefWidth="725.0">
          <children>
@@ -124,7 +126,7 @@
             </VBox>
          </children>
       </HBox>
-        <Label layoutX="409.0" layoutY="23.0" text="Småkommunens Kulturhus">
+        <Label id="header" layoutX="409.0" layoutY="23.0" text="Småkommunens Kulturhus">
             <font>
                 <Font size="18.0" />
             </font>

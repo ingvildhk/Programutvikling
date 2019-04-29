@@ -81,7 +81,6 @@ public class AdminManageHappeningsController {
         ObservableList<Happening> selectedRows;
         selectedRows = tableViewHappenings.getSelectionModel().getSelectedItems();
 
-        // TODO IF ELSE funker ikke enda men skal fikses
         if (!selectedRows.isEmpty()) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("seeOrdersToHappening.fxml"));
@@ -173,7 +172,6 @@ public class AdminManageHappeningsController {
         dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         programColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         priceColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        //hallColumn.setCellFactory(ComboBoxTableCell.forTableColumn(getHalls()));
         hallColumn.setCellFactory(ComboBoxTableCell.forTableColumn(getHalls()));
 
         contactNameCol.setCellFactory(TextFieldTableCell.forTableColumn());

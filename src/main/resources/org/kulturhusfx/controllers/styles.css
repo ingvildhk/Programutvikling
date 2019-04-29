@@ -1,3 +1,60 @@
+.root {
+    -fx-background-color: white;
+    -fx-text-fill: #0F7173;
+}
+
 .button {
+    -fx-background-color: white;
+    -fx-text-fill: #0F7173;
+    -fx-border-width: 3px;
+    -fx-border-style: solid;
+    -fx-border-color: #0F7173;
+    -fx-border-radius: 2px;
+}
+
+.label {
     -fx-font-weight: bold;
+    -fx-text-fill: #0F7173;
+}
+
+#header {
+    -fx-font-size: 24;
+    -fx-text-fill: #0F7173;;
+}
+
+.tableViewMainPage{
+
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler{
+    /*-fx-background-color: #0B3142;*/
+    -fx-stroke: transparent;
+    -fx-size:50px;
+    -fx-alignment: center ;
+    -fx-text-alignment: center;
+}
+
+.table-row-cell:filled:hover {
+
+    -fx-size:40px;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+
+}
+.table-view:row-selection {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-fixed-cell-size: 40px;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+}
+
+.table-view .table-column{
+    -fx-text-alignment: center;
+    -fx-alignment: CENTER
+
 }
