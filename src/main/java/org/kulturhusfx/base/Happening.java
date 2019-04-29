@@ -6,6 +6,7 @@ import java.io.Serializable;
 public class Happening implements Serializable {
 
     private ContactPerson contactPerson;
+    // TODO fjerne String id?
     private String id;
     private String name;
     private String type;
@@ -113,6 +114,7 @@ public class Happening implements Serializable {
         this.contactPerson.setOtherInformation(otherInformation);
     }
 
+    // TODO private?
     public void setContactPerson(ContactPerson contactPerson) {
         this.contactPerson = contactPerson;
     }

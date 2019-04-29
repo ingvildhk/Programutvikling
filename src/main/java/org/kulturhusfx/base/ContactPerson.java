@@ -44,6 +44,7 @@ public class ContactPerson implements Serializable {
         return otherInformation;
     }
 
+    // TODO Private?
     public void setContactName(String contactName) {
         this.contactName = contactName;
     }

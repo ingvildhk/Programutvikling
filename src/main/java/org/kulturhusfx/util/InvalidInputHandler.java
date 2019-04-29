@@ -11,11 +11,11 @@ public class InvalidInputHandler {
         alert.setContentText(exception.getMessage());
 
         alert.showAndWait();
-        throw exception; // Hvilket Exception?
+        throw exception; // TODO skal det gjøres noe med dette exceptionet eller er det greit?
 
     }
 
-    //method without "throw exception" for being able to generate alerts from threads
+    //Method without "throw exception" for being able to generate alerts from threads
     public static void generateThreadAlert(RuntimeException exception) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Feil i registreringsdata");

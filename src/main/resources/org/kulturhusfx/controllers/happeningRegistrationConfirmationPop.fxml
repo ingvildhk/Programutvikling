@@ -9,7 +9,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.HappeningRegistrationConfirmationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.kulturhusfx.controllers.HappeningRegistrationConfirmationController">
     <children>
         <Label id="header" layoutX="299.0" layoutY="14.0" text="Småkommunens Kulturhus">
             <font>
@@ -40,27 +43,43 @@
       <Label fx:id="registeredHappeningDateLabel" layoutX="190.0" layoutY="269.0" text="Label" />
       <Label fx:id="registeredHappeningHallLabel" layoutX="190.0" layoutY="234.0" text="Label" />
       <Label fx:id="registeredHappeningTimeLabel" layoutX="190.0" layoutY="306.0" text="Label" />
-      <Label fx:id="registeredHappeningScheduleLabel" layoutX="190.0" layoutY="396.0" maxWidth="150.0" text="Label" wrapText="true" />
-      <TextField fx:id="changeHappeningNameTxtField" layoutX="303.0" layoutY="128.0" prefHeight="27.0" prefWidth="194.0" />
-      <TextField fx:id="changeHappeningPerformersTxtField" layoutX="303.0" layoutY="199.0" prefHeight="27.0" prefWidth="194.0" />
-      <ChoiceBox fx:id="changeHappeningTypeChoiceBox" layoutX="303.0" layoutY="163.0" prefHeight="27.0" prefWidth="194.0" />
-      <ChoiceBox fx:id="changeHappeningHallChoiceBox" layoutX="304.0" layoutY="232.0" prefHeight="27.0" prefWidth="194.0" />
-      <TextField fx:id="changeHappeningTimeTxtField" layoutX="304.0" layoutY="301.0" prefHeight="27.0" prefWidth="194.0" />
-      <TextField fx:id="changeHappeningTicketPriceTxtField" layoutX="304.0" layoutY="336.0" prefHeight="27.0" prefWidth="194.0" />
-      <TextArea fx:id="changeHappeningProgramTxtArea" layoutX="304.0" layoutY="373.0" prefHeight="85.0" prefWidth="194.0" />
-      <TextField fx:id="changeHappeningContactPersonTxtField" layoutX="861.0" layoutY="126.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeHappeningPhoneTxtField" layoutX="861.0" layoutY="173.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeHappeningEmailTxtField" layoutX="861.0" layoutY="212.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeHappeningWebpageTxtField" layoutX="861.0" layoutY="255.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeHappeningFirmTxtField" layoutX="861.0" layoutY="302.0" prefHeight="25.0" prefWidth="113.0" />
-      <TextField fx:id="changeHappeningOtherTxtField" layoutX="861.0" layoutY="357.0" prefHeight="25.0" prefWidth="113.0" />
+      <Label fx:id="registeredHappeningScheduleLabel" layoutX="190.0" layoutY="396.0" maxWidth="150.0" text="Label"
+             wrapText="true" />
+      <TextField fx:id="changeHappeningNameTxtField" layoutX="303.0" layoutY="128.0" prefHeight="27.0"
+                 prefWidth="194.0" />
+      <TextField fx:id="changeHappeningPerformersTxtField" layoutX="303.0" layoutY="199.0" prefHeight="27.0"
+                 prefWidth="194.0" />
+      <ChoiceBox fx:id="changeHappeningTypeChoiceBox" layoutX="303.0" layoutY="163.0" prefHeight="27.0"
+                 prefWidth="194.0" />
+      <ChoiceBox fx:id="changeHappeningHallChoiceBox" layoutX="304.0" layoutY="232.0" prefHeight="27.0"
+                 prefWidth="194.0" />
+      <TextField fx:id="changeHappeningTimeTxtField" layoutX="304.0" layoutY="301.0" prefHeight="27.0"
+                 prefWidth="194.0" />
+      <TextField fx:id="changeHappeningTicketPriceTxtField" layoutX="304.0" layoutY="336.0" prefHeight="27.0"
+                 prefWidth="194.0" />
+      <TextArea fx:id="changeHappeningProgramTxtArea" layoutX="304.0" layoutY="373.0" prefHeight="85.0"
+                prefWidth="194.0" />
+      <TextField fx:id="changeHappeningContactPersonTxtField" layoutX="861.0" layoutY="126.0" prefHeight="25.0"
+                 prefWidth="113.0" />
+      <TextField fx:id="changeHappeningPhoneTxtField" layoutX="861.0" layoutY="173.0" prefHeight="25.0"
+                 prefWidth="113.0" />
+      <TextField fx:id="changeHappeningEmailTxtField" layoutX="861.0" layoutY="212.0" prefHeight="25.0"
+                 prefWidth="113.0" />
+      <TextField fx:id="changeHappeningWebpageTxtField" layoutX="861.0" layoutY="255.0" prefHeight="25.0"
+                 prefWidth="113.0" />
+      <TextField fx:id="changeHappeningFirmTxtField" layoutX="861.0" layoutY="302.0" prefHeight="25.0"
+                 prefWidth="113.0" />
+      <TextField fx:id="changeHappeningOtherTxtField" layoutX="861.0" layoutY="357.0" prefHeight="25.0"
+                 prefWidth="113.0" />
       <Label fx:id="registeredHappeningContactPersonLabel" layoutX="700.0" layoutY="131.0" text="Label" />
       <Label fx:id="registeredHappeningPhoneLabel" layoutX="700.0" layoutY="180.0" text="Label" />
       <Label fx:id="registeredHappeningEmailLabel" layoutX="700.0" layoutY="217.0" text="Label" />
       <Label fx:id="registeredHappeningWebpageLabel" layoutX="700.0" layoutY="260.0" text="Label" />
       <Label fx:id="registeredHappeningFirmLabel" layoutX="700.0" layoutY="307.0" text="Label" />
-      <Label fx:id="registeredHappeningOtherLabel" layoutX="700.0" layoutY="362.0" maxWidth="50.0" text="Label" textOverrun="CLIP" wrapText="true" />
-      <Button layoutX="45.0" layoutY="28.0" mnemonicParsing="false" onAction="#backToAdminBtn" text="Lagre og gå tilbake" />
+      <Label fx:id="registeredHappeningOtherLabel" layoutX="700.0" layoutY="362.0" maxWidth="50.0" text="Label"
+             textOverrun="CLIP" wrapText="true" />
+      <Button layoutX="45.0" layoutY="28.0" mnemonicParsing="false" onAction="#backToAdminBtn"
+              text="Lagre og gå tilbake" />
       <DatePicker fx:id="changeHappeningDateDatePicker" layoutX="304.0" layoutY="267.0" />
     </children>
 </AnchorPane>

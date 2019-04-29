@@ -4,7 +4,7 @@ import javafx.scene.control.Alert;
 
 public class FileExceptionHandler {
 
-    public static void generateExceptionmsg(Exception exception) {
+    public static void generateExceptionMsg(Exception exception) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Filhåndtering feil");
         alert.setHeaderText("Filhåndtering feil");

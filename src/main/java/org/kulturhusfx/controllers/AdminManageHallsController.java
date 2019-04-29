@@ -35,8 +35,20 @@ public class AdminManageHallsController {
         setEditableColumns();
     }
 
-    public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
-        sceneUtils.launchScene(event, AdminManageHallsController.class, "adminMainPage.fxml");
+    private void setColumnValues() {
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Hall, String>("hallName"));
+        typeOfHallColumn.setCellValueFactory(new PropertyValueFactory<Hall, String>("hallType"));
+        numberOfSeatsColumn.setCellValueFactory(new PropertyValueFactory<Hall, String>("numberOfSeats"));
+
+        tableViewHalls.setItems(getHalls());
+    }
+
+    private void setEditableColumns() {
+        tableViewHalls.setEditable(true);
+
+        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        typeOfHallColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        numberOfSeatsColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
     public void editHallNameCellEvent(TableColumn.CellEditEvent edittedCell) {
@@ -54,22 +66,6 @@ public class AdminManageHallsController {
         Hall hallSelected = tableViewHalls.getSelectionModel().getSelectedItem();
         exceptionAlertWrapper(() -> Checker.checkValidNumberOfSeats(edittedCell.getNewValue().toString()));
         hallSelected.setNumberOfSeats(edittedCell.getNewValue().toString());
-    }
-
-    private void setColumnValues() {
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Hall, String>("hallName"));
-        typeOfHallColumn.setCellValueFactory(new PropertyValueFactory<Hall, String>("hallType"));
-        numberOfSeatsColumn.setCellValueFactory(new PropertyValueFactory<Hall, String>("numberOfSeats"));
-
-        tableViewHalls.setItems(getHalls());
-    }
-
-    private void setEditableColumns() {
-        tableViewHalls.setEditable(true);
-
-        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        typeOfHallColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        numberOfSeatsColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
     public void deleteHallFromTableView() {
@@ -92,5 +88,9 @@ public class AdminManageHallsController {
             halls.add(hall);
         }
         return halls;
+    }
+
+    public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
+        sceneUtils.launchScene(event, AdminManageHallsController.class, "adminMainPage.fxml");
     }
 }

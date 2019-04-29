@@ -40,7 +40,7 @@ public class FileChooserMethods {
                 SaveFileCsv csv = new SaveFileCsv();
                 csv.saveHappeningToFile(happening, fileName);
             } else {
-                FileExceptionHandler.generateExceptionmsg(new InvalidObjectException("Filtype må være jobj eller csv"));
+                FileExceptionHandler.generateExceptionMsg(new InvalidObjectException("Filtype må være jobj eller csv"));
             }
         }
     }
@@ -60,7 +60,7 @@ public class FileChooserMethods {
                 SaveFileCsv csv = new SaveFileCsv();
                 csv.saveHallToFile(hall, fileName);
             } else {
-                FileExceptionHandler.generateExceptionmsg(new InvalidObjectException("Filtype må være jobj eller csv"));
+                FileExceptionHandler.generateExceptionMsg(new InvalidObjectException("Filtype må være jobj eller csv"));
             }
         }
     }

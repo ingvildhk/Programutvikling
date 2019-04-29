@@ -8,7 +8,6 @@ import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.util.*;
 
-import java.io.IOException;
 import java.util.List;
 
 import static org.kulturhusfx.util.Checker.exceptionAlertWrapper;
@@ -30,32 +29,19 @@ public class HallRegistrationConfirmationController {
         setValuetoLabels();
     }
 
-    public void editHallBtn() {
-        editHall();
-        sceneUtils.generateConfirmationAlert("Bekreftelse endring i registrert sal", "Sal er endret");
-    }
-
-    public void backToAdminMainPage(ActionEvent event) {
-        sceneUtils.launchScene(event, AdminMainPageController.class, "adminMainPage.fxml");
-    }
-
-    public void saveHallBtn(ActionEvent event) {
-        try {
-            fileChooserMethods.saveHallToFile(registeredHall);
-            sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring", "Sal er lagret til fil");
-        } catch (Exception e) {
-            FileExceptionHandler.generateExceptionmsg(new Exception("Lagring til fil feilet: " + e.getMessage()));
-        }
-    }
-
-    //shows the information of the newly registered hall
-    public void setValuetoLabels() {
+    //shows information of the newly registered hall
+    private void setValuetoLabels() {
         registeredHallNameLabel.setText(registeredHall.getHallName());
         registeredHallTypeLabel.setText(registeredHall.getHallType());
         registeredHallNumberSeatsLabel.setText(registeredHall.getNumberOfSeats());
     }
 
-    public void editHall() {
+    public void editHallBtn() {
+        editHall();
+        sceneUtils.generateConfirmationAlert("Bekreftelse endring i registrert sal", "Sal er endret");
+    }
+
+    private void editHall() {
         String name = ControllerHelper.changeInformation(changeHallNameTxtField, registeredHallNameLabel);
         String type = ControllerHelper.changeInformation(changeHallTypeTxtField, registeredHallTypeLabel);
         String seats = ControllerHelper.changeInformation(changeHallNumberSeatsTxtField, registeredHallNumberSeatsLabel);
@@ -63,5 +49,19 @@ public class HallRegistrationConfirmationController {
         exceptionAlertWrapper(() -> Checker.checkValidNumberOfSeats(seats));
         registeredHall.changeHallInformation(name, type, seats);
         setValuetoLabels();
+    }
+
+    // TODO actionEvent?
+    public void saveHallBtn(ActionEvent event) {
+        try {
+            fileChooserMethods.saveHallToFile(registeredHall);
+            sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring", "Sal er lagret til fil");
+        } catch (Exception e) {
+            FileExceptionHandler.generateExceptionMsg(new Exception("Lagring til fil feilet: " + e.getMessage()));
+        }
+    }
+
+    public void backToAdminMainPage(ActionEvent event) {
+        sceneUtils.launchScene(event, AdminMainPageController.class, "adminMainPage.fxml");
     }
 }

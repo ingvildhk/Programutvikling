@@ -7,6 +7,7 @@ public class Hall implements Serializable {
     private String hallType;
     private String numberOfSeats;
 
+    // TODO: comment til hvorfor denne er her?
     private static final long serialVersionUID = -6005051981025523334L;
 
     public Hall(String hallName, String hallType, String numberOfSeats) {

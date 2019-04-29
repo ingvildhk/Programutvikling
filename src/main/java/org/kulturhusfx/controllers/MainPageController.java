@@ -42,19 +42,36 @@ public class MainPageController {
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
     public void initialize() {
-
-        addButtons();
         setColumnValues();
+        addButtons();
         //onInputMethodTextChanged();
         filteringTxtField();
     }
 
-    // Skal fikses
+    private void setColumnValues() {
+        HappeningColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("name"));
+        TypeColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("type"));
+        DateColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("date"));
+        TimeColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("time"));
+        AvailableColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("availableTickets"));
+        tableViewHappenings.setItems(getHappenings());
+    }
+
+    private void addButtons() {
+        OrderColumn.setCellValueFactory(
+                property -> new SimpleBooleanProperty(property.getValue() != null));
+
+        //adds buttons to not-empty cells
+        OrderColumn.setCellFactory(
+                property -> new OrderButton());
+    }
+
+    // TODO Skal fikses
     public void onInputMethodTextChanged() {
         filteringTxtField();
     }
 
-    // Method that allows user to filter value in cells
+    // Method that allows user to search for value in table cells
     public void filteringTxtField() {
         srcTxtField.textProperty().addListener(observable -> {
             if (srcTxtField.textProperty().get().isEmpty()) {
@@ -85,24 +102,6 @@ public class MainPageController {
 
     public void handleAdminLoginBtnAction(ActionEvent event) throws IOException {
         sceneUtils.launchScene(event, MainPageController.class, "adminMainPage.fxml");
-    }
-
-    private void addButtons() {
-        OrderColumn.setCellValueFactory(
-                property -> new SimpleBooleanProperty(property.getValue() != null));
-
-        //adds buttons to not-empty cells
-        OrderColumn.setCellFactory(
-                property -> new OrderButton());
-    }
-
-    private void setColumnValues() {
-        HappeningColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("name"));
-        TypeColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("type"));
-        DateColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("date"));
-        TimeColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("time"));
-        AvailableColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("availableTickets"));
-        tableViewHappenings.setItems(getHappenings());
     }
 
     private ObservableList<Happening> getHappenings() {

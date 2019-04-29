@@ -1,7 +1,5 @@
 package org.kulturhusfx.util;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import org.kulturhusfx.base.Happening;
@@ -14,13 +12,9 @@ public class OrderButton extends TableCell<Happening, Boolean> {
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
     public OrderButton() {
-        cellButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                MainPageController.currentHappening = OrderButton.this.getTableView().getItems().get(OrderButton.this.getIndex());
-                sceneUtils.launchScene(event, PurchaseTicketController.class, "purchaseTicket.fxml");
-            }
+        cellButton.setOnAction(event -> {
+            MainPageController.currentHappening = OrderButton.this.getTableView().getItems().get(OrderButton.this.getIndex());
+            sceneUtils.launchScene(event, PurchaseTicketController.class, "purchaseTicket.fxml");
         });
     }
 
