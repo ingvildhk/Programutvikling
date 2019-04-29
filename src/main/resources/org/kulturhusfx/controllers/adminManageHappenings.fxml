@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.AdminManageHappeningsController">
     <children>
-        <Label layoutX="207.0" layoutY="28.0" text="Småkommunens Kulturhus">
+        <Label id="header" layoutX="207.0" layoutY="28.0" text="Småkommunens Kulturhus">
             <font>
                 <Font size="24.0" />
             </font>

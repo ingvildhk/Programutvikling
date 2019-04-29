@@ -10,27 +10,28 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.MainPageController">
     <children>
-        <Label layoutX="237.0" layoutY="15.0" stylesheets="@styles.css" text="Småkommunens Kulturhus">
+        <Label id="header" layoutX="322.0" layoutY="17.0" text="Småkommunens Kulturhus">
             <font>
                 <Font size="24.0" />
             </font>
         </Label>
-        <Label layoutX="322.0" layoutY="64.0" text="Våre arrangementer">
+        <Label layoutX="406.0" layoutY="51.0" text="Våre arrangementer:">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <Button id="adminLoginButton" fx:id="adminLoginBtn" layoutX="884.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleAdminLoginBtnAction" text="Admin Login" />
-        <TableView fx:id="tableViewHappenings" layoutX="16.0" layoutY="111.0" prefHeight="465.0" prefWidth="967.0">
+        <Button id="adminLoginButton" fx:id="adminLoginBtn" layoutX="842.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleAdminLoginBtnAction" text="Administratorside" />
+        <TableView id="tableViewMainPage" fx:id="tableViewHappenings" layoutX="16.0" layoutY="115.0" prefHeight="465.0" prefWidth="969.0">
             <columns>
                 <TableColumn fx:id="HappeningColumn" prefWidth="237.9999942779541" text="Arrangement" />
                 <TableColumn fx:id="TypeColumn" prefWidth="149.3333282470703" text="Type" />
                 <TableColumn fx:id="DateColumn" prefWidth="131.99996948242188" text="Dato" />
                 <TableColumn fx:id="TimeColumn" prefWidth="145.33331298828125" text="Tidspunkt" />
                 <TableColumn fx:id="AvailableColumn" prefWidth="152.0" text="Antall Ledige" />
-                <TableColumn fx:id="OrderColumn" prefWidth="146.66668701171875" text="Bestill" />
+                <TableColumn fx:id="OrderColumn" prefWidth="149.99993896484375" text="Bestill" />
             </columns>
         </TableView>
-        <TextField fx:id="srcTxtField" layoutX="16.0" layoutY="69.0" />
+        <TextField fx:id="srcTxtField" layoutX="69.0" layoutY="72.0" onInputMethodTextChanged="#filteringTxtField" prefHeight="27.0" prefWidth="182.0" promptText="Søk etter arrangement..." />
+        <Label layoutX="17.0" layoutY="76.0" text="Søk:" />
     </children>
 </AnchorPane>

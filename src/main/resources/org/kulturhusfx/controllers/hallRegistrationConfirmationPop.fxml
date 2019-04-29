@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.HallRegistrationConfirmationPopController">
     <children>
-        <Label layoutX="393.0" layoutY="11.0" text="Småkommunens Kulturhus">
+        <Label id="header" layoutX="393.0" layoutY="11.0" text="Småkommunens Kulturhus">
             <font>
                 <Font size="18.0" />
             </font>

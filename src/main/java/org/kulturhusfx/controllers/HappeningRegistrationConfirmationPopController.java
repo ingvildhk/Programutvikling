@@ -2,10 +2,7 @@ package org.kulturhusfx.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.base.Hall;
@@ -27,7 +24,7 @@ public class HappeningRegistrationConfirmationPopController {
     @FXML
     private Label registeredHappeningFirmLabel, registeredHappeningOtherLabel;
     @FXML
-    private TextField changeHappeningNameTxtField, changeHappeningPerformersTxtField, changeHappeningDateTxtField, changeHappeningTimeTxtField;
+    private TextField changeHappeningNameTxtField, changeHappeningPerformersTxtField, changeHappeningTimeTxtField;
     @FXML
     private TextField changeHappeningTicketPriceTxtField, changeHappeningContactPersonTxtField, changeHappeningPhoneTxtField, changeHappeningEmailTxtField;
     @FXML
@@ -36,6 +33,8 @@ public class HappeningRegistrationConfirmationPopController {
     private TextArea changeHappeningProgramTxtArea;
     @FXML
     private ChoiceBox changeHappeningTypeChoiceBox, changeHappeningHallChoiceBox;
+    @FXML
+    private DatePicker changeHappeningDateDatePicker;
 
     private HappeningModel happeningModel = HappeningModel.getInstance();
     private HallModel hallModel = HallModel.getInstance();
@@ -98,11 +97,12 @@ public class HappeningRegistrationConfirmationPopController {
     }
 
     private void setChangedInformation() {
-        String type, room, program;
+        String type, room, program, date;
         String name = ControllerHelper.changeInformation(changeHappeningNameTxtField, registeredHappeningNameLabel);
         String performer = ControllerHelper.changeInformation(changeHappeningPerformersTxtField, registeredHappeningPerformersLabel);
         String time = ControllerHelper.changeInformation(changeHappeningTimeTxtField, registeredHappeningTimeLabel);
-        String date = ControllerHelper.changeInformation(changeHappeningDateTxtField, registeredHappeningDateLabel);
+        //String date = ControllerHelper.changeInformation(changeHappeningDateTxtField, registeredHappeningDateLabel);
+
         String contact = ControllerHelper.changeInformation(changeHappeningContactPersonTxtField, registeredHappeningContactPersonLabel);
         String phone = ControllerHelper.changeInformation(changeHappeningPhoneTxtField, registeredHappeningPhoneLabel);
         String email = ControllerHelper.changeInformation(changeHappeningEmailTxtField, registeredHappeningEmailLabel);
@@ -110,6 +110,12 @@ public class HappeningRegistrationConfirmationPopController {
         String firm = ControllerHelper.changeInformation(changeHappeningFirmTxtField, registeredHappeningFirmLabel);
         String other = ControllerHelper.changeInformation(changeHappeningOtherTxtField, registeredHappeningOtherLabel);
         String ticket = ControllerHelper.changeInformation(changeHappeningTicketPriceTxtField, registeredHappeningTicketPriceLabel);
+
+        if(changeHappeningDateDatePicker.getValue() == null){
+            date = registeredHappeningDateLabel.getText();
+        } else{
+            date = changeHappeningDateDatePicker.getValue().toString();
+        }
 
         if (changeHappeningTypeChoiceBox.getValue() == null) {
             type = registeredHappeningTypeLabel.getText();
