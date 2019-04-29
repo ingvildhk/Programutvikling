@@ -75,7 +75,7 @@ public class AdminManageHappeningsController {
     }
     */
 
-    public void seeOrdersToEventbtn(ActionEvent event) throws IOException {
+    public void seeOrdersToHappeningbtn(ActionEvent event) throws IOException {
         // sceneUtils.launchScene(event, AdminManageHappeningsController.class, "seeOrdersToHappening.fxml");
 
         ObservableList<Happening> selectedRows;
@@ -108,34 +108,34 @@ public class AdminManageHappeningsController {
     }
 
     // Methods to change and set eventdata i tableView with double-click
-    public void editEventNameCellEvent (TableColumn.CellEditEvent edittedCell){
+    public void editHappeningNameCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setName(edittedCell.getNewValue().toString());
     }
 
-    public void editEventPerformersCellEvent (TableColumn.CellEditEvent edittedCell){
+    public void editHappeningPerformersCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setPerformers(edittedCell.getNewValue().toString());
     }
 
-    public void editEventTimeCellEvent (TableColumn.CellEditEvent edittedCell){
+    public void editHappeningTimeCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidTime(edittedCell.getNewValue().toString());
         happeningSelected.setTime(edittedCell.getNewValue().toString());
     }
 
-    public void editEventDateCellEvent (TableColumn.CellEditEvent edittedCell){
+    public void editHappeningDateCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidDate(edittedCell.getNewValue().toString());
         happeningSelected.setDate(edittedCell.getNewValue().toString());
     }
 
-    public void editEventScheduleCellEvent (TableColumn.CellEditEvent edittedCell){
+    public void editHappeningScheduleCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setSchedule(edittedCell.getNewValue().toString());
     }
 
-    public void editEventPriceCellEvent (TableColumn.CellEditEvent edittedCell){
+    public void editHappeningPriceCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidTicketPrice(edittedCell.getNewValue().toString());
         happeningSelected.setTicketPrice(edittedCell.getNewValue().toString());
@@ -187,44 +187,44 @@ public class AdminManageHappeningsController {
         tableViewHappenings.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
-    public void editEventTypeCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void editHappeningTypeCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setType(edittedCell.getNewValue().toString());
     }
 
-    public void editEventHallCellEvent (TableColumn.CellEditEvent edittedCell){
+    public void editHappeningHallCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setHall((Hall)edittedCell.getNewValue());
     }
 
-    public void editEventContactNameCellEvent (TableColumn.CellEditEvent edittedCell){
+    public void editHappeningContactNameCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setContactPersonName(edittedCell.getNewValue().toString());
     }
 
-    public void editEventContactPhoneCellEvent (TableColumn.CellEditEvent edittedCell){
+    public void editHappeningContactPhoneCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidPhone(edittedCell.getNewValue().toString());
         happeningSelected.setContactPersonPhone(edittedCell.getNewValue().toString());
     }
 
-    public void editEventContactEmailCellEvent (TableColumn.CellEditEvent edittedCell){
+    public void editHappeningContactEmailCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidEmail(edittedCell.getNewValue().toString());
         happeningSelected.setContactPersonEmail(edittedCell.getNewValue().toString());
     }
 
-    public void editEventContactWebpageCellEvent (TableColumn.CellEditEvent edittedCell) {
+    public void editHappeningContactWebpageCellEvent(TableColumn.CellEditEvent edittedCell) {
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setContactPersonWebpage(edittedCell.getNewValue().toString());
     }
 
-    public void editEventContactFirmCellEvent (TableColumn.CellEditEvent edittedCell){
+    public void editHappeningContactFirmCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setContactPersonFirm(edittedCell.getNewValue().toString());
     }
 
-    public void editEventContactOtherCellEvent (TableColumn.CellEditEvent edittedCell){
+    public void editHappeningContactOtherCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setContactPersonOther(edittedCell.getNewValue().toString());
     }
