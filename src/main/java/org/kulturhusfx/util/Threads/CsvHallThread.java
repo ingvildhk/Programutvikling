@@ -30,6 +30,7 @@ public class CsvHallThread extends Task<Void> {
     @Override
     protected Void call() {
         try {
+            Thread.sleep(3000);
             readFileCsv.readHallFromFile(fileName);
         }
         catch (InvalidInputException e) {
