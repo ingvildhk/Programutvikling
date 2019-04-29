@@ -37,7 +37,7 @@ public class PurchaseTicketController {
     @FXML
     private TextField phoneTxtField;
     @FXML
-    private ChoiceBox numberOfTicketsChoiceBox;
+    private ChoiceBox <String> numberOfTicketsChoiceBox;
 
     public void initialize() {
         setLabels();
@@ -73,6 +73,7 @@ public class PurchaseTicketController {
     private void createNewTickets() {
         String phone = phoneTxtField.getText();
         exceptionAlertWrapper(() -> Checker.checkIfFieldIsEmpty(phone));
+        exceptionAlertWrapper(() -> Checker.checkValidPhone(phone));
         exceptionAlertWrapper(() -> Checker.checkIfChoiceBoxIsEmpty(numberOfTicketsChoiceBox));
         String numberOfTickets = numberOfTicketsChoiceBox.getValue().toString();
 
