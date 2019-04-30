@@ -17,9 +17,9 @@ import java.util.List;
 
 public class MainApp extends Application {
 
-    HappeningModel happeningModel = HappeningModel.getInstance();
-    HallModel hallModel = HallModel.getInstance();
-    List<Hall> hallList = hallModel.getHallList();
+    private HappeningModel happeningModel = HappeningModel.getInstance();
+    private HallModel hallModel = HallModel.getInstance();
+    private List<Hall> hallList = hallModel.getHallList();
 
     private static final String ARR_FILE_PATH = "Arrangement.csv";
     private static final String HALL_FILE_PATH = "Sal.jobj";
@@ -53,8 +53,6 @@ public class MainApp extends Application {
         stage.setTitle("Programutvikling Semesteroppgave");
         stage.setScene(scene);
         stage.show();
-
-
     }
 
     /**

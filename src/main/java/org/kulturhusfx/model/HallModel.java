@@ -1,6 +1,5 @@
 package org.kulturhusfx.model;
 
-
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.base.Happening;
 

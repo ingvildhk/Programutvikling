@@ -8,7 +8,6 @@ import org.kulturhusfx.base.Happening;
 
 public class TicketConfirmationController {
 
-    //TODO copy managehappeningscontroller?
     private String numberOfTickets = PurchaseTicketController.currentNumberofTickets;
     private Happening currentHappening = MainPageController.currentHappening;
 

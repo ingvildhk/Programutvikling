@@ -18,41 +18,36 @@ public class SeeOrdersToHappeningController {
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
     @FXML
-    ListView orderListView;
+    ListView <String> orderListView;
 
     @FXML
     Label selectedHappeningName;
 
-    private Happening selectedHappening;
-
     public void initialize () {
     }
 
-
     // Method that count the frequency of tickets with same phonenumber and output result in listView
     public void initData (Happening happening){
-            this.selectedHappening = happening;
 
-            ObservableList<Ticket> orders = FXCollections.observableArrayList();
+        ObservableList<Ticket> orders = FXCollections.observableArrayList();
 
             Map <String, Integer> frequencyMap = new HashMap<>();
             for (Ticket ticket : happening.getTicketModel().getTicketList()){
-                Integer count = frequencyMap.get(ticket.getPhoneNumber());
-                if (count == null)
-                    count = 0;
+                Integer frequency = frequencyMap.get(ticket.getPhoneNumber());
+                if (frequency == null)
+                    frequency = 0;
 
-                frequencyMap.put(ticket.getPhoneNumber(), count +1);
+                frequencyMap.put(ticket.getPhoneNumber(), frequency +1);
                 orders.add(ticket);
             }
 
             for (Map.Entry<String, Integer> entry : frequencyMap.entrySet()){
                 String order = "Telefonnummer: " + entry.getKey() + " har bestilt " + entry.getValue() + " billett(er).";
-                System.out.println(order);
                 orderListView.getItems().addAll(order);
             }
 
-        // To set lable to the selected eventName
-        selectedHappeningName.setText(selectedHappening.getName());
+        // To set label selectedHappeningName, to the selected happeningName
+        selectedHappeningName.setText("'" + happening.getName() + "'");
     }
 
     public void backToAdminMagageEventsBtn (ActionEvent event) throws IOException {

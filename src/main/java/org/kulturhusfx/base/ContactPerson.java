@@ -10,6 +10,9 @@ public class ContactPerson implements Serializable {
     private String firm;
     private String otherInformation;
 
+    //SerialVersionUID makes sure that the object is correctly serialized when reading from .jobj file
+    private static final long serialVersionUID = 6604539640364471825L;
+
     public ContactPerson(String name, String phoneNumber, String email, String webpage,
                          String firm, String otherInformation) {
         this.contactName = name;
@@ -44,27 +47,28 @@ public class ContactPerson implements Serializable {
         return otherInformation;
     }
 
-    public void setContactName(String contactName) {
+    //package-private as they are accessed only through the happening class
+    void setContactName(String contactName) {
         this.contactName = contactName;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setEmail(String email) {
+    void setEmail(String email) {
         this.email = email;
     }
 
-    public void setWebpage(String webpage) {
+    void setWebpage(String webpage) {
         this.webpage = webpage;
     }
 
-    public void setFirm(String firm) {
+    void setFirm(String firm) {
         this.firm = firm;
     }
 
-    public void setOtherInformation(String otherInformation) {
+    void setOtherInformation(String otherInformation) {
         this.otherInformation = otherInformation;
     }
 }

@@ -102,7 +102,6 @@ public class ReadFileCsv extends ReadFile {
                         throw new InvalidInputException("All informasjon må fylles ut, husk å dele variabler med ';'");
                     }
                 }
-                //Only checks the name of halls
                 if (!hallList.isEmpty()) {
                     Checker.checkIfHallExists(hallDetails[0], hallList);
                 }

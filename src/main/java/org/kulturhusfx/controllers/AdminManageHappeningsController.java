@@ -47,37 +47,99 @@ public class AdminManageHappeningsController {
     private List<Hall> hallList = hallModel.getHallList();
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
-
     public void initialize() {
         setColumnValues();
         setEditableColumns();
     }
 
-    // Method to list the registrered events in tableView
+    private void setColumnValues(){
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("name"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("type"));
+        performersColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("performers"));
+        hallColumn.setCellValueFactory(new PropertyValueFactory<>("hall"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("time"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("date"));
+        programColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("schedule"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("ticketPrice"));
+
+        contactNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().
+                getContactName()));
+        contactPhoneCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().
+                getPhoneNumber()));
+        contactEmailCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().
+                getEmail()));
+        contactFirmCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().
+                getFirm()));
+        contactWebsiteCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().
+                getContactPerson().getWebpage()));
+        contactOtherCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().
+                getOtherInformation()));
+
+        tableViewHappenings.setItems(getHappenings());
+    }
+
+    // Method to create ObservableList of happenings ArrayList
     private ObservableList<Happening> getHappenings(){
         ObservableList<Happening> happenings = FXCollections.observableArrayList();
         for (Happening happening : happeningList){
-            happenings.add(happening);
+            happenings.addAll(happening);
         }
         return happenings;
+    }
+
+    private void setEditableColumns() {
+        // To change text fields, editable must be true
+        tableViewHappenings.setEditable(true);
+
+        // To make columns editable
+        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        typeColumn.setCellFactory(ComboBoxTableCell.forTableColumn("Konsert", "Teater", "Konferanse",
+                "Forestilling", "Annet"));
+        performersColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        timeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        programColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        priceColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        hallColumn.setCellFactory(ComboBoxTableCell.forTableColumn(getHalls()));
+
+        contactNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        contactPhoneCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        contactEmailCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        contactWebsiteCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        contactFirmCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        contactOtherCol.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        tableViewHappenings.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
+    private ObservableList<Hall> getHalls(){
+        ObservableList<Hall> halls = FXCollections.observableArrayList();
+        for (Hall hall : hallList){
+            halls.add(hall);
+        }
+        return halls;
     }
 
     public void deleteHappeningBtn(){
         deleteHappeningFromTableView();
     }
 
-    /*Test om det fungerte med egen metode
-    public void showScene(Parent parent, ActionEvent event) {
-        Scene MainPageScene = new Scene(parent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(MainPageScene);
-        window.show();
+    private void deleteHappeningFromTableView(){
+        ObservableList<Happening> selectedRows;
+
+        // contains the selected rows
+        selectedRows = tableViewHappenings.getSelectionModel().getSelectedItems();
+        for (Happening happening : selectedRows){
+            happeningList.remove(happening);
+        }
+        for(Happening happenings : happeningModel.getHappeningList()) {
+            tableViewHappenings.getItems().remove(happenings);
+        }
+        tableViewHappenings.setItems(getHappenings());
     }
-    */
 
-    public void seeOrdersToHappeningbtn(ActionEvent event) throws IOException {
-        // sceneUtils.launchScene(event, AdminManageHappeningsController.class, "seeOrdersToHappening.fxml");
-
+    // Method to access the SeeOrdersToHappeningController to send the selected object to the initData-method
+    public void seeOrdersToHappeningBtn(ActionEvent event) throws IOException {
         ObservableList<Happening> selectedRows;
         selectedRows = tableViewHappenings.getSelectionModel().getSelectedItems();
 
@@ -85,7 +147,6 @@ public class AdminManageHappeningsController {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("seeOrdersToHappening.fxml"));
             Parent parent = loader.load();
-            //showScene(parent, event);
 
             Scene scene = new Scene(parent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -94,19 +155,23 @@ public class AdminManageHappeningsController {
 
             SeeOrdersToHappeningController controller = loader.getController();
 
-            // Access the controller and call a method
+            // Access the controller and call the initData-method
             controller.initData(tableViewHappenings.getSelectionModel().getSelectedItem());
         } else {
-            InvalidInputHandler.generateAlert(new InvalidInputException("Arrangement er ikke valgt. For å kunne se billetter til" +
-                    "et arrangement må du markere arrangementet du ønsker å se billetter til. "));
+            InvalidInputHandler.generateAlert(new InvalidInputException("Arrangement er ikke valgt. For å kunne se " +
+                    "billetter til et arrangement må du markere arrangementet du ønsker å se billetter til. "));
         }
     }
+
 
     public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
         sceneUtils.launchScene(event, AdminManageHappeningsController.class, "adminMainPage.fxml");
     }
 
-    // Methods to change and set eventdata i tableView with double-click
+    /*
+    Methods to change and set happening data to new values in tableView with double-click
+     */
+
     public void editHappeningNameCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setName(edittedCell.getNewValue().toString());
@@ -138,51 +203,6 @@ public class AdminManageHappeningsController {
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidTicketPrice(edittedCell.getNewValue().toString());
         happeningSelected.setTicketPrice(edittedCell.getNewValue().toString());
-    }
-
-    private void setColumnValues(){
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("name"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("type"));
-        performersColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("performers"));
-        hallColumn.setCellValueFactory(new PropertyValueFactory<>("hall"));
-        timeColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("time"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("date"));
-        programColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("schedule"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("ticketPrice"));
-
-        contactNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getContactName()));
-        contactPhoneCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getPhoneNumber()));
-        contactEmailCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getEmail()));
-        contactFirmCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getFirm()));
-        contactWebsiteCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getWebpage()));
-        contactOtherCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().getOtherInformation()));
-
-        tableViewHappenings.setItems(getHappenings());
-    }
-
-    private void setEditableColumns() {
-        // To change text fields, editable must be true
-        tableViewHappenings.setEditable(true);
-
-        // To make columns editable
-        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        typeColumn.setCellFactory(ComboBoxTableCell.forTableColumn("Konsert", "Teater", "Konferanse", "Forestilling", "Annet"));
-        performersColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        timeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        programColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        priceColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        hallColumn.setCellFactory(ComboBoxTableCell.forTableColumn(getHalls()));
-
-        contactNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        contactPhoneCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        contactEmailCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        contactWebsiteCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        contactFirmCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        contactOtherCol.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        // To select multipe rows with, men fungerer ikke med deleteButton
-        tableViewHappenings.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     public void editHappeningTypeCellEvent(TableColumn.CellEditEvent edittedCell){
@@ -225,29 +245,6 @@ public class AdminManageHappeningsController {
     public void editHappeningContactOtherCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setContactPersonOther(edittedCell.getNewValue().toString());
-    }
-
-    public void deleteHappeningFromTableView(){
-        ObservableList<Happening> selectedRows;
-
-        // contains the selected rows
-        selectedRows = tableViewHappenings.getSelectionModel().getSelectedItems();
-        for (Happening happening : selectedRows){
-            happeningList.remove(happening);
-        }
-        for(Happening happenings : happeningModel.getHappeningList()) {
-            tableViewHappenings.getItems().remove(happenings);
-        }
-        tableViewHappenings.setItems(getHappenings());
-    }
-
-
-    private ObservableList<Hall> getHalls(){
-        ObservableList<Hall> halls = FXCollections.observableArrayList();
-        for (Hall hall : hallList){
-            halls.add(hall);
-        }
-        return halls;
     }
 
 }

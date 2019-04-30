@@ -21,11 +21,11 @@ import java.util.List;
 
 public class MainPageController {
 
-    //TODO copy how it's done in managehappeningscontroller?
+    //to transfer the information about the current happening to be able to order tickets
     public static Happening currentHappening;
 
     @FXML
-    private TableView<Happening> tableViewHappenings;
+    public TableView<Happening> tableViewHappenings;
     @FXML
     private TableColumn<Happening, String> HappeningColumn, TypeColumn, DateColumn, TimeColumn, AvailableColumn;
 
@@ -35,31 +35,22 @@ public class MainPageController {
     @FXML
     private TextField srcTxtField;
 
-    private HallModel hallModel = HallModel.getInstance();
     private HappeningModel happeningModel = HappeningModel.getInstance();
     private List<Happening> happeningList = happeningModel.getHappeningList();
-    private List<Hall> hallList = hallModel.getHallList();
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
     public void initialize() {
-
-        addButtons();
         setColumnValues();
-        //onInputMethodTextChanged();
+        addButtons();
         filteringTxtField();
     }
 
-    // Skal fikses
-    public void onInputMethodTextChanged() {
-        filteringTxtField();
-    }
 
-    // Method that allows user to filter value in cells
+    // Method that allows user to search for value in table cells
     public void filteringTxtField() {
         srcTxtField.textProperty().addListener(observable -> {
             if (srcTxtField.textProperty().get().isEmpty()) {
                 tableViewHappenings.setItems(getHappenings());
-                return;
             }
 
             ObservableList<Happening> happeningList = FXCollections.observableArrayList();
@@ -79,7 +70,6 @@ public class MainPageController {
                     }
                 }
             tableViewHappenings.setItems(happeningList);
-            addButtons();
         });
     }
 
@@ -87,8 +77,8 @@ public class MainPageController {
         sceneUtils.launchScene(event, MainPageController.class, "adminMainPage.fxml");
     }
 
+    //adds buttons to not-empty cells
     private void addButtons() {
-        //adds buttons to not-empty cells
         OrderColumn.setCellValueFactory(
                 property -> new SimpleBooleanProperty(property.getValue() != null));
 
@@ -109,7 +99,7 @@ public class MainPageController {
         ObservableList<Happening> happenings = FXCollections.observableArrayList();
 
         for (Happening happening : happeningList) {
-            happenings.add(happening);
+            happenings.addAll(happening);
         }
         return happenings;
     }

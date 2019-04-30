@@ -16,7 +16,6 @@ import org.kulturhusfx.util.Threads.CsvEventThread;
 import org.kulturhusfx.util.Threads.CsvHallThread;
 import org.kulturhusfx.util.Threads.JobjEventThread;
 import org.kulturhusfx.util.Threads.JobjHallThread;
-
 import java.io.File;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -27,14 +26,17 @@ import static org.kulturhusfx.util.Checker.exceptionAlertWrapper;
 public class AdminMainPageController {
 
     @FXML
-    private Button btnBack, btnManageHappenings, btnManageHalls, btnRegisterHappening, btnRegisterHappeningFile, btnRegisterHallFile, btnRegisterHall;
+    private Button btnBack, btnManageHappenings, btnManageHalls, btnRegisterHappening, btnRegisterHappeningFile,
+            btnRegisterHallFile, btnRegisterHall;
     @FXML
     private TextField hallName, hallType, totalNumberOfSeats, performers, time, ticketPrice, happeningName,
             contactName, contactPhone, contactEmail, contactWebsite, contactFirm, contactOther;
     @FXML
     private TextArea happeningSchedule;
+
     @FXML
-    private ChoiceBox happeningType, happeningHall;
+    private ChoiceBox <String> happeningType, happeningHall;
+
     @FXML
     private DatePicker datePicker;
 
@@ -53,8 +55,18 @@ public class AdminMainPageController {
     public void initialize() {
         addHappeningType();
         updateHallList();
+        preDefinedValuesToChoiceBoxAndDatePicker();
+    }
 
-        //sets standard choices for choiceboxes and datepicker
+    private void addHappeningType() {
+        ControllerHelper.addHappeningType(happeningType);
+    }
+
+    private void updateHallList() {
+        ControllerHelper.updateRoomList(happeningHall, hallModel);
+    }
+
+    private void preDefinedValuesToChoiceBoxAndDatePicker(){
         if (!hallList.isEmpty()) {
             happeningHall.setValue(hallList.get(0).getHallName());
         }
@@ -67,108 +79,14 @@ public class AdminMainPageController {
         sceneUtils.launchScene(event, HappeningRegistrationConfirmationController.class, "happeningRegistrationConfirmationPop.fxml");
     }
 
-    public void roomRegistrationBtn(ActionEvent event) {
-        registerHall();
-        updateHallList();
-        sceneUtils.launchScene(event, HallRegistrationConfirmationController.class, "hallRegistrationConfirmationPop.fxml");
-    }
-
-    public void registerHappeningFromFileBtn(ActionEvent event) {
-        setFileChooserFilters();
-        fileChooser.setTitle("Velg arrangementsfil");
-        File selectedFile = fileChooser.showOpenDialog(null);
-        fileName = selectedFile.getName();
-        if (fileChooser.getSelectedExtensionFilter() == csvFilter) {
-            disableButtons();
-            Task<Void> task = new CsvEventThread(this::happeningConfirmation);
-            service.execute(task);
-        } else if (fileChooser.getSelectedExtensionFilter() == jobjFilter) {
-            disableButtons();
-            Task<Void> task = new JobjEventThread(this::happeningConfirmation);
-            service.execute(task);
-        }
-    }
-
-    public void happeningConfirmation() {
-        openButtons();
-        updateHallList();
-    }
-
-    public void registerHallFromFileBtn(ActionEvent event) {
-        setFileChooserFilters();
-        fileChooser.setTitle("Velg salfil");
-        File selectedFile = fileChooser.showOpenDialog(null);
-        fileName = selectedFile.getName();
-        if (fileChooser.getSelectedExtensionFilter() == csvFilter) {
-            disableButtons();
-            Task<Void> task = new CsvHallThread(this::hallConfirmation);
-            service.execute(task);
-        } else if (fileChooser.getSelectedExtensionFilter() == jobjFilter) {
-            disableButtons();
-            Task<Void> task = new JobjHallThread(this::hallConfirmation);
-            service.execute(task);
-        }
-    }
-
-    public void hallConfirmation() {
-        openButtons();
-        updateHallList();
-    }
-
-    public void backToMainPageBtn(ActionEvent event) {
-        sceneUtils.launchScene(event, MainPageController.class, "MainPage.fxml");
-    }
-
-    public void manageEventsBtn(ActionEvent event) {
-        sceneUtils.launchScene(event, AdminManageHappeningsController.class, "adminManageHappenings.fxml");
-    }
-
-    public void seeAllEventsBtn(ActionEvent event) {
-        sceneUtils.launchScene(event, AdminManageHallsController.class, "adminManageHalls.fxml");
-    }
-
-    public void setFileChooserFilters() {
-        if (!fileChooser.getExtensionFilters().contains(jobjFilter)) {
-            fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
-        }
-    }
-
-    public void disableButtons() {
-        btnBack.setDisable(true);
-        btnManageHappenings.setDisable(true);
-        btnManageHalls.setDisable(true);
-        btnRegisterHappening.setDisable(true);
-        btnRegisterHappeningFile.setDisable(true);
-        btnRegisterHallFile.setDisable(true);
-        btnRegisterHall.setDisable(true);
-    }
-
-    public void openButtons() {
-        btnBack.setDisable(false);
-        btnManageHappenings.setDisable(false);
-        btnManageHalls.setDisable(false);
-        btnRegisterHappening.setDisable(false);
-        btnRegisterHappeningFile.setDisable(false);
-        btnRegisterHallFile.setDisable(false);
-        btnRegisterHall.setDisable(false);
-    }
-
-    public void addHappeningType() {
-        ControllerHelper.addHappeningType(happeningType);
-    }
-
-    public void updateHallList() {
-        ControllerHelper.updateRoomList(happeningHall, hallModel);
-    }
-
-    public void registerHappening() {
+    private void registerHappening() {
         exceptionAlertWrapper(() -> Checker.checkIfChoiceBoxIsEmpty(happeningHall));
         exceptionAlertWrapper(() -> Checker.checkIfChoiceBoxIsEmpty(happeningType));
 
         String name = happeningName.getText();
-        String type = happeningType.getValue().toString();
+        String type = happeningType.getValue();
         String performer = performers.getText();
-        String room = happeningHall.getValue().toString();
+        String room = happeningHall.getValue();
         String time = this.time.getText();
         String date = datePicker.getValue().toString();
         String program = happeningSchedule.getText();
@@ -196,16 +114,106 @@ public class AdminMainPageController {
         happeningModel.createHappening(contactPerson, name, performer, program, hall, type, date, time, ticket);
     }
 
-    public void registerHall() {
-        String room = hallName.getText();
+    public void registerHappeningFromFileBtn(ActionEvent event) {
+        setFileChooserFilters();
+        fileChooser.setTitle("Velg arrangementsfil");
+        File selectedFile = fileChooser.showOpenDialog(null);
+        fileName = selectedFile.getName();
+        if (fileChooser.getSelectedExtensionFilter() == csvFilter) {
+            disableButtons();
+            Task<Void> task = new CsvEventThread(this::happeningConfirmation);
+            service.execute(task);
+        } else if (fileChooser.getSelectedExtensionFilter() == jobjFilter) {
+            disableButtons();
+            Task<Void> task = new JobjEventThread(this::happeningConfirmation);
+            service.execute(task);
+        }
+    }
+
+    private void setFileChooserFilters() {
+        if (!fileChooser.getExtensionFilters().contains(jobjFilter)) {
+            fileChooser.getExtensionFilters().addAll(jobjFilter, csvFilter);
+        }
+    }
+
+    public void hallRegistrationBtn(ActionEvent event) {
+        registerHall();
+        updateHallList();
+        sceneUtils.launchScene(event, HallRegistrationConfirmationController.class, "hallRegistrationConfirmationPop.fxml");
+    }
+
+    private void registerHall() {
+        String hall = hallName.getText();
         String type = hallType.getText();
         String seat = totalNumberOfSeats.getText();
 
-        exceptionAlertWrapper(() -> Checker.checkIfFieldIsEmpty(room, type, seat));
+        exceptionAlertWrapper(() -> Checker.checkIfFieldIsEmpty(hall, type, seat));
         exceptionAlertWrapper(() -> Checker.checkValidNumberOfSeats(seat));
-        exceptionAlertWrapper(() -> Checker.checkIfHallExists(room, hallList));
-        hallModel.createHall(room, type, seat);
+        exceptionAlertWrapper(() -> Checker.checkIfHallExists(hall, hallList));
+        hallModel.createHall(hall, type, seat);
     }
+
+    public void registerHallFromFileBtn(ActionEvent event) {
+        setFileChooserFilters();
+        fileChooser.setTitle("Velg salfil");
+        File selectedFile = fileChooser.showOpenDialog(null);
+        fileName = selectedFile.getName();
+        if (fileChooser.getSelectedExtensionFilter() == csvFilter) {
+            disableButtons();
+            Task<Void> task = new CsvHallThread(this::hallConfirmation);
+            service.execute(task);
+        } else if (fileChooser.getSelectedExtensionFilter() == jobjFilter) {
+            disableButtons();
+            Task<Void> task = new JobjHallThread(this::hallConfirmation);
+            service.execute(task);
+        }
+    }
+
+    private void happeningConfirmation() {
+        openButtons();
+        updateHallList();
+    }
+
+    private void hallConfirmation() {
+        openButtons();
+        updateHallList();
+    }
+
+    /*openButtons and disableButtons prevents buttons from being used while reading from file
+    This makes sure that the user doesn't change, delete or add elements as new ones are being
+    created from file*/
+    private void openButtons() {
+        btnBack.setDisable(false);
+        btnManageHappenings.setDisable(false);
+        btnManageHalls.setDisable(false);
+        btnRegisterHappening.setDisable(false);
+        btnRegisterHappeningFile.setDisable(false);
+        btnRegisterHallFile.setDisable(false);
+        btnRegisterHall.setDisable(false);
+    }
+
+    private void disableButtons() {
+        btnBack.setDisable(true);
+        btnManageHappenings.setDisable(true);
+        btnManageHalls.setDisable(true);
+        btnRegisterHappening.setDisable(true);
+        btnRegisterHappeningFile.setDisable(true);
+        btnRegisterHallFile.setDisable(true);
+        btnRegisterHall.setDisable(true);
+    }
+
+    public void backToMainPageBtn(ActionEvent event) {
+        sceneUtils.launchScene(event, MainPageController.class, "MainPage.fxml");
+    }
+
+    public void manageEventsBtn(ActionEvent event) {
+        sceneUtils.launchScene(event, AdminManageHappeningsController.class, "adminManageHappenings.fxml");
+    }
+
+    public void seeAllEventsBtn(ActionEvent event) {
+        sceneUtils.launchScene(event, AdminManageHallsController.class, "adminManageHalls.fxml");
+    }
+
 }
 
 

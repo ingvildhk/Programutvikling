@@ -10,11 +10,9 @@ import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.model.HappeningModel;
 import org.kulturhusfx.util.*;
 
-import java.io.IOException;
 import java.util.List;
 
 import static org.kulturhusfx.util.Checker.exceptionAlertWrapper;
-import static org.kulturhusfx.util.ControllerHelper.changeInformation;
 
 public class HappeningRegistrationConfirmationController {
 
@@ -48,40 +46,15 @@ public class HappeningRegistrationConfirmationController {
     private FileChooserMethods fileChooserMethods = FileChooserMethods.getInstance();
 
     public void initialize() {
+        setLabels();
         updateRoomList();
         addHappeningType();
-        setLabels();
+        changeHappeningHallChoiceBox.setValue(registeredHappening.getHall().getHallName());
+        changeHappeningTypeChoiceBox.setValue(registeredHappening.getType());
+        changeHappeningDateDatePicker.setValue(ControllerHelper.getLocalDate());
     }
 
-    public void changeHappeningBtn(ActionEvent event) {
-        setChangedInformation();
-        setLabels();
-        sceneUtils.generateConfirmationAlert("Bekreftelse på endring i registrert arrangement", "Arrangement er endret");
-    }
-
-    public void backToAdminBtn(ActionEvent event) {
-        sceneUtils.launchScene(event, AdminMainPageController.class, "adminMainPage.fxml");
-    }
-
-    public void saveToFileBtn(ActionEvent event) {
-        try {
-            fileChooserMethods.saveHappeningToFile(registeredHappening);
-            sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring", "Arrangementet er lagret til fil");
-
-        } catch (Exception e) {
-            FileExceptionHandler.generateExceptionmsg(new Exception("Lagring til fil feilet: " + e.getMessage()));
-        }
-    }
-
-    public void updateRoomList() {
-        ControllerHelper.updateRoomList(changeHappeningHallChoiceBox, hallModel);
-    }
-
-    public void addHappeningType() {
-        ControllerHelper.addHappeningType(changeHappeningTypeChoiceBox);
-    }
-
-    public void setLabels() {
+    private void setLabels() {
         registeredHappeningNameLabel.setText(registeredHappening.getName());
         registeredHappeningTypeLabel.setText(registeredHappening.getType());
         registeredHappeningPerformersLabel.setText(registeredHappening.getPerformers());
@@ -98,13 +71,35 @@ public class HappeningRegistrationConfirmationController {
         registeredHappeningOtherLabel.setText(registeredHappening.getContactPerson().getOtherInformation());
     }
 
+    private void updateRoomList() {
+        ControllerHelper.updateRoomList(changeHappeningHallChoiceBox, hallModel);
+    }
+
+    private void addHappeningType() {
+        ControllerHelper.addHappeningType(changeHappeningTypeChoiceBox);
+    }
+
+    public void saveToFileBtn(ActionEvent event) {
+        try {
+            fileChooserMethods.saveHappeningToFile(registeredHappening);
+            sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring", "Arrangementet er lagret til fil");
+
+        } catch (Exception e) {
+            FileExceptionHandler.generateExceptionMsg(new Exception("Lagring til fil feilet: " + e.getMessage()));
+        }
+    }
+
+    public void changeHappeningBtn(ActionEvent event) {
+        setChangedInformation();
+        setLabels();
+        sceneUtils.generateConfirmationAlert("Bekreftelse på endring i registrert arrangement", "Arrangement er endret");
+    }
+
     private void setChangedInformation() {
         String type, room, program, date;
         String name = ControllerHelper.changeInformation(changeHappeningNameTxtField, registeredHappeningNameLabel);
         String performer = ControllerHelper.changeInformation(changeHappeningPerformersTxtField, registeredHappeningPerformersLabel);
         String time = ControllerHelper.changeInformation(changeHappeningTimeTxtField, registeredHappeningTimeLabel);
-        //String date = ControllerHelper.changeInformation(changeHappeningDateTxtField, registeredHappeningDateLabel);
-
         String contact = ControllerHelper.changeInformation(changeHappeningContactPersonTxtField, registeredHappeningContactPersonLabel);
         String phone = ControllerHelper.changeInformation(changeHappeningPhoneTxtField, registeredHappeningPhoneLabel);
         String email = ControllerHelper.changeInformation(changeHappeningEmailTxtField, registeredHappeningEmailLabel);
@@ -149,5 +144,9 @@ public class HappeningRegistrationConfirmationController {
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
 
         registeredHappening.changeHappeningInformation(contactPerson, name, performer, type, program, hall, date, time, ticket);
+    }
+
+    public void backToAdminBtn(ActionEvent event) {
+        sceneUtils.launchScene(event, AdminMainPageController.class, "adminMainPage.fxml");
     }
 }

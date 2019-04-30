@@ -56,7 +56,8 @@ public class Checker {
         Matcher m = p.matcher(date);
         boolean validDate = m.matches();
         if (!validDate) {
-            throw new InvalidDateException("Datoformat feil. Skal være i dette formatet: 'yyyy-mm-dd' Happening ble ikke oppdatert ");
+            throw new InvalidDateException("Datoformat er feil. Formatet skal være: 'åååå-mm-dd' " +
+                    "Arrangement ble ikke oppdatert ");
         }
     }
 

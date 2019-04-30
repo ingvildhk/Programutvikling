@@ -24,7 +24,6 @@ import static org.kulturhusfx.util.Checker.exceptionAlertWrapper;
 
 public class PurchaseTicketController {
 
-    //TODO copy managehappeningscontroller?
     private Happening currentHappening = MainPageController.currentHappening;
     public static String currentNumberofTickets;
 
@@ -41,22 +40,9 @@ public class PurchaseTicketController {
 
     public void initialize() {
         setLabels();
-        numberOfTicketsChoiceBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9");
-        numberOfTicketsChoiceBox.setValue("1");
-    }
+        setDefaultValueToNumberOfTicketsChoiceBox();
+        addAlternativesToNumberOfTicketsChoiceBox();
 
-    public void orderBtn(ActionEvent event) throws IOException {
-        createNewTickets();
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ticketConfirmationPop.fxml"));
-        Parent parent = fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(parent));
-        stage.show();
-    }
-
-    public void backToMainPageBtn(ActionEvent event) {
-        sceneUtils.launchScene(event, MainPageController.class, "MainPage.fxml");
     }
 
     private void setLabels() {
@@ -68,6 +54,24 @@ public class PurchaseTicketController {
         typeLabel.setText(currentHappening.getType());
         scheduleLabel.setText(currentHappening.getSchedule());
         ticketPriceLabel.setText(currentHappening.getTicketPrice());
+    }
+
+    private void setDefaultValueToNumberOfTicketsChoiceBox(){
+        numberOfTicketsChoiceBox.setValue("1");
+    }
+
+    private void addAlternativesToNumberOfTicketsChoiceBox(){
+        numberOfTicketsChoiceBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9");
+    }
+
+    public void orderBtn(ActionEvent event) throws IOException {
+        createNewTickets();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ticketConfirmationPop.fxml"));
+        Parent parent = fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     private void createNewTickets() {
@@ -97,5 +101,9 @@ public class PurchaseTicketController {
 
         //updates available tickets
         currentHappening.setAvailableTickets(currentHappening.getAvailableTickets() - orderManyTickets);
+    }
+
+    public void backToMainPageBtn(ActionEvent event) {
+        sceneUtils.launchScene(event, MainPageController.class, "MainPage.fxml");
     }
 }

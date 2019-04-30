@@ -52,13 +52,13 @@ public class JobjHallThread extends Task<Void> {
         if (hallExists) {
             InvalidInputHandler.generateThreadAlert(new InvalidHallException("En av salene du forsøker å registrere finnes fra før"));
         } else if (ioException != null) {
-            FileExceptionHandler.generateExceptionmsg(new IOException("Feil oppstod under lesing fra fil: " + ioException.getMessage()));
+            FileExceptionHandler.generateExceptionMsg(new IOException("Feil oppstod under lesing fra fil: " + ioException.getMessage()));
         } else if (interruptedException != null) {
-            FileExceptionHandler.generateExceptionmsg(new InterruptedException("Feil oppstod under lesing fra fil: " + interruptedException.getMessage()));
+            FileExceptionHandler.generateExceptionMsg(new InterruptedException("Feil oppstod under lesing fra fil: " + interruptedException.getMessage()));
         } else if (classException != null) {
-            FileExceptionHandler.generateExceptionmsg(new ClassNotFoundException("Feil oppstod under lesing fra fil: " + classException.getMessage()));
+            FileExceptionHandler.generateExceptionMsg(new ClassNotFoundException("Feil oppstod under lesing fra fil: " + classException.getMessage()));
         } else if (exception != null) {
-            FileExceptionHandler.generateExceptionmsg(new Exception(exception.getMessage()));
+            FileExceptionHandler.generateExceptionMsg(new Exception(exception.getMessage()));
         } else {
             sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Sal er opprettet fra fil");
         }

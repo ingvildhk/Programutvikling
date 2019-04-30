@@ -57,10 +57,10 @@ public class CsvHallThread extends Task<Void> {
             InvalidInputHandler.generateThreadAlert(inputException);
         }
         else if (ioException != null) {
-            FileExceptionHandler.generateExceptionmsg(new IOException("Feil oppsto under lesing fra fil: " + ioException.getMessage()));
+            FileExceptionHandler.generateExceptionMsg(new IOException("Feil oppsto under lesing fra fil: " + ioException.getMessage()));
         }
         else if (exception != null){
-            FileExceptionHandler.generateExceptionmsg(new Exception(exception.getMessage()));
+            FileExceptionHandler.generateExceptionMsg(new Exception(exception.getMessage()));
         }
         else {
             sceneUtils.generateConfirmationAlert("Bekreftelse på registrering", "Sal er opprettet fra fil");

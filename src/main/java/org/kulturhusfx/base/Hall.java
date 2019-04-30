@@ -7,6 +7,7 @@ public class Hall implements Serializable {
     private String hallType;
     private String numberOfSeats;
 
+    //SerialVersionUID makes sure that the object is correctly serialized when reading from .jobj file
     private static final long serialVersionUID = -6005051981025523334L;
 
     public Hall(String hallName, String hallType, String numberOfSeats) {
@@ -45,6 +46,7 @@ public class Hall implements Serializable {
         setNumberOfSeats(numberOfSeats);
     }
 
+    //toString() makes sure the information is correctly displayed in tableview
     public String toString(){
         return (hallName + " " + hallType + " " + numberOfSeats);
     }
