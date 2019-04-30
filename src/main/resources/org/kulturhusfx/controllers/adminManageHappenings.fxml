@@ -15,7 +15,7 @@
             </font>
         </Label>
       <Button layoutX="26.0" layoutY="29.0" mnemonicParsing="false" onAction="#backToAdminMainPageBtn" text="Tilbake" />
-      <TableView fx:id="tableViewHappenings" layoutX="26.0" layoutY="113.0" prefHeight="310.0" prefWidth="968.0">
+      <TableView fx:id="tableViewHappenings" layoutX="26.0" layoutY="113.0" prefHeight="336.0" prefWidth="968.0">
         <columns>
           <TableColumn fx:id="nameColumn" minWidth="165.0" onEditCommit="#editHappeningNameCellEvent" prefWidth="125.0" text="Arrangementnavn" />
           <TableColumn fx:id="typeColumn" minWidth="100.0" onEditCommit="#editHappeningTypeCellEvent" prefWidth="65.0" text="Type" />
@@ -33,12 +33,12 @@
             <TableColumn fx:id="contactOtherCol" minWidth="150.0" onEditCommit="#editHappeningContactOtherCellEvent" prefWidth="127.0" text="Andre opplysninger" />
         </columns>
       </TableView>
-      <Button layoutX="26.0" layoutY="456.0" mnemonicParsing="false" onAction="#deleteHappeningBtn" prefHeight="27.0" prefWidth="198.0" text="Slett arrangement" />
+      <Button layoutX="26.0" layoutY="490.0" mnemonicParsing="false" onAction="#deleteHappeningBtn" prefHeight="27.0" prefWidth="198.0" text="Slett arrangement" />
       <Label layoutX="26.0" layoutY="84.0" prefHeight="17.0" prefWidth="397.0" text="Dobbelklikk på arrangement for å endre. Trykk enter for å lagre">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Button fx:id="seeOrdersBtn" layoutX="254.0" layoutY="456.0" mnemonicParsing="false" onAction="#seeOrdersToHappeningBtn" prefHeight="27.0" prefWidth="239.0" text="Se bestillinger" />
-      <Label layoutX="254.0" layoutY="430.0" text="Marker arrangementet du vil se bestillingene til, og klikk &quot;Se bestillinger&quot;." />
+      <Button fx:id="seeOrdersBtn" layoutX="254.0" layoutY="490.0" mnemonicParsing="false" onAction="#seeOrdersToHappeningBtn" prefHeight="27.0" prefWidth="239.0" text="Se bestillinger" />
+      <Label layoutX="254.0" layoutY="464.0" text="Marker arrangementet du vil se bestillingene til, og klikk &quot;Se bestillinger&quot;." />
     </children>
 </AnchorPane>

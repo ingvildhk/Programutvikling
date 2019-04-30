@@ -138,7 +138,7 @@ public class AdminManageHappeningsController {
         tableViewHappenings.setItems(getHappenings());
     }
 
-    // Method to access the SeeOrdersToHappeningController to send the selected object to the initData-method
+    // Method to access the SeeOrdersToHappeningController and send the selected object to the viewOrdersToSelectedEvent-method
     public void seeOrdersToHappeningBtn(ActionEvent event) throws IOException {
         ObservableList<Happening> selectedRows;
         selectedRows = tableViewHappenings.getSelectionModel().getSelectedItems();
@@ -155,8 +155,8 @@ public class AdminManageHappeningsController {
 
             SeeOrdersToHappeningController controller = loader.getController();
 
-            // Access the controller and call the initData-method
-            controller.initData(tableViewHappenings.getSelectionModel().getSelectedItem());
+            // Access the controller and call the viewOrdersToSelectedEvent-method
+            controller.viewOrdersToSelectedEvent(tableViewHappenings.getSelectionModel().getSelectedItem());
         } else {
             InvalidInputHandler.generateAlert(new InvalidInputException("Arrangement er ikke valgt. For å kunne se " +
                     "billetter til et arrangement må du markere arrangementet du ønsker å se billetter til. "));

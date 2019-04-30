@@ -18,24 +18,27 @@ public class SeeOrdersToHappeningController {
     private SceneUtils sceneUtils = SceneUtils.getInstance();
 
     @FXML
-    ListView <String> orderListView;
+    private ListView <String> orderListView;
 
     @FXML
-    Label selectedHappeningName;
+    private Label selectedHappeningName;
 
     public void initialize () {
     }
 
-    // Method that count the frequency of tickets with same phonenumber and output result in listView
-    public void initData (Happening happening){
+    /* Method that receive the selected happening-object from AdminManageHappeningsController and
+     count the frequency of tickets based on phone number and outputs result in listView
+     */
+    public void viewOrdersToSelectedEvent(Happening happening){
 
         ObservableList<Ticket> orders = FXCollections.observableArrayList();
 
             Map <String, Integer> frequencyMap = new HashMap<>();
             for (Ticket ticket : happening.getTicketModel().getTicketList()){
                 Integer frequency = frequencyMap.get(ticket.getPhoneNumber());
-                if (frequency == null)
+                if (frequency == null){
                     frequency = 0;
+                }
 
                 frequencyMap.put(ticket.getPhoneNumber(), frequency +1);
                 orders.add(ticket);

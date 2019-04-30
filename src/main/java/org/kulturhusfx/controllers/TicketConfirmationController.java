@@ -16,7 +16,7 @@ public class TicketConfirmationController {
     private double totalSum = numOfTickets * ticketPrice;
 
     @FXML
-    Label happeningLabel, totalSumLabel, numberOfTicketsLabel;
+    private Label happeningLabel, totalSumLabel, numberOfTicketsLabel;
 
     public void initialize() {
         numberOfTicketsLabel.setText(numberOfTickets);
