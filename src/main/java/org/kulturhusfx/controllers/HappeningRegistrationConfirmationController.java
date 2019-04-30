@@ -49,6 +49,9 @@ public class HappeningRegistrationConfirmationController {
         setLabels();
         updateRoomList();
         addHappeningType();
+        changeHappeningHallChoiceBox.setValue(registeredHappening.getHall().getHallName());
+        changeHappeningTypeChoiceBox.setValue(registeredHappening.getType());
+        changeHappeningDateDatePicker.setValue(ControllerHelper.getLocalDate());
     }
 
     private void setLabels() {
@@ -97,8 +100,6 @@ public class HappeningRegistrationConfirmationController {
         String name = ControllerHelper.changeInformation(changeHappeningNameTxtField, registeredHappeningNameLabel);
         String performer = ControllerHelper.changeInformation(changeHappeningPerformersTxtField, registeredHappeningPerformersLabel);
         String time = ControllerHelper.changeInformation(changeHappeningTimeTxtField, registeredHappeningTimeLabel);
-        //String date = ControllerHelper.changeInformation(changeHappeningDateTxtField, registeredHappeningDateLabel);
-
         String contact = ControllerHelper.changeInformation(changeHappeningContactPersonTxtField, registeredHappeningContactPersonLabel);
         String phone = ControllerHelper.changeInformation(changeHappeningPhoneTxtField, registeredHappeningPhoneLabel);
         String email = ControllerHelper.changeInformation(changeHappeningEmailTxtField, registeredHappeningEmailLabel);

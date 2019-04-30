@@ -84,9 +84,9 @@ public class AdminMainPageController {
         exceptionAlertWrapper(() -> Checker.checkIfChoiceBoxIsEmpty(happeningType));
 
         String name = happeningName.getText();
-        String type = happeningType.getValue().toString();
+        String type = happeningType.getValue();
         String performer = performers.getText();
-        String room = happeningHall.getValue().toString();
+        String room = happeningHall.getValue();
         String time = this.time.getText();
         String date = datePicker.getValue().toString();
         String program = happeningSchedule.getText();
@@ -179,7 +179,9 @@ public class AdminMainPageController {
         updateHallList();
     }
 
-    // TODO Kommentar til denne
+    /*openButtons and disableButtons prevents buttons from being used while reading from file
+    This makes sure that the user doesn't change, delete or add elements as new ones are being
+    created from file*/
     private void openButtons() {
         btnBack.setDisable(false);
         btnManageHappenings.setDisable(false);

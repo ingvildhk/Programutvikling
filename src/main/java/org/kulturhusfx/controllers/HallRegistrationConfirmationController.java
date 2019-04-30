@@ -51,8 +51,7 @@ public class HallRegistrationConfirmationController {
         setValuetoLabels();
     }
 
-    // TODO actionEvent?
-    public void saveHallBtn(ActionEvent event) {
+    public void saveHallBtn() {
         try {
             fileChooserMethods.saveHallToFile(registeredHall);
             sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring", "Sal er lagret til fil");

@@ -27,7 +27,7 @@ public class ReadFileJobj extends ReadFile {
                     break;
                 }
             }
-            if (hallExists) {
+            if (!hallExists) {
                 hallList.add(newHappening.getHall());
 
             }

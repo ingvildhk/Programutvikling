@@ -6,8 +6,6 @@ import java.io.Serializable;
 public class Happening implements Serializable {
 
     private ContactPerson contactPerson;
-    // TODO fjerne String id?
-    private String id;
     private String name;
     private String type;
     private String performers;
@@ -20,7 +18,7 @@ public class Happening implements Serializable {
     //TicketModel is transient so that Happening can be serialized
     private transient TicketModel ticketModel;
 
-    //SVUID set to a random number
+    //SerialVersionUID makes sure that the object is correctly serialized when reading from .jobj file
     private static final long serialVersionUID = -3210158538721287756L;
 
     public Happening(ContactPerson contactPerson, String name, String performers,
@@ -80,10 +78,6 @@ public class Happening implements Serializable {
         return ticketPrice;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public int getAvailableTickets() { return availableTickets; }
 
     public TicketModel getTicketModel() {
@@ -114,8 +108,7 @@ public class Happening implements Serializable {
         this.contactPerson.setOtherInformation(otherInformation);
     }
 
-    // TODO private?
-    public void setContactPerson(ContactPerson contactPerson) {
+    private void setContactPerson(ContactPerson contactPerson) {
         this.contactPerson = contactPerson;
     }
 

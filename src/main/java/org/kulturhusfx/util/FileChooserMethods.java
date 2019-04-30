@@ -12,6 +12,8 @@ import java.io.InvalidObjectException;
 
 public class FileChooserMethods {
 
+    //general methods for saving to file
+
     private static final FileChooserMethods instance = new FileChooserMethods();
 
     private FileChooserMethods() {

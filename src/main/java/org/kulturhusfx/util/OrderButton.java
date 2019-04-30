@@ -1,10 +1,18 @@
 package org.kulturhusfx.util;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
+import javafx.stage.Stage;
 import org.kulturhusfx.base.Happening;
 import org.kulturhusfx.controllers.MainPageController;
 import org.kulturhusfx.controllers.PurchaseTicketController;
+import org.kulturhusfx.controllers.SeeOrdersToHappeningController;
+
+import java.io.IOException;
 
 //class for adding and handling buttons on main page, when clicking to order tickets
 public class OrderButton extends TableCell<Happening, Boolean> {

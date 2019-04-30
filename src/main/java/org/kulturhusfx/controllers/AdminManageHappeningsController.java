@@ -109,7 +109,6 @@ public class AdminManageHappeningsController {
         contactFirmCol.setCellFactory(TextFieldTableCell.forTableColumn());
         contactOtherCol.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        // To select multipe rows with, men fungerer ikke med deleteButton
         tableViewHappenings.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 

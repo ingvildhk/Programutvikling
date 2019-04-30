@@ -24,7 +24,6 @@ import static org.kulturhusfx.util.Checker.exceptionAlertWrapper;
 
 public class PurchaseTicketController {
 
-    //TODO copy managehappeningscontroller?
     private Happening currentHappening = MainPageController.currentHappening;
     public static String currentNumberofTickets;
 
