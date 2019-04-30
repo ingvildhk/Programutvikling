@@ -53,7 +53,7 @@ public class CsvEventThread extends Task<Void> {
             FileExceptionHandler.generateExceptionmsg(new IOException("Feil oppstod under lesing fra fil: " + ioeException.getMessage()));
         }
         else if (interruptedException != null) {
-            FileExceptionHandler.generateExceptionmsg(new IOException("Feil oppstod under lesing fra fil: " + interruptedException.getMessage()));
+            FileExceptionHandler.generateExceptionmsg(new InterruptedException("Feil oppstod under lesing fra fil: " + interruptedException.getMessage()));
         }
         else if (exception != null) {
             FileExceptionHandler.generateExceptionmsg(exception);

@@ -88,10 +88,10 @@ public class MainPageController {
     }
 
     private void addButtons() {
+        //adds buttons to not-empty cells
         OrderColumn.setCellValueFactory(
                 property -> new SimpleBooleanProperty(property.getValue() != null));
 
-        //adds buttons to not-empty cells
         OrderColumn.setCellFactory(
                 property -> new OrderButton());
     }

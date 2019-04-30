@@ -36,7 +36,7 @@ public class ReadFileCsv extends ReadFile {
                     }
                     for (int i = 0; i < stringList.size(); i++) {
                         if (stringList.get(i) == null | stringList.get(i).trim().isEmpty()) {
-                            throw new InvalidInputException("All informasjon må fylles ut");
+                            throw new InvalidInputException("All informasjon må fylles ut, husk å dele variabler med ';'");
                         }
                     }
 
@@ -99,7 +99,7 @@ public class ReadFileCsv extends ReadFile {
                 String[] hallDetails = line.split(";");
                 for (int i = 0; i < hallDetails.length; i++) {
                     if (hallDetails[i] == null | hallDetails[i].trim().isEmpty()) {
-                        throw new InvalidInputException("All informasjon må fylles ut");
+                        throw new InvalidInputException("All informasjon må fylles ut, husk å dele variabler med ';'");
                     }
                 }
                 //Only checks the name of halls
