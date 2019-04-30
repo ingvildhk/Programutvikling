@@ -44,7 +44,6 @@ public class MainPageController {
     public void initialize() {
         setColumnValues();
         addButtons();
-        //onInputMethodTextChanged();
         filteringTxtField();
     }
 
@@ -66,17 +65,12 @@ public class MainPageController {
                 property -> new OrderButton());
     }
 
-    // TODO Skal fikses
-    public void onInputMethodTextChanged() {
-        filteringTxtField();
-    }
-
     // Method that allows user to search for value in table cells
     public void filteringTxtField() {
         srcTxtField.textProperty().addListener(observable -> {
             if (srcTxtField.textProperty().get().isEmpty()) {
                 tableViewHappenings.setItems(getHappenings());
-                return;
+                //return;
             }
 
             ObservableList<Happening> happeningList = FXCollections.observableArrayList();
@@ -96,7 +90,6 @@ public class MainPageController {
                     }
                 }
             tableViewHappenings.setItems(happeningList);
-            addButtons();
         });
     }
 
@@ -108,7 +101,7 @@ public class MainPageController {
         ObservableList<Happening> happenings = FXCollections.observableArrayList();
 
         for (Happening happening : happeningList) {
-            happenings.add(happening);
+            happenings.addAll(happening);
         }
         return happenings;
     }

@@ -33,11 +33,11 @@ public class SeeOrdersToHappeningController {
 
             Map <String, Integer> frequencyMap = new HashMap<>();
             for (Ticket ticket : happening.getTicketModel().getTicketList()){
-                Integer count = frequencyMap.get(ticket.getPhoneNumber());
-                if (count == null)
-                    count = 0;
+                Integer frequency = frequencyMap.get(ticket.getPhoneNumber());
+                if (frequency == null)
+                    frequency = 0;
 
-                frequencyMap.put(ticket.getPhoneNumber(), count +1);
+                frequencyMap.put(ticket.getPhoneNumber(), frequency +1);
                 orders.add(ticket);
             }
 

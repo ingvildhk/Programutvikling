@@ -139,6 +139,7 @@ public class AdminManageHappeningsController {
         tableViewHappenings.setItems(getHappenings());
     }
 
+    // Method to access the SeeOrdersToHappeningController to send the selected object to the initData-method
     public void seeOrdersToHappeningBtn(ActionEvent event) throws IOException {
         ObservableList<Happening> selectedRows;
         selectedRows = tableViewHappenings.getSelectionModel().getSelectedItems();
@@ -147,7 +148,6 @@ public class AdminManageHappeningsController {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("seeOrdersToHappening.fxml"));
             Parent parent = loader.load();
-            //showScene(parent, event);
 
             Scene scene = new Scene(parent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -170,7 +170,7 @@ public class AdminManageHappeningsController {
     }
 
     /*
-    Methods to change and set happening data in tableView with double-click
+    Methods to change and set happening data to new values in tableView with double-click
      */
 
     public void editHappeningNameCellEvent(TableColumn.CellEditEvent edittedCell){
