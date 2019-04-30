@@ -8,7 +8,7 @@ public class Hall implements Serializable {
     private String numberOfSeats;
 
     //SerialVersionUID makes sure that the object is correctly serialized when reading from .jobj file
-    private static final long serialVersionUID = -6005051981025523334L;
+    private static final long serialVersionUID = 6775470689058458061L;
 
     public Hall(String hallName, String hallType, String numberOfSeats) {
         this.hallName = hallName;
