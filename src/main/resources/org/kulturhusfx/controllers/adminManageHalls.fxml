@@ -7,24 +7,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.AdminManageHallsController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kulturhusfx.controllers.AdminManageHallsController">
          <children>
             <Button layoutX="22.0" layoutY="31.0" mnemonicParsing="false" onAction="#backToAdminMainPageBtn" text="Tilbake" />
-            <Label layoutX="264.0" layoutY="96.0" prefHeight="17.0" prefWidth="255.0" text="Oversikt over saler:">
+            <Label layoutX="217.0" layoutY="139.0" prefHeight="19.0" prefWidth="397.0" text="Dobbeltklikk på sal for å endre. Trykk enter for å lagre.">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-      <TableView fx:id="tableViewHalls" layoutX="264.0" layoutY="134.0" prefHeight="297.0" prefWidth="485.0">
+      <TableView fx:id="tableViewHalls" layoutX="217.0" layoutY="174.0" prefHeight="320.0" prefWidth="532.0">
         <columns>
-          <TableColumn fx:id="nameColumn" onEditCommit="#editHallNameCellEvent" prefWidth="159.0" text="Navn" />
-          <TableColumn fx:id="typeOfHallColumn" onEditCommit="#editHallTypeCellEvent" prefWidth="165.0" text="Type lokale" />
-            <TableColumn fx:id="numberOfSeatsColumn" minWidth="0.0" onEditCommit="#editNumberOfSeatsCellEvent" prefWidth="167.0" text="Antall plasser" />
+          <TableColumn fx:id="nameColumn" onEditCommit="#editHallNameCellEvent" prefWidth="183.0" text="Navn" />
+          <TableColumn fx:id="typeOfHallColumn" onEditCommit="#editHallTypeCellEvent" prefWidth="190.0" text="Type lokale" />
+            <TableColumn fx:id="numberOfSeatsColumn" minWidth="0.0" onEditCommit="#editNumberOfSeatsCellEvent" prefWidth="157.0" text="Antall plasser" />
         </columns>
       </TableView>
-      <Button layoutX="639.0" layoutY="447.0" mnemonicParsing="false" onAction="#deleteHallFromTableView" prefHeight="27.0" prefWidth="110.0" text="Slett sal" />
-      <Label id="header" layoutX="350.0" layoutY="30.0" text="Småkommunens kulturhus">
+      <Button layoutX="639.0" layoutY="506.0" mnemonicParsing="false" onAction="#deleteHallFromTableView" prefHeight="27.0" prefWidth="110.0" text="Slett sal" />
+      <Label id="header" layoutX="333.0" layoutY="33.0" text="Småkommunens kulturhus">
          <font>
             <Font size="24.0" />
          </font>
