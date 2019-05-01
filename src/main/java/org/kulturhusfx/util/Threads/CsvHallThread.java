@@ -53,7 +53,7 @@ public class CsvHallThread extends Task<Void> {
         if (hallExist){
             InvalidInputHandler.generateThreadAlert(new InvalidHallException("En av salene du forsøker å registrere finnes fra før"));
         }
-        if (inputException != null) {
+        else if (inputException != null) {
             InvalidInputHandler.generateThreadAlert(inputException);
         }
         else if (ioException != null) {
