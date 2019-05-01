@@ -52,10 +52,12 @@ public class JobjHallThread extends Task<Void> {
         if (hallExists) {
             InvalidInputHandler.generateThreadAlert(new InvalidHallException("En av salene du forsøker å registrere finnes fra før"));
         } else if (ioException != null) {
+            ioException.printStackTrace();
             FileExceptionHandler.generateExceptionMsg(new IOException("Feil oppstod under lesing fra fil: " + ioException.getMessage()));
         } else if (interruptedException != null) {
             FileExceptionHandler.generateExceptionMsg(new InterruptedException("Feil oppstod under lesing fra fil: " + interruptedException.getMessage()));
         } else if (classException != null) {
+            classException.printStackTrace();
             FileExceptionHandler.generateExceptionMsg(new ClassNotFoundException("Feil oppstod under lesing fra fil: " + classException.getMessage()));
         } else if (exception != null) {
             FileExceptionHandler.generateExceptionMsg(new Exception(exception.getMessage()));

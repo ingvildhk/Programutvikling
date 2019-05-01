@@ -20,8 +20,9 @@ public class OrderButton extends TableCell<Happening, Boolean> {
     }
 
     @Override
-    protected void updateItem(Boolean t, boolean empty) {
-        super.updateItem(t, empty);
+    //adds a button to row, if the row is not empty
+    protected void updateItem(Boolean b, boolean empty) {
+        super.updateItem(b, empty);
         if (!empty) {
             setGraphic(cellButton);
         } else {
