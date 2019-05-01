@@ -9,9 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.base.Happening;
-import org.kulturhusfx.model.HallModel;
 import org.kulturhusfx.model.HappeningModel;
 import org.kulturhusfx.util.OrderButton;
 import org.kulturhusfx.util.SceneUtils;
@@ -44,7 +42,6 @@ public class MainPageController {
         addButtons();
         filteringTxtField();
     }
-
 
     // Method that allows user to search for value in table cells
     public void filteringTxtField() {

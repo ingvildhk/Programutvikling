@@ -85,7 +85,7 @@ public class AdminManageHallsController {
     private ObservableList<Hall> getHalls() {
         ObservableList<Hall> halls = FXCollections.observableArrayList();
         for (Hall hall : hallList) {
-            halls.add(hall);
+            halls.addAll(hall);
         }
         return halls;
     }

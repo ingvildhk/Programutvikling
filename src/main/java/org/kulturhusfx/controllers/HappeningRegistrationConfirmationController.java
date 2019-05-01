@@ -17,23 +17,27 @@ import static org.kulturhusfx.util.Checker.exceptionAlertWrapper;
 public class HappeningRegistrationConfirmationController {
 
     @FXML
-    private Label registeredHappeningNameLabel, registeredHappeningTypeLabel, registeredHappeningPerformersLabel, registeredHappeningHallLabel;
+    private Label registeredHappeningNameLabel, registeredHappeningTypeLabel, registeredHappeningPerformersLabel,
+            registeredHappeningHallLabel;
     @FXML
-    private Label registeredHappeningDateLabel, registeredHappeningTimeLabel, registeredHappeningTicketPriceLabel, registeredHappeningScheduleLabel;
+    private Label registeredHappeningDateLabel, registeredHappeningTimeLabel, registeredHappeningTicketPriceLabel,
+            registeredHappeningScheduleLabel;
     @FXML
-    private Label registeredHappeningContactPersonLabel, registeredHappeningPhoneLabel, registeredHappeningEmailLabel, registeredHappeningWebpageLabel;
+    private Label registeredHappeningContactPersonLabel, registeredHappeningPhoneLabel, registeredHappeningEmailLabel,
+            registeredHappeningWebpageLabel;
     @FXML
     private Label registeredHappeningFirmLabel, registeredHappeningOtherLabel;
     @FXML
     private TextField changeHappeningNameTxtField, changeHappeningPerformersTxtField, changeHappeningTimeTxtField;
     @FXML
-    private TextField changeHappeningTicketPriceTxtField, changeHappeningContactPersonTxtField, changeHappeningPhoneTxtField, changeHappeningEmailTxtField;
+    private TextField changeHappeningTicketPriceTxtField, changeHappeningContactPersonTxtField,
+            changeHappeningPhoneTxtField, changeHappeningEmailTxtField;
     @FXML
     private TextField changeHappeningWebpageTxtField, changeHappeningFirmTxtField, changeHappeningOtherTxtField;
     @FXML
     private TextArea changeHappeningProgramTxtArea;
     @FXML
-    private ChoiceBox changeHappeningTypeChoiceBox, changeHappeningHallChoiceBox;
+    private ChoiceBox <String> changeHappeningTypeChoiceBox, changeHappeningHallChoiceBox;
     @FXML
     private DatePicker changeHappeningDateDatePicker;
 
@@ -82,7 +86,8 @@ public class HappeningRegistrationConfirmationController {
     public void saveToFileBtn(ActionEvent event) {
         try {
             fileChooserMethods.saveHappeningToFile(registeredHappening);
-            sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring", "Arrangementet er lagret til fil");
+            sceneUtils.generateConfirmationAlert("Bekreftelse på fillagring",
+                    "Arrangementet er lagret til fil");
 
         } catch (Exception e) {
             FileExceptionHandler.generateExceptionMsg(new Exception("Lagring til fil feilet: " + e.getMessage()));
@@ -92,7 +97,8 @@ public class HappeningRegistrationConfirmationController {
     public void changeHappeningBtn(ActionEvent event) {
         setChangedInformation();
         setLabels();
-        sceneUtils.generateConfirmationAlert("Bekreftelse på endring i registrert arrangement", "Arrangement er endret");
+        sceneUtils.generateConfirmationAlert("Bekreftelse på endring i registrert arrangement",
+                "Arrangement er endret");
     }
 
     private void setChangedInformation() {
@@ -143,7 +149,8 @@ public class HappeningRegistrationConfirmationController {
 
         ContactPerson contactPerson = new ContactPerson(contact, phone, email, website, firm, other);
 
-        registeredHappening.changeHappeningInformation(contactPerson, name, performer, type, program, hall, date, time, ticket);
+        registeredHappening.changeHappeningInformation(contactPerson, name, performer, type, program, hall, date, time,
+                ticket);
     }
 
     public void backToAdminBtn(ActionEvent event) {

@@ -3,7 +3,6 @@ package org.kulturhusfx.model;
 import org.kulturhusfx.base.ContactPerson;
 import org.kulturhusfx.base.Hall;
 import org.kulturhusfx.base.Happening;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
