@@ -55,9 +55,9 @@ public class MainPageController {
 
             for (int i = 0; i < getHappenings().size(); i++)
                 for (int j = 0; j < columns.size(); j++) {
-                    TableColumn col = columns.get(j);
+                    TableColumn tabCol = columns.get(j);
 
-                    String cellValue = col.getCellData(getHappenings().get(i)).toString();
+                    String cellValue = tabCol.getCellData(getHappenings().get(i)).toString();
 
                     cellValue = cellValue.toLowerCase();
 

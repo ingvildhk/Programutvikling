@@ -23,8 +23,7 @@ public class SeeOrdersToHappeningController {
     @FXML
     private Label selectedHappeningName;
 
-    public void initialize () {
-    }
+    public void initialize () {}
 
     /* Method that receive the selected happening-object from AdminManageHappeningsController and
      count the frequency of tickets based on phone number and outputs result in listView
@@ -33,18 +32,18 @@ public class SeeOrdersToHappeningController {
 
         ObservableList<Ticket> orders = FXCollections.observableArrayList();
 
-            Map <String, Integer> frequencyMap = new HashMap<>();
+            Map <String, Integer> map = new HashMap<>();
             for (Ticket ticket : happening.getTicketModel().getTicketList()){
-                Integer frequency = frequencyMap.get(ticket.getPhoneNumber());
-                if (frequency == null){
-                    frequency = 0;
+                Integer repetition = map.get(ticket.getPhoneNumber());
+                if (repetition == null){
+                    repetition = 0;
                 }
 
-                frequencyMap.put(ticket.getPhoneNumber(), frequency +1);
+                map.put(ticket.getPhoneNumber(), repetition +1);
                 orders.add(ticket);
             }
 
-            for (Map.Entry<String, Integer> entry : frequencyMap.entrySet()){
+            for (Map.Entry<String, Integer> entry : map.entrySet()){
                 String order = "Telefonnummer: " + entry.getKey() + " har bestilt " + entry.getValue() + " billett(er).";
                 orderListView.getItems().addAll(order);
             }
@@ -53,7 +52,7 @@ public class SeeOrdersToHappeningController {
         selectedHappeningName.setText("'" + happening.getName() + "'");
     }
 
-    public void backToAdminMagageEventsBtn (ActionEvent event) throws IOException {
+    public void backToAdminManageEventsBtn(ActionEvent event) throws IOException {
             sceneUtils.launchScene(event, SeeOrdersToHappeningController.class, "adminManageHappenings.fxml");
     }
 }

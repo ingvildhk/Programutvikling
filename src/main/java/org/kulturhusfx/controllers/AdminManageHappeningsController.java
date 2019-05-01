@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
@@ -34,12 +33,12 @@ public class AdminManageHappeningsController {
     private TableView<Happening> tableViewHappenings;
 
     @FXML
-    private TableColumn<Happening, String> nameColumn, typeColumn, performersColumn,
-            timeColumn, dateColumn, programColumn, priceColumn, contactNameCol,
+    private TableColumn<Happening, String> happeningNameCol, happeningTypeCol, happeningPerformersCol,
+            happeningTimeCol, happeningDateCol, happeningScheduleCol, happeningPriceCol, contactNameCol,
             contactFirmCol, contactWebsiteCol, contactPhoneCol, contactEmailCol, contactOtherCol;
 
     @FXML
-    private  TableColumn<Happening, Hall> hallColumn;
+    private  TableColumn<Happening, Hall> hallCol;
 
     private HallModel hallModel = HallModel.getInstance();
     private HappeningModel happeningModel = HappeningModel.getInstance();
@@ -53,14 +52,14 @@ public class AdminManageHappeningsController {
     }
 
     private void setColumnValues(){
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("name"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("type"));
-        performersColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("performers"));
-        hallColumn.setCellValueFactory(new PropertyValueFactory<>("hall"));
-        timeColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("time"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("date"));
-        programColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("schedule"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<Happening, String>("ticketPrice"));
+        happeningNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        happeningTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        happeningPerformersCol.setCellValueFactory(new PropertyValueFactory<>("performers"));
+        hallCol.setCellValueFactory(new PropertyValueFactory<>("hall"));
+        happeningTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        happeningDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        happeningPriceCol.setCellValueFactory(new PropertyValueFactory<>("ticketPrice"));
+        happeningScheduleCol.setCellValueFactory(new PropertyValueFactory<>("schedule"));
 
         contactNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContactPerson().
                 getContactName()));
@@ -78,7 +77,7 @@ public class AdminManageHappeningsController {
         tableViewHappenings.setItems(getHappenings());
     }
 
-    // Method to create ObservableList of happenings ArrayList
+    /* Method to create ObservableList of happenings ArrayList */
     private ObservableList<Happening> getHappenings(){
         ObservableList<Happening> happenings = FXCollections.observableArrayList();
         for (Happening happening : happeningList){
@@ -88,19 +87,19 @@ public class AdminManageHappeningsController {
     }
 
     private void setEditableColumns() {
-        // To change text fields, editable must be true
+        // To edit text fields, editable must be true
         tableViewHappenings.setEditable(true);
 
-        // To make columns editable
-        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        typeColumn.setCellFactory(ComboBoxTableCell.forTableColumn("Konsert", "Teater", "Konferanse",
+        // To make columns editable when double-clicked
+        happeningNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        happeningTypeCol.setCellFactory(ComboBoxTableCell.forTableColumn("Konsert", "Teater", "Konferanse",
                 "Forestilling", "Annet"));
-        performersColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        timeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        programColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        priceColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        hallColumn.setCellFactory(ComboBoxTableCell.forTableColumn(getHalls()));
+        happeningPerformersCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        happeningTimeCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        happeningDateCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        happeningScheduleCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        happeningPriceCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        hallCol.setCellFactory(ComboBoxTableCell.forTableColumn(getHalls()));
 
         contactNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         contactPhoneCol.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -108,23 +107,22 @@ public class AdminManageHappeningsController {
         contactWebsiteCol.setCellFactory(TextFieldTableCell.forTableColumn());
         contactFirmCol.setCellFactory(TextFieldTableCell.forTableColumn());
         contactOtherCol.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        tableViewHappenings.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
+    /* Method to create ObservableList of halls ArrayList */
     private ObservableList<Hall> getHalls(){
         ObservableList<Hall> halls = FXCollections.observableArrayList();
         for (Hall hall : hallList){
-            halls.add(hall);
+            halls.addAll(hall);
         }
         return halls;
     }
 
     public void deleteHappeningBtn(){
-        deleteHappeningFromTableView();
+        deleteHappeningViaTableView();
     }
 
-    private void deleteHappeningFromTableView(){
+    private void deleteHappeningViaTableView(){
         ObservableList<Happening> selectedRows;
 
         // contains the selected rows
@@ -132,20 +130,25 @@ public class AdminManageHappeningsController {
         for (Happening happening : selectedRows){
             happeningList.remove(happening);
         }
-        for(Happening happenings : happeningModel.getHappeningList()) {
-            tableViewHappenings.getItems().remove(happenings);
+        for(Happening happening : happeningModel.getHappeningList()) {
+            tableViewHappenings.getItems().remove(happening);
         }
         tableViewHappenings.setItems(getHappenings());
     }
 
-    // Method to access the SeeOrdersToHappeningController and send the selected object to the viewOrdersToSelectedEvent-method
     public void seeOrdersToHappeningBtn(ActionEvent event) throws IOException {
-        ObservableList<Happening> selectedRows;
-        selectedRows = tableViewHappenings.getSelectionModel().getSelectedItems();
+        seeOrdersToSelectedHappening(event);
+    }
 
-        if (!selectedRows.isEmpty()) {
+    // Method to access the SeeOrdersToHappeningController and send the selected object to the
+    // viewOrdersToSelectedEvent-method
+    private void seeOrdersToSelectedHappening(ActionEvent event) throws IOException{
+        ObservableList<Happening> selectedRow;
+        selectedRow = tableViewHappenings.getSelectionModel().getSelectedItems();
+
+        if (!selectedRow.isEmpty()) {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("seeOrdersToHappening.fxml"));
+            loader.setLocation(getClass().getResource("seeOrdersToSelectedHappening.fxml"));
             Parent parent = loader.load();
 
             Scene scene = new Scene(parent);
@@ -163,86 +166,83 @@ public class AdminManageHappeningsController {
         }
     }
 
-
     public void backToAdminMainPageBtn(ActionEvent event) throws IOException {
         sceneUtils.launchScene(event, AdminManageHappeningsController.class, "adminMainPage.fxml");
     }
 
-    /*
-    Methods to change and set happening data to new values in tableView with double-click
-     */
+    /* Methods to change and set happening data to new values in tableView */
 
-    public void editHappeningNameCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void setHappeningNameCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setName(edittedCell.getNewValue().toString());
     }
 
-    public void editHappeningPerformersCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void setHappeningPerformersCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setPerformers(edittedCell.getNewValue().toString());
     }
 
-    public void editHappeningTimeCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void setHappeningTimeCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidTime(edittedCell.getNewValue().toString());
         happeningSelected.setTime(edittedCell.getNewValue().toString());
     }
 
-    public void editHappeningDateCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void setHappeningDateCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidDate(edittedCell.getNewValue().toString());
         happeningSelected.setDate(edittedCell.getNewValue().toString());
     }
 
-    public void editHappeningScheduleCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void setHappeningScheduleCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setSchedule(edittedCell.getNewValue().toString());
     }
 
-    public void editHappeningPriceCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void setHappeningPriceCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidTicketPrice(edittedCell.getNewValue().toString());
         happeningSelected.setTicketPrice(edittedCell.getNewValue().toString());
     }
 
-    public void editHappeningTypeCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void setHappeningTypeCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setType(edittedCell.getNewValue().toString());
     }
 
-    public void editHappeningHallCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void setHappeningHallCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setHall((Hall)edittedCell.getNewValue());
     }
 
-    public void editHappeningContactNameCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void setHappeningContactNameCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setContactPersonName(edittedCell.getNewValue().toString());
     }
 
-    public void editHappeningContactPhoneCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void setHappeningContactPhoneCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidPhone(edittedCell.getNewValue().toString());
         happeningSelected.setContactPersonPhone(edittedCell.getNewValue().toString());
     }
 
-    public void editHappeningContactEmailCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void setHappeningContactEmailCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         Checker.checkValidEmail(edittedCell.getNewValue().toString());
         happeningSelected.setContactPersonEmail(edittedCell.getNewValue().toString());
     }
 
-    public void editHappeningContactWebpageCellEvent(TableColumn.CellEditEvent edittedCell) {
+    public void setHappeningContactWebpageCellEvent(TableColumn.CellEditEvent edittedCell) {
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setContactPersonWebpage(edittedCell.getNewValue().toString());
     }
 
-    public void editHappeningContactFirmCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void setHappeningContactFirmCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setContactPersonFirm(edittedCell.getNewValue().toString());
     }
 
-    public void editHappeningContactOtherCellEvent(TableColumn.CellEditEvent edittedCell){
+    public void setHappeningContactOtherCellEvent(TableColumn.CellEditEvent edittedCell){
         Happening happeningSelected = tableViewHappenings.getSelectionModel().getSelectedItem();
         happeningSelected.setContactPersonOther(edittedCell.getNewValue().toString());
     }
